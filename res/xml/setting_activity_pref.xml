@@ -43,6 +43,13 @@
                 android:targetClass="org.zarroboogs.weibo.ui.preference.WaterMarkPrefActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="weibo_upload_big_pic"
+            android:summary="开启后上传高质量图片"
+            android:title="原图上传" />
+
         <!--
              <Preference
             android:key="draft"

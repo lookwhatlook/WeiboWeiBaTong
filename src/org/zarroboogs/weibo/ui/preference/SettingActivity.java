@@ -114,6 +114,10 @@ public class SettingActivity extends AbstractAppActivity {
 	public static final String WATER_MARK_ENABLE = "water_mark_enable";
 	// end water mark pref key
 
+	// upload big picture
+	public static final String UPLOAD_BIG_PIC = "weibo_upload_big_pic";
+	// upload big picture end
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 

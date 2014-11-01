@@ -349,5 +349,9 @@ public class SettingUtils {
 	public static boolean isFilterSinaAd() {
 		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.FILTER_SINA_AD, false);
 	}
+	
+	public static boolean isUploadBigPic(){
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.UPLOAD_BIG_PIC, true);
+	}
 
 }

@@ -4,10 +4,13 @@ import java.io.File;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
+import org.zarroboogs.weibo.setting.SettingUtils;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 
@@ -32,7 +35,8 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 	@Override
 	protected Bitmap doInBackground(String... params) {
 		data = params[0];
-		return decodeSampledBitmapFromFile(data, 1024);
+		int uploadWidth = SettingUtils.isUploadBigPic() ? 2048 : 720;
+		return decodeSampledBitmapFromFile(data, uploadWidth);
 	}
 
 	// Once complete, see if ImageView is still around and set bitmap.
@@ -71,7 +75,7 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 
 		// Calculate inSampleSize
 		options.inSampleSize = calculateInSampleSize(options, reqWidth);
-
+		Log.d("UploadSize", "scale:" + options.inSampleSize);
 		// Decode bitmap with inSampleSize set
 		options.inJustDecodeBounds = false;
 		return BitmapFactory.decodeFile(filename, options);
