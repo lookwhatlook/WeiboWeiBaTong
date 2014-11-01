@@ -2,7 +2,7 @@ package org.zarroboogs.weibo.net;
 
 import java.util.concurrent.ExecutorService;
 
-import android.text.TextUtils;
+import org.zarroboogs.weibo.setting.SettingUtils;
 
 public class UploadThread implements Runnable {
 	private WaterMark mWaterMark;
@@ -14,38 +14,21 @@ public class UploadThread implements Runnable {
 			CENTER
 		}
 		// &marks=1&markpos=1&logo=1&nick=%40andforce&url=weibo.com/u/2294141594
-		boolean isEnaable = true;
-		int markpos = 1;
 		String nick = "";
 		String url = "";
 
-		public WaterMark(boolean isEnable, POS pos, String nick, String url) {
-			this.isEnaable = isEnable;
-			switch (pos) {
-				case BOTTOM_RIGHT:
-					this.markpos = 1;
-					break;
-				case BOTTOM_CENTER: {
-					this.markpos = 2;
-					break;
-				}
-				case CENTER: {
-					this.markpos = 3;
-					break;
-				}
-	
-				default:
-					this.markpos = 1;
-					break;
-			}
-			this.markpos = markpos;
+		public WaterMark(String nick, String url) {
 			this.nick = nick;
 			this.url = url;
 		}
 
 		public String buildMark() {
-			if (isEnaable) {
-				return "&marks=1&markpos=" + markpos + "&logo=1&nick=%40" + nick + "&url=" + url;
+			if (SettingUtils.getEnableWaterMark()) {
+				String markpos = SettingUtils.getWaterMarkPos();
+				String logo = SettingUtils.isWaterMarkWeiboICONShow() ? "1" : "0";
+				String nick = SettingUtils.isWaterMarkScreenNameShow() ? "%40"+this.nick : "";
+				String url = SettingUtils.isWaterMarkWeiboURlShow() ? this.url : "";
+				return "&marks=1&markpos=" + markpos + "&logo=" + logo+ "&nick=" + nick + "&url=" + url;
 			} else {
 				return "&marks=0";
 			}

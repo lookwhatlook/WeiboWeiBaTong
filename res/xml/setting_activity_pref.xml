@@ -36,6 +36,13 @@
                 android:targetClass="org.zarroboogs.weibo.ui.preference.NotificationActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
+        <Preference
+            android:summary="设置微博发图水印"
+            android:title="图片水印" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.WaterMarkPrefActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
         <!--
              <Preference
             android:key="draft"

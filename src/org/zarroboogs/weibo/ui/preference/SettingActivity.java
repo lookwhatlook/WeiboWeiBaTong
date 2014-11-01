@@ -105,6 +105,14 @@ public class SettingActivity extends AbstractAppActivity {
 	public static final String DEBUG_MEM_INFO = "pref_mem_key";
 
 	public static final String CRASH = "pref_crash_key";
+	
+	// water mark pref key
+	public static final String WATER_MARK_SCREEN_NAME = "water_mark_screen_name";
+	public static final String WATER_MARK_WEIBO_ICON = "water_mark_weibo_icon";
+	public static final String WATER_MARK_WEIBO_URL = "water_mark_weibo_url";
+	public static final String WATER_MARK_POS = "water_mark_pos";
+	public static final String WATER_MARK_ENABLE = "water_mark_enable";
+	// end water mark pref key
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

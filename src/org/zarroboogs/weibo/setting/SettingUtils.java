@@ -145,6 +145,35 @@ public class SettingUtils {
 	public static boolean getEnableFetchMSG() {
 		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.ENABLE_FETCH_MSG, false);
 	}
+	
+	// water mark setting
+	public static boolean getEnableWaterMark() {
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.WATER_MARK_ENABLE, true);
+	}
+	
+/*	public static final String WATER_MARK_SCREEN_NAME = "water_mark_screen_name";
+	public static final String WATER_MARK_WEIBO_ICON = "water_mark_weibo_icon";
+	public static final String WATER_MARK_WEIBO_URL = "water_mark_weibo_url";
+	public static final String WATER_MARK_POS = "water_mark_pos";
+	public static final String WATER_MARK_ENABLE = "water_mark_enable";*/
+	
+	public static boolean isWaterMarkScreenNameShow() {
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.WATER_MARK_SCREEN_NAME, true);
+	}
+	
+	public static boolean isWaterMarkWeiboICONShow() {
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.WATER_MARK_WEIBO_ICON, true);
+	}
+	
+	public static boolean isWaterMarkWeiboURlShow() {
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.WATER_MARK_WEIBO_URL, true);
+	}
+	
+	public static String getWaterMarkPos() {
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.WATER_MARK_POS, "1");
+	}
+	
+	// end water mark setting
 
 	public static boolean getEnableAutoRefresh() {
 		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.AUTO_REFRESH, false);
@@ -180,6 +209,10 @@ public class SettingUtils {
 
 	public static void setEnableFetchMSG(boolean value) {
 		SettingHelper.setEditor(getContext(), SettingActivity.ENABLE_FETCH_MSG, value);
+	}
+	
+	public static void setEnableWaterMark(boolean value) {
+		SettingHelper.setEditor(getContext(), SettingActivity.WATER_MARK_ENABLE, value);
 	}
 
 	public static boolean allowVibrate() {

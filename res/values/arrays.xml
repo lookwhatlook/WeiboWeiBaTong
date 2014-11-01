@@ -1,4 +1,16 @@
 <resources>
+        <string-array name="water_mark_pos_array">
+        <item>底部居右</item>
+        <item>底部居中</item>
+        <item>图片中间</item>
+    </string-array>
+    <string-array name="water_mark_pos_value">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    
+    
     <string-array name="frequency">
         <item>三分钟</item>
         <item>十五分钟</item>

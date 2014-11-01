@@ -226,6 +226,9 @@
             </intent-filter>
         </activity>
         <activity android:name="org.zarroboogs.weibo.ui.preference.NotificationActivity"/>
+        
+        <activity android:name="org.zarroboogs.weibo.ui.preference.WaterMarkPrefActivity"/>
+        
         <activity
                 android:name="org.zarroboogs.weibo.ui.preference.DraftActivity"
                 android:uiOptions="splitActionBarWhenNarrow"/>

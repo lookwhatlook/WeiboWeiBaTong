@@ -533,7 +533,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		} else {
 			url = "weibo.com/u/" + mAccountBean.getUid();
 		}
-		WaterMark mark = new WaterMark(true, POS.BOTTOM_RIGHT, mAccountBean.getUsernick(), url);
+		WaterMark mark = new WaterMark(mAccountBean.getUsernick(), url);
 		final int count = send.size();
 		for (int i = 0; i < count; i++) {
 			UploadThread ut000 = new UploadThread(mark, i, myOnUploaded, mAccountBean.getCookie(), send.get(i));
