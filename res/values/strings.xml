@@ -462,7 +462,6 @@
 
     <!--Setting Read-->
     <string name="pref_read_title">阅读</string>
-    <string name="pref_read_style_title">新数据载入后</string>
     <string name="pref_read_style_summary">微博刷新的方向</string>
 
     <!--Setting Control-->
@@ -512,7 +511,6 @@
     <string name="pref_enable_internal_web_browser">启用内置浏览器</string>
     <string name="pref_web_browser_summary">内置浏览器可以查阅分享该网页链接的微博</string>
     <string name="pref_gallery_title">图片</string>
-    <string name="pref_enable_click_to_close_gallery">启用点击关闭图片</string>
     <string name="pref_cache_title">缓存</string>
     <string name="pref_click_to_clean_cache">点击清理缓存图片</string>
     <string name="start_clean_cache">开始清理缓存</string>

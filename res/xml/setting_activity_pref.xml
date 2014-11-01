@@ -22,21 +22,16 @@
             android:key="auto_refresh"
             android:summary="@string/pref_auto_refresh_summary"
             android:title="@string/pref_auto_refresh_title" />
-
-        <ListPreference
-            android:defaultValue="1"
-            android:dialogTitle="@string/pref_read_style_title"
-            android:entries="@array/read_style_mode"
-            android:entryValues="@array/read_style_mode_value"
-            android:key="read_style"
-            android:title="@string/pref_read_style_title" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="sound"
+            android:summary="开关操作音效"
             android:title="@string/pref_sound_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_advanced_title" >
-        <Preference android:title="@string/notification" >
+        <Preference
+            android:summary="新消息通知"
+            android:title="@string/notification" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.NotificationActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
@@ -61,6 +56,7 @@
         -->
         <Preference
             android:key="filter"
+            android:summary="眼不见心不烦"
             android:title="@string/filter" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.FilterActivity"
@@ -73,10 +69,21 @@
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
         -->
-        <Preference android:title="@string/pref_other_title" >
+        <!--
+             <Preference android:title="@string/pref_other_title" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.OtherActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+        -->
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_support_title" >
+        <Preference
+            android:summary="@string/pref_play_store_address_summary"
+            android:title="@string/pref_play_store_address_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="market://details?id=org.zarroboogs.weibo" />
         </Preference>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_about_title" >

@@ -21,24 +21,7 @@
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_support_title" >
-        <Preference
-            android:summary="@string/pref_play_store_address_summary"
-            android:title="@string/pref_play_store_address_title" >
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="market://details?id=org.zarroboogs.weibo" />
-        </Preference>
-        <!-- <Preference -->
-        <!-- android:enabled="false" -->
-        <!-- android:key="pref_recommend_key" -->
-        <!-- android:title="@string/pref_recommend_title" -->
-        <!-- > -->
 
-
-        <!-- </Preference> -->
-
-    </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_storage_title" >
         <Preference
             android:key="pref_cache_path_key"
