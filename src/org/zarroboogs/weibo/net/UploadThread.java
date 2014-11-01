@@ -8,14 +8,36 @@ public class UploadThread implements Runnable {
 	private WaterMark mWaterMark;
 
 	public static class WaterMark {
+		public static enum POS{
+			BOTTOM_RIGHT,
+			BOTTOM_CENTER,
+			CENTER
+		}
 		// &marks=1&markpos=1&logo=1&nick=%40andforce&url=weibo.com/u/2294141594
 		boolean isEnaable = true;
 		int markpos = 1;
 		String nick = "";
 		String url = "";
 
-		public WaterMark(boolean isEnable, int markpos, String nick, String url) {
+		public WaterMark(boolean isEnable, POS pos, String nick, String url) {
 			this.isEnaable = isEnable;
+			switch (pos) {
+				case BOTTOM_RIGHT:
+					this.markpos = 1;
+					break;
+				case BOTTOM_CENTER: {
+					this.markpos = 2;
+					break;
+				}
+				case CENTER: {
+					this.markpos = 3;
+					break;
+				}
+	
+				default:
+					this.markpos = 1;
+					break;
+			}
 			this.markpos = markpos;
 			this.nick = nick;
 			this.url = url;

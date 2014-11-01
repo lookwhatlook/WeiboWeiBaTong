@@ -18,6 +18,7 @@ import org.zarroboogs.weibo.net.ExecuterManager;
 import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask;
 import org.zarroboogs.weibo.net.LoginWeiboAsyncTask;
 import org.zarroboogs.weibo.net.UploadThread;
+import org.zarroboogs.weibo.net.UploadThread.WaterMark.POS;
 import org.zarroboogs.weibo.net.WeiboAsyncTask;
 import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 import org.zarroboogs.weibo.net.LoginWeiboAsyncTask.LoginCallBack;
@@ -532,7 +533,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		} else {
 			url = "weibo.com/u/" + mAccountBean.getUid();
 		}
-		WaterMark mark = new WaterMark(true, 1, mAccountBean.getUsernick(), url);
+		WaterMark mark = new WaterMark(true, POS.BOTTOM_RIGHT, mAccountBean.getUsernick(), url);
 		final int count = send.size();
 		for (int i = 0; i < count; i++) {
 			UploadThread ut000 = new UploadThread(mark, i, myOnUploaded, mAccountBean.getCookie(), send.get(i));
