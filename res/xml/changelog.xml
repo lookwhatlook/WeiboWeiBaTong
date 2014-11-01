@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog>
+    <release version="V1.02-2014.10.22"
+             versioncode="2">
+        <change>基于四次元开发</change>
+        <change>每个账户由于自定义尾巴功能，需要登录2次，不是BUG</change>
+        <change>支持转发，自定义尾巴</change>
+    </release>
+        <release version="V1.03-2014.10.26"
+             versioncode="3">
+        <change>添加图片水印</change>
+        <change>如果升级时候出现异常，请完全卸载重新安装</change>
+    </release>
+</changelog>

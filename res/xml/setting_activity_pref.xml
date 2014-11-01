@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_normal_title" >
+        <Preference
+            android:key="pref_official_weibo_key"
+            android:summary="@string/developer_weibo"
+            android:title="@string/pref_official_weibo_title" >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="org.zarroboogs.weibo://@andforce" />
+        </Preference>
+<!--         <Preference android:title="@string/pref_appearance_title" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.AppearanceActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference> -->
+        <Preference android:title="@string/pref_read_title" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.ReadActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="sound"
+            android:title="@string/pref_sound_title" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_advanced_title" >
+        <Preference android:title="@string/notification" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.NotificationActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+<!--         <Preference
+            android:key="draft"
+            android:title="@string/draft" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.DraftActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference> -->
+<!--         <Preference
+            android:key="data_control"
+            android:title="@string/pref_data_control_title" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.ControlActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference> -->
+        <Preference
+            android:key="filter"
+            android:title="@string/filter" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.FilterActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+        <!--
+             <Preference android:title="@string/pref_performance_title" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.PerformanceActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+        -->
+        <Preference android:title="@string/pref_other_title" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.OtherActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+    </PreferenceCategory>
+    <!--
+         <PreferenceCategory android:title="@string/pref_about_title" 
+        android:>
+        <Preference android:title="@string/pref_about_title" >
+            <intent
+                android:targetClass="org.zarroboogs.weibo.ui.preference.AboutActivity"
+                android:targetPackage="org.zarroboogs.weibo" />
+        </Preference>
+    </PreferenceCategory>
+    -->
+
+</PreferenceScreen>
