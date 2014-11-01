@@ -10,11 +10,13 @@
                 android:action="android.intent.action.VIEW"
                 android:data="org.zarroboogs.weibo://@andforce" />
         </Preference>
-<!--         <Preference android:title="@string/pref_appearance_title" >
+        <!--
+             <Preference android:title="@string/pref_appearance_title" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.AppearanceActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
-        </Preference> -->
+        </Preference>
+        -->
         <Preference android:title="@string/pref_read_title" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.ReadActivity"
@@ -32,20 +34,24 @@
                 android:targetClass="org.zarroboogs.weibo.ui.preference.NotificationActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
-<!--         <Preference
+        <!--
+             <Preference
             android:key="draft"
             android:title="@string/draft" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.DraftActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
-        </Preference> -->
-<!--         <Preference
+        </Preference>
+        -->
+        <!--
+             <Preference
             android:key="data_control"
             android:title="@string/pref_data_control_title" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.ControlActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
-        </Preference> -->
+        </Preference>
+        -->
         <Preference
             android:key="filter"
             android:title="@string/filter" >
@@ -66,15 +72,12 @@
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
     </PreferenceCategory>
-    <!--
-         <PreferenceCategory android:title="@string/pref_about_title" 
-        android:>
+    <PreferenceCategory android:title="@string/pref_about_title" >
         <Preference android:title="@string/pref_about_title" >
             <intent
                 android:targetClass="org.zarroboogs.weibo.ui.preference.AboutActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
     </PreferenceCategory>
-    -->
 
 </PreferenceScreen>

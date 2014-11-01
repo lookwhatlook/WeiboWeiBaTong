@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import org.zarroboogs.weibo.support.file.FileManager;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
@@ -17,6 +18,12 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 
 	public ExceptionHandler(Thread.UncaughtExceptionHandler handler) {
 		this.previousHandler = handler;
+	}
+
+	private String getCurrentTime() {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");// 设置日期格式
+		System.out.println(df.format(new Date()));// new Date()为获取当前系统时间
+		return df.format(new Date());
 	}
 
 	public void uncaughtException(Thread thread, Throwable exception) {
@@ -33,8 +40,8 @@ public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
 				return;
 			}
 
-			String filename = UUID.randomUUID().toString();
-			String path = logDir + File.separator + filename + ".stacktrace";
+			String filename = getCurrentTime();
+			String path = logDir + File.separator + filename + "_crash.txt";
 
 			BufferedWriter write = new BufferedWriter(new FileWriter(path));
 			write.write("Package: " + CrashManagerConstants.APP_PACKAGE + "\n");

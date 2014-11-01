@@ -533,24 +533,19 @@
     <string name="pref_version_title">@string/title_changelog</string>
     <string name="pref_official_weibo_title">"@andforce</string>
     <string name="official_weibo_link">四次元App</string>
-    <string name="pref_suggest_title">反馈意见</string>
     <string name="pref_recommend_title">推荐给微博好友</string>
     <string name="recommend_content">还在被微博的广告恶心吗？换用 四次元 吧，干净清爽的新浪微博安卓客户端，下载 => http://t.cn/zlAUwy7
     </string>
-    <string name="pref_donate_title">捐赠支持开发</string>
     <string name="pref_donate_summary">捐之前想清楚，下个版本不一定会支持你的设备</string>
     <string name="donate_summary2">没钱好痛苦……_(:3」∠)_</string>
-    <string name="pref_play_store_address_title">Google Play</string>
+    <string name="pref_play_store_address_title">去App市场反馈</string>
     <string name="pref_play_store_address_summary">打分支持该应用</string>
     <string name="pref_github_title">Github</string>
-    <string name="pref_author_title">开发者</string>
-    <string name="pref_author_summary">心之所在</string>
     <string name="pref_icon_design_title">图标</string>
     <string name="pref_cache_path_title">缓存文件路径</string>
     <string name="pref_saved_pic_path_title">图片保存路径</string>
-    <string name="pref_saved_log_path_title">崩溃日志保存路径</string>
+    <string name="pref_saved_log_path_title">崩溃日志</string>
     <string name="pref_open_source_license_title">开源协议</string>
-    <string name="pref_google_plus_group_title">Google+ 社群</string>
     <string name="pref_google_plus_group_summary">获取最新测试版</string>
     <string name="pref_debug_title">调试</string>
     <string name="pref_debug_mem_title">内存信息</string>

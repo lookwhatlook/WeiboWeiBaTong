@@ -57,18 +57,6 @@ public class AboutFragment extends PreferenceFragment {
 
 		addPreferencesFromResource(R.xml.about_pref);
 
-		findPreference(SettingActivity.SUGGEST).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Intent intent = new Intent(getActivity(), WriteWeiboActivity.class);
-				intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
-				intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
-				intent.putExtra("content", buildContent());
-				startActivity(intent);
-				return true;
-			}
-		});
-
 		// findPreference(SettingActivity.RECOMMEND)
 		// .setOnPreferenceClickListener(new
 		// Preference.OnPreferenceClickListener() {
@@ -96,44 +84,7 @@ public class AboutFragment extends PreferenceFragment {
 			}
 		});
 
-		findPreference(SettingActivity.DONATE).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-				Dialog dialog = new Dialog(getActivity(), R.style.UserAvatarDialog);
-				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-				ImageView imageView = new ImageView(getActivity());
-				imageView.setImageResource(R.drawable.alipay);
-				dialog.setContentView(imageView);
-				dialog.show();
-				return true;
-			}
-		});
-
 		detectDebugPreference();
-
-		findPreference(SettingActivity.AUTHOR).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-
-				blackMagicCount++;
-				if (blackMagicCount > 3) {
-					SettingUtils.setBlackMagicEnabled();
-				}
-
-				if (mp != null && mp.isPlaying()) {
-					mp.stop();
-					playing = false;
-					return true;
-				}
-				if (mp == null || !playing) {
-					mp = MediaPlayer.create(getActivity(), R.raw.star);
-				}
-				mp.start();
-				playing = true;
-				Toast.makeText(getActivity(), "♩♪♫♬♭", Toast.LENGTH_SHORT).show();
-				return true;
-			}
-		});
 
 		buildCacheSummary();
 		buildLogSummary();

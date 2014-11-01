@@ -32,6 +32,7 @@ public class LicenseActivity extends AbstractAppActivity {
 			setTheme(android.R.style.Theme_Holo_Light_DialogWhenLarge);
 			break;
 		default:
+			
 			setTheme(android.R.style.Theme_Holo_DialogWhenLarge);
 		}
 		ActionBar actionBar = getActionBar();
