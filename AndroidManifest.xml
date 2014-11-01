@@ -235,7 +235,6 @@
         <activity
                 android:name="org.zarroboogs.weibo.ui.preference.AppearanceActivity"
                 android:uiOptions="splitActionBarWhenNarrow"/>
-        <activity android:name="org.zarroboogs.weibo.ui.preference.ReadActivity"/>
         <activity android:name="org.zarroboogs.weibo.ui.preference.PerformanceActivity"/>
         <activity android:name="org.zarroboogs.weibo.ui.preference.OtherActivity"/>
         <activity android:name="org.zarroboogs.weibo.ui.preference.AboutActivity"/>

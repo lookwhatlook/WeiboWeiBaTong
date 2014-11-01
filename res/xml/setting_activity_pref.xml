@@ -17,12 +17,19 @@
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
         -->
-        <Preference android:title="@string/pref_read_title" >
-            <intent
-                android:targetClass="org.zarroboogs.weibo.ui.preference.ReadActivity"
-                android:targetPackage="org.zarroboogs.weibo" />
-        </Preference>
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="auto_refresh"
+            android:summary="@string/pref_auto_refresh_summary"
+            android:title="@string/pref_auto_refresh_title" />
 
+        <ListPreference
+            android:defaultValue="1"
+            android:dialogTitle="@string/pref_read_style_title"
+            android:entries="@array/read_style_mode"
+            android:entryValues="@array/read_style_mode_value"
+            android:key="read_style"
+            android:title="@string/pref_read_style_title" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="sound"
