@@ -149,8 +149,9 @@ public class CommentsTimeLine extends AbstractAppFragment implements MainTimeLin
 		actionBar.addTab(commentsByMeTab);
 
 		if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
-			viewPager.setCurrentItem(nav, false);
-
+			if(viewPager != null){
+				viewPager.setCurrentItem(nav, false);
+			}
 		}
 
 	}
