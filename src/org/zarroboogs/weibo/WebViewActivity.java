@@ -4,6 +4,7 @@ import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.database.AccountDatabaseManager;
 import org.zarroboogs.weibo.database.AccountTable;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
+import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.utils.PatternUtils;
 
 import com.crashlytics.android.internal.m;
@@ -40,6 +41,9 @@ public class WebViewActivity extends SharedPreferenceActivity implements IWeiboC
 		setContentView(R.layout.webview_layout);
 
 		mAccountBean = (AccountBean) getIntent().getParcelableExtra(BundleArgsConstants.ACCOUNT_EXTRA);
+		if (mAccountBean == null) {
+            mAccountBean = GlobalContext.getInstance().getAccountBean();
+        }
 
 		initView();
 		initData();
@@ -139,9 +143,9 @@ public class WebViewActivity extends SharedPreferenceActivity implements IWeiboC
 					uid = uidtmp;
 				}
 				uname = PatternUtils.macthUname(oneLine);
-				Log.d("Weibo-Cookie", "" + uid);
-				Log.d("Weibo-Cookie", "" + uname);
-				Log.d("Weibo-Cookie", "in db : uid = " + mAccountBean.getUid());
+//				Log.d("Weibo-Cookie", "" + uid);
+//				Log.d("Weibo-Cookie", "" + uname);
+//				Log.d("Weibo-Cookie", "in db : uid = " + mAccountBean.getUid());
 
 				if (!TextUtils.isEmpty(uname)) {
 					manager.updateAccount(AccountTable.TABLE_NAME, uid, AccountTable.USER_NAME, uname);
