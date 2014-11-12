@@ -14,6 +14,8 @@ import org.zarroboogs.weibo.ui.loader.FriendUserLoader;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 import org.zarroboogs.weibo.widget.PerformanceImageView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
@@ -76,6 +78,22 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	public UserBean getUser() {
 		return GlobalContext.getInstance().getAccountBean().getInfo();
 	}

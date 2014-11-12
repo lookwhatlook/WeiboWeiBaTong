@@ -27,6 +27,8 @@ import org.zarroboogs.weibo.ui.preference.filter.FilterSourceFragment;
 import org.zarroboogs.weibo.ui.preference.filter.FilterTopicFragment;
 import org.zarroboogs.weibo.ui.preference.filter.FilterUserFragment;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +45,22 @@ public class FilterActivity extends AbstractAppActivity {
 		super.onCreate(savedInstanceState);
 		initLayout();
 
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
 	}
 
 	private void initLayout() {

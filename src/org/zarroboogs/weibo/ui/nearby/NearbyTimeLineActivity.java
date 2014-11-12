@@ -20,6 +20,8 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -79,6 +81,9 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+		
 		if (TextUtils.isEmpty(locationStr)) {
 			if (Utility.isTaskStopped(locationTask)) {
 				GeoBean geoBean = new GeoBean();
@@ -89,10 +94,14 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
 			}
 		}
 	}
+	
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+		
 		Utility.cancelTasks(locationTask);
 	}
 

@@ -8,6 +8,7 @@ import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.utils.PatternUtils;
 
 import com.crashlytics.android.internal.m;
+import com.umeng.analytics.MobclickAgent;
 
 import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
@@ -49,6 +50,23 @@ public class WebViewActivity extends SharedPreferenceActivity implements IWeiboC
 		initData();
 
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 
 	public void initView() {
 		mWebView = (WebView) findViewById(R.id.webview);

@@ -29,6 +29,8 @@ import org.zarroboogs.weibo.utils.ImageUtility;
 import org.zarroboogs.weibo.widget.KeyboardControlEditText;
 import org.zarroboogs.weibo.widget.SmileyPicker;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.ActionBar;
 import android.content.ContentValues;
 import android.content.Context;
@@ -714,9 +716,20 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	@Override
 	protected void onPause() {
 		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+		
 		if (locationListener != null) {
 			((LocationManager) WriteWeiboActivity.this.getSystemService(Context.LOCATION_SERVICE)).removeUpdates(locationListener);
 		}
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
 	}
 
 	public AccountBean getAccount() {

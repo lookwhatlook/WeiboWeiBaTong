@@ -25,6 +25,8 @@ import org.zarroboogs.weibo.ui.send.WriteRepostActivity;
 import org.zarroboogs.weibo.ui.task.FavAsyncTask;
 import org.zarroboogs.weibo.ui.task.UnFavAsyncTask;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -138,7 +140,22 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 		}
 
 	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
 
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();

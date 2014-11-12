@@ -27,6 +27,8 @@ import org.zarroboogs.weibo.ui.send.WriteWeiboActivity;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.utils.ErrorCode;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -78,7 +80,8 @@ public class UserInfoActivity extends AbstractAppActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
 	}
 
 	@Override
@@ -140,6 +143,15 @@ public class UserInfoActivity extends AbstractAppActivity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	
 	private boolean isMyselfProfile() {
 		boolean screenNameEqualCurrentAccount = bean.getScreen_name() != null
 				&& bean.getScreen_name().equals(GlobalContext.getInstance().getCurrentAccountName());

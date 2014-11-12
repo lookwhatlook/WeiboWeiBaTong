@@ -12,6 +12,8 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,10 +40,23 @@ public class SSOActivity extends AbstractAppActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
 	protected void onPause() {
+		// TODO Auto-generated method stub
 		super.onPause();
 		Utility.cancelTasks(task);
+		
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
 	}
+	
 
 	private static class SSOTask extends MyAsyncTask<String, UserBean, OAuthActivity.DBResult> {
 

@@ -10,6 +10,7 @@ import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask;
 import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 
 import com.google.gson.Gson;
+import com.umeng.analytics.MobclickAgent;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
@@ -50,6 +51,22 @@ public class ChangeWeibaActivity extends SharedPreferenceActivity implements OnI
 		listView.setOnItemClickListener(this);
 
 		fetchWeiBa();
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
 	}
 
 	private void showDialogForWeiBo() {

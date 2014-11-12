@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.selectphoto.ImgsAdapter.OnItemClickClass;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -57,6 +59,22 @@ public class ImgsActivity extends Activity {
 		util = new Util(this);
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	private void updateCount() {
 		mButton.setText(getString(R.string.img_select) + "(" + mSendImgData.getSendImgs().size() + ")");
 	}

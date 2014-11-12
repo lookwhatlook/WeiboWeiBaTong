@@ -7,6 +7,8 @@ import android.view.MenuItem;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
+import com.umeng.analytics.MobclickAgent;
+
 /**
  * User: qii Date: 12-10-22
  */
@@ -25,6 +27,22 @@ public class DraftActivity extends AbstractAppActivity {
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;

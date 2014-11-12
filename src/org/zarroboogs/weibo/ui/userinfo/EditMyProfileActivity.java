@@ -15,6 +15,8 @@ import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 import org.zarroboogs.weibo.utils.ImageUtility;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -80,6 +82,21 @@ public class EditMyProfileActivity extends AbstractAppActivity implements Dialog
 		userBean = (UserBean) getIntent().getParcelableExtra(Constances.USERBEAN);
 		initValue(savedInstanceState);
 
+	}
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
 	}
 
 	private void initLayout() {

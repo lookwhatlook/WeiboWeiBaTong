@@ -8,6 +8,8 @@ import android.view.MenuItem;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
+import com.umeng.analytics.MobclickAgent;
+
 /**
  * User: qii Date: 13-2-14
  */
@@ -39,6 +41,22 @@ public class PerformanceActivity extends AbstractAppActivity {
 		return false;
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	public static class PerformanceFragment extends PreferenceFragment {
 
 		@Override

@@ -3,6 +3,7 @@ package org.zarroboogs.weibo.ui.main;
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.slidingmenu.lib.SlidingMenu;
+import com.umeng.analytics.MobclickAgent;
 
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.R;
@@ -479,6 +480,9 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+		
 		IntentFilter filter = new IntentFilter(AppEventAction.NEW_MSG_PRIORITY_BROADCAST);
 		filter.setPriority(1);
 		newMsgInterruptBroadcastReceiver = new NewMsgInterruptBroadcastReceiver();
@@ -493,6 +497,9 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	@Override
 	protected void onPause() {
 		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+		
 		Utility.unregisterReceiverIgnoredReceiverNotRegisteredException(this, newMsgInterruptBroadcastReceiver);
 		Utility.unregisterReceiverIgnoredReceiverNotRegisteredException(this, musicReceiver);
 

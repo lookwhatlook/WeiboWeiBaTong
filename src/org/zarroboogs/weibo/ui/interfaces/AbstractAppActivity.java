@@ -15,8 +15,6 @@ import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.utils.GlobalContext;
 
-import com.umeng.analytics.MobclickAgent;
-
 import java.lang.reflect.Field;
 import java.nio.charset.Charset;
 
@@ -35,7 +33,7 @@ public class AbstractAppActivity extends FragmentActivity {
 		if (theme != SettingUtils.getAppTheme()) {
 			reload();
 		}
-		MobclickAgent.onResume(this);
+
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class AbstractAppActivity extends FragmentActivity {
 		if (GlobalContext.getInstance().getCurrentRunningActivity() == this) {
 			GlobalContext.getInstance().setCurrentRunningActivity(null);
 		}
-		MobclickAgent.onPause(this);
+
 	}
 
 	@Override

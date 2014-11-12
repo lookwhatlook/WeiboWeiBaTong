@@ -21,6 +21,8 @@ import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.search.AtUserActivity;
 
+import com.umeng.analytics.MobclickAgent;
+
 /**
  * User: Jiang Qi Date: 12-8-2
  */
@@ -62,6 +64,22 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 		}
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	private void handleDraftOperation(Intent intent) {
 		AccountBean account = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
 		token = account.getAccess_token();

@@ -13,6 +13,8 @@ import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.utils.WeiBoURLs;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -288,8 +290,19 @@ public class OAuthActivity extends AbstractAppActivity {
 	}
 
 	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
 	protected void onPause() {
+		// TODO Auto-generated method stub
 		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
 		if (isFinishing()) {
 			webView.stopLoading();
 		}

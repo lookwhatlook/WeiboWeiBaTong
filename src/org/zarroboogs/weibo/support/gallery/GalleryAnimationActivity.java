@@ -6,6 +6,8 @@ import org.zarroboogs.weibo.support.lib.AnimationRect;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.GlobalContext;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
@@ -118,6 +120,22 @@ public class GalleryAnimationActivity extends FragmentActivity {
 
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	private HashMap<Integer, BigPicContainerFragment> fragmentMap = new HashMap<Integer, BigPicContainerFragment>();
 
 	private boolean alreadyAnimateIn = false;

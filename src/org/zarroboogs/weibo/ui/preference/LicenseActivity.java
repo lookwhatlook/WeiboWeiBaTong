@@ -3,6 +3,9 @@ package org.zarroboogs.weibo.ui.preference;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
+
+import com.umeng.analytics.MobclickAgent;
+
 import android.annotation.TargetApi;
 import android.app.ActionBar;
 import android.content.Context;
@@ -55,6 +58,22 @@ public class LicenseActivity extends AbstractAppActivity {
 		webView.loadUrl("file:///android_asset/licenses.html");
 	}
 
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		MobclickAgent.onPageStart(this.getClass().getName());
+		MobclickAgent.onResume(this);
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		MobclickAgent.onPageEnd(this.getClass().getName());
+		MobclickAgent.onPause(this);
+	}
+	
 	@Override
 	public void onBackPressed() {
 		if (webView != null && webView.canGoBack()) {
