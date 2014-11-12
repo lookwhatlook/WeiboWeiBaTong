@@ -1,316 +1,324 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="org.zarroboogs.weibo"
-          android:versionCode="6"
-          android:versionName="1.033">
+    package="org.zarroboogs.weibo"
+    android:versionCode="6"
+    android:versionName="1.033" >
 
     <uses-sdk
-            android:minSdkVersion="14"
-            android:targetSdkVersion="20"/>
+        android:minSdkVersion="14"
+        android:targetSdkVersion="20" />
+
     <uses-feature
-            android:glEsVersion="0x00020000"
-            android:required="true"/>
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-<!--     <uses-permission android:name="android.permission.NFC"/> -->
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- <uses-permission android:name="android.permission.NFC"/> -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <permission
-            android:name="org.zarroboogs.weibo.permission.MAPS_RECEIVE"
-            android:protectionLevel="signature"/>
-    <uses-permission android:name="org.zarroboogs.weibo.permission.MAPS_RECEIVE"/>
+        android:name="org.zarroboogs.weibo.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="org.zarroboogs.weibo.permission.MAPS_RECEIVE" />
 
     <application
-            android:label="@string/app_name"
-            android:icon="@drawable/ic_launcher"
-            android:theme="@style/AppTheme_Light"
-            android:largeHeap="true"
-            android:allowBackup="true"
-            android:name="org.zarroboogs.weibo.support.utils.GlobalContext">
+        android:name="org.zarroboogs.weibo.support.utils.GlobalContext"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:theme="@style/AppTheme_Light" >
 
         <!-- Umeng start -->
-        <meta-data android:value="5462e519fd98c553cc0000ad" android:name="UMENG_APPKEY"></meta-data>
-		<meta-data android:value="WanDouJia" android:name="UMENG_CHANNEL"/>
-		<!-- Umeng end -->
-
-        <meta-data android:name="com.crashlytics.ApiKey"
-                   android:value="22c3e094e4bf447e9b89eee57143c5cc5df5c641"/>
-
-
-        <!--this is debug key-->
-        <!--<meta-data-->
-        <!--android:name="com.google.android.maps.v2.API_KEY"-->
-        <!--android:value="AIzaSyDizhP6l9ekit374ZpPXMNjVYDqurwgfrc"/>-->
-
-        <!-- this is release key-->
         <meta-data
-                android:name="com.google.android.maps.v2.API_KEY"
-                android:value="AIzaSyA_Ozn9WNG58ImFlmOFOItHvn1JShWvIpE"/>
+            android:name="UMENG_APPKEY"
+            android:value="5462e519fd98c553cc0000ad" >
+        </meta-data>
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="WanDouJia" />
+        <!-- Umeng end -->
+
+        <meta-data
+            android:name="com.crashlytics.ApiKey"
+            android:value="22c3e094e4bf447e9b89eee57143c5cc5df5c641" />
+
+        <!-- this is debug key -->
+        <!-- <meta-data -->
+        <!-- android:name="com.google.android.maps.v2.API_KEY" -->
+        <!-- android:value="AIzaSyDizhP6l9ekit374ZpPXMNjVYDqurwgfrc"/> -->
+
+
+        <!-- this is release key -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyA_Ozn9WNG58ImFlmOFOItHvn1JShWvIpE" />
 
         <activity
-                android:name="org.zarroboogs.weibo.ui.login.AccountActivity"
-                android:uiOptions="splitActionBarWhenNarrow">
+            android:name="org.zarroboogs.weibo.ui.login.AccountActivity"
+            android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <!-- login activity -->
 
-        <activity android:name="org.zarroboogs.weibo.ui.login.OAuthActivity"/>
-        <activity android:name="org.zarroboogs.weibo.ui.login.SSOActivity"/>
+        <activity android:name="org.zarroboogs.weibo.ui.login.OAuthActivity" />
+        <activity android:name="org.zarroboogs.weibo.ui.login.SSOActivity" />
 
-        <!--main activity -->
+        <!-- main activity -->
         <activity
-                android:name="org.zarroboogs.weibo.ui.main.MainTimeLineActivity"
-                android:launchMode="singleTask"/>
+            android:name="org.zarroboogs.weibo.ui.main.MainTimeLineActivity"
+            android:launchMode="singleTask" />
 
-        <!--send activity -->
+        <!-- send activity -->
         <activity
-                android:name="org.zarroboogs.weibo.ui.send.WriteWeiboActivity"
-                android:launchMode="singleTop"
-                android:windowSoftInputMode="stateVisible|adjustResize">
+            android:name="org.zarroboogs.weibo.ui.send.WriteWeiboActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateVisible|adjustResize" >
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="image/*"/>
+                <action android:name="android.intent.action.SEND" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="image/*" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="text/plain"/>
-            </intent-filter>
-        </activity>
+                <action android:name="android.intent.action.SEND" />
 
-        <activity
-                android:name="org.zarroboogs.weibo.ui.send.WriteRepostActivity"
-                android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.send.WriteCommentActivity"
-                android:windowSoftInputMode="stateVisible|adjustResize"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity"
-                android:windowSoftInputMode="stateVisible|adjustResize"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-        <!--browser activity -->
-        <activity
-                android:name="org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity"
-                android:theme="@style/AppTheme_Dummy"
-                android:uiOptions="splitActionBarWhenNarrow"
-                android:exported="false"
-                android:label="@string/detail"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.browser.BrowserCommentActivity"
-                android:label="@string/comment_detail"/>
-        <activity
-                android:name="org.zarroboogs.weibo.support.gallery.GalleryActivity"
-                android:theme="@style/GalleryTheme"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.support.gallery.GalleryAnimationActivity"
-                android:theme="@style/GalleryTheme"
-                android:configChanges="screenSize|keyboardHidden|orientation"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.browser.BrowserWriteWeiboLocalPicActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.browser.BrowserWebActivity"
-                android:uiOptions="splitActionBarWhenNarrow"
-                android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-
-                <data android:host="e.weibo.com"
-                      android:scheme="http"/>
-
-                <data android:host="weibo.com"
-                      android:scheme="http"/>
-
-                <data android:host="www.weibo.com"
-                      android:scheme="http"/>
-
-                <data android:host="www.weibo.cn"
-                      android:scheme="http"/>
-
-                <data android:host="weibo.cn"
-                      android:scheme="http"/>
-
-                <data android:host="t.cn"
-                      android:scheme="http"/>
-
+                <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.browser.BrowserShareTimeLineActivity"/>
         <activity
-                android:name="org.zarroboogs.weibo.ui.browser.AppMapActivity"
-                android:launchMode="singleTop"/>
-
-
-        <!--topic activity -->
+            android:name="org.zarroboogs.weibo.ui.send.WriteRepostActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-                android:name="org.zarroboogs.weibo.ui.topic.SearchTopicByNameActivity"
-                android:label="@string/search_topic"
-                android:uiOptions="splitActionBarWhenNarrow">
+            android:name="org.zarroboogs.weibo.ui.send.WriteCommentActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <!-- browser activity -->
+        <activity
+            android:name="org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity"
+            android:exported="false"
+            android:label="@string/detail"
+            android:theme="@style/AppTheme_Dummy"
+            android:uiOptions="splitActionBarWhenNarrow" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.browser.BrowserCommentActivity"
+            android:label="@string/comment_detail" />
+        <activity
+            android:name="org.zarroboogs.weibo.support.gallery.GalleryActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/GalleryTheme" />
+        <activity
+            android:name="org.zarroboogs.weibo.support.gallery.GalleryAnimationActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:launchMode="singleTop"
+            android:theme="@style/GalleryTheme" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.browser.BrowserWriteWeiboLocalPicActivity"
+            android:launchMode="singleTop"
+            android:uiOptions="splitActionBarWhenNarrow" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.browser.BrowserWebActivity"
+            android:launchMode="singleTask"
+            android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="android.intent.action.VIEW"/>
-                <data android:scheme="org.zarroboogs.weibo.topic"/>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data
+                    android:host="e.weibo.com"
+                    android:scheme="http" />
+                <data
+                    android:host="weibo.com"
+                    android:scheme="http" />
+                <data
+                    android:host="www.weibo.com"
+                    android:scheme="http" />
+                <data
+                    android:host="www.weibo.cn"
+                    android:scheme="http" />
+                <data
+                    android:host="weibo.cn"
+                    android:scheme="http" />
+                <data
+                    android:host="t.cn"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.topic.UserTopicListActivity"/>
-
-        <!--user activity -->
+        <activity android:name="org.zarroboogs.weibo.ui.browser.BrowserShareTimeLineActivity" />
         <activity
-                android:name="org.zarroboogs.weibo.ui.userinfo.UserInfoActivity"
-                android:theme="@style/AppTheme_Dummy">
+            android:name="org.zarroboogs.weibo.ui.browser.AppMapActivity"
+            android:launchMode="singleTop" />
+
+        <!-- topic activity -->
+        <activity
+            android:name="org.zarroboogs.weibo.ui.topic.SearchTopicByNameActivity"
+            android:label="@string/search_topic"
+            android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <action android:name="android.intent.action.VIEW"/>
-                <data android:scheme="org.zarroboogs.weibo"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:mimeType="application/org.zarroboogs.weibo.beam"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="org.zarroboogs.weibo.topic" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.userinfo.UserTimeLineActivity"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.userinfo.MyInfoActivity"
-                android:theme="@style/AppTheme_Dummy"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.userinfo.EditMyProfileActivity"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.userinfo.FriendListActivity"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.userinfo.FanListActivity"
-                android:launchMode="singleTop"/>
-        <activity
-                android:name="org.zarroboogs.weibo.ui.userinfo.MyFavActivity"
-                android:launchMode="singleTop"/>
+        <activity android:name="org.zarroboogs.weibo.ui.topic.UserTopicListActivity" />
 
-
-        <!--search activity -->
+        <!-- user activity -->
         <activity
-                android:name="org.zarroboogs.weibo.ui.search.SearchMainActivity"
-                android:launchMode="singleTop">
+            android:name="org.zarroboogs.weibo.ui.userinfo.UserInfoActivity"
+            android:theme="@style/AppTheme_Dummy" >
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <data android:scheme="org.zarroboogs.weibo" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:mimeType="application/org.zarroboogs.weibo.beam" />
+            </intent-filter>
+        </activity>
+        <activity android:name="org.zarroboogs.weibo.ui.userinfo.UserTimeLineActivity" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.userinfo.MyInfoActivity"
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme_Dummy" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.userinfo.EditMyProfileActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.userinfo.FriendListActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.userinfo.FanListActivity"
+            android:launchMode="singleTop" />
+        <activity
+            android:name="org.zarroboogs.weibo.ui.userinfo.MyFavActivity"
+            android:launchMode="singleTop" />
+
+        <!-- search activity -->
+        <activity
+            android:name="org.zarroboogs.weibo.ui.search.SearchMainActivity"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
             <meta-data
-                    android:name="android.app.searchable"
-                    android:resource="@xml/searchable"/>
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.search.AtUserActivity"/>
+        <activity android:name="org.zarroboogs.weibo.ui.search.AtUserActivity" />
 
-        <!--friend group-->
-        <activity android:name="org.zarroboogs.weibo.ui.friendgroup.ManageGroupActivity"/>
+        <!-- friend group -->
+        <activity android:name="org.zarroboogs.weibo.ui.friendgroup.ManageGroupActivity" />
 
-        <!-- nearby-->
-        <activity android:name="org.zarroboogs.weibo.ui.nearby.NearbyTimeLineActivity"/>
+        <!-- nearby -->
+        <activity android:name="org.zarroboogs.weibo.ui.nearby.NearbyTimeLineActivity" />
 
-        <!--preference activity -->
-        <activity android:name="org.zarroboogs.weibo.ui.preference.SettingActivity"/>
-        <!--intent-filter is used for Android-Setting-Data usage- click this app- View app Settings-->
-        <activity android:name="org.zarroboogs.weibo.ui.preference.ControlActivity">
+        <!-- preference activity -->
+        <activity android:name="org.zarroboogs.weibo.ui.preference.SettingActivity" />
+        <!-- intent-filter is used for Android-Setting-Data usage- click this app- View app Settings -->
+        <activity android:name="org.zarroboogs.weibo.ui.preference.ControlActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE"/>
-                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
+
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.preference.NotificationActivity"/>
-        
-        <activity android:name="org.zarroboogs.weibo.ui.preference.WaterMarkPrefActivity"/>
-        
+        <activity android:name="org.zarroboogs.weibo.ui.preference.NotificationActivity" />
+        <activity android:name="org.zarroboogs.weibo.ui.preference.WaterMarkPrefActivity" />
         <activity
-                android:name="org.zarroboogs.weibo.ui.preference.DraftActivity"
-                android:uiOptions="splitActionBarWhenNarrow"/>
+            android:name="org.zarroboogs.weibo.ui.preference.DraftActivity"
+            android:uiOptions="splitActionBarWhenNarrow" />
         <activity
-                android:name="org.zarroboogs.weibo.ui.preference.FilterActivity"
-                android:uiOptions="splitActionBarWhenNarrow"/>
+            android:name="org.zarroboogs.weibo.ui.preference.FilterActivity"
+            android:uiOptions="splitActionBarWhenNarrow" />
         <activity
-                android:name="org.zarroboogs.weibo.ui.preference.AppearanceActivity"
-                android:uiOptions="splitActionBarWhenNarrow"/>
-        <activity android:name="org.zarroboogs.weibo.ui.preference.PerformanceActivity"/>
-        <activity android:name="org.zarroboogs.weibo.ui.preference.OtherActivity"/>
-        <activity android:name="org.zarroboogs.weibo.ui.preference.AboutActivity"/>
+            android:name="org.zarroboogs.weibo.ui.preference.AppearanceActivity"
+            android:uiOptions="splitActionBarWhenNarrow" />
+        <activity android:name="org.zarroboogs.weibo.ui.preference.PerformanceActivity" />
+        <activity android:name="org.zarroboogs.weibo.ui.preference.OtherActivity" />
+        <activity android:name="org.zarroboogs.weibo.ui.preference.AboutActivity" />
         <activity
-                android:name="org.zarroboogs.weibo.ui.preference.LicenseActivity"
-                android:theme="@android:style/Theme.Holo.DialogWhenLarge"/>
-
+            android:name="org.zarroboogs.weibo.ui.preference.LicenseActivity"
+            android:theme="@android:style/Theme.Holo.DialogWhenLarge" />
 
         <!-- service -->
-        <service android:name="org.zarroboogs.weibo.othercomponent.FetchNewMsgService"/>
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendWeiboService"/>
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService"/>
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendCommentService"/>
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendReplyToCommentService"/>
+        <service android:name="org.zarroboogs.weibo.othercomponent.FetchNewMsgService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendWeiboService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendCommentService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendReplyToCommentService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsWeiboNotificationServiceHelper" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsCommentNotificationServiceHelper" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBCommentsToMeNotificationServiceHelper" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.BigTextNotificationService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.SimpleTextNotificationService" />
 
-        <service
-                android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsWeiboNotificationServiceHelper"/>
-        <service
-                android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsCommentNotificationServiceHelper"/>
-        <service
-                android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBCommentsToMeNotificationServiceHelper"/>
-        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.BigTextNotificationService"/>
-        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.SimpleTextNotificationService"/>
-
-        <!---broadcast receiver -->
+        <!-- -broadcast receiver -->
         <receiver
-                android:exported="false"
-                android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.UnreadMsgReceiver">
+            android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.UnreadMsgReceiver"
+            android:exported="false" >
             <intent-filter>
-                <action android:name="org.zarroboogs.weibo.newmsg.priority"/>
+                <action android:name="org.zarroboogs.weibo.newmsg.priority" />
             </intent-filter>
         </receiver>
         <receiver
-                android:name="org.zarroboogs.weibo.othercomponent.ConnectionChangeReceiver"
-                android:label="NetworkConnection">
+            android:name="org.zarroboogs.weibo.othercomponent.ConnectionChangeReceiver"
+            android:label="NetworkConnection" >
             <intent-filter>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
         </receiver>
 
-        <!--provider-->
+        <!-- provider -->
         <provider
-                android:exported="false"
-                android:name="org.zarroboogs.weibo.ui.search.SearchSuggestionProvider"
-                android:authorities="org.zarroboogs.weibo.ui.search.SearchSuggestionProvider"/>
+            android:name="org.zarroboogs.weibo.ui.search.SearchSuggestionProvider"
+            android:authorities="org.zarroboogs.weibo.ui.search.SearchSuggestionProvider"
+            android:exported="false" />
 
-        <!--black magic-->
-        <activity android:name="org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity"/>
+        <!-- black magic -->
+        <activity android:name="org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity" />
 
         <!-- dm -->
-        <activity android:name="org.zarroboogs.weibo.ui.dm.DMActivity"/>
-        <activity android:name="org.zarroboogs.weibo.ui.dm.DMUserListActivity"/>
-        <activity android:name="org.zarroboogs.weibo.ui.dm.DMSelectUserActivity"/>
-        
+        <activity android:name="org.zarroboogs.weibo.ui.dm.DMActivity" />
+        <activity android:name="org.zarroboogs.weibo.ui.dm.DMUserListActivity" />
+        <activity android:name="org.zarroboogs.weibo.ui.dm.DMSelectUserActivity" />
         <activity
             android:name="org.zarroboogs.weibo.WeiboMainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-        
         <activity
             android:name="org.zarroboogs.weibo.RepostWeiboMainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
         </activity>
-        
         <activity android:name="org.zarroboogs.weibo.WebViewActivity" >
         </activity>
         <activity
@@ -326,6 +334,15 @@
             android:label="@string/app_name" >
         </activity>
 
+        <service
+            android:name="com.umeng.update.net.DownloadingService"
+            android:process=":DownloadingService" >
+        </service>
+
+        <activity
+            android:name="com.umeng.update.UpdateDialogActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
+        </activity>
     </application>
 
 </manifest>

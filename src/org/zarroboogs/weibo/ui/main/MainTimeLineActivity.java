@@ -4,6 +4,7 @@ import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.slidingmenu.lib.SlidingMenu;
 import com.umeng.analytics.MobclickAgent;
+import com.umeng.update.UmengUpdateAgent;
 
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.R;
@@ -136,6 +137,8 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		UmengUpdateAgent.update(this);
+		
 		if (savedInstanceState != null) {
 			mAccountBean = savedInstanceState.getParcelable(Constances.ACCOUNT);
 		} else {
