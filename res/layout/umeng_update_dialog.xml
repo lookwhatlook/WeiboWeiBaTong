@@ -84,6 +84,7 @@
 
 		<CheckBox
 		    android:id="@+id/umeng_update_id_check"
+		    android:visibility="gone"
 	        android:layout_width="fill_parent"
 	        android:layout_height="32dp"
 	        android:text="@string/UMIgnore"
