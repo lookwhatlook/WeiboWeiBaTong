@@ -22,6 +22,8 @@ import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 import org.zarroboogs.weibo.widget.pulltorefresh.SoundPullEventListener;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -341,6 +343,7 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends A
 		TimeLineBitmapDownloader.getInstance().setPauseDownloadWork(false);
 		TimeLineBitmapDownloader.getInstance().setPauseReadWork(false);
 
+		MobclickAgent.onPageEnd(this.getClass().getName());
 	}
 
 	protected void onListViewScrollStop() {
@@ -444,6 +447,8 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends A
 		super.onResume();
 		getListView().setFastScrollEnabled(SettingUtils.allowFastScroll());
 		getAdapter().notifyDataSetChanged();
+		
+		MobclickAgent.onPageStart(this.getClass().getName());
 	}
 
 	@Override

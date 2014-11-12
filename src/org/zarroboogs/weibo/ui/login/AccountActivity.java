@@ -15,6 +15,8 @@ import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 import org.zarroboogs.weibo.widget.ChangeLogDialog;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.AsyncTaskLoader;
@@ -80,6 +82,9 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+	    
+	    MobclickAgent.updateOnlineConfig(this);
+	    
 		// release
 		BroserContent.getInstance().release();
 

@@ -6,6 +6,7 @@ import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemor
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.umeng.analytics.MobclickAgent;
 
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -79,6 +80,10 @@ public final class GlobalContext extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		
+		MobclickAgent.openActivityDurationTrack(false);
+		MobclickAgent.setDebugMode(true);
+		
 		instance = this;
 		initImageLoader(getApplicationContext());
 
