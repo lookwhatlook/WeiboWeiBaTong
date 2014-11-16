@@ -83,7 +83,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		
-		MobclickAgent.setDebugMode(true);
+		MobclickAgent.setDebugMode(false);
 		MobclickAgent.openActivityDurationTrack(false);
 	    MobclickAgent.updateOnlineConfig(this);
 	    

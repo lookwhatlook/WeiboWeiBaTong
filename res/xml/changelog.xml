@@ -19,4 +19,10 @@
         <change>修改了几个容易让人困惑的提示</change>
         <change>调整了设置的层次</change>
     </release>
+    
+	<release version="V1.04-2014.11.16" versioncode="7">
+	    <change>修正Android5.0下gif黑屏崩溃问题</change>
+        <change>添加发现版本自动升级功能</change>
+    </release>
+    
 </changelog>
