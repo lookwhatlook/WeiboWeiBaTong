@@ -771,7 +771,6 @@ public class GifDrawable extends Drawable implements Animatable, MediaPlayerCont
         return mListeners.remove(listener);
     }
 
-    @Override
     public ColorFilter getColorFilter() {
         return mPaint.getColorFilter();
     }

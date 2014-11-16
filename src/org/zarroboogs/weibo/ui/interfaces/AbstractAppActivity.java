@@ -1,10 +1,6 @@
 package org.zarroboogs.weibo.ui.interfaces;
 
 import android.content.Intent;
-import android.nfc.NdefMessage;
-import android.nfc.NdefRecord;
-import android.nfc.NfcAdapter;
-import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.ViewConfiguration;
@@ -16,7 +12,6 @@ import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 import java.lang.reflect.Field;
-import java.nio.charset.Charset;
 
 /**
  * User: Jiang Qi Date: 12-7-31
@@ -62,7 +57,6 @@ public class AbstractAppActivity extends FragmentActivity {
 		setTheme(theme);
 		super.onCreate(savedInstanceState);
 		forceShowActionBarOverflowMenu();
-		initNFC();
 		GlobalContext.getInstance().setActivity(this);
 	}
 
@@ -79,30 +73,8 @@ public class AbstractAppActivity extends FragmentActivity {
 		}
 	}
 
-	private void initNFC() {
-		NfcAdapter mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-		if (mNfcAdapter == null) {
-			return;
-		}
 
-		mNfcAdapter.setNdefPushMessageCallback(new NfcAdapter.CreateNdefMessageCallback() {
-			@Override
-			public NdefMessage createNdefMessage(NfcEvent event) {
-				String text = (GlobalContext.getInstance().getCurrentAccountName());
 
-				NdefMessage msg = new NdefMessage(new NdefRecord[] { createMimeRecord("application/org.zarroboogs.weibo.beam", text.getBytes()),
-						NdefRecord.createApplicationRecord(getPackageName()) });
-				return msg;
-			}
-		}, this);
-
-	}
-
-	private NdefRecord createMimeRecord(String mimeType, byte[] payload) {
-		byte[] mimeBytes = mimeType.getBytes(Charset.forName("US-ASCII"));
-		NdefRecord mimeRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, mimeBytes, new byte[0], payload);
-		return mimeRecord;
-	}
 
 	private void reload() {
 
