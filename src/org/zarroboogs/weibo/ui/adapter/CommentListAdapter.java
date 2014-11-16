@@ -1,11 +1,11 @@
 package org.zarroboogs.weibo.ui.adapter;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity;
 import org.zarroboogs.weibo.widget.AutoScrollListView;

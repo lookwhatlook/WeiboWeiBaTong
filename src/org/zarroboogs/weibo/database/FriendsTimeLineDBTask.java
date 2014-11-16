@@ -3,6 +3,7 @@ package org.zarroboogs.weibo.database;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.GroupBean;
 import org.zarroboogs.weibo.bean.GroupListBean;
 import org.zarroboogs.weibo.bean.MessageBean;
@@ -10,7 +11,6 @@ import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.MessageTimeLineData;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.support.utils.AppConfig;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import android.content.ContentValues;

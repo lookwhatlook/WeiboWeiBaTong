@@ -1,9 +1,9 @@
 package org.zarroboogs.weibo.ui.actionmenu;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.CommentBean;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity;
 import org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity;
 

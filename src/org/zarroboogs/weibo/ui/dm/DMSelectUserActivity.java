@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.ui.dm;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.UserListBean;
 import org.zarroboogs.weibo.dao.SearchDao;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.basefragment.AbstractFriendsFanListFragment;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.loader.FriendUserLoader;

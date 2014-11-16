@@ -1,12 +1,12 @@
 package org.zarroboogs.weibo.othercomponent;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.support.asyncdrawable.TaskCache;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.utils.ImageUtility;

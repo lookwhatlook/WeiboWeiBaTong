@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.widget;
 
-import org.zarroboogs.weibo.support.utils.GlobalContext;
+import org.zarroboogs.weibo.GlobalContext;
 
 import android.content.Context;
 import android.graphics.Bitmap;

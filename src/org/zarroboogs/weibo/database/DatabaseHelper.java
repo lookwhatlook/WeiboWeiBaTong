@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.database;
 
-import org.zarroboogs.weibo.support.utils.GlobalContext;
+import org.zarroboogs.weibo.GlobalContext;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

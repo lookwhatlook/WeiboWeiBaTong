@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.userinfo;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -19,7 +20,6 @@ import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.support.utils.ViewUtility;

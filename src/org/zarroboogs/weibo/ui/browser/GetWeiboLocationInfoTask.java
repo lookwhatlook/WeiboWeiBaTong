@@ -1,12 +1,12 @@
 package org.zarroboogs.weibo.ui.browser;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.GeoBean;
 import org.zarroboogs.weibo.dao.BaiduGeoCoderDao;
 import org.zarroboogs.weibo.dao.GoogleGeoCoderDao;
 import org.zarroboogs.weibo.dao.MapDao;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import android.app.Activity;

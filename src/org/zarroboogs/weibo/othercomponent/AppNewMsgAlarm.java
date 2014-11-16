@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.othercomponent;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 import android.app.AlarmManager;
 import android.app.NotificationManager;

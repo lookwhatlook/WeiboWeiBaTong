@@ -1,11 +1,11 @@
 package org.zarroboogs.weibo.ui.browser;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.dao.Mid2IdDao;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.file.FileManager;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.common.CommonProgressDialogFragment;
 import org.zarroboogs.weibo.ui.userinfo.UserInfoActivity;

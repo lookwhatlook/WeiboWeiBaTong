@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.ui.topic;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.TopicResultListBean;
 import org.zarroboogs.weibo.dao.TopicDao;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.basefragment.AbstractMessageTimeLineFragment;
 import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity;

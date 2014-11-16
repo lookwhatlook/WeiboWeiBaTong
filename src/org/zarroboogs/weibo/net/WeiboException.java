@@ -3,8 +3,8 @@ package org.zarroboogs.weibo.net;
 import android.content.res.Resources;
 import android.text.TextUtils;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 /**
  * User: Jiang Qi Date: 12-8-14

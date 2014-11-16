@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.othercomponent.unreadnotification;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.UnreadBean;
@@ -8,7 +9,6 @@ import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 

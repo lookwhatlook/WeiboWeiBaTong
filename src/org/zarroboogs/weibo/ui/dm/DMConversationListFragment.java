@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.dm;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -10,7 +11,6 @@ import org.zarroboogs.weibo.bean.data.DMListBean;
 import org.zarroboogs.weibo.dao.SendDMDao;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.AppConfig;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.ui.adapter.DMConversationAdapter;
 import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;

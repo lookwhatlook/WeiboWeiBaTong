@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.support.utils;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 

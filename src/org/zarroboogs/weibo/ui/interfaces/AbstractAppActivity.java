@@ -6,10 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 import java.lang.reflect.Field;
 

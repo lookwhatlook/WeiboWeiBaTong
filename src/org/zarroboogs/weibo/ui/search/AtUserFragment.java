@@ -16,13 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AtUserBean;
 import org.zarroboogs.weibo.dao.AtUserDao;
 import org.zarroboogs.weibo.database.AtUsersDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,6 +4,7 @@ package org.zarroboogs.weibo.ui.browser;
 //import com.google.android.gms.maps.MapsInitializer;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -22,7 +23,6 @@ import org.zarroboogs.weibo.support.gallery.GalleryAnimationActivity;
 import org.zarroboogs.weibo.support.lib.AnimationRect;
 import org.zarroboogs.weibo.support.lib.ClickableTextViewMentionLinkOnTouchListener;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.CommentSingleChoiceModeListener;

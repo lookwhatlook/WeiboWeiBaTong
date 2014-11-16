@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.support.gallery;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.support.lib.AnimationRect;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 import com.umeng.analytics.MobclickAgent;
 

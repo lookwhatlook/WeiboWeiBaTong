@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 
 /**
  * User: qii Date: 13-2-11

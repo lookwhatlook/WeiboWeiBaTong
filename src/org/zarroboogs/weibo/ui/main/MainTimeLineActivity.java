@@ -7,6 +7,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WeiboMainActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -23,7 +24,6 @@ import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.dm.DMUserListFragment;
 import org.zarroboogs.weibo.ui.maintimeline.FriendsTimeLineFragment;

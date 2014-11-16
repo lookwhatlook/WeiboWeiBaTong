@@ -8,6 +8,7 @@ package org.zarroboogs.weibo.ui.nearby;
 //import com.google.android.gms.maps.model.Marker;
 //import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.GeoBean;
@@ -15,7 +16,6 @@ import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.data.NearbyStatusListBean;
 import org.zarroboogs.weibo.dao.NearbyTimeLineDao;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;

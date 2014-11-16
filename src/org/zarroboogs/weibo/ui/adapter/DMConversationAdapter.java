@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.ui.adapter;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DMBean;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.IWeiciyuanDrawable;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;
 import org.zarroboogs.weibo.support.utils.ViewUtility;
 import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;

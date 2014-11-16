@@ -1,9 +1,9 @@
 package org.zarroboogs.weibo.ui.browser;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.ShareListBean;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.basefragment.AbstractMessageTimeLineFragment;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.loader.BrowserShareMsgLoader;

@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AtUserBean;
 import org.zarroboogs.weibo.dao.AtUserDao;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.utils.WeiboPatterns;
 

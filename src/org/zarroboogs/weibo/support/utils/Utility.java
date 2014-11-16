@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.support.utils;
 
 import org.zarroboogs.weibo.BuildConfig;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;

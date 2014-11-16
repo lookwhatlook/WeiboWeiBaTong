@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.ui.userinfo;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.UserBean;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 

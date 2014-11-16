@@ -12,13 +12,13 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.FanDao;
 import org.zarroboogs.weibo.dao.FriendshipsDao;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.adapter.UserListAdapter;
 import org.zarroboogs.weibo.ui.basefragment.AbstractUserListFragment;
 import org.zarroboogs.weibo.ui.send.WriteWeiboActivity;

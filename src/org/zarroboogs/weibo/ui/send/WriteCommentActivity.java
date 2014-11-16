@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.send;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentDraftBean;
@@ -10,7 +11,6 @@ import org.zarroboogs.weibo.dao.RepostNewMsgDao;
 import org.zarroboogs.weibo.database.DraftDBManager;
 import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendCommentService;
 import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.search.AtUserActivity;
 

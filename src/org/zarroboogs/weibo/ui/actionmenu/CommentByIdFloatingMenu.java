@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.CommentBean;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.browser.BrowserCommentActivity;
 import org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity;
 

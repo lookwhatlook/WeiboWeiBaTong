@@ -9,11 +9,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.dao.ShowStatusDao;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.utils.ErrorCode;
 

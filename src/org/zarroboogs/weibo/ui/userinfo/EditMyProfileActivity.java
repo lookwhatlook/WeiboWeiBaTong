@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.userinfo;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.UserBean;
@@ -9,7 +10,6 @@ import org.zarroboogs.weibo.dao.ShowUserDao;
 import org.zarroboogs.weibo.database.AccountDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.asyncdrawable.ProfileAvatarReadWorker;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;

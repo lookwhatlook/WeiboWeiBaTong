@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.support.utils;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AdBean;
 import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.bean.MessageBean;

@@ -16,13 +16,13 @@ import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.RepostWeiboMainActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgFragment;

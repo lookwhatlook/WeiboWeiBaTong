@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.support.utils;
+package org.zarroboogs.weibo;
 
 import com.crashlytics.android.Crashlytics;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
@@ -17,6 +17,7 @@ import org.zarroboogs.weibo.database.GroupDBTask;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.crashmanager.CrashManager;
 import org.zarroboogs.weibo.support.crashmanager.CrashManagerConstants;
+import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.widget.SmileyMap;
 
 import android.app.Activity;
@@ -46,43 +47,49 @@ import java.util.Set;
  * User: Jiang Qi Date: 12-7-27
  */
 public final class GlobalContext extends Application {
-	private static GlobalContext instance;
+	public static GlobalContext instance;
 
 	public final static String SLEEP_INTENT = "org.videolan.vlc.SleepIntent";
 
 	// singleton
-	private static GlobalContext globalContext = null;
+	public static GlobalContext globalContext = null;
 
 	// image size
-	private Activity activity = null;
+	public Activity activity = null;
 
-	private Activity currentRunningActivity = null;
+	public Activity currentRunningActivity = null;
 
-	private DisplayMetrics displayMetrics = null;
+	public DisplayMetrics displayMetrics = null;
 
 	// image memory cache
-	private LruCache<String, Bitmap> appBitmapCache = null;
+	public LruCache<String, Bitmap> appBitmapCache = null;
 
 	// current account info
-	private AccountBean accountBean = null;
+	public AccountBean accountBean = null;
 
-	private LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>> emotionsPic = new LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>>();
+	public LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>> emotionsPic = null;
 
-	private GroupListBean group = null;
+	public GroupListBean group = null;
 
-	private MusicInfoBean musicInfo = null;
+	public MusicInfoBean musicInfo = null;
 
-	private Handler handler = new Handler();
+	public Handler handler;
 
 	public boolean tokenExpiredDialogIsShowing = false;
 
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		instance = this;
+		globalContext = (GlobalContext) getApplicationContext();
+		instance = (GlobalContext) getApplicationContext();
+		
+		
+		handler = new Handler();
+		emotionsPic = new LinkedHashMap<Integer, LinkedHashMap<String, Bitmap>>();
+		
 		initImageLoader(getApplicationContext());
 
-		globalContext = this;
+		
 		buildCache();
 		CrashManagerConstants.loadFromContext(this);
 		CrashManager.registerHandler();

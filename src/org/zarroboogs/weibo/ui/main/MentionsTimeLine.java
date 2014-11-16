@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.ui.main;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UnreadTabIndex;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppFragment;

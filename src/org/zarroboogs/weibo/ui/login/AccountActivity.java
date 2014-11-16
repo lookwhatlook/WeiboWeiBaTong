@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.ui.login;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -7,7 +8,6 @@ import org.zarroboogs.weibo.database.AccountDBTask;
 import org.zarroboogs.weibo.net.BroserContent;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity;

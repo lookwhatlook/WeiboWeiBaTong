@@ -4,7 +4,6 @@ import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.database.AccountDatabaseManager;
 import org.zarroboogs.weibo.database.AccountTable;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.utils.PatternUtils;
 
 import com.crashlytics.android.internal.m;

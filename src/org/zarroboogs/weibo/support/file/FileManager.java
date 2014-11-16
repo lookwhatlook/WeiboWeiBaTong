@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.support.file;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.database.DownloadPicturesDBTask;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 

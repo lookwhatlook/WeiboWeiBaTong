@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.support.utils;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.data.DataItem;
 

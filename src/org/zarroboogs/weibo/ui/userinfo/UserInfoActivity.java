@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.userinfo;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WeiboMainActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -15,7 +16,6 @@ import org.zarroboogs.weibo.database.FilterDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.common.CommonErrorDialogFragment;

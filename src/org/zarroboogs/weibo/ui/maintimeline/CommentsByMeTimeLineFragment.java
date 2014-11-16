@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.maintimeline;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -11,7 +12,6 @@ import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
 import org.zarroboogs.weibo.database.CommentByMeTimeLineDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.CommentFloatingMenu;
 import org.zarroboogs.weibo.ui.actionmenu.CommentSingleChoiceModeListener;

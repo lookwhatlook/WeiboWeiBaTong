@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.othercomponent.unreadnotification;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentBean;
@@ -16,7 +17,6 @@ import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.send.WriteCommentActivity;

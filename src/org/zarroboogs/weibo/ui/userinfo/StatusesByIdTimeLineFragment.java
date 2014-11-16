@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.ui.userinfo;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.support.utils.AppConfig;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.basefragment.AbstractMessageTimeLineFragment;
 import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity;
 import org.zarroboogs.weibo.ui.loader.StatusesByIdLoader;

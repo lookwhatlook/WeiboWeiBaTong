@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.othercomponent;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.MusicInfoBean;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import android.content.Context;

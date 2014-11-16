@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.support.asyncdrawable;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.utils.ImageUtility;
 
 import android.graphics.Bitmap;

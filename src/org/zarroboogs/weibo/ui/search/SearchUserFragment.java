@@ -6,10 +6,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.UserListBean;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.basefragment.AbstractUserListFragment;
 import org.zarroboogs.weibo.ui.loader.SearchUserLoader;
 

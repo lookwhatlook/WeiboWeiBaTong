@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.ui.userinfo;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.GroupBean;
@@ -7,7 +8,6 @@ import org.zarroboogs.weibo.bean.GroupListBean;
 import org.zarroboogs.weibo.dao.GroupListDao;
 import org.zarroboogs.weibo.dao.ModifyGroupMemberDao;
 import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.ui.friendgroup.ManageGroupActivity;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 

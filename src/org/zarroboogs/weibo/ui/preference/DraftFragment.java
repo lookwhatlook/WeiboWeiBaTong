@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.ui.preference;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -12,7 +13,6 @@ import org.zarroboogs.weibo.bean.StatusDraftBean;
 import org.zarroboogs.weibo.database.AccountDBTask;
 import org.zarroboogs.weibo.database.DraftDBManager;
 import org.zarroboogs.weibo.database.DraftTable;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.ui.send.WriteCommentActivity;
 import org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity;

@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
@@ -17,7 +18,6 @@ import org.zarroboogs.weibo.bean.RepostDraftBean;
 import org.zarroboogs.weibo.dao.RepostNewMsgDao;
 import org.zarroboogs.weibo.database.DraftDBManager;
 import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.search.AtUserActivity;
 

@@ -2,6 +2,7 @@ package org.zarroboogs.weibo.ui.main;
 
 import com.slidingmenu.lib.SlidingMenu;
 
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
@@ -13,7 +14,6 @@ import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
-import org.zarroboogs.weibo.support.utils.GlobalContext;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.dm.DMUserListFragment;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppFragment;
