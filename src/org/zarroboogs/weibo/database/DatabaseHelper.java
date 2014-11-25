@@ -17,9 +17,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 37;
 
-	static final String CREATE_ACCOUNT_TABLE_SQL = "create table " + AccountTable.TABLE_NAME + "(" + AccountTable.UID + " integer primary key autoincrement,"
-			+ AccountTable.USER_NAME + " text," + AccountTable.COOKIE + " text," + AccountTable.OAUTH_TOKEN + " text," + AccountTable.OAUTH_TOKEN_EXPIRES_TIME
-			+ " text," + AccountTable.OAUTH_TOKEN_SECRET + " text," + AccountTable.BLACK_MAGIC + " boolean," + AccountTable.NAVIGATION_POSITION + " integer,"
+	static final String CREATE_ACCOUNT_TABLE_SQL = "create table " + AccountTable.ACCOUNT_TABLE + "(" + 
+	AccountTable.UID + " integer primary key autoincrement,"
+			+ AccountTable.USER_NAME + " text," + 
+			AccountTable.USER_PWD + "  text," +
+			AccountTable.COOKIE + " text," + 
+			AccountTable.OAUTH_TOKEN + " text," + 
+			AccountTable.OAUTH_TOKEN_EXPIRES_TIME + " text," + 
+			AccountTable.OAUTH_TOKEN_SECRET + " text," + 
+			AccountTable.BLACK_MAGIC + " boolean," + 
+			AccountTable.NAVIGATION_POSITION + " integer,"
 			+ AccountTable.INFOJSON + " text" + ");";
 
 	static final String CREATE_GROUP_TABLE_SQL = "create table " + GroupTable.TABLE_NAME + "(" + GroupTable.ID + " integer primary key autoincrement,"
@@ -266,7 +273,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 	}
 
 	private void deleteAllTable(SQLiteDatabase db) {
-		db.execSQL("DROP TABLE IF EXISTS " + AccountTable.TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + AccountTable.ACCOUNT_TABLE);
 
 		deleteAllTableExceptAccount(db);
 

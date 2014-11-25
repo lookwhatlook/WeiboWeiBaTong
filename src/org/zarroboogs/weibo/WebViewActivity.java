@@ -165,14 +165,14 @@ public class WebViewActivity extends SharedPreferenceActivity implements IWeiboC
 //				Log.d("Weibo-Cookie", "in db : uid = " + mAccountBean.getUid());
 
 				if (!TextUtils.isEmpty(uname)) {
-					manager.updateAccount(AccountTable.TABLE_NAME, uid, AccountTable.USER_NAME, uname);
+					manager.updateAccount(AccountTable.ACCOUNT_TABLE, uid, AccountTable.USER_NAME, uname);
 				}
 			}
 		}
 
 		Log.d("Weibo-Cookie", "after for : " + uid);
 		if (uid.equals(mAccountBean.getUid())) {
-			manager.updateAccount(AccountTable.TABLE_NAME, uid, AccountTable.COOKIE, cookie);
+			manager.updateAccount(AccountTable.ACCOUNT_TABLE, uid, AccountTable.COOKIE, cookie);
 			cookieManager.removeSessionCookie();
 			finish();
 		} else if (!TextUtils.isEmpty(uid)) {

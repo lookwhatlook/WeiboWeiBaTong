@@ -2,11 +2,14 @@ package org.zarroboogs.weibo;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.codec.binary.Base64;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.WeibaGson;
@@ -14,6 +17,20 @@ import org.zarroboogs.weibo.bean.WeibaTree;
 import org.zarroboogs.weibo.bean.WeiboWeiba;
 import org.zarroboogs.weibo.database.AccountDBTask;
 import org.zarroboogs.weibo.database.AppsrcDatabaseManager;
+import org.zarroboogs.weibo.login.httpclient.AfterPreLoginAsyncTask;
+import org.zarroboogs.weibo.login.httpclient.LoginAsyncTask;
+import org.zarroboogs.weibo.login.httpclient.PreLoginAsyncTask;
+import org.zarroboogs.weibo.login.httpclient.RealLibrary;
+import org.zarroboogs.weibo.login.httpclient.SendWeiboAsyncTask;
+import org.zarroboogs.weibo.login.httpclient.AfterPreLoginAsyncTask.OnAfterPreLongInListener;
+import org.zarroboogs.weibo.login.httpclient.LoginAsyncTask.OnLogInListener;
+import org.zarroboogs.weibo.login.httpclient.PreLoginAsyncTask.OnPreLongInListener;
+import org.zarroboogs.weibo.login.httpclient.SendWeiboAsyncTask.OnSendListener;
+import org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask;
+import org.zarroboogs.weibo.login.javabean.HasloginBean;
+import org.zarroboogs.weibo.login.javabean.LoginResultHelper;
+import org.zarroboogs.weibo.login.javabean.PreLoginResult;
+import org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
 import org.zarroboogs.weibo.net.ExecuterManager;
 import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask;
 import org.zarroboogs.weibo.net.LoginWeiboAsyncTask;
@@ -35,6 +52,8 @@ import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 
+import com.evgenii.jsevaluator.JsEvaluator;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -52,6 +71,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -75,8 +95,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WeiboMainActivity extends SharedPreferenceActivity implements LoginCallBack, OnClickListener, OnGlobalLayoutListener, OnSendFinished,
-		OnItemClickListener, OnSharedPreferenceChangeListener {
+public class WeiboMainActivity extends SharedPreferenceActivity implements LoginCallBack, OnClickListener,
+		OnGlobalLayoutListener, OnSendFinished, OnItemClickListener, OnSharedPreferenceChangeListener {
 
 	String pidC = "";
 	RelativeLayout mEmotionRelativeLayout;
@@ -86,7 +106,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	Map<Integer, String> map = new HashMap<Integer, String>();
 	InputMethodManager imm = null;
 	EditText mEditText;
-	Handler mHandler = new Handler();
 	RelativeLayout mRootView;
 
 	RelativeLayout editTextLayout;
@@ -98,6 +117,11 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	TableLayout sendImgTL;
 
 	AccountBean mAccountBean;
+	
+	JsEvaluator mJsEvaluator;
+	PreLoginResult mPreLonginBean;
+	HasloginBean mHasloginBean;
+	String rsaPwd = "";
 
 	private boolean isKeyBoardShowed = false;
 	private ScrollView mEditPicScrollView;
@@ -141,6 +165,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		getAppSrcSharedPreference().registerOnSharedPreferenceChangeListener(this);
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		setContentView(R.layout.activity_main);
+		mJsEvaluator = new JsEvaluator(getApplicationContext());
 
 		mAccountBean = getIntent().getParcelableExtra(BundleArgsConstants.ACCOUNT_EXTRA);
 		atContent = getIntent().getStringExtra("content");
@@ -531,16 +556,37 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 					mEmptyToast.show();
 					return;
 				}
-				// String cookieInDB = mAccountBean.getCookie();
-				// Log.d("COOKIE_STORED: ", /*cookieInDB.equals(cookieInSp) +*/
-				// "   cookieInSp::" + cookieInSp + " \r\n " + "cookieInDB::" +
-				// cookieInDB);
-				WeiboAsyncTask mAsyncTask = new WeiboAsyncTask(mAccountBean.getCookieInDB(), getWeiba().getCode(), pidC, text);
-				mAsyncTask.setOnSendFinishedListener(this);
-				mAsyncTask.execute(getApplicationContext());
+//				WeiboAsyncTask mAsyncTask = new WeiboAsyncTask(mAccountBean.getCookieInDB(), getWeiba().getCode(), pidC, text);
+//				mAsyncTask.setOnSendFinishedListener(this);
+//				mAsyncTask.execute(getApplicationContext());
+				
+				sendWeibo(mHasloginBean);
 			}
 		}
 	}
+	
+	private void sendWeibo(HasloginBean hasloginBean) {
+		String text = mEditText.getText().toString();
+		if (TextUtils.isEmpty(text)) {
+			mEmptyToast.show();
+			return;
+		}
+		if (hasloginBean.isResult()) {
+			Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+			SendWeiboAsyncTask sendWeiboAsyncTask = new SendWeiboAsyncTask(new OnSendListener() {
+				
+				@Override
+				public void onSend(Boolean hb) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "" + hb, Toast.LENGTH_SHORT).show();
+				}
+			});
+			sendWeiboAsyncTask.execute(getWeiba().getCode(), text, pidC);
+		}else {
+			Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
 
 	private void uploadPictures(ArrayList<String> send) {
 		UserBean userBean = AccountDBTask.getUserBean(mAccountBean.getUid());
@@ -602,10 +648,21 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 					mEmptyToast.show();
 				} else {
 					showDialogForWeiBo();
-					String cookieInDB = mAccountBean.getCookieInDB();
-					Log.d("LogIn-CookieInDB", "UID: " + mAccountBean.getUid() + "  Uname:" + mAccountBean.getUname() + "   [" + cookieInDB + "]");
-					LoginWeiboAsyncTask mAsyncTask = new LoginWeiboAsyncTask(WeiboMainActivity.this, cookieInDB);
-					mAsyncTask.execute(getApplicationContext());
+//					String cookieInDB = mAccountBean.getCookieInDB();
+//					Log.d("LogIn-CookieInDB", "UID: " + mAccountBean.getUid() + "  Uname:" + mAccountBean.getUname() + "   [" + cookieInDB + "]");
+//					LoginWeiboAsyncTask mAsyncTask = new LoginWeiboAsyncTask(WeiboMainActivity.this, cookieInDB);
+//					mAsyncTask.execute(getApplicationContext());
+					if (mHasloginBean != null && mHasloginBean.isResult()) {
+//						sendWeibo(mHasloginBean);
+						Log.d("SEND_SEND", "0000000000000000000");
+						onDoLogInFinish(true);
+					}else if (!TextUtils.isEmpty(rsaPwd)) {
+						afterPreLogin(rsaPwd);
+						Log.d("SEND_SEND", "1111111111111111111111");
+					} else {
+						preLogin();
+						Log.d("SEND_SEND", "2222222222222222222222222222");
+					}
 				}
 			} else {
 				Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
@@ -638,6 +695,89 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		}
 
 	}
+	
+	private void preLogin() {
+		PreLoginAsyncTask loginAsyncTask = new PreLoginAsyncTask(new OnPreLongInListener() {
+			
+			@Override
+			public void onDoLogInFinish(PreLoginResult preLonginBean) {
+				
+				mPreLonginBean = preLonginBean;
+				encodePassword(preLonginBean);
+			}
+		});
+		Log.d("preLogin", "" + mAccountBean.getUname() +  "     " + mAccountBean.getPwd());
+		loginAsyncTask.execute(mAccountBean.getUname(),mAccountBean.getPwd());
+	}
+	private void afterPreLogin(String rasPassWord) {
+		AfterPreLoginAsyncTask afterPreLoginAsyncTask = new AfterPreLoginAsyncTask(new OnAfterPreLongInListener() {
+			
+			@Override
+			public void onDoLogInFinish(LoginResultHelper preLonginBean) {
+				// TODO Auto-generated method stub
+				Log.d("onDoLogInFinish", "" + preLonginBean.isLogin() + preLonginBean.getErrorReason());
+				if (preLonginBean.isLogin()) {
+					login(preLonginBean);
+				}else {
+					Log.d("LogIn_Failed", "[" + preLonginBean.getErrorReason() + "]");
+					mHandler.sendEmptyMessage(1002);
+				}
+			}
+
+		});
+		afterPreLoginAsyncTask.setPreLonginBean(mPreLonginBean);
+		afterPreLoginAsyncTask.execute(encodeAccount(mAccountBean.getUname()), rasPassWord, null);
+	}
+	private void encodePassword(PreLoginResult preLonginBean) {
+		RealLibrary realLibrary = new RealLibrary(getApplicationContext());
+		String js = realLibrary.getRsaJs();
+		
+		String pwd = "\"" + mAccountBean.getPwd() + "\"";
+		String servertime = "\"" + preLonginBean.getServertime() + "\"";
+		String nonce = "\"" + preLonginBean.getNonce() + "\"";
+		String pubkey = "\"" + preLonginBean.getPubkey() + "\"";
+		String call = " var rsaPassWord = getRsaPassWord(" + pwd +", " + servertime + ", " + nonce +", " + pubkey+ "); rsaPassWord; ";
+		
+		mJsEvaluator.evaluate(js + call, new JsCallback() {
+			
+			@Override
+			public void onResult(String value) {
+				// TODO Auto-generated method stub
+				Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+				Message msg = new Message();
+				rsaPwd = value;
+				msg.what = 1000;
+				mHandler.sendMessage(msg);
+			}
+		});
+	}
+	
+	private void login(LoginResultHelper preLonginBean) {
+		LoginAsyncTask loginAsyncTask = new LoginAsyncTask(new OnLogInListener() {
+			
+			@Override
+			public void onLonIn(HasloginBean hb) {
+				Message message = new Message();
+				message.obj = hb;
+				message.what =  1001;
+				mHandler.sendMessage(message);
+			}
+		});
+		loginAsyncTask.execute(preLonginBean);
+	}
+
+    private String encodeAccount(String account) {
+        String encodedString;
+		try {
+			encodedString = new String(Base64.encodeBase64(URLEncoder.encode(account, "UTF-8").getBytes()));
+	        String userName = encodedString.replace('+','-').replace('/','_');
+	        return userName;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        return null;
+    }
 
 	@Override
 	public void onGlobalLayout() {
@@ -720,4 +860,31 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		saveWeiba(weiba);
 		menu.toggle();
 	}
+	Handler mHandler = new Handler(){
+
+		@Override
+		public void handleMessage(Message msg) {
+			// TODO Auto-generated method stub
+			super.handleMessage(msg);
+			if (msg.what == 1000) {
+				afterPreLogin(rsaPwd);
+			}
+			if (msg.what == 1001) {
+				mHasloginBean = (HasloginBean) msg.obj;
+				sendWeibo(mHasloginBean);
+			}
+			if (msg.what == 1002) {
+				DoorImageAsyncTask doorImageAsyncTask = new DoorImageAsyncTask();
+				doorImageAsyncTask.setOnDoorOpenListener(new OnDoorOpenListener() {
+					
+					@Override
+					public void onDoorOpen(android.graphics.Bitmap result) {
+						// TODO Auto-generated method stub
+						//mDoorImg.setImageBitmap(result);
+					}
+				});
+				doorImageAsyncTask.execute(mPreLonginBean.getPcid());
+			}
+		}
+	};
 }

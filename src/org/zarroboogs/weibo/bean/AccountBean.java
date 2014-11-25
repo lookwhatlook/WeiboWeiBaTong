@@ -20,6 +20,16 @@ public class AccountBean implements Parcelable {
 
 	// uname // email tel
 	private String uname;
+	private String pwd;
+	
+	public String getPwd(){
+		return pwd;
+	}
+	
+	public String setPwd(String pwd){
+		return this.pwd = pwd;
+	}
+	
 	// cookie
 	private String cookie;
 

@@ -294,7 +294,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 				return;
 			}
 
-			if (TextUtils.isEmpty(cookie)) {
+			if (false && TextUtils.isEmpty(cookie)) {
 				Intent intent = new Intent(AccountActivity.this, WebViewActivity.class);
 				intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, selectAccountBean);
 				startActivity(intent);

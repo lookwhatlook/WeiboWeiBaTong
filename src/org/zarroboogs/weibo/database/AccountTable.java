@@ -1,15 +1,18 @@
 package org.zarroboogs.weibo.database;
 
+
 /**
  * User: Jiang Qi Date: 12-7-30
  */
 public class AccountTable {
 
-	public static final String TABLE_NAME = "account_table";
+	public static final String ACCOUNT_TABLE = "account_table";
 
 	public static final String UID = "uid";
 
 	public static final String USER_NAME = "uname";
+	
+	public static final String USER_PWD = "pwd";
 
 	public static final String COOKIE = "cookie";
 

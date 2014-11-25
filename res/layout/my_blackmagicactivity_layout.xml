@@ -11,7 +11,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="80dp"
         android:alignmentMode="alignBounds"
         android:columnCount="2"
         android:columnOrderPreserved="false"
@@ -41,34 +41,49 @@
 
         <EditText
             android:id="@+id/username"
-            android:hint="邮箱/帐号/手机号"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:ems="10" />
+            android:ems="10"
+            android:hint="邮箱/帐号/手机号" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
             android:gravity="right"
             android:text="@string/login_password" />
 
         <EditText
             android:id="@+id/password"
-            android:hint="请输入密码"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:inputType="textPassword"
-            android:ems="10"/>
+            android:ems="10"
+            android:hint="请输入密码"
+            android:inputType="textPassword" />
+
+        <ImageView
+            android:id="@+id/imagedoor"
+            android:layout_width="100px"
+            android:layout_height="40px"
+            android:scaleType="fitXY"
+            android:src="@drawable/ab_bottom_solid_inverse_holo" />
+
+        <EditText
+            android:hint="请输入验证码"
+            android:id="@+id/doorimg"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10" />
     </GridLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:background="#7F1E90FF" >
+        android:background="#7F1E90FF"
+        android:visibility="gone" >
 
         <TextView
             android:layout_width="wrap_content"
@@ -77,6 +92,5 @@
             android:layout_centerInParent="true"
             android:text="@string/first_login_tips" />
     </RelativeLayout>
-
 
 </RelativeLayout>

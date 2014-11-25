@@ -123,7 +123,8 @@ public class BlackMagicActivity extends AbstractAppActivity {
 				appSecret = value.substring(value.indexOf(",") + 1);
 
 				Log.d("APPKEY", "key:" + appkey + "  secret:" + appSecret);
-				loginTask = new BlackMagicLoginTask(this, username.getText().toString(), password.getText().toString(), appkey, appSecret);
+				loginTask = new BlackMagicLoginTask(this, username.getText().toString(), 
+						password.getText().toString(), appkey, appSecret);
 				loginTask.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
 			}
 			return true;

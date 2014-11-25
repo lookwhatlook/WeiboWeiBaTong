@@ -3,7 +3,6 @@ package org.zarroboogs.weibo.ui.maintimeline;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.WebViewActivity;
 import org.zarroboogs.weibo.WeiboMainActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;

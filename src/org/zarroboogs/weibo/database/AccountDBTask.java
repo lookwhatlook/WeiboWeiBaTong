@@ -44,19 +44,23 @@ public class AccountDBTask {
 		cv.put(AccountTable.OAUTH_TOKEN, account.getAccess_token());
 		cv.put(AccountTable.OAUTH_TOKEN_EXPIRES_TIME, String.valueOf(account.getExpires_time()));
 		cv.put(AccountTable.BLACK_MAGIC, blackMagic);
+		// uname
+		cv.put(AccountTable.USER_NAME, account.getUname());
+		// pwd
+		cv.put(AccountTable.USER_PWD, account.getPwd());
 
 		String json = new Gson().toJson(account.getInfo());
 		cv.put(AccountTable.INFOJSON, json);
 
-		Cursor c = getWsd().query(AccountTable.TABLE_NAME, null, AccountTable.UID + "=?", new String[] { account.getUid() }, null, null, null);
+		Cursor c = getWsd().query(AccountTable.ACCOUNT_TABLE, null, AccountTable.UID + "=?", new String[] { account.getUid() }, null, null, null);
 
 		if (c != null && c.getCount() > 0) {
 			String[] args = { account.getUid() };
-			getWsd().update(AccountTable.TABLE_NAME, cv, AccountTable.UID + "=?", args);
+			getWsd().update(AccountTable.ACCOUNT_TABLE, cv, AccountTable.UID + "=?", args);
 			return OAuthActivity.DBResult.update_successfully;
 		} else {
 
-			getWsd().insert(AccountTable.TABLE_NAME, AccountTable.UID, cv);
+			getWsd().insert(AccountTable.ACCOUNT_TABLE, AccountTable.UID, cv);
 			return OAuthActivity.DBResult.add_successfuly;
 		}
 
@@ -79,7 +83,7 @@ public class AccountDBTask {
 		cv.put(AccountTable.UID, uid);
 		cv.put(AccountTable.INFOJSON, json);
 
-		int c = getWsd().update(AccountTable.TABLE_NAME, cv, AccountTable.UID + "=?", new String[] { uid });
+		int c = getWsd().update(AccountTable.ACCOUNT_TABLE, cv, AccountTable.UID + "=?", new String[] { uid });
 	}
 
 	public static void updateNavigationPosition(AccountBean account, int position) {
@@ -89,18 +93,21 @@ public class AccountDBTask {
 		cv.put(AccountTable.UID, uid);
 		cv.put(AccountTable.NAVIGATION_POSITION, position);
 
-		int c = getWsd().update(AccountTable.TABLE_NAME, cv, AccountTable.UID + "=?", new String[] { uid });
+		int c = getWsd().update(AccountTable.ACCOUNT_TABLE, cv, AccountTable.UID + "=?", new String[] { uid });
 	}
 
 	public static List<AccountBean> getAccountList() {
 		List<AccountBean> accountList = new ArrayList<AccountBean>();
-		String sql = "select * from " + AccountTable.TABLE_NAME;
+		String sql = "select * from " + AccountTable.ACCOUNT_TABLE;
 		Cursor c = getWsd().rawQuery(sql, null);
 		while (c.moveToNext()) {
 			AccountBean account = new AccountBean();
 			// uname
 			int uname = c.getColumnIndex(AccountTable.USER_NAME);
 			account.setUname(c.getString(uname));
+			// pwd 
+			int pwd = c.getColumnIndex(AccountTable.USER_PWD);
+			account.setPwd(c.getString(pwd));
 			// cookie
 			int cookie = c.getColumnIndex(AccountTable.COOKIE);
 			account.setCookie(c.getString(cookie));
@@ -134,7 +141,7 @@ public class AccountDBTask {
 
 	public static UserBean getUserBean(String id) {
 
-		String sql = "select * from " + AccountTable.TABLE_NAME + " where " + AccountTable.UID + " = " + id;
+		String sql = "select * from " + AccountTable.ACCOUNT_TABLE + " where " + AccountTable.UID + " = " + id;
 		Cursor c = getRsd().rawQuery(sql, null);
 		UserBean value = null;
 		if (c.moveToNext()) {
@@ -153,7 +160,7 @@ public class AccountDBTask {
 
 	public static AccountBean getAccount(String id) {
 
-		String sql = "select * from " + AccountTable.TABLE_NAME + " where " + AccountTable.UID + " = " + id;
+		String sql = "select * from " + AccountTable.ACCOUNT_TABLE + " where " + AccountTable.UID + " = " + id;
 		Cursor c = getRsd().rawQuery(sql, null);
 		if (c.moveToNext()) {
 			AccountBean account = new AccountBean();
@@ -165,6 +172,10 @@ public class AccountDBTask {
 
 			colid = c.getColumnIndex(AccountTable.USER_NAME);
 			account.setUname(c.getString(colid));
+			
+			// pwd
+			int pwd = c.getColumnIndex(AccountTable.USER_PWD);
+			account.setPwd(c.getString(pwd));
 
 			colid = c.getColumnIndex(AccountTable.OAUTH_TOKEN_EXPIRES_TIME);
 			account.setExpires_time(Long.valueOf(c.getString(colid)));
@@ -196,7 +207,7 @@ public class AccountDBTask {
 		asString = asString.replace("[", "(");
 		asString = asString.replace("]", ")");
 
-		String sql = "delete from " + AccountTable.TABLE_NAME + " where " + AccountTable.UID + " in " + asString;
+		String sql = "delete from " + AccountTable.ACCOUNT_TABLE + " where " + AccountTable.UID + " in " + asString;
 
 		getWsd().execSQL(sql);
 

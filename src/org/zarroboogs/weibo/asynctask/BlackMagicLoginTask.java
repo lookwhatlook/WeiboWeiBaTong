@@ -16,6 +16,7 @@ import org.zarroboogs.weibo.utils.AppLoggerUtils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
 public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
@@ -24,7 +25,7 @@ public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
 
 	private ProgressFragment progressFragment = ProgressFragment.newInstance();
 
-	private WeakReference<BlackMagicActivity> mBlackMagicActivityWeakReference;
+	private WeakReference<FragmentActivity> mBlackMagicActivityWeakReference;
 
 	private String username;
 
@@ -34,12 +35,9 @@ public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
 
 	private String appSecret;
 
-	public BlackMagicLoginTask() {
 
-	}
-
-	public BlackMagicLoginTask(BlackMagicActivity activity, String username, String password, String appkey, String appSecret) {
-		mBlackMagicActivityWeakReference = new WeakReference<BlackMagicActivity>(activity);
+	public BlackMagicLoginTask(FragmentActivity activity, String username, String password, String appkey, String appSecret) {
+		mBlackMagicActivityWeakReference = new WeakReference<FragmentActivity>(activity);
 		this.username = username;
 		this.password = password;
 		this.appkey = appkey;
@@ -52,7 +50,7 @@ public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
 
 		progressFragment.setAsyncTask(this);
 
-		BlackMagicActivity activity = mBlackMagicActivityWeakReference.get();
+		FragmentActivity activity = mBlackMagicActivityWeakReference.get();
 		if (activity != null) {
 			progressFragment.show(activity.getSupportFragmentManager(), "");
 		}
@@ -67,6 +65,9 @@ public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
 			account.setAccess_token(result[0]);
 			account.setInfo(user);
 			account.setExpires_time(System.currentTimeMillis() + Long.valueOf(result[1]) * 1000);
+			account.setPwd(password);
+			account.setUname(username);
+			
 			AccountDBTask.addOrUpdateAccount(account, true);
 			AppLoggerUtils.e("token expires in " + Utility.calcTokenExpiresInDays(account) + " days");
 			return result;
@@ -84,7 +85,7 @@ public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
 			progressFragment.dismissAllowingStateLoss();
 		}
 
-		BlackMagicActivity activity = mBlackMagicActivityWeakReference.get();
+		FragmentActivity activity = mBlackMagicActivityWeakReference.get();
 		if (activity == null) {
 			return;
 		}
@@ -101,7 +102,7 @@ public class BlackMagicLoginTask extends MyAsyncTask<Void, Void, String[]> {
 			progressFragment.dismissAllowingStateLoss();
 		}
 
-		BlackMagicActivity activity = mBlackMagicActivityWeakReference.get();
+		FragmentActivity activity = mBlackMagicActivityWeakReference.get();
 		if (activity == null) {
 			return;
 		}
