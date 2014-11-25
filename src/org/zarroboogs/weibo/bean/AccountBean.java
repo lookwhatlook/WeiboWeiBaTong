@@ -14,24 +14,22 @@ public class AccountBean implements Parcelable {
 
 	private String access_token;
 	private long expires_time;
-	private UserBean info;
 	private boolean black_magic;
 	private int navigationPosition;
-
 	// uname // email tel
 	private String uname;
 	private String pwd;
-	
-	public String getPwd(){
-		return pwd;
-	}
-	
-	public String setPwd(String pwd){
-		return this.pwd = pwd;
-	}
-	
 	// cookie
 	private String cookie;
+	private UserBean info;
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
 
 	public String getUname() {
 		return uname;
@@ -118,12 +116,13 @@ public class AccountBean implements Parcelable {
 	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(access_token);
-		// uname cookie
-		dest.writeString(uname);
-		dest.writeString(cookie);
-		// end
 		dest.writeLong(expires_time);
 		dest.writeInt(navigationPosition);
+		// uname cookie
+		dest.writeString(uname);
+		dest.writeString(pwd);
+		dest.writeString(cookie);
+		// end
 		dest.writeBooleanArray(new boolean[] { this.black_magic });
 		dest.writeParcelable(info, flags);
 	}
@@ -132,18 +131,21 @@ public class AccountBean implements Parcelable {
 		public AccountBean createFromParcel(Parcel in) {
 			AccountBean accountBean = new AccountBean();
 			accountBean.access_token = in.readString();
-			// uname cookie
-			accountBean.uname = in.readString();
-			accountBean.cookie = in.readString();
-			//
 			accountBean.expires_time = in.readLong();
 			accountBean.navigationPosition = in.readInt();
 
+			// uname cookie
+			accountBean.uname = in.readString();
+			accountBean.pwd = in.readString();
+			accountBean.cookie = in.readString();
+			
+			//
 			boolean[] booleans = new boolean[1];
 			in.readBooleanArray(booleans);
 			accountBean.black_magic = booleans[0];
 
-			accountBean.info = in.readParcelable(UserBean.class.getClassLoader());
+			accountBean.info = in.readParcelable(UserBean.class
+					.getClassLoader());
 
 			return accountBean;
 		}
@@ -156,7 +158,9 @@ public class AccountBean implements Parcelable {
 	@Override
 	public boolean equals(Object o) {
 
-		return o instanceof AccountBean && !TextUtils.isEmpty(((AccountBean) o).getUid()) && ((AccountBean) o).getUid().equalsIgnoreCase(getUid());
+		return o instanceof AccountBean
+				&& !TextUtils.isEmpty(((AccountBean) o).getUid())
+				&& ((AccountBean) o).getUid().equalsIgnoreCase(getUid());
 
 	}
 

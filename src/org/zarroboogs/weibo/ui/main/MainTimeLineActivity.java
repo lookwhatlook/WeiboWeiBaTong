@@ -141,15 +141,20 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		
 		if (savedInstanceState != null) {
 			mAccountBean = savedInstanceState.getParcelable(Constances.ACCOUNT);
+			Log.d("ACCOUNTBEAN", "00000000000000000");
 		} else {
 			Intent intent = getIntent();
 			mAccountBean = intent.getParcelableExtra(BundleArgsConstants.ACCOUNT_EXTRA);
+			Log.d("ACCOUNTBEAN", "11111111111111111111111111" + mAccountBean.getUname());
 		}
 
 		if (mAccountBean == null) {
 			mAccountBean = GlobalContext.getInstance().getAccountBean();
+			Log.d("ACCOUNTBEAN", "22222222222222222222222222222");
 		}
+		
 
+		Log.d("ACCOUNTBEAN", "" + mAccountBean.getPwd());
 		GlobalContext.getInstance().setGroup(null);
 		GlobalContext.getInstance().setAccountBean(mAccountBean);
 		SettingUtils.setDefaultAccountId(mAccountBean.getUid());

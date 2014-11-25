@@ -22,7 +22,7 @@ public class SendWeiboAsyncTask extends AsyncTask<String, Integer, Boolean> {
 		SinaPreLogin sinaPreLogin = new SinaPreLogin();
 		boolean isSend = sinaPreLogin.sendWeibo(BroserContent.getInstance(), 
 				"http://widget.weibo.com/public/aj_addMblog.php",
-				params[0], params[1], null, params[3]);
+				params[0], params[1], null, params[2]);
 		return isSend;
 	}
 

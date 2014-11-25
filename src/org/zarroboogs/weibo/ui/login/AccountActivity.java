@@ -149,6 +149,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 		if (!TextUtils.isEmpty(id)) {
 			AccountBean bean = AccountDBTask.getAccount(id);
 			if (bean != null) {
+				Log.d("getUUUUU", "" + bean.getUname() + bean.getPwd());
 				Intent start = MainTimeLineActivity.newIntent(bean);
 				startActivity(start);
 				finish();
@@ -285,7 +286,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 		public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 			AccountBean selectAccountBean = accountList.get(i);
 			String cookie = selectAccountBean.getCookie();
-			Log.d("AccountActivity_onItemClick", "" + cookie);
+			Log.d("AccountActivity_onItemClick", "" + selectAccountBean.getPwd());
 
 			if (!Utility.isTokenValid(selectAccountBean)) {
 

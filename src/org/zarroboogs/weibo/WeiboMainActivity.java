@@ -579,6 +579,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 				public void onSend(Boolean hb) {
 					// TODO Auto-generated method stub
 					Toast.makeText(getApplicationContext(), "" + hb, Toast.LENGTH_SHORT).show();
+					hideDialogForWeiBo();
 				}
 			});
 			sendWeiboAsyncTask.execute(getWeiba().getCode(), text, pidC);

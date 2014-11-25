@@ -3,6 +3,7 @@ package org.zarroboogs.weibo.database;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -174,8 +175,9 @@ public class AccountDBTask {
 			account.setUname(c.getString(colid));
 			
 			// pwd
-			int pwd = c.getColumnIndex(AccountTable.USER_PWD);
-			account.setPwd(c.getString(pwd));
+			colid = c.getColumnIndex(AccountTable.USER_PWD);
+			account.setPwd(c.getString(colid));
+			Log.d("AccoubtDB", "" + c.getString(colid));
 
 			colid = c.getColumnIndex(AccountTable.OAUTH_TOKEN_EXPIRES_TIME);
 			account.setExpires_time(Long.valueOf(c.getString(colid)));
