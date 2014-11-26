@@ -69,6 +69,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -716,7 +717,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 			@Override
 			public void onDoLogInFinish(LoginResultHelper preLonginBean) {
 				// TODO Auto-generated method stub
-				Log.d("onDoLogInFinish", "" + preLonginBean.isLogin() + preLonginBean.getErrorReason());
+				Log.d("onDoLogInFinish", "" + preLonginBean.isLogin() + "[" + preLonginBean.getErrorReason() + "]");
 				if (preLonginBean.isLogin()) {
 					login(preLonginBean);
 				}else {
@@ -738,19 +739,37 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		String nonce = "\"" + preLonginBean.getNonce() + "\"";
 		String pubkey = "\"" + preLonginBean.getPubkey() + "\"";
 		String call = " var rsaPassWord = getRsaPassWord(" + pwd +", " + servertime + ", " + nonce +", " + pubkey+ "); rsaPassWord; ";
+		String jsMethod = "getRsaPassWord(" + pwd +", " + servertime + ", " + nonce +", " + pubkey+ ")";
 		
-		mJsEvaluator.evaluate(js + call, new JsCallback() {
-			
-			@Override
-			public void onResult(String value) {
-				// TODO Auto-generated method stub
-				Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
-				Message msg = new Message();
-				rsaPwd = value;
-				msg.what = 1000;
-				mHandler.sendMessage(msg);
-			}
-		});
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+		    mJsEvaluator.evaluate("file:///android_asset/ssologin.html", jsMethod, new JsCallback() {
+                
+                @Override
+                public void onResult(String value) {
+                    // TODO Auto-generated method stub
+                    Log.d("mJsEvaluator", "[" + value + "]");
+                    Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+                    Message msg = new Message();
+                    rsaPwd = value.replace("\"", "");
+                    msg.what = 1000;
+                    mHandler.sendMessage(msg);
+                }
+            });
+		}else {
+	        mJsEvaluator.evaluate(js + call, new JsCallback() {
+	            
+	            @Override
+	            public void onResult(String value) {
+	                // TODO Auto-generated method stub
+	                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+	                Message msg = new Message();
+	                rsaPwd = value;
+	                msg.what = 1000;
+	                mHandler.sendMessage(msg);
+	            }
+	        });
+        }
+
 	}
 	
 	private void login(LoginResultHelper preLonginBean) {

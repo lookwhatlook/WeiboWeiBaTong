@@ -27,6 +27,10 @@ public class WebViewWrapper implements WebViewWrapperInterface {
 		final JavaScriptInterface jsInterface = new JavaScriptInterface(callJavaResult);
 		mWebView.addJavascriptInterface(jsInterface, JsEvaluator.JS_NAMESPACE);
 	}
+	@Override
+	public WebView getWebView(){
+	    return mWebView;
+	}
 
 	@Override
 	public void loadJavaScript(String javascript) {

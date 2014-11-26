@@ -3,6 +3,10 @@ package com.evgenii.jsevaluator;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
+import android.webkit.ValueCallback;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.evgenii.jsevaluator.interfaces.CallJavaResultInterface;
 import com.evgenii.jsevaluator.interfaces.HandlerWrapperInterface;
@@ -78,6 +82,32 @@ public class JsEvaluator implements CallJavaResultInterface, JsEvaluatorInterfac
 		getWebViewWrapper().loadJavaScript(js);
 	}
 
+	/**
+	 * @param jsFileUrl "file:///android_asset/ssologin.html"
+	 * @param jsMethod  String method = "getRsaPassWord(\"Andforce!@#\", \"1416987599\", \"JXBHTP\", \"aaaa\")";
+	 * @param resultCallback
+	 */
+	public void evaluate(String jsFileUrl , final String jsMethod, final JsCallback resultCallback){
+	    final WebView webView = getWebViewWrapper().getWebView();
+	    webView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                
+                
+                webView.evaluateJavascript(jsMethod, new ValueCallback<String>() {
+                    
+                    @Override
+                    public void onReceiveValue(String value) {
+                        resultCallback.onResult(value);
+                    }
+                });
+                
+            }
+        });
+	    webView.loadUrl(jsFileUrl);
+	}
 	public ArrayList<JsCallback> getResultCallbacks() {
 		return mResultCallbacks;
 	}

@@ -42,7 +42,10 @@ public class LoginResultHelper {
 			} else if (result.contains("输入的验证码不正确")) {
 				mIsLogin = false;
 				mErrorReason = "输入的验证码不正确";
-			}
+			} else if (result.contains("请输入正确的密码")) {
+			    mIsLogin = false;
+                mErrorReason = "请输入正确的密码";
+            }
 			this.mResponseString = result;
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
