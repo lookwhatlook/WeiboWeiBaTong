@@ -365,8 +365,7 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 
 			String text = mEditText.getText().toString();
 			if (TextUtils.isEmpty(text)) {
-				mEmptyToast.show();
-				return;
+				text = "转发微博";
 			}
 			RepostWeiboAsyncTask mAsyncTask = new RepostWeiboAsyncTask(mAccountBean.getCookie(), getWeiba().getCode(), msg.getId(), text);
 			mAsyncTask.setRepostFinishedListener(this);
@@ -407,22 +406,15 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 		}
 		case R.id.sendWeiBoBtn: {
 			if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
-				if (checkDataEmpty()) {
-					mEmptyToast.show();
+				showDialogForWeiBo();
+				if (mHasloginBean != null && mHasloginBean.isResult()) {
+					onDoLogInFinish(true);
+				}else if (!TextUtils.isEmpty(rsaPwd)) {
+					afterPreLogin(rsaPwd);
 				} else {
-					showDialogForWeiBo();
-					if (mHasloginBean != null && mHasloginBean.isResult()) {
-//						sendWeibo(mHasloginBean);
-						Log.d("SEND_SEND", "0000000000000000000");
-						onDoLogInFinish(true);
-					}else if (!TextUtils.isEmpty(rsaPwd)) {
-						afterPreLogin(rsaPwd);
-						Log.d("SEND_SEND", "1111111111111111111111");
-					} else {
-						preLogin();
-						Log.d("SEND_SEND", "2222222222222222222222222222");
-					}
+					preLogin();
 				}
+			
 			} else {
 				Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
 				;
@@ -644,6 +636,9 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 		}
 		if (hasloginBean.isResult()) {
 			
+			if (checkDataEmpty()) {
+				text = "转发微博";
+			}
 			RepostWeiboAsyncTask mAsyncTask = new RepostWeiboAsyncTask(mAccountBean.getCookie(), getWeiba().getCode(), msg.getId(), text);
 			mAsyncTask.setRepostFinishedListener(this);
 			mAsyncTask.execute(getApplicationContext());
