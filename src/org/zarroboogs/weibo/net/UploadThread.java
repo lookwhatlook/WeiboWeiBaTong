@@ -2,6 +2,7 @@ package org.zarroboogs.weibo.net;
 
 import java.util.concurrent.ExecutorService;
 
+import org.zarroboogs.weibo.login.net.BroserContent;
 import org.zarroboogs.weibo.setting.SettingUtils;
 
 public class UploadThread implements Runnable {

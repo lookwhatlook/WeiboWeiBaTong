@@ -5,7 +5,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.database.AccountDBTask;
-import org.zarroboogs.weibo.net.BroserContent;
+import org.zarroboogs.weibo.login.net.BroserContent;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
@@ -87,9 +87,6 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 		MobclickAgent.openActivityDurationTrack(false);
 	    MobclickAgent.updateOnlineConfig(this);
 	    
-		// release
-		BroserContent.getInstance().release();
-
 		// CookieManager manager = CookieManager.getInstance();
 		// manager.removeAllCookie();
 

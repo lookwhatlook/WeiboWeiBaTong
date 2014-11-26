@@ -1,5 +1,8 @@
 package org.zarroboogs.weibo.net;
 
+import org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
+import org.zarroboogs.weibo.login.net.BroserContent;
+
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -33,7 +36,8 @@ public class WeiboAsyncTask extends AsyncTask<Context, Integer, Boolean> {
 		// TODO Auto-generated method stub
 		BroserContent mBroserContent = BroserContent.getInstance();
 		HttpPostHelper mPostHelper = new HttpPostHelper();
-		return mPostHelper.sendWeibo(mBroserContent, "http://widget.weibo.com/public/aj_addMblog.php", app_src, textContent, mCookie, pid);
+		SinaPreLogin sinaPreLogin = new SinaPreLogin();
+		return sinaPreLogin.sendWeibo(mBroserContent, "http://widget.weibo.com/public/aj_addMblog.php", app_src, textContent, mCookie, pid);
 	}
 
 	@Override

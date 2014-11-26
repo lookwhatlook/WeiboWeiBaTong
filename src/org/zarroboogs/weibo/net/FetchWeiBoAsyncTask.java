@@ -1,5 +1,7 @@
 package org.zarroboogs.weibo.net;
 
+import org.zarroboogs.weibo.login.net.BroserContent;
+
 import android.os.AsyncTask;
 
 public class FetchWeiBoAsyncTask extends AsyncTask<Void, Integer, String> {

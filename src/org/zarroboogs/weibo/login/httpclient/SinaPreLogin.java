@@ -145,32 +145,31 @@ public class SinaPreLogin {
         // http://widget.weibo.com/public/aj_addMblog.php
 
         List<Header> headers = new ArrayList<Header>();
-        headers.add(new BasicHeader("Accept", "*/*"));
-        headers.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
-        headers.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
-        headers.add(new BasicHeader("Connection", "keep-alive"));
-        headers.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
-        headers.add(new BasicHeader("Host", "widget.weibo.com"));
-        headers.add(new BasicHeader("Origin", "http://widget.weibo.com"));
-        headers.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
-        headers.add(new BasicHeader("Referer", "http://widget.weibo.com/topics/topic_vote_base.php?" + "tag=Weibo&app_src="
-                + app_src
-                + "&isshowright=0&language=zh_cn"));
-        headers.add(new BasicHeader("User-Agent", Constaces.User_Agent));
+	        headers.add(new BasicHeader("Accept", "*/*"));
+	        headers.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
+	        headers.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
+	        headers.add(new BasicHeader("Connection", "keep-alive"));
+	        headers.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
+	        headers.add(new BasicHeader("Host", "widget.weibo.com"));
+	        headers.add(new BasicHeader("Origin", "http://widget.weibo.com"));
+	        headers.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
+	        headers.add(new BasicHeader("Referer", "http://widget.weibo.com/topics/topic_vote_base.php?" + 
+	        			"tag=Weibo&app_src=" + app_src + "&isshowright=0&language=zh_cn"));
+	        headers.add(new BasicHeader("User-Agent", Constaces.User_Agent));
 
         List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
-        loginParams.add(new BasicNameValuePair("app_src", app_src));
-        loginParams.add(new BasicNameValuePair("content", content));
-        if (!TextUtils.isEmpty(pid)) {
-            loginParams.add(new BasicNameValuePair("pic_id", pid));
-        }
-        loginParams.add(new BasicNameValuePair("return_type", "2"));
-        loginParams.add(new BasicNameValuePair("refer", ""));
-        loginParams.add(new BasicNameValuePair("vsrc", "base_topic"));
-        loginParams.add(new BasicNameValuePair("wsrc", "app_topic_base"));
-        loginParams.add(new BasicNameValuePair("ext", "login=>1;url=>"));
-        loginParams.add(new BasicNameValuePair("html_type", "2"));
-        loginParams.add(new BasicNameValuePair("_t", "0"));
+	        loginParams.add(new BasicNameValuePair("app_src", app_src));
+	        loginParams.add(new BasicNameValuePair("content", content));
+	        if (!TextUtils.isEmpty(pid)) {
+	            loginParams.add(new BasicNameValuePair("pic_id", pid));
+	        }
+	        loginParams.add(new BasicNameValuePair("return_type", "2"));
+	        loginParams.add(new BasicNameValuePair("refer", ""));
+	        loginParams.add(new BasicNameValuePair("vsrc", "base_topic"));
+	        loginParams.add(new BasicNameValuePair("wsrc", "app_topic_base"));
+	        loginParams.add(new BasicNameValuePair("ext", "login=>1;url=>"));
+	        loginParams.add(new BasicNameValuePair("html_type", "2"));
+	        loginParams.add(new BasicNameValuePair("_t", "0"));
         // loginParams.add(new BasicNameValuePair("Cookie", cookie));
 
         HttpPost logInPost = HttpFactory.createHttpPost(url, headers, loginParams);

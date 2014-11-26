@@ -23,11 +23,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.zarroboogs.weibo.bean.UploadPicResult;
+import org.zarroboogs.weibo.login.net.BroserContent;
+import org.zarroboogs.weibo.login.net.HttpFactory;
 import org.zarroboogs.weibo.utils.CookieUtils;
 import org.zarroboogs.weibo.utils.CourseHeader;
 import org.zarroboogs.weibo.utils.CourseUrls;
 import org.zarroboogs.weibo.utils.PatternUtils;
 
+import com.crashlytics.android.internal.r;
 import com.google.gson.Gson;
 
 import android.text.TextUtils;
@@ -63,42 +66,40 @@ public class HttpPostHelper {
 	public boolean repostWeibo(BroserContent broserContent, String url, String app_src, String content, String cookie, String mid) {
 		CloseableHttpClient httpClient = broserContent.getHttpClient();
 		// http://widget.weibo.com/public/aj_repost.php
-		Header[] loginHeaders = {
-				new BasicHeader("Accept", "*/*"),
-				new BasicHeader("Accept-Encoding", "gzip, deflate"),
-				new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"),
-				// new BasicHeader("Cache-Control", "max-age=0"),
-				new BasicHeader("Connection", "keep-alive"),
-				new BasicHeader("Content-Type", "application/x-www-form-urlencoded"),
-				new BasicHeader("Host", "widget.weibo.com"),
-				new BasicHeader("Origin", "http://widget.weibo.com"),
-				new BasicHeader("X-Requested-With", "XMLHttpRequest"),
-				new BasicHeader("Cookie", cookie),
-				new BasicHeader("Referer", "http://widget.weibo.com/dialog/publish.php?button=forward&language=zh_cn&mid=" + mid + "&app_src=" + app_src
-						+ "&refer=1&rnd=14128245"),
-				// "http://widget.weibo.com/topics/topic_vote_base.php?tag=Weibo&app_src="
-				// + app_src + "&isshowright=0&language=zh_cn"),
-				new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
-						+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"), };
+		
+		List<Header> requestHeaders = new ArrayList<Header>();
+		requestHeaders.add(new BasicHeader("Accept", "*/*"));
+		requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
+		requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
+		requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
+		requestHeaders.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
+		requestHeaders.add(new BasicHeader("Host", "widget.weibo.com"));
+		requestHeaders.add(new BasicHeader("Origin", "http://widget.weibo.com"));
+		requestHeaders.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
+		requestHeaders.add(new BasicHeader("Referer", "http://widget.weibo.com/dialog/publish.php?button=forward&language=zh_cn&mid=" + mid + 
+				"&app_src=" + app_src + "&refer=1&rnd=14128245"));
+		requestHeaders.add(new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
+				+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"));
+		
 
 		List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
-		loginParams.add(new BasicNameValuePair("content", content));
-		loginParams.add(new BasicNameValuePair("visible", "0"));
-		loginParams.add(new BasicNameValuePair("refer", ""));
-
-		loginParams.add(new BasicNameValuePair("app_src", app_src));
-		loginParams.add(new BasicNameValuePair("mid", mid));
-		loginParams.add(new BasicNameValuePair("return_type", "2"));
-
-		loginParams.add(new BasicNameValuePair("vsrc", "publish_web"));
-		loginParams.add(new BasicNameValuePair("wsrc", "app_publish"));
-		loginParams.add(new BasicNameValuePair("ext", "login=>1;url=>"));
-		loginParams.add(new BasicNameValuePair("html_type", "2"));
-		loginParams.add(new BasicNameValuePair("is_comment", "1"));
-		loginParams.add(new BasicNameValuePair("_t", "0"));
+			loginParams.add(new BasicNameValuePair("content", content));
+			loginParams.add(new BasicNameValuePair("visible", "0"));
+			loginParams.add(new BasicNameValuePair("refer", ""));
+	
+			loginParams.add(new BasicNameValuePair("app_src", app_src));
+			loginParams.add(new BasicNameValuePair("mid", mid));
+			loginParams.add(new BasicNameValuePair("return_type", "2"));
+	
+			loginParams.add(new BasicNameValuePair("vsrc", "publish_web"));
+			loginParams.add(new BasicNameValuePair("wsrc", "app_publish"));
+			loginParams.add(new BasicNameValuePair("ext", "login=>1;url=>"));
+			loginParams.add(new BasicNameValuePair("html_type", "2"));
+			loginParams.add(new BasicNameValuePair("is_comment", "1"));
+			loginParams.add(new BasicNameValuePair("_t", "0"));
 		// loginParams.add(new BasicNameValuePair("Cookie", cookie));
 
-		HttpPost logInPost = HttpPostFactory.createHttpPost(url, loginHeaders, loginParams);
+		HttpPost logInPost = HttpFactory.createHttpPost(url, requestHeaders, loginParams);
 
 		// logInPost.addHeader("Cookie", cookie);
 		CloseableHttpResponse logInResponse = null;
@@ -158,117 +159,30 @@ public class HttpPostHelper {
 		return isSuccess;
 	}
 
-	public boolean sendWeibo(BroserContent broserContent, String url, String app_src, String content, String cookie, String pid) {
-		CloseableHttpClient httpClient = broserContent.getHttpClient();
-		// http://widget.weibo.com/dialog/PublishWeb.php?button=public&app_src=3G5oUM
-		// http://widget.weibo.com/public/aj_addMblog.php
-		Header[] loginHeaders = {
-				new BasicHeader("Accept", "*/*"),
-				new BasicHeader("Accept-Encoding", "gzip, deflate"),
-				new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"),
-				// new BasicHeader("Cache-Control", "max-age=0"),
-				new BasicHeader("Connection", "keep-alive"),
-				new BasicHeader("Content-Type", "application/x-www-form-urlencoded"),
-				new BasicHeader("Host", "widget.weibo.com"),
-				new BasicHeader("Origin", "http://widget.weibo.com"),
-				new BasicHeader("X-Requested-With", "XMLHttpRequest"),
-				new BasicHeader("Cookie", cookie),
-				new BasicHeader("Referer", "http://widget.weibo.com/topics/topic_vote_base.php?" + "tag=Weibo&app_src=" + app_src
-						+ "&isshowright=0&language=zh_cn"),
-				new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
-						+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"), };
-
-		List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
-		loginParams.add(new BasicNameValuePair("app_src", app_src));
-		loginParams.add(new BasicNameValuePair("content", content));
-		if (!TextUtils.isEmpty(pid)) {
-			loginParams.add(new BasicNameValuePair("pic_id", pid));
-		}
-		loginParams.add(new BasicNameValuePair("return_type", "2"));
-		loginParams.add(new BasicNameValuePair("refer", ""));
-		loginParams.add(new BasicNameValuePair("vsrc", "base_topic"));
-		loginParams.add(new BasicNameValuePair("wsrc", "app_topic_base"));
-		loginParams.add(new BasicNameValuePair("ext", "login=>1;url=>"));
-		loginParams.add(new BasicNameValuePair("html_type", "2"));
-		loginParams.add(new BasicNameValuePair("_t", "0"));
-		// loginParams.add(new BasicNameValuePair("Cookie", cookie));
-
-		HttpPost logInPost = HttpPostFactory.createHttpPost(url, loginHeaders, loginParams);
-
-		// logInPost.addHeader("Cookie", cookie);
-		CloseableHttpResponse logInResponse = null;
-		String allResponse = "";
-		boolean isSuccess = false;
-		try {
-			logInResponse = httpClient.execute(logInPost);
-			HttpEntity mEntity = logInResponse.getEntity();
-			if (mEntity != null) {
-				InputStream in;
-				try {
-					in = mEntity.getContent();
-					String str = "";
-					BufferedReader br = new BufferedReader(new InputStreamReader(in, "UTF-8"));
-					while ((str = br.readLine()) != null) {
-						allResponse += str;
-					}
-
-				} catch (IllegalStateException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Error IllegalStateException----");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					System.out.println("Error IOException");
-				}
-			}
-			Log.d("RES_CODE_POST: ", allResponse);
-			Gson gson = new Gson();
-			WeiBoPostResult result = gson.fromJson(allResponse, WeiBoPostResult.class);
-			if (logInResponse.getStatusLine().getStatusCode() == 200) {
-				if (result != null && result.getCode() == 100000) {
-					isSuccess = true;
-				} else {
-					isSuccess = false;
-				}
-			}
-		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			isSuccess = false;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			isSuccess = false;
-		} finally {
-			try {
-				if (logInResponse != null) {
-					logInResponse.close();
-				}
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		return isSuccess;
-	}
 
 	public String uploadPicToWeibo(BroserContent broserContent, String url, String cookie, String picurl) {
 		// http://picupload.service.weibo.com/interface/pic_upload.php?app=miniblog&data=1&mime=image/png&ct=0.2805887470021844
 		CloseableHttpClient httpClient = broserContent.getHttpClient();
-		Header[] loginHeaders = {
-				new BasicHeader("Host", "picupload.service.weibo.com"),
-				new BasicHeader("Origin", "http://tjs.sjs.sinajs.cn"),
-				new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
-						+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"), new BasicHeader("Content-Type", "application/octet-stream"),
-				new BasicHeader("Accept", "*/*"),
-				new BasicHeader("Referer", "http://tjs.sjs.sinajs.cn/open/widget/static/swf/MultiFilesUpload.swf?" + "version=1411256448572"),
-				new BasicHeader("Accept-Encoding", "gzip, deflate"), new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"),
-				new BasicHeader("Cookie", cookie), };
+		
+		
+		List<Header> requestHeaders = new ArrayList<Header>();
+		requestHeaders.add(new BasicHeader("Host", "picupload.service.weibo.com"));
+		requestHeaders.add(new BasicHeader("Origin", "http://tjs.sjs.sinajs.cn"));
+		requestHeaders.add(new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
+				+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"));
+		requestHeaders.add(new BasicHeader("Content-Type", "application/octet-stream"));
+		requestHeaders.add(new BasicHeader("Accept", "*/*"));
+		requestHeaders.add(new BasicHeader("Referer", "http://tjs.sjs.sinajs.cn/open/widget/static/swf/MultiFilesUpload.swf?" + "version=1411256448572"));
+		requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
+		requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
+
+	
 
 		List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
 
-		HttpPost logInPost = HttpPostFactory.createHttpPost(url, loginHeaders, loginParams);
+		HttpPost logInPost = HttpFactory.createHttpPost(url, requestHeaders, loginParams);
+		
+		
 		File file = new File(picurl);
 		FileEntity reqEntity = new FileEntity(file, "binary/octet-stream");
 
@@ -337,23 +251,31 @@ public class HttpPostHelper {
 
 	public boolean loginNetEase(BroserContent broserContent, String url, String name, String password) {
 		CloseableHttpClient httpClient = broserContent.getHttpClient();
-		Header[] loginHeaders = { new BasicHeader("Accept", CourseHeader.Accept), new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"),
-				new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"), new BasicHeader("Cache-Control", "max-age=0"),
-				new BasicHeader("Connection", "keep-alive"), new BasicHeader("Content-Type", "application/x-www-form-urlencoded"),
-				new BasicHeader("Host", "reg.163.com"), new BasicHeader("Origin", "http://study.163.com"), new BasicHeader("Referer", "http://study.163.com/"),
-				new BasicHeader("User-Agent", CourseHeader.User_Agent), };
+		
+		List<Header> requestHeaders = new ArrayList<Header>();
+			requestHeaders.add(new BasicHeader("Accept", CourseHeader.Accept));
+			requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"));
+			requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"));
+			requestHeaders.add(new BasicHeader("Cache-Control", "max-age=0"));
+			requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
+			requestHeaders.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
+			requestHeaders.add(new BasicHeader("Host", "reg.163.com"));
+			requestHeaders.add(new BasicHeader("Origin", "http://study.163.com"));
+			requestHeaders.add(new BasicHeader("Referer", "http://study.163.com/"));
+			requestHeaders.add(new BasicHeader("User-Agent", CourseHeader.User_Agent));
+		
 
 		List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
-		loginParams.add(new BasicNameValuePair("product", "study"));
-		loginParams.add(new BasicNameValuePair("url", "http://study.163.com?from=study"));
-		loginParams.add(new BasicNameValuePair("savelogin", "1"));
-		loginParams.add(new BasicNameValuePair("domains", "163.com"));
-		loginParams.add(new BasicNameValuePair("type", "0"));
-		loginParams.add(new BasicNameValuePair("append", "1"));
-		loginParams.add(new BasicNameValuePair("username", name));
-		loginParams.add(new BasicNameValuePair("password", password));
+			loginParams.add(new BasicNameValuePair("product", "study"));
+			loginParams.add(new BasicNameValuePair("url", "http://study.163.com?from=study"));
+			loginParams.add(new BasicNameValuePair("savelogin", "1"));
+			loginParams.add(new BasicNameValuePair("domains", "163.com"));
+			loginParams.add(new BasicNameValuePair("type", "0"));
+			loginParams.add(new BasicNameValuePair("append", "1"));
+			loginParams.add(new BasicNameValuePair("username", name));
+			loginParams.add(new BasicNameValuePair("password", password));
 
-		HttpPost logInPost = HttpPostFactory.createHttpPost(url, loginHeaders, loginParams);
+		HttpPost logInPost = HttpFactory.createHttpPost(url, requestHeaders, loginParams);
 
 		CloseableHttpResponse logInResponse = null;
 		boolean isSuccess = false;
@@ -396,12 +318,18 @@ public class HttpPostHelper {
 
 		String httpSessionId = CookieUtils.getHttpSessionId(cookieStore);
 
-		// ============��ȡ���е�ʵ�ÿγ�
-		Header[] allCourseHeaders = { new BasicHeader("Accept", "*/*"), new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"),
-				new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"), new BasicHeader("Cache-Control", "max-age=0"),
-				new BasicHeader("Connection", "keep-alive"), new BasicHeader("Content-Type", "text/plain"), new BasicHeader("Host", "study.163.com"),
-				new BasicHeader("Origin", "http://study.163.com"), new BasicHeader("Referer", "http://study.163.com/find.htm"),
-				new BasicHeader("User-Agent", CourseHeader.User_Agent), };
+		List<Header> requestHeaders = new ArrayList<Header>();
+			requestHeaders.add(new BasicHeader("Accept", "*/*"));
+			requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"));
+			requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"));
+			requestHeaders.add(new BasicHeader("Cache-Control", "max-age=0"));
+			requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
+			requestHeaders.add(new BasicHeader("Content-Type", "text/plain"));
+			requestHeaders.add(new BasicHeader("Host", "study.163.com"));
+			requestHeaders.add(new BasicHeader("Origin", "http://study.163.com"));
+			requestHeaders.add(new BasicHeader("Referer", "http://study.163.com/find.htm"));
+			requestHeaders.add(new BasicHeader("User-Agent", CourseHeader.User_Agent));
+
 
 		List<NameValuePair> allCourceParam = new ArrayList<NameValuePair>();
 		allCourceParam.add(new BasicNameValuePair("callCount", "1"));
@@ -415,7 +343,10 @@ public class HttpPostHelper {
 		allCourceParam.add(new BasicNameValuePair("c0-param0", "string:" + URLEncoder.encode(videoUrl)));
 		allCourceParam.add(new BasicNameValuePair("batchId", "757817"));
 
-		HttpPost allCoursePost = HttpPostFactory.createHttpPost(CourseUrls.VideoToaken, allCourseHeaders, allCourceParam);
+//		HttpPost allCoursePost = HttpPostFactory.createHttpPost(CourseUrls.VideoToaken, allCourseHeaders, allCourceParam);
+		HttpPost allCoursePost = HttpFactory.createHttpPost(CourseUrls.VideoToaken, requestHeaders, allCourceParam);
+		
+		
 		CloseableHttpResponse postResult = null;
 
 		String responseString = null;
@@ -446,26 +377,34 @@ public class HttpPostHelper {
 
 		String httpSessionId = CookieUtils.getHttpSessionId(cookieStore);
 
-		Header[] allCourseHeaders = { new BasicHeader("Accept", "*/*"), new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"),
-				new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"), new BasicHeader("Cache-Control", "max-age=0"),
-				new BasicHeader("Connection", "keep-alive"), new BasicHeader("Content-Type", "text/plain"), new BasicHeader("Host", "study.163.com"),
-				new BasicHeader("Origin", "http://study.163.com"), new BasicHeader("Referer", "http://study.163.com/find.htm"),
-				new BasicHeader("User-Agent", CourseHeader.User_Agent), };
+		List<Header> requestHeaders = new ArrayList<Header>();
+			requestHeaders.add(new BasicHeader("Accept", "*/*"));
+			requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"));
+			requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"));
+			requestHeaders.add(new BasicHeader("Cache-Control", "max-age=0"));
+			requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
+			requestHeaders.add(new BasicHeader("Content-Type", "text/plain"));
+			requestHeaders.add(new BasicHeader("Host", "study.163.com"));
+			requestHeaders.add(new BasicHeader("Origin", "http://study.163.com"));
+			requestHeaders.add(new BasicHeader("Referer", "http://study.163.com/find.htm"));
+			requestHeaders.add(new BasicHeader("User-Agent", CourseHeader.User_Agent));
+		
+		
 
 		List<NameValuePair> allCourceParam = new ArrayList<NameValuePair>();
-		allCourceParam.add(new BasicNameValuePair("callCount", "1"));
-		allCourceParam.add(new BasicNameValuePair("scriptSessionId", "${scriptSessionId}190"));
-		allCourceParam.add(new BasicNameValuePair("httpSessionId", httpSessionId));
+			allCourceParam.add(new BasicNameValuePair("callCount", "1"));
+			allCourceParam.add(new BasicNameValuePair("scriptSessionId", "${scriptSessionId}190"));
+			allCourceParam.add(new BasicNameValuePair("httpSessionId", httpSessionId));
+	
+			allCourceParam.add(new BasicNameValuePair("c0-scriptName", "CategoryBean"));
+			allCourceParam.add(new BasicNameValuePair("c0-methodName", "getFilterRecommendCategoryTree"));
+	
+			allCourceParam.add(new BasicNameValuePair("c0-id", "0"));
+			allCourceParam.add(new BasicNameValuePair("c0-param0", "number:1"));
+			allCourceParam.add(new BasicNameValuePair("batchId", "757817"));
 
-		allCourceParam.add(new BasicNameValuePair("c0-scriptName", "CategoryBean"));
-		allCourceParam.add(new BasicNameValuePair("c0-methodName", "getFilterRecommendCategoryTree"));
-
-		allCourceParam.add(new BasicNameValuePair("c0-id", "0"));
-		allCourceParam.add(new BasicNameValuePair("c0-param0", "number:1"));
-		allCourceParam.add(new BasicNameValuePair("batchId", "757817"));
-
-		HttpPost allCoursePost = HttpPostFactory.createHttpPost(CourseUrls.CategroyTree, allCourseHeaders, allCourceParam);
-
+		//HttpPost allCoursePost = HttpPostFactory.createHttpPost(CourseUrls.CategroyTree, allCourseHeaders, allCourceParam);
+		HttpPost allCoursePost = HttpFactory.createHttpPost(CourseUrls.CategroyTree, requestHeaders, allCourceParam);
 		CloseableHttpResponse postResult = null;
 		String responseString = null;
 		try {
@@ -495,24 +434,33 @@ public class HttpPostHelper {
 
 		String httpSessionId = CookieUtils.getHttpSessionId(cookieStore);
 
-		// getVideoInfo
-		Header[] getVideoInfoHeaders = { new BasicHeader("Accept", "*/*"), new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"),
-				new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"), new BasicHeader("Cache-Control", "max-age=0"),
-				new BasicHeader("Connection", "keep-alive"), new BasicHeader("Content-Type", "text/plain"), new BasicHeader("Host", "study.163.com"),
-				new BasicHeader("Origin", "http://study.163.com"), new BasicHeader("Referer", "http://study.163.com/find.htm"),
-				new BasicHeader("User-Agent", CourseHeader.User_Agent), };
+		List<Header> requestHeaders = new ArrayList<Header>();
+			requestHeaders.add(new BasicHeader("Accept", "*/*"));
+			requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip,deflate,sdch"));
+			requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en;q=0.6,ja;q=0.4,zh-TW;q=0.2"));
+			requestHeaders.add(new BasicHeader("Cache-Control", "max-age=0"));
+			requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
+			requestHeaders.add(new BasicHeader("Content-Type", "text/plain"));
+			requestHeaders.add(new BasicHeader("Host", "study.163.com"));
+			requestHeaders.add(new BasicHeader("Origin", "http://study.163.com"));
+			requestHeaders.add(new BasicHeader("Referer", "http://study.163.com/find.htm"));
+			requestHeaders.add(new BasicHeader("User-Agent", CourseHeader.User_Agent));
+		
 		List<NameValuePair> getVideoInfoParams = new ArrayList<NameValuePair>();
-		getVideoInfoParams.add(new BasicNameValuePair("callCount", "1"));
-		getVideoInfoParams.add(new BasicNameValuePair("scriptSessionId", "${scriptSessionId}190"));
-		getVideoInfoParams.add(new BasicNameValuePair("httpSessionId", httpSessionId));
-		getVideoInfoParams.add(new BasicNameValuePair("c0-scriptName", "LessonLearnBean"));
-		getVideoInfoParams.add(new BasicNameValuePair("c0-methodName", "getVideoLearnInfo"));
-		getVideoInfoParams.add(new BasicNameValuePair("c0-id", "0"));
-		getVideoInfoParams.add(new BasicNameValuePair("c0-param0", "string:" + lessionID));
-		getVideoInfoParams.add(new BasicNameValuePair("c0-param1", "string:" + courseID));
-		getVideoInfoParams.add(new BasicNameValuePair("batchId", "905319"));
+			getVideoInfoParams.add(new BasicNameValuePair("callCount", "1"));
+			getVideoInfoParams.add(new BasicNameValuePair("scriptSessionId", "${scriptSessionId}190"));
+			getVideoInfoParams.add(new BasicNameValuePair("httpSessionId", httpSessionId));
+			getVideoInfoParams.add(new BasicNameValuePair("c0-scriptName", "LessonLearnBean"));
+			getVideoInfoParams.add(new BasicNameValuePair("c0-methodName", "getVideoLearnInfo"));
+			getVideoInfoParams.add(new BasicNameValuePair("c0-id", "0"));
+			getVideoInfoParams.add(new BasicNameValuePair("c0-param0", "string:" + lessionID));
+			getVideoInfoParams.add(new BasicNameValuePair("c0-param1", "string:" + courseID));
+			getVideoInfoParams.add(new BasicNameValuePair("batchId", "905319"));
 
-		HttpPost getVideoInfoHttpPost = HttpPostFactory.createHttpPost(CourseUrls.GetVideoInfo, getVideoInfoHeaders, getVideoInfoParams);
+		//HttpPost getVideoInfoHttpPost = HttpPostFactory.createHttpPost(CourseUrls.GetVideoInfo, getVideoInfoHeaders, getVideoInfoParams);
+		HttpPost getVideoInfoHttpPost = HttpFactory.createHttpPost(CourseUrls.GetVideoInfo, requestHeaders, getVideoInfoParams);
+				
+				
 		CloseableHttpResponse mHttpResponse = null;
 		String responseString = null;
 		try {
