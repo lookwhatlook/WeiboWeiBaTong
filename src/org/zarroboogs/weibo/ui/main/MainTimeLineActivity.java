@@ -317,7 +317,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	private void buildPhoneLeftRightSlidingMenu(Bundle savedInstanceState) {
 		setBehindContentView(R.layout.layout_left_menu_frame);
 		getSlidingMenu().setSlidingEnabled(true);
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// 右侧的Menu

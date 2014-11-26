@@ -237,7 +237,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 		menu = new SlidingMenu(this);
 		menu.setMode(SlidingMenu.LEFT);
-		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		menu.setShadowWidthRes(R.dimen.shadow_width);
 		menu.setShadowDrawable(R.drawable.shadow_slidingmenu);
 		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);

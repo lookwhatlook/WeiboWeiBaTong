@@ -207,7 +207,7 @@ public class RightMenuFragment extends AbstractAppFragment {
 			return true;
 		}
 
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		currentIndex = HOME_INDEX;
 
 		if (Utility.isDevicePort() && !reset) {
@@ -426,7 +426,7 @@ public class RightMenuFragment extends AbstractAppFragment {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = DM_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -475,7 +475,7 @@ public class RightMenuFragment extends AbstractAppFragment {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = FAV_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -523,7 +523,7 @@ public class RightMenuFragment extends AbstractAppFragment {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = PROFILE_INDEX;
 		if (Utility.isDevicePort() && !reset) {
