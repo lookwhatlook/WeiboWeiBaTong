@@ -1,6 +1,9 @@
 package org.zarroboogs.weibo.utils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 
@@ -35,6 +38,9 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 	@Override
 	protected Bitmap doInBackground(String... params) {
 		mFileName = params[0];
+		if (mFileName.contains(".gif")) {
+			return null;
+		}
 		int uploadWidth = SettingUtils.isUploadBigPic() ? 2048 : 720;
 		return decodeSampledBitmapFromFile(mFileName, uploadWidth);
 	}
@@ -42,9 +48,13 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 	// Once complete, see if ImageView is still around and set bitmap.
 	@Override
 	protected void onPostExecute(Bitmap bitmap) {
-	    String newFile;
+	    String newFile = null;
 	    if (mFileName.contains(".gif")) {
-	        newFile = BitmapUtils.saveBitmapToFile(cacheDir, "WEI-" + makeMD5(mFileName), bitmap, ".gif");
+	        //newFile = BitmapUtils.saveBitmapToFile(cacheDir, "WEI-" + makeMD5(mFileName), bitmap, ".gif");
+	    	String newFilePath = cacheDir.getAbsolutePath() + "/WEI-" + makeMD5(mFileName) + ".gif";
+	        copy(mFileName, newFilePath);
+	        newFile = newFilePath;
+	        Log.d("AAAAAAAAAA", "old: " + mFileName + "  new :" + newFile);
         }else {
             newFile = BitmapUtils.saveBitmapToFile(cacheDir, "WEI-" + makeMD5(mFileName), bitmap, ".jpg");
         }
@@ -54,6 +64,23 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 		}
 	}
 
+	private boolean copy(String fileFrom, String fileTo) {  
+        try {  
+            FileInputStream in = new java.io.FileInputStream(fileFrom);  
+            FileOutputStream out = new FileOutputStream(fileTo);  
+            byte[] bt = new byte[1024];  
+            int count;  
+            while ((count = in.read(bt)) > 0) {  
+                out.write(bt, 0, count);  
+            }  
+            in.close();  
+            out.close();  
+            return true;  
+        } catch (IOException ex) {  
+            return false;  
+        }  
+    }  
+	
 	public static String makeMD5(String password) {
 		MessageDigest md;
 		try {

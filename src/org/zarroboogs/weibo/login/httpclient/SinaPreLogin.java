@@ -35,6 +35,8 @@ import org.zarroboogs.weibo.login.net.BroserContent;
 import org.zarroboogs.weibo.login.net.HttpFactory;
 import org.zarroboogs.weibo.login.utils.Constaces;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 
 public class SinaPreLogin {
@@ -172,6 +174,8 @@ public class SinaPreLogin {
 	        loginParams.add(new BasicNameValuePair("_t", "0"));
         // loginParams.add(new BasicNameValuePair("Cookie", cookie));
 
+	        Log.d("sendWeibo-PIC", "[" + pid + "]");
+	        
         HttpPost logInPost = HttpFactory.createHttpPost(url, headers, loginParams);
 
         // logInPost.addHeader("Cookie", cookie);
@@ -202,7 +206,7 @@ public class SinaPreLogin {
                 }
             }
 
-            System.out.println("==========================send resule:\r\n" + allResponse);
+            Log.d("sendWeibo", "" + allResponse);
             Gson gson = new Gson();
             WeiBoPostResult result = gson.fromJson(allResponse, WeiBoPostResult.class);
             if (logInResponse.getStatusLine().getStatusCode() == 200) {

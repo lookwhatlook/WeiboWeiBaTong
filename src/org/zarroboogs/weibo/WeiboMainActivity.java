@@ -98,7 +98,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class WeiboMainActivity extends SharedPreferenceActivity implements LoginCallBack, OnClickListener,
-		OnGlobalLayoutListener, OnSendFinished, OnItemClickListener, OnSharedPreferenceChangeListener {
+		OnGlobalLayoutListener, OnItemClickListener, OnSharedPreferenceChangeListener {
 
 	String pidC = "";
 	RelativeLayout mEmotionRelativeLayout;
@@ -442,9 +442,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 						text = getString(R.string.default_text_pic_weibo);
 					}
 
-					WeiboAsyncTask mAsyncTask = new WeiboAsyncTask(mAccountBean.getCookie(), getWeiba().getCode(), pidC, text);
-					mAsyncTask.setOnSendFinishedListener(WeiboMainActivity.this);
-					mAsyncTask.execute(getApplicationContext());
+					sendWeibo(mHasloginBean);
 				}
 
 			}
@@ -561,11 +559,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 					sendBitmapWorkerTask.execute(send.get(i));
 				}
 			} else {
-				String text = mEditText.getText().toString();
-				if (TextUtils.isEmpty(text)) {
-					mEmptyToast.show();
-					return;
-				}
+
 //				WeiboAsyncTask mAsyncTask = new WeiboAsyncTask(mAccountBean.getCookieInDB(), getWeiba().getCode(), pidC, text);
 //				mAsyncTask.setOnSendFinishedListener(this);
 //				mAsyncTask.execute(getApplicationContext());
@@ -578,18 +572,15 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	private void sendWeibo(HasloginBean hasloginBean) {
 		String text = mEditText.getText().toString();
 		if (TextUtils.isEmpty(text)) {
-			mEmptyToast.show();
-			return;
+			text = getString(R.string.default_text_pic_weibo);
 		}
 		if (hasloginBean.isResult()) {
-			Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 			SendWeiboAsyncTask sendWeiboAsyncTask = new SendWeiboAsyncTask(new OnSendListener() {
 				
 				@Override
 				public void onSend(Boolean hb) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "" + hb, Toast.LENGTH_SHORT).show();
-					hideDialogForWeiBo();
+					onSendFinished(hb);
 				}
 			});
 			sendWeiboAsyncTask.execute(getWeiba().getCode(), text, pidC);
@@ -850,7 +841,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 	}
 
-	@Override
 	public void onSendFinished(boolean isSuccess) {
 		// TODO Auto-generated method stub
 		hideDialogForWeiBo();

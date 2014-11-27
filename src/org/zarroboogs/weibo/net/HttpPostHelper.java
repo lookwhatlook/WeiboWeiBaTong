@@ -25,6 +25,7 @@ import org.apache.http.message.BasicNameValuePair;
 import org.zarroboogs.weibo.bean.UploadPicResult;
 import org.zarroboogs.weibo.login.net.BroserContent;
 import org.zarroboogs.weibo.login.net.HttpFactory;
+import org.zarroboogs.weibo.login.utils.Constaces;
 import org.zarroboogs.weibo.utils.CookieUtils;
 import org.zarroboogs.weibo.utils.CourseHeader;
 import org.zarroboogs.weibo.utils.CourseUrls;
@@ -78,8 +79,7 @@ public class HttpPostHelper {
 		requestHeaders.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
 		requestHeaders.add(new BasicHeader("Referer", "http://widget.weibo.com/dialog/publish.php?button=forward&language=zh_cn&mid=" + mid + 
 				"&app_src=" + app_src + "&refer=1&rnd=14128245"));
-		requestHeaders.add(new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
-				+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"));
+		requestHeaders.add(new BasicHeader("User-Agent", Constaces.User_Agent));
 		
 
 		List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
@@ -168,8 +168,7 @@ public class HttpPostHelper {
 		List<Header> requestHeaders = new ArrayList<Header>();
 		requestHeaders.add(new BasicHeader("Host", "picupload.service.weibo.com"));
 		requestHeaders.add(new BasicHeader("Origin", "http://tjs.sjs.sinajs.cn"));
-		requestHeaders.add(new BasicHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) "
-				+ "Chrome/34.0.1847.137 Safari/537.36 LBBROWSER"));
+		requestHeaders.add(new BasicHeader("User-Agent", Constaces.User_Agent));
 		requestHeaders.add(new BasicHeader("Content-Type", "application/octet-stream"));
 		requestHeaders.add(new BasicHeader("Accept", "*/*"));
 		requestHeaders.add(new BasicHeader("Referer", "http://tjs.sjs.sinajs.cn/open/widget/static/swf/MultiFilesUpload.swf?" + "version=1411256448572"));
