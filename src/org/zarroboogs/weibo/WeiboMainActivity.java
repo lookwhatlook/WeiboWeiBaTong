@@ -403,12 +403,19 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 					@Override
 					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						String content = mEditText.getText().toString() + ((ImageView) v).getContentDescription();
-						TimeLineUtility.addEmotions(mEditText, content);
-						//mEditText.setText(content);
-						mEditText.setSelection(content.length());
-					}
+                        // TODO Auto-generated method stub
+                        String text = ((ImageView) v).getContentDescription() + "";
+                        int index = mEditText.getSelectionStart();// 获取光标所在位置
+                        Editable edit = mEditText.getEditableText();// 获取EditText的文字
+                        if (index < 0 || index >= edit.length()) {
+                            edit.append(text);
+                        } else {
+                            edit.insert(index, text);// 光标所在位置插入文字
+                        }
+                        String content = mEditText.getText().toString();
+                        TimeLineUtility.addEmotions(mEditText, content);
+                        mEditText.setSelection(index + text.length());
+                    }
 				});
 				mEmotionArrayList.add((ImageView) v);
 			}
