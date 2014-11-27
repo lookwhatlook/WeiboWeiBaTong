@@ -442,6 +442,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 						text = getString(R.string.default_text_pic_weibo);
 					}
 
+					Log.d(LOGIN_TAG, "onUploaded  pid : " + pidC);
 					sendWeibo(mHasloginBean);
 				}
 
@@ -549,7 +550,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 						@Override
 						public void onCacheDone(String newFile) {
 							// TODO Auto-generated method stub
-							Log.d("RESIZE_PIC", "" + newFile);
+							Log.d(LOGIN_TAG, "has create new File : " + newFile);
 							sendImgData.addReSizeImg(newFile);
 							if (sendImgData.getReSizeImgs().size() == count) {
 								uploadPictures(sendImgData.getReSizeImgs());
@@ -580,6 +581,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 				@Override
 				public void onSend(Boolean hb) {
 					// TODO Auto-generated method stub
+					Log.d(LOGIN_TAG, "SendWeiboAsyncTask - onSend: " + hb);
 					onSendFinished(hb);
 				}
 			});
@@ -603,6 +605,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		for (int i = 0; i < count; i++) {
 			UploadThread ut000 = new UploadThread(mark, i, myOnUploaded, mAccountBean.getCookie(), send.get(i));
 			manager.addJobs(ut000);
+			Log.d(LOGIN_TAG, "uploadPictures : " + i);
 		}
 	}
 
@@ -889,6 +892,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 			if (msg.what == 1001) {
 				mHasloginBean = (HasloginBean) msg.obj;
 				onDoLogInFinish(true);
+				Log.d(LOGIN_TAG, "mHandler 1001");
 			}
 			if (msg.what == 1002) {
 				DoorImageAsyncTask doorImageAsyncTask = new DoorImageAsyncTask();

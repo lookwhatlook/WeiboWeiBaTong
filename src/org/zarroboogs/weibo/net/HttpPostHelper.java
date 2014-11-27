@@ -213,7 +213,7 @@ public class HttpPostHelper {
 					System.out.println("Error IOException");
 				}
 			}
-			Log.d("RES_CODE_POST_PIC: ",
+			Log.d("START_SEND_WEIBO  ",
 					"" + logInResponse.getStatusLine().getStatusCode() + "result: " + allResponse + "\r\n" + PatternUtils.preasePid(allResponse));
 
 			if (logInResponse.getStatusLine().getStatusCode() == 200) {
