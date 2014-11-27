@@ -20,7 +20,7 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 
 	private OnCacheDoneListener mCacheDoneListener;
 
-	private String data = null;
+	private String mFileName = null;
 	private File cacheDir;
 	private Context mContext;
 
@@ -34,15 +34,21 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 	// Decode image in background.
 	@Override
 	protected Bitmap doInBackground(String... params) {
-		data = params[0];
+		mFileName = params[0];
 		int uploadWidth = SettingUtils.isUploadBigPic() ? 2048 : 720;
-		return decodeSampledBitmapFromFile(data, uploadWidth);
+		return decodeSampledBitmapFromFile(mFileName, uploadWidth);
 	}
 
 	// Once complete, see if ImageView is still around and set bitmap.
 	@Override
 	protected void onPostExecute(Bitmap bitmap) {
-		String newFile = BitmapUtils.saveBitmapToFile(cacheDir, "WEI-" + makeMD5(data), bitmap, ".jpg");
+	    String newFile;
+	    if (mFileName.contains(".gif")) {
+	        newFile = BitmapUtils.saveBitmapToFile(cacheDir, "WEI-" + makeMD5(mFileName), bitmap, ".gif");
+        }else {
+            newFile = BitmapUtils.saveBitmapToFile(cacheDir, "WEI-" + makeMD5(mFileName), bitmap, ".jpg");
+        }
+
 		if (mCacheDoneListener != null) {
 			mCacheDoneListener.onCacheDone(newFile);
 		}
