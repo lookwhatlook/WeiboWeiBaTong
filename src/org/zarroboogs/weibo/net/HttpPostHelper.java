@@ -31,10 +31,8 @@ import org.zarroboogs.weibo.utils.CourseHeader;
 import org.zarroboogs.weibo.utils.CourseUrls;
 import org.zarroboogs.weibo.utils.PatternUtils;
 
-import com.crashlytics.android.internal.r;
 import com.google.gson.Gson;
 
-import android.text.TextUtils;
 import android.util.Log;
 
 public class HttpPostHelper {
@@ -68,18 +66,19 @@ public class HttpPostHelper {
 		CloseableHttpClient httpClient = broserContent.getHttpClient();
 		// http://widget.weibo.com/public/aj_repost.php
 		
+		
 		List<Header> requestHeaders = new ArrayList<Header>();
-		requestHeaders.add(new BasicHeader("Accept", "*/*"));
-		requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
-		requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
-		requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
-		requestHeaders.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
-		requestHeaders.add(new BasicHeader("Host", "widget.weibo.com"));
-		requestHeaders.add(new BasicHeader("Origin", "http://widget.weibo.com"));
-		requestHeaders.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
-		requestHeaders.add(new BasicHeader("Referer", "http://widget.weibo.com/dialog/publish.php?button=forward&language=zh_cn&mid=" + mid + 
-				"&app_src=" + app_src + "&refer=1&rnd=14128245"));
-		requestHeaders.add(new BasicHeader("User-Agent", Constaces.User_Agent));
+			requestHeaders.add(new BasicHeader("Accept", "*/*"));
+			requestHeaders.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
+			requestHeaders.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
+			requestHeaders.add(new BasicHeader("Connection", "keep-alive"));
+			requestHeaders.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
+			requestHeaders.add(new BasicHeader("Host", "widget.weibo.com"));
+			requestHeaders.add(new BasicHeader("Origin", "http://widget.weibo.com"));
+			requestHeaders.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
+			requestHeaders.add(new BasicHeader("Referer", "http://widget.weibo.com/dialog/publish.php?button=forward&language=zh_cn&mid=" + mid + 
+					"&app_src=" + app_src + "&refer=1&rnd=14128245"));
+			requestHeaders.add(new BasicHeader("User-Agent", Constaces.User_Agent));
 		
 
 		List<NameValuePair> loginParams = new ArrayList<NameValuePair>();
