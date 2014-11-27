@@ -25,7 +25,7 @@ public class SmileyMap {
 		 */
 		general.put("[挖鼻屎]", "d_wabishi.png");
 		general.put("[泪]", "d_lei.png");
-		general.put("[亲亲]", "d_qinqin,png");
+		general.put("[亲亲]", "d_qinqin.png");
 		general.put("[晕]", "d_yun.png");
 		general.put("[可爱]", "d_keai.png");
 		general.put("[花心]", "d_huaxin.png");
@@ -63,6 +63,9 @@ public class SmileyMap {
 		general.put("[悲伤]", "d_beishang.png");
 		general.put("[嘘]", "d_xu.png");
 		general.put("[呵呵]", "d_hehe.png");
+		
+		general.put("[太开心]", "d_taikaixin.png");
+        
 		
 		general.put("[感冒]", "d_ganmao.png");
 		general.put("[黑线]", "d_heixian.png");
