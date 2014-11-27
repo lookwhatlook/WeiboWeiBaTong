@@ -44,6 +44,7 @@ import org.zarroboogs.weibo.net.WeiboAsyncTask.OnSendFinished;
 import org.zarroboogs.weibo.selectphoto.ImgFileListActivity;
 import org.zarroboogs.weibo.selectphoto.SendImgData;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
+import org.zarroboogs.weibo.support.utils.TimeLineUtility;
 import org.zarroboogs.weibo.utils.SendBitmapWorkerTask;
 import org.zarroboogs.weibo.utils.SendBitmapWorkerTask.OnCacheDoneListener;
 import org.zarroboogs.weibo.utils.Utility;
@@ -404,7 +405,8 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						String content = mEditText.getText().toString() + ((ImageView) v).getContentDescription();
-						mEditText.setText(content);
+						TimeLineUtility.addEmotions(mEditText, content);
+						//mEditText.setText(content);
 						mEditText.setSelection(content.length());
 					}
 				});

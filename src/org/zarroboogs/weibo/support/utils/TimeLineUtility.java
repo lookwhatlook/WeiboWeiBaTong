@@ -22,6 +22,7 @@ import android.text.TextUtils;
 import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -75,6 +76,18 @@ public class TimeLineUtility {
 		return value;
 	}
 
+	public static void addEmotions(EditText et, String txt) {
+        String hackTxt;
+        if (txt.startsWith("[") && txt.endsWith("]")) {
+            hackTxt = txt + " ";
+        } else {
+            hackTxt = txt;
+        }
+        SpannableString value = SpannableString.valueOf(hackTxt);
+        TimeLineUtility.addEmotions(value);
+        et.setText(value);
+    }
+	
 	public static void addJustHighLightLinks(MessageBean bean) {
 		bean.setListViewSpannableString(convertNormalStringToSpannableString(bean.getText()));
 		bean.getSourceString();
