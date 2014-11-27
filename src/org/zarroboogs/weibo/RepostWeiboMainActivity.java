@@ -34,6 +34,7 @@ import org.zarroboogs.weibo.net.RepostWeiboAsyncTask.OnRepostFinished;
 import org.zarroboogs.weibo.selectphoto.ImgFileListActivity;
 import org.zarroboogs.weibo.selectphoto.SendImgData;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
+import org.zarroboogs.weibo.support.utils.TimeLineUtility;
 import org.zarroboogs.weibo.utils.Utility;
 import org.zarroboogs.weibo.utils.WeiBaNetUtils;
 
@@ -276,7 +277,7 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 					public void onClick(View v) {
 						// TODO Auto-generated method stub
 						String content = mEditText.getText().toString() + ((ImageView) v).getContentDescription();
-						mEditText.setText(content);
+						TimeLineUtility.addEmotions(mEditText, content);
 						mEditText.setSelection(content.length());
 					}
 				});
