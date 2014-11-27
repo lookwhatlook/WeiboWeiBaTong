@@ -143,7 +143,7 @@ public class SettingUtils {
 	}
 
 	public static boolean getEnableFetchMSG() {
-		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.ENABLE_FETCH_MSG, false);
+		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.ENABLE_FETCH_MSG, true);
 	}
 	
 	// water mark setting
