@@ -100,7 +100,8 @@ import android.widget.Toast;
 public class WeiboMainActivity extends SharedPreferenceActivity implements LoginCallBack, OnClickListener,
 		OnGlobalLayoutListener, OnItemClickListener, OnSharedPreferenceChangeListener {
 
-	String pidC = "";
+	public static final String LOGIN_TAG = "START_SEND_WEIBO ";
+	private String pidC = "";
 	RelativeLayout mEmotionRelativeLayout;
 	ExecuterManager manager = new ExecuterManager();
 	MyOnUploaded myOnUploaded = new MyOnUploaded();
@@ -120,10 +121,10 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 	AccountBean mAccountBean;
 	
-	JsEvaluator mJsEvaluator;
-	PreLoginResult mPreLonginBean;
-	HasloginBean mHasloginBean;
-	String rsaPwd = "";
+	private JsEvaluator mJsEvaluator;
+	private PreLoginResult mPreLonginBean;
+	private HasloginBean mHasloginBean;
+	private String rsaPwd = "";
 
 	private boolean isKeyBoardShowed = false;
 	private ScrollView mEditPicScrollView;
@@ -159,7 +160,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 	AppsrcDatabaseManager mDBmanager = null;// new
 											// AppsrcDatabaseManager(getApplicationContext());
-	String atContent = "";
+	private String atContent = "";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -264,7 +265,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 						}
 					});
 					Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
-					;
 				}
 
 			}
@@ -626,14 +626,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 			break;
 		}
 		case R.id.appSrcBtn: {
-			// if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
-			// Intent weibaIntent = new Intent(this, ChangeWeibaActivity.class);
-			// startActivityForResult(weibaIntent, ChangeWeibaActivity.REQUEST);
-			// }else {
-			// Toast.makeText(getApplicationContext(),
-			// R.string.net_not_avaliable,
-			// Toast.LENGTH_SHORT).show();;
-			// }
 			if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
 				if (isKeyBoardShowed) {
 					imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
@@ -656,19 +648,18 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 //					mAsyncTask.execute(getApplicationContext());
 					if (mHasloginBean != null && mHasloginBean.isResult()) {
 //						sendWeibo(mHasloginBean);
-						Log.d("SEND_SEND", "0000000000000000000");
 						onDoLogInFinish(true);
+						Log.d(LOGIN_TAG, "onDoLogInFinish");
 					}else if (!TextUtils.isEmpty(rsaPwd)) {
 						afterPreLogin(rsaPwd);
-						Log.d("SEND_SEND", "1111111111111111111111");
+						Log.d(LOGIN_TAG, "afterPreLogin");
 					} else {
 						preLogin();
-						Log.d("SEND_SEND", "2222222222222222222222222222");
+						Log.d(LOGIN_TAG, "preLogin");
 					}
 				}
 			} else {
 				Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
-				;
 			}
 
 			break;
@@ -703,25 +694,29 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 			
 			@Override
 			public void onDoLogInFinish(PreLoginResult preLonginBean) {
-				
+				Log.d(LOGIN_TAG, "preLogin - onDoLogInFinish");
 				mPreLonginBean = preLonginBean;
 				encodePassword(preLonginBean);
+				
 			}
 		});
-		Log.d("preLogin", "" + mAccountBean.getUname() +  "     " + mAccountBean.getPwd());
 		loginAsyncTask.execute(mAccountBean.getUname(),mAccountBean.getPwd());
 	}
 	private void afterPreLogin(String rasPassWord) {
+		Log.d(LOGIN_TAG, "afterPreLogin");
 		AfterPreLoginAsyncTask afterPreLoginAsyncTask = new AfterPreLoginAsyncTask(new OnAfterPreLongInListener() {
 			
 			@Override
 			public void onDoLogInFinish(LoginResultHelper preLonginBean) {
 				// TODO Auto-generated method stub
-				Log.d("onDoLogInFinish", "" + preLonginBean.isLogin() + "[" + preLonginBean.getErrorReason() + "]");
+				
+				
 				if (preLonginBean.isLogin()) {
 					login(preLonginBean);
+					Log.d(LOGIN_TAG, "afterPreLogin " + preLonginBean.isLogin());
+					
 				}else {
-					Log.d("LogIn_Failed", "[" + preLonginBean.getErrorReason() + "]");
+					Log.d(LOGIN_TAG, "afterPreLogin " + preLonginBean.isLogin() + "[" + preLonginBean.getErrorReason() + "]");
 					mHandler.sendEmptyMessage(1002);
 				}
 			}
@@ -777,6 +772,9 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 			
 			@Override
 			public void onLonIn(HasloginBean hb) {
+				
+				Log.d(LOGIN_TAG, "login  " +  hb.isResult());
+				
 				Message message = new Message();
 				message.obj = hb;
 				message.what =  1001;
@@ -890,7 +888,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 			}
 			if (msg.what == 1001) {
 				mHasloginBean = (HasloginBean) msg.obj;
-				sendWeibo(mHasloginBean);
+				onDoLogInFinish(true);
 			}
 			if (msg.what == 1002) {
 				DoorImageAsyncTask doorImageAsyncTask = new DoorImageAsyncTask();
