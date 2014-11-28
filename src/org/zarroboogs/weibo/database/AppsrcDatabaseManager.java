@@ -55,6 +55,7 @@ public class AppsrcDatabaseManager {
 			WeiboWeiba lession = new WeiboWeiba();
 			lession.setCode(cursor.getString(cursor.getColumnIndex(AppsrcDatabaseHelper.CODE)));
 			lession.setText(cursor.getString(cursor.getColumnIndex(AppsrcDatabaseHelper.TEXT)));
+			cursor.close();
 			return lession;
 		}
 		return null;
@@ -70,6 +71,7 @@ public class AppsrcDatabaseManager {
 
 			lessions.add(lession);
 		}
+		cursor.close();
 		return lessions;
 	}
 
