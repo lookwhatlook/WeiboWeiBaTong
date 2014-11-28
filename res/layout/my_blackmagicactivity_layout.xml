@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:ems="10"
-            android:hint="邮箱/帐号/手机号" />
+            android:hint="邮箱/手机号" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,6 +63,7 @@
             android:inputType="textPassword" />
 
         <ImageView
+            android:visibility="gone"
             android:id="@+id/imagedoor"
             android:layout_width="100px"
             android:layout_height="40px"
@@ -70,6 +71,7 @@
             android:src="@drawable/ab_bottom_solid_inverse_holo" />
 
         <EditText
+            android:visibility="gone"
             android:hint="请输入验证码"
             android:id="@+id/doorimg"
             android:layout_marginLeft="5dp"
