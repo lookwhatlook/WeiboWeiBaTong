@@ -12,6 +12,7 @@ import org.zarroboogs.weibo.setting.SettingUtils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -42,7 +43,9 @@ public class SendBitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
 			return null;
 		}
 		int uploadWidth = SettingUtils.isUploadBigPic() ? 2048 : 720;
-		return decodeSampledBitmapFromFile(mFileName, uploadWidth);
+		EditBitmapUtils editBitmapUtils = new EditBitmapUtils(mContext);
+		return editBitmapUtils.getBitmapByMaxWidth(Uri.fromFile(new File(mFileName)), uploadWidth);
+	//	return decodeSampledBitmapFromFile(mFileName, uploadWidth);
 	}
 
 	// Once complete, see if ImageView is still around and set bitmap.
