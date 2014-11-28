@@ -102,8 +102,6 @@ public class DownloadPicturesDBTask {
 
 		cursor.close();
 
-		AppLoggerUtils.v("weiciyuan picture cache size: " + total + "mb");
-
 		if (total < MAX_DISK_CACHE) {
 			return;
 		}
