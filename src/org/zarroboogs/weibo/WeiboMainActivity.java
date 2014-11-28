@@ -586,8 +586,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 				}
 			});
 			sendWeiboAsyncTask.execute(getWeiba().getCode(), text, pidC);
-		}else {
-			Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -746,7 +744,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
                 public void onResult(String value) {
                     // TODO Auto-generated method stub
                     Log.d("mJsEvaluator", "[" + value + "]");
-                    Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
                     Message msg = new Message();
                     rsaPwd = value.replace("\"", "");
                     msg.what = 1000;
@@ -759,7 +756,6 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	            @Override
 	            public void onResult(String value) {
 	                // TODO Auto-generated method stub
-	                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
 	                Message msg = new Message();
 	                rsaPwd = value;
 	                msg.what = 1000;

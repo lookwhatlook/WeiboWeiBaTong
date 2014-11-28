@@ -507,7 +507,6 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
                 public void onResult(String value) {
                     // TODO Auto-generated method stub
                     Log.d("mJsEvaluator", "[" + value + "]");
-                    Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
                     Message msg = new Message();
                     rsaPwd = value.replace("\"", "");
                     msg.what = 1000;
@@ -520,7 +519,6 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 	            @Override
 	            public void onResult(String value) {
 	                // TODO Auto-generated method stub
-	                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
 	                Message msg = new Message();
 	                rsaPwd = value;
 	                msg.what = 1000;
@@ -651,12 +649,7 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 			RepostWeiboAsyncTask mAsyncTask = new RepostWeiboAsyncTask(mAccountBean.getCookie(), getWeiba().getCode(), msg.getId(), text);
 			mAsyncTask.setRepostFinishedListener(this);
 			mAsyncTask.execute(getApplicationContext());
-			
-			
-			Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-			
 		}else {
-			Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
