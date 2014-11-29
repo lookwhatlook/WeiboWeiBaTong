@@ -305,7 +305,7 @@
     <color name="dark_gray">#1E2129</color>
     
     <color name="actionbar_red">#E01C1C</color>
-    <color name="actionbar_dark">#222222</color>
+    <color name="actionbar_dark">#01579b</color>
     
     <color name="light_orange">#FF7A0F</color>
     <color name="divide_line">#FFC5CCD1</color>
