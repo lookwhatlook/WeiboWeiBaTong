@@ -1,7 +1,11 @@
 package org.zarroboogs.weibo.ui.basefragment;
 
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -18,6 +22,8 @@ import org.zarroboogs.weibo.ui.actionmenu.StatusSingleChoiceModeListener;
 import org.zarroboogs.weibo.ui.adapter.StatusListAdapter;
 import org.zarroboogs.weibo.ui.interfaces.IRemoveItem;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
  * User: qii Date: 12-7-29
@@ -110,6 +116,24 @@ public abstract class AbstractMessageTimeLineFragment<T extends DataListItem<Mes
 		clearActionMode();
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setInsets(getActivity(), container);
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	public static void setInsets(Activity context, View view) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+			return;
+		SystemBarTintManager tintManager = new SystemBarTintManager(context);
+		SystemBarTintManager.SystemBarConfig config = tintManager
+				.getConfig();
+		view.setPadding(0, config.getPixelInsetTop(true),
+				config.getPixelInsetRight(), config.getPixelInsetBottom());
+	}
+	
 	class RemoveTask extends MyAsyncTask<Void, Void, Boolean> {
 
 		String token;

@@ -7,11 +7,18 @@ import org.zarroboogs.weibo.bean.UserListBean;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.utils.AppConfig;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AbsListView;
 
 import java.util.List;
@@ -25,6 +32,24 @@ public abstract class AbstractFriendsFanListFragment extends AbstractUserListFra
 
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setInsets(getActivity(), container);
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	public static void setInsets(Activity context, View view) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+			return;
+		SystemBarTintManager tintManager = new SystemBarTintManager(context);
+		SystemBarTintManager.SystemBarConfig config = tintManager
+				.getConfig();
+		view.setPadding(0, config.getPixelInsetTop(true),
+				config.getPixelInsetRight(), config.getPixelInsetBottom());
+	}
+	
 	// this api has bug, check cursor before add data
 	@Override
 	protected void oldUserLoaderSuccessCallback(UserListBean newValue) {
