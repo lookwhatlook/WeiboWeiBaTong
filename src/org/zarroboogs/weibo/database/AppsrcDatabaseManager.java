@@ -51,11 +51,15 @@ public class AppsrcDatabaseManager {
 	public WeiboWeiba searchAppsrcByCode(String code) {
 		Cursor cursor = mSqLiteDatabase.rawQuery("select * from " + AppsrcDatabaseHelper.TABLE_NAME_APPSRC + " where " + AppsrcDatabaseHelper.CODE + " = ?",
 				new String[] { code });
-		while (cursor.moveToNext()) {
+		
+		while (cursor != null && cursor.moveToNext()) {
 			WeiboWeiba lession = new WeiboWeiba();
 			lession.setCode(cursor.getString(cursor.getColumnIndex(AppsrcDatabaseHelper.CODE)));
 			lession.setText(cursor.getString(cursor.getColumnIndex(AppsrcDatabaseHelper.TEXT)));
-			cursor.close();
+			if (cursor != null) {
+				cursor.close();
+				cursor = null;
+			}
 			return lession;
 		}
 		return null;
@@ -64,14 +68,17 @@ public class AppsrcDatabaseManager {
 	public List<WeiboWeiba> fetchAllAppsrc() {
 		Cursor cursor = mSqLiteDatabase.rawQuery("select * from " + AppsrcDatabaseHelper.TABLE_NAME_APPSRC, null);
 		List<WeiboWeiba> lessions = new ArrayList<WeiboWeiba>();
-		while (cursor.moveToNext()) {
+		while (cursor != null && cursor.moveToNext()) {
 			WeiboWeiba lession = new WeiboWeiba();
 			lession.setCode(cursor.getString(cursor.getColumnIndex(AppsrcDatabaseHelper.CODE)));
 			lession.setText(cursor.getString(cursor.getColumnIndex(AppsrcDatabaseHelper.TEXT)));
 
 			lessions.add(lession);
 		}
-		cursor.close();
+		if (cursor != null) {
+			cursor.close();
+			cursor = null;
+		};
 		return lessions;
 	}
 
