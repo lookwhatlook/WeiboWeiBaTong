@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="root_screen"
+    android:fitsSystemWindows="true" >
 
     <PreferenceCategory android:title="@string/pref_normal_title" >
         <Preference

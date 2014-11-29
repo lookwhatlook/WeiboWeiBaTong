@@ -9,6 +9,9 @@ import org.zarroboogs.weibo.ui.send.WriteWeiboActivity;
 import org.zarroboogs.weibo.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.widget.ChangeLogDialog;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -20,6 +23,7 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Debug;
 import android.os.Environment;
@@ -29,6 +33,9 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceScreen;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -92,6 +99,23 @@ public class AboutFragment extends PreferenceFragment {
 		findPreference(SettingActivity.SAVED_PIC_PATH).setSummary(
 				Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
 
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setInsets(getActivity(), container);
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	public static void setInsets(Activity context, View view) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+			return;
+		SystemBarTintManager tintManager = new SystemBarTintManager(context);
+		SystemBarTintManager.SystemBarConfig config = tintManager
+				.getConfig();
+		view.setPadding(0, config.getPixelInsetTop(true),
+				config.getPixelInsetRight(), config.getPixelInsetBottom());
 	}
 
 	private void detectDebugPreference() {

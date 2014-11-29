@@ -4,12 +4,20 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.umeng.analytics.MobclickAgent;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceScreen;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ListView;
 
 /**
  * User: Jiang Qi Date: 12-8-6
@@ -132,7 +140,6 @@ public class SettingActivity extends AbstractAppActivity {
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
 		}
-
 	}
 	
 	@Override
@@ -170,6 +177,23 @@ public class SettingActivity extends AbstractAppActivity {
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			addPreferencesFromResource(R.xml.setting_activity_pref);
+		}
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			setInsets(getActivity(), container);
+			return super.onCreateView(inflater, container, savedInstanceState);
+		}
+
+		public static void setInsets(Activity context, View view) {
+			if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+				return;
+			SystemBarTintManager tintManager = new SystemBarTintManager(context);
+			SystemBarTintManager.SystemBarConfig config = tintManager
+					.getConfig();
+			view.setPadding(0, config.getPixelInsetTop(true),
+					config.getPixelInsetRight(), config.getPixelInsetBottom());
 		}
 	}
 

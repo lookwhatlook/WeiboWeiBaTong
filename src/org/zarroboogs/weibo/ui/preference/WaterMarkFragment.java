@@ -1,18 +1,24 @@
 package org.zarroboogs.weibo.ui.preference;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.setting.SettingUtils;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +75,24 @@ public class WaterMarkFragment extends PreferenceFragment implements SharedPrefe
 		buildSummary();
 	}
 
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		setInsets(getActivity(), container);
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	public static void setInsets(Activity context, View view) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+			return;
+		SystemBarTintManager tintManager = new SystemBarTintManager(context);
+		SystemBarTintManager.SystemBarConfig config = tintManager
+				.getConfig();
+		view.setPadding(0, config.getPixelInsetTop(true),
+				config.getPixelInsetRight(), config.getPixelInsetBottom());
+	}
+	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();

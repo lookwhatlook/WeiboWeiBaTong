@@ -34,12 +34,17 @@ import org.zarroboogs.weibo.widget.BlurImageView;
 import org.zarroboogs.weibo.widget.SwipeFrameLayout;
 import org.zarroboogs.weibo.widget.TimeLineAvatarImageView;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
+
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.support.v4.view.PagerAdapter;
@@ -60,6 +65,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -265,6 +271,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 			result = swipeFrameLayout;
 		}
 
+		setInsets(getActivity(), container);
 		return result;
 	}
 
@@ -1012,6 +1019,17 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 				loadNewMsg();
 			}
 		}
+	}
+
+
+	public static void setInsets(Activity context, View view) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+			return;
+		SystemBarTintManager tintManager = new SystemBarTintManager(context);
+		SystemBarTintManager.SystemBarConfig config = tintManager
+				.getConfig();
+		view.setPadding(0, config.getPixelInsetTop(true),
+				config.getPixelInsetRight(), config.getPixelInsetBottom());
 	}
 
 }
