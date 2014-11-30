@@ -1,7 +1,7 @@
 package org.zarroboogs.util.net;
 
-import org.zarroboogs.utils.net.BroserContent;
 
+import lib.org.zarroboogs.utils.net.BroserContent;
 import android.content.Context;
 import android.os.AsyncTask;
 

@@ -10,6 +10,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import lib.org.zarroboogs.utils.net.BroserContent;
+import lib.org.zarroboogs.utils.net.HttpFactory;
+import lib.org.zarroboogs.weibo.login.utils.Constaces;
+
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -26,10 +30,7 @@ import org.zarroboogs.utils.CookieUtils;
 import org.zarroboogs.utils.CourseHeader;
 import org.zarroboogs.utils.CourseUrls;
 import org.zarroboogs.utils.PatternUtils;
-import org.zarroboogs.utils.net.BroserContent;
-import org.zarroboogs.utils.net.HttpFactory;
 import org.zarroboogs.weibo.bean.UploadPicResult;
-import org.zarroboogs.weibo.login.utils.Constaces;
 
 import com.google.gson.Gson;
 

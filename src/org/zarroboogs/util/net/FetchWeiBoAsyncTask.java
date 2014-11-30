@@ -1,7 +1,6 @@
 package org.zarroboogs.util.net;
 
-import org.zarroboogs.utils.net.BroserContent;
-
+import lib.org.zarroboogs.utils.net.BroserContent;
 import android.os.AsyncTask;
 
 public class FetchWeiBoAsyncTask extends AsyncTask<Void, Integer, String> {
