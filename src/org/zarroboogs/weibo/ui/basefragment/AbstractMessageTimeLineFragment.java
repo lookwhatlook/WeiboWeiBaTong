@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.data.DataListItem;
@@ -21,7 +22,6 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.StatusSingleChoiceModeListener;
 import org.zarroboogs.weibo.ui.adapter.StatusListAdapter;
 import org.zarroboogs.weibo.ui.interfaces.IRemoveItem;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 

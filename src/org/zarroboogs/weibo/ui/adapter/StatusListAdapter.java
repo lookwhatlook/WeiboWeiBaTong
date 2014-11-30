@@ -8,6 +8,7 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.widget.AutoScrollListView;
 import org.zarroboogs.weibo.widget.TopTipsView;
 import org.zarroboogs.weibo.widget.VelocityListView;
+
 import android.annotation.TargetApi;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+
 import java.util.List;
 import java.util.WeakHashMap;
 

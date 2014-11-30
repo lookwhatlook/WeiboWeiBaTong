@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.othercomponent.unreadnotification;
 
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.bean.CommentListBean;
@@ -9,7 +10,6 @@ import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.db.task.NotificationDBTask;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

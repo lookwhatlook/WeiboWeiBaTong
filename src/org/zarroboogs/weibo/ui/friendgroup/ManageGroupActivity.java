@@ -11,10 +11,10 @@ import org.zarroboogs.weibo.dao.FriendGroupDao;
 import org.zarroboogs.weibo.dao.UpdateGroupNameDao;
 import org.zarroboogs.weibo.db.task.GroupDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
+import org.zarroboogs.weibo.setting.activity.SettingActivity;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
-import org.zarroboogs.weibo.ui.preference.SettingActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 
+import org.zarroboogs.weibo.fragment.CommentsTimeLineFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 import org.zarroboogs.weibo.ui.maintimeline.CommentsByMeTimeLineFragment;
 import org.zarroboogs.weibo.ui.maintimeline.CommentsToMeTimeLineFragment;
@@ -17,16 +18,16 @@ public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
 	private SparseArray<Fragment> fragmentList;
 
-	public CommentsTimeLinePagerAdapter(CommentsTimeLine fragment, ViewPager viewPager, FragmentManager fm, SparseArray<Fragment> fragmentList) {
+	public CommentsTimeLinePagerAdapter(CommentsTimeLineFragment fragment, ViewPager viewPager, FragmentManager fm, SparseArray<Fragment> fragmentList) {
 		super(fm);
 		this.fragmentList = fragmentList;
-		fragmentList.append(CommentsTimeLine.COMMENTS_TO_ME_CHILD_POSITION, fragment.getCommentsToMeTimeLineFragment());
-		fragmentList.append(CommentsTimeLine.COMMENTS_BY_ME_CHILD_POSITION, fragment.getCommentsByMeTimeLineFragment());
+		fragmentList.append(CommentsTimeLineFragment.COMMENTS_TO_ME_CHILD_POSITION, fragment.getCommentsToMeTimeLineFragment());
+		fragmentList.append(CommentsTimeLineFragment.COMMENTS_BY_ME_CHILD_POSITION, fragment.getCommentsByMeTimeLineFragment());
 		FragmentTransaction transaction = fragment.getChildFragmentManager().beginTransaction();
-		if (!fragmentList.get(CommentsTimeLine.COMMENTS_TO_ME_CHILD_POSITION).isAdded())
-			transaction.add(viewPager.getId(), fragmentList.get(CommentsTimeLine.COMMENTS_TO_ME_CHILD_POSITION), CommentsToMeTimeLineFragment.class.getName());
-		if (!fragmentList.get(CommentsTimeLine.COMMENTS_BY_ME_CHILD_POSITION).isAdded())
-			transaction.add(viewPager.getId(), fragmentList.get(CommentsTimeLine.COMMENTS_BY_ME_CHILD_POSITION), CommentsByMeTimeLineFragment.class.getName());
+		if (!fragmentList.get(CommentsTimeLineFragment.COMMENTS_TO_ME_CHILD_POSITION).isAdded())
+			transaction.add(viewPager.getId(), fragmentList.get(CommentsTimeLineFragment.COMMENTS_TO_ME_CHILD_POSITION), CommentsToMeTimeLineFragment.class.getName());
+		if (!fragmentList.get(CommentsTimeLineFragment.COMMENTS_BY_ME_CHILD_POSITION).isAdded())
+			transaction.add(viewPager.getId(), fragmentList.get(CommentsTimeLineFragment.COMMENTS_BY_ME_CHILD_POSITION), CommentsByMeTimeLineFragment.class.getName());
 		if (!transaction.isEmpty()) {
 			transaction.commit();
 			fragment.getChildFragmentManager().executePendingTransactions();
@@ -40,8 +41,8 @@ public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 	@Override
 	protected String getTag(int position) {
 		SparseArray<String> tagList = new SparseArray<String>();
-		tagList.append(CommentsTimeLine.COMMENTS_TO_ME_CHILD_POSITION, CommentsToMeTimeLineFragment.class.getName());
-		tagList.append(CommentsTimeLine.COMMENTS_BY_ME_CHILD_POSITION, CommentsByMeTimeLineFragment.class.getName());
+		tagList.append(CommentsTimeLineFragment.COMMENTS_TO_ME_CHILD_POSITION, CommentsToMeTimeLineFragment.class.getName());
+		tagList.append(CommentsTimeLineFragment.COMMENTS_BY_ME_CHILD_POSITION, CommentsByMeTimeLineFragment.class.getName());
 
 		return tagList.get(position);
 	}

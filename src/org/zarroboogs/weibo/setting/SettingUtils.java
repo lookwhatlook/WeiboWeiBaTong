@@ -2,9 +2,9 @@ package org.zarroboogs.weibo.setting;
 
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.setting.activity.SettingActivity;
 import org.zarroboogs.weibo.support.utils.AppConfig;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.preference.SettingActivity;
 
 import android.content.Context;
 

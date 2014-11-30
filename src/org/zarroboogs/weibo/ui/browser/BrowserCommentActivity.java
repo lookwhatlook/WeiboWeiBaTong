@@ -1,9 +1,9 @@
 package org.zarroboogs.weibo.ui.browser;
 
 import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

@@ -3,9 +3,9 @@ package org.zarroboogs.weibo.ui.topic;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

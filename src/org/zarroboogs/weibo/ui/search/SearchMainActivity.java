@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.ui.search;
 
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 import org.zarroboogs.weibo.ui.basefragment.AbstractMessageTimeLineFragment;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

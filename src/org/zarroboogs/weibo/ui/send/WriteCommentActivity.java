@@ -9,8 +9,8 @@ import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.data.DataItem;
 import org.zarroboogs.weibo.dao.RepostNewMsgDao;
 import org.zarroboogs.weibo.db.DraftDBManager;
-import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendCommentService;
-import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService;
+import org.zarroboogs.weibo.service.SendCommentService;
+import org.zarroboogs.weibo.service.SendRepostService;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.search.AtUserActivity;
 

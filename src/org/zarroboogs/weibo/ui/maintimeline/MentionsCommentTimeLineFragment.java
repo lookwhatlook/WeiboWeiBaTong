@@ -3,6 +3,7 @@ package org.zarroboogs.weibo.ui.maintimeline;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -15,6 +16,7 @@ import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
 import org.zarroboogs.weibo.db.task.MentionCommentsTimeLineDBTask;
+import org.zarroboogs.weibo.fragment.MentionsTimeLineFragment;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.othercomponent.unreadnotification.NotificationServiceHelper;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
@@ -27,8 +29,6 @@ import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.ui.interfaces.IRemoveItem;
 import org.zarroboogs.weibo.ui.loader.MentionsCommentDBLoader;
 import org.zarroboogs.weibo.ui.loader.MentionsCommentMsgLoader;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
-import org.zarroboogs.weibo.ui.main.MentionsTimeLine;
 import org.zarroboogs.weibo.widget.TopTipsView;
 
 import android.annotation.SuppressLint;
@@ -162,7 +162,7 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
 	}
 
 	private void setActionBarTabCount(int count) {
-		MentionsTimeLine parent = (MentionsTimeLine) getParentFragment();
+		MentionsTimeLineFragment parent = (MentionsTimeLineFragment) getParentFragment();
 		ActionBar.Tab tab = parent.getCommentTab();
 		if (tab == null) {
 			return;

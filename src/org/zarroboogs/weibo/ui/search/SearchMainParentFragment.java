@@ -1,6 +1,8 @@
 package org.zarroboogs.weibo.ui.search;
 
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
+import org.zarroboogs.weibo.fragment.LeftMenuFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
@@ -8,8 +10,6 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.ui.basefragment.AbstractUserListFragment;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppFragment;
-import org.zarroboogs.weibo.ui.main.LeftMenuFragment;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 import org.zarroboogs.weibo.ui.main.SimpleTwoTabsListener;
 
 import android.app.ActionBar;

@@ -2,12 +2,12 @@ package org.zarroboogs.weibo.ui.browser;
 
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.dao.ShareShortUrlCountDao;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.lib.CheatSheet;
 import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

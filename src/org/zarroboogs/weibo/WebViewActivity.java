@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo;
 
+import org.zarroboogs.weibo.activity.SharedPreferenceActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.db.AccountDatabaseManager;
 import org.zarroboogs.weibo.db.table.AccountTable;

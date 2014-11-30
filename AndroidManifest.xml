@@ -78,7 +78,7 @@
 
         <!-- main activity -->
         <activity
-            android:name="org.zarroboogs.weibo.ui.main.MainTimeLineActivity"
+            android:name="org.zarroboogs.weibo.activity.MainTimeLineActivity"
             android:launchMode="singleTask" />
 
         <!-- send activity -->
@@ -241,39 +241,39 @@
         <activity android:name="org.zarroboogs.weibo.ui.nearby.NearbyTimeLineActivity" />
 
         <!-- preference activity -->
-        <activity android:name="org.zarroboogs.weibo.ui.preference.SettingActivity" />
+        <activity android:name="org.zarroboogs.weibo.setting.activity.SettingActivity" />
         <!-- intent-filter is used for Android-Setting-Data usage- click this app- View app Settings -->
-        <activity android:name="org.zarroboogs.weibo.ui.preference.ControlActivity" >
+        <activity android:name="org.zarroboogs.weibo.setting.activity.ControlActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MANAGE_NETWORK_USAGE" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.preference.NotificationActivity" />
-        <activity android:name="org.zarroboogs.weibo.ui.preference.WaterMarkPrefActivity" />
+        <activity android:name="org.zarroboogs.weibo.setting.activity.NotificationActivity" />
+        <activity android:name="org.zarroboogs.weibo.setting.activity.WaterMarkPrefActivity" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.preference.DraftActivity"
+            android:name="org.zarroboogs.weibo.setting.activity.DraftActivity"
             android:uiOptions="splitActionBarWhenNarrow" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.preference.FilterActivity"
+            android:name="org.zarroboogs.weibo.setting.activity.FilterActivity"
             android:uiOptions="splitActionBarWhenNarrow" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.preference.AppearanceActivity"
+            android:name="org.zarroboogs.weibo.setting.activity.AppearanceActivity"
             android:uiOptions="splitActionBarWhenNarrow" />
-        <activity android:name="org.zarroboogs.weibo.ui.preference.PerformanceActivity" />
-        <activity android:name="org.zarroboogs.weibo.ui.preference.OtherActivity" />
-        <activity android:name="org.zarroboogs.weibo.ui.preference.AboutActivity" />
+        <activity android:name="org.zarroboogs.weibo.setting.activity.PerformanceActivity" />
+        <activity android:name="org.zarroboogs.weibo.setting.activity.OtherActivity" />
+        <activity android:name="org.zarroboogs.weibo.setting.activity.AboutActivity" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.preference.LicenseActivity"
+            android:name="org.zarroboogs.weibo.setting.activity.LicenseActivity"
             android:theme="@android:style/Theme.Holo.DialogWhenLarge" />
 
         <!-- service -->
         <service android:name="org.zarroboogs.weibo.othercomponent.FetchNewMsgService" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendWeiboService" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendCommentService" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.sendweiboservice.SendReplyToCommentService" />
+        <service android:name="org.zarroboogs.weibo.service.SendWeiboService" />
+        <service android:name="org.zarroboogs.weibo.service.SendRepostService" />
+        <service android:name="org.zarroboogs.weibo.service.SendCommentService" />
+        <service android:name="org.zarroboogs.weibo.service.SendReplyToCommentService" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsWeiboNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsCommentNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBCommentsToMeNotificationServiceHelper" />
@@ -310,12 +310,12 @@
         <activity android:name="org.zarroboogs.weibo.ui.dm.DMUserListActivity" />
         <activity android:name="org.zarroboogs.weibo.ui.dm.DMSelectUserActivity" />
         <activity
-            android:name="org.zarroboogs.weibo.WeiboMainActivity"
+            android:name="org.zarroboogs.weibo.activity.WeiboMainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
         </activity>
         <activity
-            android:name="org.zarroboogs.weibo.RepostWeiboMainActivity"
+            android:name="org.zarroboogs.weibo.activity.RepostWeiboMainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="adjustResize" >
         </activity>
@@ -330,7 +330,7 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:name="org.zarroboogs.weibo.ChangeWeibaActivity"
+            android:name="org.zarroboogs.weibo.activity.ChangeWeibaActivity"
             android:label="@string/app_name" >
         </activity>
 

@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 import org.zarroboogs.weibo.ui.maintimeline.MentionsCommentTimeLineFragment;
 import org.zarroboogs.weibo.ui.maintimeline.MentionsWeiboTimeLineFragment;
 

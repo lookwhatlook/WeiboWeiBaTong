@@ -3,16 +3,16 @@ package org.zarroboogs.weibo.ui.dm;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.DMUserListBean;
 import org.zarroboogs.weibo.db.task.DMDBTask;
+import org.zarroboogs.weibo.fragment.LeftMenuFragment;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.adapter.DMUserListAdapter;
 import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.ui.loader.DMUserLoader;
-import org.zarroboogs.weibo.ui.main.LeftMenuFragment;
-import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 
 import android.app.ActionBar;
 import android.content.Intent;
