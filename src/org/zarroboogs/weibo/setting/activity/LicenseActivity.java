@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.setting.activity;
 
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.AbstractAppActivity;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

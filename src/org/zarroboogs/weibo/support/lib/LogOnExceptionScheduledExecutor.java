@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.support.lib;
 
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
+import org.zarroboogs.utils.AppLoggerUtils;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;

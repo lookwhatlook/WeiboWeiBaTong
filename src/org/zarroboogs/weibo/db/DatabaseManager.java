@@ -8,10 +8,10 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.weibo.activity.OAuthActivity;
 import org.zarroboogs.weibo.bean.EmotionBean;
 import org.zarroboogs.weibo.db.table.EmotionsTable;
-import org.zarroboogs.weibo.ui.login.OAuthActivity;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;

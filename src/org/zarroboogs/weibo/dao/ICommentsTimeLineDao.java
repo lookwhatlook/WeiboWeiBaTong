@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.dao;
 
+import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.bean.CommentListBean;
-import org.zarroboogs.weibo.net.WeiboException;
 
 /**
  * User: qii Date: 12-12-16

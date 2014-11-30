@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.setting.fragment;
 
+import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.WriteWeiboActivity;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.setting.activity.SettingActivity;
 import org.zarroboogs.weibo.support.file.FileManager;
-import org.zarroboogs.weibo.ui.send.WriteWeiboActivity;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.widget.ChangeLogDialog;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;

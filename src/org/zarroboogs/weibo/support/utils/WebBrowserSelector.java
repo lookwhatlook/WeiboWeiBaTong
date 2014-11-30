@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.provider.Browser;
 
+import org.zarroboogs.weibo.activity.BrowserWebActivity;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.ui.browser.BrowserWebActivity;
 
 /**
  * User: qii Date: 13-9-17

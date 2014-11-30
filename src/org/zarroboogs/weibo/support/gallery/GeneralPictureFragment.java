@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.support.gallery;
 
+import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.weibo.MyAnimationListener;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.lib.AnimationRect;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.basefragment.MyAnimationListener;
-import org.zarroboogs.weibo.utils.ImageUtility;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;

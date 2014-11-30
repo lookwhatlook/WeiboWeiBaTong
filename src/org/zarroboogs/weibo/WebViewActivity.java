@@ -1,11 +1,11 @@
 package org.zarroboogs.weibo;
 
+import org.zarroboogs.utils.PatternUtils;
 import org.zarroboogs.weibo.activity.SharedPreferenceActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.db.AccountDatabaseManager;
 import org.zarroboogs.weibo.db.table.AccountTable;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.utils.PatternUtils;
 
 import com.crashlytics.android.internal.m;
 import com.umeng.analytics.MobclickAgent;

@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.dao;
 
-import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.utils.WeiBoURLs;
+import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.WeiBoURLs;
 
 /**
  * User: qii Date: 12-10-21

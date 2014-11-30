@@ -1,17 +1,17 @@
 package org.zarroboogs.weibo.support.asyncdrawable;
 
+import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.UserBean;
+import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
-import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
-import org.zarroboogs.weibo.utils.ImageUtility;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

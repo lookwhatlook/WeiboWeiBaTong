@@ -10,9 +10,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 /**
  * User: qii Date: 13-2-26

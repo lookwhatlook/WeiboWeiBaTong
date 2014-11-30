@@ -5,12 +5,12 @@ import com.google.gson.JsonSyntaxException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.zarroboogs.util.net.HttpUtility;
+import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.util.net.HttpUtility.HttpMethod;
+import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.WeiBoURLs;
 import org.zarroboogs.weibo.bean.UserBean;
-import org.zarroboogs.weibo.net.HttpUtility;
-import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.net.HttpUtility.HttpMethod;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
-import org.zarroboogs.weibo.utils.WeiBoURLs;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -22,7 +22,6 @@ import org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;

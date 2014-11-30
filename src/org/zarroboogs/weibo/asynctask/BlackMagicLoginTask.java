@@ -2,16 +2,16 @@ package org.zarroboogs.weibo.asynctask;
 
 import java.lang.ref.WeakReference;
 
+import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.weibo.activity.BlackMagicActivity;
+import org.zarroboogs.weibo.activity.BlackMagicActivity.ProgressFragment;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.BMOAuthDao;
 import org.zarroboogs.weibo.dao.OAuthDao;
 import org.zarroboogs.weibo.db.task.AccountDBTask;
-import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity;
-import org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity.ProgressFragment;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import android.app.Activity;
 import android.content.Intent;

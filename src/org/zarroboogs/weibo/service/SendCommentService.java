@@ -1,8 +1,10 @@
 package org.zarroboogs.weibo.service;
 
+import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.WriteCommentActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentBean;
@@ -10,11 +12,9 @@ import org.zarroboogs.weibo.bean.CommentDraftBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.dao.CommentNewMsgDao;
 import org.zarroboogs.weibo.db.DraftDBManager;
-import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.send.WriteCommentActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;

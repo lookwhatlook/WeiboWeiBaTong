@@ -4,7 +4,9 @@ import com.slidingmenu.lib.SlidingMenu;
 
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.AccountActivity;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
+import org.zarroboogs.weibo.activity.NearbyTimeLineActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.db.task.AccountDBTask;
@@ -17,14 +19,6 @@ import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.dm.DMUserListFragment;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppFragment;
-import org.zarroboogs.weibo.ui.login.AccountActivity;
-import org.zarroboogs.weibo.ui.maintimeline.FriendsTimeLineFragment;
-import org.zarroboogs.weibo.ui.nearby.NearbyTimeLineActivity;
-import org.zarroboogs.weibo.ui.search.SearchMainParentFragment;
-import org.zarroboogs.weibo.ui.userinfo.MyFavListFragment;
-import org.zarroboogs.weibo.ui.userinfo.UserInfoFragment;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

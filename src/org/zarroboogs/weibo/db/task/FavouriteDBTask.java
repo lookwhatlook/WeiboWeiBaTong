@@ -3,13 +3,13 @@ package org.zarroboogs.weibo.db.task;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.bean.FavBean;
 import org.zarroboogs.weibo.bean.FavListBean;
 import org.zarroboogs.weibo.bean.FavouriteTimeLineData;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.db.DatabaseHelper;
 import org.zarroboogs.weibo.db.table.FavouriteTable;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import android.content.ContentValues;
 import android.database.Cursor;

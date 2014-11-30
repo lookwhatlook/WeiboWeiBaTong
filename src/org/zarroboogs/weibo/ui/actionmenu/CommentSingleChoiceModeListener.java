@@ -3,11 +3,12 @@ package org.zarroboogs.weibo.ui.actionmenu;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.BrowserCommentActivity;
+import org.zarroboogs.weibo.activity.WriteReplyToCommentActivity;
 import org.zarroboogs.weibo.bean.CommentBean;
-import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
-import org.zarroboogs.weibo.ui.browser.BrowserCommentActivity;
-import org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgFragment;
-import org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity;
+import org.zarroboogs.weibo.dialogfragment.RemoveDialog;
+import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
+import org.zarroboogs.weibo.fragment.BrowserWeiboMsgFragment;
 
 import android.app.Activity;
 import android.content.ClipData;

@@ -19,13 +19,13 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.AbstractAppActivity;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.setting.fragment.FilterKeywordFragment;
 import org.zarroboogs.weibo.setting.fragment.FilterSourceFragment;
 import org.zarroboogs.weibo.setting.fragment.FilterTopicFragment;
 import org.zarroboogs.weibo.setting.fragment.FilterUserFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

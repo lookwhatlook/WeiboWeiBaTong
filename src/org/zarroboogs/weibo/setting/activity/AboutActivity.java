@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.AbstractAppActivity;
 import org.zarroboogs.weibo.setting.fragment.AboutFragment;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

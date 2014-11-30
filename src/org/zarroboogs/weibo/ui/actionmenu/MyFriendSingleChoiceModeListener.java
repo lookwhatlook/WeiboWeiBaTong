@@ -11,17 +11,17 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.WriteWeiboActivity;
+import org.zarroboogs.weibo.adapter.UserListAdapter;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.FriendshipsDao;
-import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.ui.adapter.UserListAdapter;
-import org.zarroboogs.weibo.ui.basefragment.AbstractUserListFragment;
-import org.zarroboogs.weibo.ui.send.WriteWeiboActivity;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
+import org.zarroboogs.weibo.fragment.AbstractUserListFragment;
 
 /**
  * User: qii Date: 12-10-11

@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.support.utils;
 
+import org.zarroboogs.weibo.fragment.UserInfoFragment;
 import org.zarroboogs.weibo.support.lib.LayerEnablingAnimatorListener;
-import org.zarroboogs.weibo.ui.userinfo.UserInfoFragment;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;

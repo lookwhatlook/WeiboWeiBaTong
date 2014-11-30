@@ -3,6 +3,8 @@ package org.zarroboogs.weibo.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.zarroboogs.util.net.FetchWeiBoAsyncTask;
+import org.zarroboogs.util.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 import org.zarroboogs.weibo.ChangeWeibaAdapter;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.R.id;
@@ -11,8 +13,6 @@ import org.zarroboogs.weibo.R.string;
 import org.zarroboogs.weibo.bean.WeibaGson;
 import org.zarroboogs.weibo.bean.WeibaTree;
 import org.zarroboogs.weibo.bean.WeiboWeiba;
-import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask;
-import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;

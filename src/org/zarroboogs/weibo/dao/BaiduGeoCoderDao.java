@@ -2,10 +2,10 @@ package org.zarroboogs.weibo.dao;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.zarroboogs.weibo.net.HttpUtility;
-import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.net.HttpUtility.HttpMethod;
-import org.zarroboogs.weibo.utils.WeiBoURLs;
+import org.zarroboogs.util.net.HttpUtility;
+import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.util.net.HttpUtility.HttpMethod;
+import org.zarroboogs.utils.WeiBoURLs;
 
 /**
  * doc: http://developer.baidu.com/map/webservice-geocoding.htm

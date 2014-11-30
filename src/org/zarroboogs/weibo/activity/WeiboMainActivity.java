@@ -10,6 +10,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
+import org.zarroboogs.util.net.ExecuterManager;
+import org.zarroboogs.util.net.FetchWeiBoAsyncTask;
+import org.zarroboogs.util.net.LoginWeiboAsyncTask;
+import org.zarroboogs.util.net.UploadThread;
+import org.zarroboogs.util.net.WeiboAsyncTask;
+import org.zarroboogs.util.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
+import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
+import org.zarroboogs.util.net.UploadThread.WaterMark;
+import org.zarroboogs.util.net.UploadThread.WaterMark.POS;
+import org.zarroboogs.util.net.WeiboAsyncTask.OnSendFinished;
+import org.zarroboogs.utils.SendBitmapWorkerTask;
+import org.zarroboogs.utils.Utility;
+import org.zarroboogs.utils.WeiBaNetUtils;
+import org.zarroboogs.utils.SendBitmapWorkerTask.OnCacheDoneListener;
 import org.zarroboogs.weibo.ChangeWeibaAdapter;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
@@ -39,24 +53,10 @@ import org.zarroboogs.weibo.login.javabean.HasloginBean;
 import org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
-import org.zarroboogs.weibo.net.ExecuterManager;
-import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask;
-import org.zarroboogs.weibo.net.LoginWeiboAsyncTask;
-import org.zarroboogs.weibo.net.UploadThread;
-import org.zarroboogs.weibo.net.UploadThread.WaterMark.POS;
-import org.zarroboogs.weibo.net.WeiboAsyncTask;
-import org.zarroboogs.weibo.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
-import org.zarroboogs.weibo.net.LoginWeiboAsyncTask.LoginCallBack;
-import org.zarroboogs.weibo.net.UploadThread.WaterMark;
-import org.zarroboogs.weibo.net.WeiboAsyncTask.OnSendFinished;
 import org.zarroboogs.weibo.selectphoto.ImgFileListActivity;
 import org.zarroboogs.weibo.selectphoto.SendImgData;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;
-import org.zarroboogs.weibo.utils.SendBitmapWorkerTask;
-import org.zarroboogs.weibo.utils.SendBitmapWorkerTask.OnCacheDoneListener;
-import org.zarroboogs.weibo.utils.Utility;
-import org.zarroboogs.weibo.utils.WeiBaNetUtils;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
@@ -430,7 +430,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		}
 	}
 
-	class MyOnUploaded implements org.zarroboogs.weibo.net.UploadThread.OnUploaded {
+	class MyOnUploaded implements org.zarroboogs.util.net.UploadThread.OnUploaded {
 
 		@Override
 		public void onUploaded(UploadThread r, String pid) {

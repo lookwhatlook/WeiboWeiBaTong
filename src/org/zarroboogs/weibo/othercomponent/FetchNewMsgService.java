@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.othercomponent;
 
+import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentListBean;
 import org.zarroboogs.weibo.bean.CommentTimeLineData;
@@ -15,8 +16,6 @@ import org.zarroboogs.weibo.db.task.CommentToMeTimeLineDBTask;
 import org.zarroboogs.weibo.db.task.MentionCommentsTimeLineDBTask;
 import org.zarroboogs.weibo.db.task.MentionWeiboTimeLineDBTask;
 import org.zarroboogs.weibo.db.task.NotificationDBTask;
-import org.zarroboogs.weibo.net.WeiboException;
-import org.zarroboogs.weibo.othercomponent.unreadnotification.NotificationServiceHelper;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;

@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.widget;
 
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
+import org.zarroboogs.utils.AppLoggerUtils;
 
 import android.content.Context;
 import android.util.AttributeSet;

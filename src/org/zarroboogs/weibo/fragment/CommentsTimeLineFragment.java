@@ -3,16 +3,12 @@ package org.zarroboogs.weibo.fragment;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
+import org.zarroboogs.weibo.adapter.CommentsTimeLinePagerAdapter;
+import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
 import org.zarroboogs.weibo.bean.UnreadTabIndex;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
-import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppFragment;
-import org.zarroboogs.weibo.ui.main.CommentsTimeLinePagerAdapter;
-import org.zarroboogs.weibo.ui.main.SimpleTwoTabsListener;
-import org.zarroboogs.weibo.ui.maintimeline.CommentsByMeTimeLineFragment;
-import org.zarroboogs.weibo.ui.maintimeline.CommentsToMeTimeLineFragment;
 
 import android.app.ActionBar;
 import android.content.Intent;

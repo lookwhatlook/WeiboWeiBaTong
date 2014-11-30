@@ -8,12 +8,12 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.weibo.activity.OAuthActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.db.DatabaseHelper;
 import org.zarroboogs.weibo.db.table.AccountTable;
-import org.zarroboogs.weibo.ui.login.OAuthActivity;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

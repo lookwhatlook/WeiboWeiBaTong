@@ -62,7 +62,7 @@
             android:value="AIzaSyA_Ozn9WNG58ImFlmOFOItHvn1JShWvIpE" />
 
         <activity
-            android:name="org.zarroboogs.weibo.ui.login.AccountActivity"
+            android:name="org.zarroboogs.weibo.activity.AccountActivity"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -73,8 +73,8 @@
 
         <!-- login activity -->
 
-        <activity android:name="org.zarroboogs.weibo.ui.login.OAuthActivity" />
-        <activity android:name="org.zarroboogs.weibo.ui.login.SSOActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.OAuthActivity" />
+        <activity android:name="org.zarroboogs.weibo.dialogfragment.SSOActivity" />
 
         <!-- main activity -->
         <activity
@@ -83,7 +83,7 @@
 
         <!-- send activity -->
         <activity
-            android:name="org.zarroboogs.weibo.ui.send.WriteWeiboActivity"
+            android:name="org.zarroboogs.weibo.activity.WriteWeiboActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateVisible|adjustResize" >
             <intent-filter>
@@ -102,24 +102,24 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.zarroboogs.weibo.ui.send.WriteRepostActivity"
+            android:name="org.zarroboogs.weibo.activity.WriteRepostActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.send.WriteCommentActivity"
+            android:name="org.zarroboogs.weibo.activity.WriteCommentActivityty"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.send.WriteReplyToCommentActivity"
+            android:name="org.zarroboogs.weibo.activity.WriteReplyToCommentActivityity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <!-- browser activity -->
         <activity
-            android:name="org.zarroboogs.weibo.ui.browser.BrowserWeiboMsgActivity"
+            android:name="org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity"
             android:exported="false"
             android:label="@string/detail"
             android:theme="@style/AppTheme_Dummy"
             android:uiOptions="splitActionBarWhenNarrow" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.browser.BrowserCommentActivity"
+            android:name="org.zarroboogs.weibo.activity.BrowserCommentActivity"
             android:label="@string/comment_detail" />
         <activity
             android:name="org.zarroboogs.weibo.support.gallery.GalleryActivity"
@@ -135,7 +135,7 @@
             android:launchMode="singleTop"
             android:uiOptions="splitActionBarWhenNarrow" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.browser.BrowserWebActivity"
+            android:name="org.zarroboogs.weibo.activity.BrowserWebActivity"
             android:launchMode="singleTask"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
@@ -163,14 +163,14 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.browser.BrowserShareTimeLineActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.BrowserShareTimeLineActivity" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.browser.AppMapActivity"
+            android:name="org.zarroboogs.weibo.activity.AppMapActivity"
             android:launchMode="singleTop" />
 
         <!-- topic activity -->
         <activity
-            android:name="org.zarroboogs.weibo.ui.topic.SearchTopicByNameActivity"
+            android:name="org.zarroboogs.weibo.activity.SearchTopicByNameActivity"
             android:label="@string/search_topic"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
@@ -181,11 +181,11 @@
                 <data android:scheme="org.zarroboogs.weibo.topic" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.topic.UserTopicListActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.UserTopicListActivity" />
 
         <!-- user activity -->
         <activity
-            android:name="org.zarroboogs.weibo.ui.userinfo.UserInfoActivity"
+            android:name="org.zarroboogs.weibo.activity.UserInfoActivity"
             android:theme="@style/AppTheme_Dummy" >
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
@@ -202,27 +202,27 @@
                 <data android:mimeType="application/org.zarroboogs.weibo.beam" />
             </intent-filter>
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.userinfo.UserTimeLineActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.UserTimeLineActivity" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.userinfo.MyInfoActivity"
+            android:name="org.zarroboogs.weibo.activity.MyInfoActivity"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme_Dummy" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.userinfo.EditMyProfileActivity"
+            android:name="org.zarroboogs.weibo.activity.EditMyProfileActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.userinfo.FriendListActivity"
+            android:name="org.zarroboogs.weibo.activity.FriendListActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.userinfo.FanListActivity"
+            android:name="org.zarroboogs.weibo.activity.FanListActivity"
             android:launchMode="singleTop" />
         <activity
-            android:name="org.zarroboogs.weibo.ui.userinfo.MyFavActivity"
+            android:name="org.zarroboogs.weibo.activity.MyFavActivity"
             android:launchMode="singleTop" />
 
         <!-- search activity -->
         <activity
-            android:name="org.zarroboogs.weibo.ui.search.SearchMainActivity"
+            android:name="org.zarroboogs.weibo.activity.SearchMainActivity"
             android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -232,13 +232,13 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name="org.zarroboogs.weibo.ui.search.AtUserActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.AtUserActivity" />
 
         <!-- friend group -->
-        <activity android:name="org.zarroboogs.weibo.ui.friendgroup.ManageGroupActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.ManageGroupActivity" />
 
         <!-- nearby -->
-        <activity android:name="org.zarroboogs.weibo.ui.nearby.NearbyTimeLineActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.NearbyTimeLineActivity" />
 
         <!-- preference activity -->
         <activity android:name="org.zarroboogs.weibo.setting.activity.SettingActivity" />
@@ -277,12 +277,10 @@
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsWeiboNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsCommentNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBCommentsToMeNotificationServiceHelper" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.BigTextNotificationService" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.SimpleTextNotificationService" />
-
-        <!-- -broadcast receiver -->
+        <service android:name="org.zarroboogs.weibo.othercomponent.BigTextNotificationService" />
+        <service android:name="org.zarroboogs.weiborg.zarroboogs.weibo.othercomponent.SimpleTextNotificationService" />
         <receiver
-            android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.UnreadMsgReceiver"
+            android:name="org.zarroboogs.weiborg.zarroboogs.weibo.othercomponent.UnreadMsgReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="org.zarroboogs.weibo.newmsg.priority" />
@@ -298,17 +296,17 @@
 
         <!-- provider -->
         <provider
-            android:name="org.zarroboogs.weibo.ui.search.SearchSuggestionProvider"
+            android:name="org.zarroboogs.weibo.adapter.SearchSuggestionProvider"
             android:authorities="org.zarroboogs.weibo.ui.search.SearchSuggestionProvider"
             android:exported="false" />
 
         <!-- black magic -->
-        <activity android:name="org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.BlackMagicActivity" />
 
         <!-- dm -->
-        <activity android:name="org.zarroboogs.weibo.ui.dm.DMActivity" />
-        <activity android:name="org.zarroboogs.weibo.ui.dm.DMUserListActivity" />
-        <activity android:name="org.zarroboogs.weibo.ui.dm.DMSelectUserActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.DMActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.DMUserListActivity" />
+        <activity android:name="org.zarroboogs.weibo.activity.DMSelectUserActivityity" />
         <activity
             android:name="org.zarroboogs.weibo.activity.WeiboMainActivity"
             android:label="@string/app_name"

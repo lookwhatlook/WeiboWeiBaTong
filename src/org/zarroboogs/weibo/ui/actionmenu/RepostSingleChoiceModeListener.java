@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import org.zarroboogs.weibo.adapter.StatusListAdapter;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
-import org.zarroboogs.weibo.ui.adapter.StatusListAdapter;
 
 /**
  * User: qii Date: 12-9-9

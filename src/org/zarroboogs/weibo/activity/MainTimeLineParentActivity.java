@@ -14,8 +14,8 @@ import android.widget.Toast;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
+import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.GlobalContext;
-import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 

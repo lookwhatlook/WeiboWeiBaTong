@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.dao;
 
-import org.zarroboogs.weibo.utils.WeiBoURLs;
+import org.zarroboogs.utils.WeiBoURLs;
 
 /**
  * User: qii Date: 12-9-13

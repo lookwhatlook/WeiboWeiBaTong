@@ -1,24 +1,23 @@
 package org.zarroboogs.weibo.support.utils;
 
+import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.weibo.BuildConfig;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.AccountActivity;
+import org.zarroboogs.weibo.activity.BlackMagicActivity;
+import org.zarroboogs.weibo.activity.OAuthActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.GeoBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
-import org.zarroboogs.weibo.othercomponent.unreadnotification.NotificationServiceHelper;
+import org.zarroboogs.weibo.othercomponent.NotificationServiceHelper;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
-import org.zarroboogs.weibo.ui.blackmagic.BlackMagicActivity;
-import org.zarroboogs.weibo.ui.login.AccountActivity;
-import org.zarroboogs.weibo.ui.login.OAuthActivity;
-import org.zarroboogs.weibo.ui.login.SSOActivity;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
-import org.zarroboogs.weibo.utils.ImageUtility;
 import org.zarroboogs.weibo.widget.HeaderListView;
 
 import android.annotation.TargetApi;
@@ -823,10 +822,6 @@ public class Utility {
 				return;
 			}
 			if (activity.getClass() == BlackMagicActivity.class) {
-				return;
-			}
-
-			if (activity.getClass() == SSOActivity.class) {
 				return;
 			}
 

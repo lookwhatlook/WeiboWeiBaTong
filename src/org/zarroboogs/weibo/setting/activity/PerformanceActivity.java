@@ -6,7 +6,7 @@ import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.ui.interfaces.AbstractAppActivity;
+import org.zarroboogs.weibo.activity.AbstractAppActivity;
 
 import com.umeng.analytics.MobclickAgent;
 

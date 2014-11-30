@@ -1,11 +1,11 @@
 package org.zarroboogs.weibo.support.lib;
 
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.UserInfoActivity;
+import org.zarroboogs.weibo.dialogfragment.LongClickLinkDialog;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.support.utils.WebBrowserSelector;
-import org.zarroboogs.weibo.ui.adapter.LongClickLinkDialog;
-import org.zarroboogs.weibo.ui.userinfo.UserInfoActivity;
 
 import android.content.Context;
 import android.content.Intent;

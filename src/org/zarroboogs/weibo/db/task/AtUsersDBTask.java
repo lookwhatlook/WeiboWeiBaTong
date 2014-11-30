@@ -3,10 +3,10 @@ package org.zarroboogs.weibo.db.task;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.bean.AtUserBean;
 import org.zarroboogs.weibo.db.DatabaseHelper;
 import org.zarroboogs.weibo.db.table.AtUsersTable;
-import org.zarroboogs.weibo.utils.AppLoggerUtils;
 
 import android.content.ContentValues;
 import android.database.Cursor;

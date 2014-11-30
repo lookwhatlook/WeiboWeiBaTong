@@ -2,12 +2,12 @@ package org.zarroboogs.weibo.ui.task;
 
 import android.widget.Toast;
 
+import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.FavBean;
 import org.zarroboogs.weibo.dao.FavDao;
-import org.zarroboogs.weibo.net.WeiboException;
 
 /**
  * User: qii Date: 12-9-12
