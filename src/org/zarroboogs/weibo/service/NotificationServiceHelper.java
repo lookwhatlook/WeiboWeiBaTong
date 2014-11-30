@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.othercomponent;
+package org.zarroboogs.weibo.service;
 
 import org.zarroboogs.weibo.bean.AccountBean;
 

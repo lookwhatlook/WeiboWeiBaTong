@@ -4,8 +4,8 @@ import android.content.Context;
 import android.graphics.*;
 import android.view.View;
 
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.support.file.FileManager;
 
 import java.io.File;
 import java.io.FileOutputStream;

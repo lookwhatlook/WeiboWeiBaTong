@@ -3,11 +3,11 @@ package org.zarroboogs.weibo.support.gallery;
 import java.io.File;
 
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.support.asyncdrawable.TaskCache;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.lib.AnimationRect;
 import org.zarroboogs.weibo.widget.CircleProgressView;
 

@@ -22,7 +22,7 @@ import org.zarroboogs.weibo.db.task.CommentToMeTimeLineDBTask;
 import org.zarroboogs.weibo.dialogfragment.CommentFloatingMenuDialog;
 import org.zarroboogs.weibo.loader.CommentsToMeDBLoader;
 import org.zarroboogs.weibo.loader.CommentsToMeMsgLoader;
-import org.zarroboogs.weibo.othercomponent.NotificationServiceHelper;
+import org.zarroboogs.weibo.service.NotificationServiceHelper;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;

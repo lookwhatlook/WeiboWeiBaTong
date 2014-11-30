@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.db;
 
-import org.zarroboogs.weibo.support.file.FileManager;
+import org.zarroboogs.utils.file.FileManager;
 
 import android.database.sqlite.SQLiteDatabase;
 

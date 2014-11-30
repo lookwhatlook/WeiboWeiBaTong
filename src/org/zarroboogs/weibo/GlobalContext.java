@@ -7,6 +7,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
+import org.zarroboogs.utils.crashmanager.CrashManager;
+import org.zarroboogs.utils.crashmanager.CrashManagerConstants;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.GroupListBean;
@@ -15,8 +17,6 @@ import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.db.task.GroupDBTask;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.support.crashmanager.CrashManager;
-import org.zarroboogs.weibo.support.crashmanager.CrashManagerConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.widget.SmileyMap;
 

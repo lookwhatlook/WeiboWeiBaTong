@@ -1,7 +1,7 @@
 package org.zarroboogs.util.net;
 
-import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
-import org.zarroboogs.weibo.support.file.FileUploaderHttpHelper;
+import org.zarroboogs.utils.file.FileDownloaderHttpHelper;
+import org.zarroboogs.utils.file.FileUploaderHttpHelper;
 
 import java.util.Map;
 

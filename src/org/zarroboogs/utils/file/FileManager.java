@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.support.file;
+package org.zarroboogs.utils.file;
 
 import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.weibo.GlobalContext;

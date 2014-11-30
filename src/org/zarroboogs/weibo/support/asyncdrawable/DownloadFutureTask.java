@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.support.asyncdrawable;
 
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileDownloaderHttpHelper;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.db.task.DownloadPicturesDBTask;
-import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;

@@ -2,6 +2,8 @@ package org.zarroboogs.weibo.support.utils;
 
 import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.BuildConfig;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
@@ -13,10 +15,8 @@ import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.GeoBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
-import org.zarroboogs.weibo.othercomponent.NotificationServiceHelper;
+import org.zarroboogs.weibo.service.NotificationServiceHelper;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
 import org.zarroboogs.weibo.widget.HeaderListView;
 

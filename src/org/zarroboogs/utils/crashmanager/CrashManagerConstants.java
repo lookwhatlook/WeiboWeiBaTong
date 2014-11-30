@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.support.crashmanager;
+package org.zarroboogs.utils.crashmanager;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.support.file;
+package org.zarroboogs.utils.file;
 
 public class FileUploaderHttpHelper {
 

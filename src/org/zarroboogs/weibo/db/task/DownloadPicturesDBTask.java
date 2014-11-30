@@ -1,9 +1,9 @@
 package org.zarroboogs.weibo.db.task;
 
 import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.file.FileLocationMethod;
 import org.zarroboogs.weibo.db.DatabaseHelper;
 import org.zarroboogs.weibo.db.table.DownloadPicturesTable;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
 
 import android.content.ContentValues;
 import android.database.Cursor;

@@ -6,8 +6,8 @@ import org.zarroboogs.util.net.HttpUtility;
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.util.net.HttpUtility.HttpMethod;
 import org.zarroboogs.utils.WeiBoURLs;
+import org.zarroboogs.utils.file.FileUploaderHttpHelper;
 import org.zarroboogs.weibo.bean.GeoBean;
-import org.zarroboogs.weibo.support.file.FileUploaderHttpHelper;
 
 import java.util.HashMap;
 import java.util.Map;

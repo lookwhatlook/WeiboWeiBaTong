@@ -1,7 +1,9 @@
-package org.zarroboogs.weibo.othercomponent;
+package org.zarroboogs.weibo.service;
 
 import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteCommentActivity;
@@ -17,8 +19,6 @@ import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DataItem;
 import org.zarroboogs.weibo.db.task.NotificationDBTask;
 import org.zarroboogs.weibo.support.asyncdrawable.TaskCache;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;

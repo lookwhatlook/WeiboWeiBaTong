@@ -6,12 +6,12 @@ import org.zarroboogs.util.net.HttpUtility.HttpMethod;
 import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.utils.ErrorCode;
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileDownloaderHttpHelper;
+import org.zarroboogs.utils.file.FileManager;
+import org.zarroboogs.utils.file.FileUploaderHttpHelper;
 import org.zarroboogs.weibo.BuildConfig;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
-import org.zarroboogs.weibo.support.file.FileManager;
-import org.zarroboogs.weibo.support.file.FileUploaderHttpHelper;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import android.text.TextUtils;

@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.adapter;
 
 import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.file.FileLocationMethod;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
@@ -16,7 +17,6 @@ import org.zarroboogs.weibo.support.asyncdrawable.IPictureWorker;
 import org.zarroboogs.weibo.support.asyncdrawable.IWeiciyuanDrawable;
 import org.zarroboogs.weibo.support.asyncdrawable.PictureBitmapDrawable;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.gallery.GalleryAnimationActivity;
 import org.zarroboogs.weibo.support.lib.AnimationRect;
 import org.zarroboogs.weibo.support.lib.ClickableTextViewMentionLinkOnTouchListener;

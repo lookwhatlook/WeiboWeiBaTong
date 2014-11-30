@@ -2,11 +2,11 @@ package org.zarroboogs.utils;
 
 import org.zarroboogs.util.net.HttpUtility;
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.file.FileDownloaderHttpHelper;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import android.content.Context;

@@ -1,8 +1,8 @@
-package org.zarroboogs.weibo.support.crashmanager;
+package org.zarroboogs.utils.crashmanager;
 
 import android.text.TextUtils;
 
-import org.zarroboogs.weibo.support.file.FileManager;
+import org.zarroboogs.utils.file.FileManager;
 
 import java.io.File;
 import java.io.FilenameFilter;

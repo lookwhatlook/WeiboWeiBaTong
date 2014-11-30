@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.support.file;
+package org.zarroboogs.utils.file;
 
 import java.io.File;
 import java.io.IOException;

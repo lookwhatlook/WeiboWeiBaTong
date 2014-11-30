@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.support.asyncdrawable;
 
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.lib.LayerEnablingAnimatorListener;
 import org.zarroboogs.weibo.support.utils.Utility;
 

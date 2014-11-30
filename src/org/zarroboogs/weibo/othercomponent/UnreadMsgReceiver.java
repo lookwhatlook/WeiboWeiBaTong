@@ -8,6 +8,7 @@ import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.db.task.NotificationDBTask;
+import org.zarroboogs.weibo.service.BigTextNotificationService;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;
 

@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.support.asyncdrawable;
 
-import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileDownloaderHttpHelper;
+import org.zarroboogs.utils.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import java.util.concurrent.CancellationException;

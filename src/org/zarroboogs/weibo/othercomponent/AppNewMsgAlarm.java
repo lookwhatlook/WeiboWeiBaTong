@@ -2,6 +2,7 @@ package org.zarroboogs.weibo.othercomponent;
 
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.service.FetchNewMsgService;
 import org.zarroboogs.weibo.setting.SettingUtils;
 
 import android.app.AlarmManager;

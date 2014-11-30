@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteWeiboActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import android.content.ContentResolver;

@@ -269,7 +269,7 @@
             android:theme="@android:style/Theme.Holo.DialogWhenLarge" />
 
         <!-- service -->
-        <service android:name="org.zarroboogs.weibo.othercomponent.FetchNewMsgService" />
+        <service android:name="org.zarroboogs.weibo.service.FetchNewMsgService" />
         <service android:name="org.zarroboogs.weibo.service.SendWeiboService" />
         <service android:name="org.zarroboogs.weibo.service.SendRepostService" />
         <service android:name="org.zarroboogs.weibo.service.SendCommentService" />
@@ -277,7 +277,7 @@
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsWeiboNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsCommentNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBCommentsToMeNotificationServiceHelper" />
-        <service android:name="org.zarroboogs.weibo.othercomponent.BigTextNotificationService" />
+        <service android:name="org.zarroboogs.weibo.service.BigTextNotificationService" />
         <service android:name="org.zarroboogs.weiborg.zarroboogs.weibo.othercomponent.SimpleTextNotificationService" />
         <receiver
             android:name="org.zarroboogs.weiborg.zarroboogs.weibo.othercomponent.UnreadMsgReceiver"

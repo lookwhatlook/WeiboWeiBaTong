@@ -22,7 +22,7 @@ import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
 import org.zarroboogs.weibo.db.task.MentionWeiboTimeLineDBTask;
 import org.zarroboogs.weibo.loader.MentionsWeiboMsgLoader;
 import org.zarroboogs.weibo.loader.MentionsWeiboTimeDBLoader;
-import org.zarroboogs.weibo.othercomponent.NotificationServiceHelper;
+import org.zarroboogs.weibo.service.NotificationServiceHelper;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;

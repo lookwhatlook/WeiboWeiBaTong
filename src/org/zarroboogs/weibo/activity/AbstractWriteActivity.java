@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileLocationMethod;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
@@ -9,7 +10,6 @@ import org.zarroboogs.weibo.adapter.AutoCompleteAdapter;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.dialogfragment.ClearContentDialog;
 import org.zarroboogs.weibo.dialogfragment.SaveDraftDialog;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.lib.CheatSheet;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.widget.SmileyPicker;

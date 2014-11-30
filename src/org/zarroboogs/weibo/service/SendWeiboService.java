@@ -15,6 +15,7 @@ import android.text.TextUtils;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileUploaderHttpHelper;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteWeiboActivity;
@@ -24,7 +25,6 @@ import org.zarroboogs.weibo.bean.GeoBean;
 import org.zarroboogs.weibo.bean.StatusDraftBean;
 import org.zarroboogs.weibo.dao.StatusNewMsgDao;
 import org.zarroboogs.weibo.db.DraftDBManager;
-import org.zarroboogs.weibo.support.file.FileUploaderHttpHelper;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 

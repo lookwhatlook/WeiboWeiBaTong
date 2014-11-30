@@ -8,9 +8,9 @@ import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.util.net.HttpUtility.HttpMethod;
 import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.utils.WeiBoURLs;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.support.asyncdrawable.TaskCache;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 
 import android.graphics.Bitmap;
 import android.text.TextUtils;

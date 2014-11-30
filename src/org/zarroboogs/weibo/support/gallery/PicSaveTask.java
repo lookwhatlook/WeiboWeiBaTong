@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.support.gallery;
 
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
-import org.zarroboogs.weibo.support.file.FileManager;
 
 import android.app.Activity;
 import android.widget.Toast;

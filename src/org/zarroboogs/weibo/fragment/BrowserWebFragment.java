@@ -1,6 +1,7 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity;
@@ -8,7 +9,6 @@ import org.zarroboogs.weibo.activity.UserInfoActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.dao.Mid2IdDao;
 import org.zarroboogs.weibo.dialogfragment.CommonProgressDialogFragment;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import android.annotation.SuppressLint;

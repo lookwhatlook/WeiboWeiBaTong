@@ -2,6 +2,8 @@ package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.ImageUtility;
+import org.zarroboogs.utils.file.FileLocationMethod;
+import org.zarroboogs.utils.file.FileManager;
 import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
@@ -28,8 +30,6 @@ import org.zarroboogs.weibo.db.task.TopicDBTask;
 import org.zarroboogs.weibo.dialogfragment.UserAvatarDialog;
 import org.zarroboogs.weibo.loader.StatusesByIdLoader;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
-import org.zarroboogs.weibo.support.file.FileLocationMethod;
-import org.zarroboogs.weibo.support.file.FileManager;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
