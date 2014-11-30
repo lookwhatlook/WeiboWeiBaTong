@@ -1,5 +1,3 @@
-package uk.co.senab.photoview.gestures;
-
 /*******************************************************************************
  * Copyright 2011, 2012 Chris Banes.
  *
@@ -15,27 +13,21 @@ package uk.co.senab.photoview.gestures;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
+package uk.co.senab.photoview.scrollerproxy;
 
+import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 
-public final class VersionedGestureDetector {
+@TargetApi(14)
+public class IcsScroller extends GingerScroller {
 
-	public static GestureDetector newInstance(Context context, OnGestureListener listener) {
-		final int sdkVersion = Build.VERSION.SDK_INT;
-		GestureDetector detector;
+    public IcsScroller(Context context) {
+        super(context);
+    }
 
-		if (sdkVersion < Build.VERSION_CODES.ECLAIR) {
-			detector = new CupcakeGestureDetector(context);
-		} else if (sdkVersion < Build.VERSION_CODES.FROYO) {
-			detector = new EclairGestureDetector(context);
-		} else {
-			detector = new FroyoGestureDetector(context);
-		}
-
-		detector.setOnGestureListener(listener);
-
-		return detector;
-	}
+    @Override
+    public boolean computeScrollOffset() {
+        return mScroller.computeScrollOffset();
+    }
 
 }
