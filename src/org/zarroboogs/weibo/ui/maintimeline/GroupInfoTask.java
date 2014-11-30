@@ -4,7 +4,7 @@ import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.GroupListBean;
 import org.zarroboogs.weibo.dao.FriendGroupDao;
-import org.zarroboogs.weibo.database.GroupDBTask;
+import org.zarroboogs.weibo.db.task.GroupDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 
 /**

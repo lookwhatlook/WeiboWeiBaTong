@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.support.asyncdrawable;
 
-import org.zarroboogs.weibo.database.DownloadPicturesDBTask;
+import org.zarroboogs.weibo.db.task.DownloadPicturesDBTask;
 import org.zarroboogs.weibo.support.file.FileDownloaderHttpHelper;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;

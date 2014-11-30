@@ -9,7 +9,7 @@ import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.bean.CommentDraftBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.dao.CommentNewMsgDao;
-import org.zarroboogs.weibo.database.DraftDBManager;
+import org.zarroboogs.weibo.db.DraftDBManager;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;

@@ -16,7 +16,7 @@ import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.RepostDraftBean;
 import org.zarroboogs.weibo.dao.RepostNewMsgDao;
-import org.zarroboogs.weibo.database.DraftDBManager;
+import org.zarroboogs.weibo.db.DraftDBManager;
 import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendRepostService;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.search.AtUserActivity;

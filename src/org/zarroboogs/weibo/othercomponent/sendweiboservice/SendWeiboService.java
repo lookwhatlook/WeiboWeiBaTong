@@ -20,7 +20,7 @@ import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.GeoBean;
 import org.zarroboogs.weibo.bean.StatusDraftBean;
 import org.zarroboogs.weibo.dao.StatusNewMsgDao;
-import org.zarroboogs.weibo.database.DraftDBManager;
+import org.zarroboogs.weibo.db.DraftDBManager;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.file.FileUploaderHttpHelper;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;

@@ -14,7 +14,7 @@ import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
-import org.zarroboogs.weibo.database.CommentToMeTimeLineDBTask;
+import org.zarroboogs.weibo.db.task.CommentToMeTimeLineDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.othercomponent.unreadnotification.NotificationServiceHelper;
 import org.zarroboogs.weibo.support.utils.AppEventAction;

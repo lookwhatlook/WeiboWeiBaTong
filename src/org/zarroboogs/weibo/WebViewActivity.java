@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo;
 
 import org.zarroboogs.weibo.bean.AccountBean;
-import org.zarroboogs.weibo.database.AccountDatabaseManager;
-import org.zarroboogs.weibo.database.AccountTable;
+import org.zarroboogs.weibo.db.AccountDatabaseManager;
+import org.zarroboogs.weibo.db.table.AccountTable;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.utils.PatternUtils;
 

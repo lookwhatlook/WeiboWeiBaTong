@@ -5,7 +5,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.database.FilterDBTask;
+import org.zarroboogs.weibo.db.task.FilterDBTask;
 
 import java.util.Collection;
 import java.util.List;

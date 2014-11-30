@@ -12,7 +12,7 @@ import org.zarroboogs.weibo.dao.FriendshipsDao;
 import org.zarroboogs.weibo.dao.ModifyGroupMemberDao;
 import org.zarroboogs.weibo.dao.RemarkDao;
 import org.zarroboogs.weibo.dao.ShowUserDao;
-import org.zarroboogs.weibo.database.FilterDBTask;
+import org.zarroboogs.weibo.db.task.FilterDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;

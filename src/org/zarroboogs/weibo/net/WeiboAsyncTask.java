@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.net;
 
+import org.zarroboogs.utils.net.BroserContent;
 import org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
-import org.zarroboogs.weibo.login.net.BroserContent;
 
 import android.content.Context;
 import android.os.AsyncTask;

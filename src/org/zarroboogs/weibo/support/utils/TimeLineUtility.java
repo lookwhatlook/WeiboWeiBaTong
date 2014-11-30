@@ -8,7 +8,7 @@ import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DMBean;
 import org.zarroboogs.weibo.bean.data.DMUserBean;
-import org.zarroboogs.weibo.database.FilterDBTask;
+import org.zarroboogs.weibo.db.task.FilterDBTask;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.lib.MyURLSpan;

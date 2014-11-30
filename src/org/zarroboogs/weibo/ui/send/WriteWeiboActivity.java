@@ -10,7 +10,7 @@ import org.zarroboogs.weibo.bean.MusicInfoBean;
 import org.zarroboogs.weibo.bean.StatusDraftBean;
 import org.zarroboogs.weibo.dao.BaiduGeoCoderDao;
 import org.zarroboogs.weibo.dao.GoogleGeoCoderDao;
-import org.zarroboogs.weibo.database.DraftDBManager;
+import org.zarroboogs.weibo.db.DraftDBManager;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendWeiboService;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;

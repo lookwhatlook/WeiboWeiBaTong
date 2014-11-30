@@ -5,7 +5,7 @@ import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.OAuthDao;
-import org.zarroboogs.weibo.database.AccountDBTask;
+import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.lib.sinasso.SsoHandler;
 import org.zarroboogs.weibo.support.utils.Utility;

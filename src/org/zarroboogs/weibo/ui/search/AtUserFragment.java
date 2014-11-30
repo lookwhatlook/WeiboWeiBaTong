@@ -21,7 +21,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AtUserBean;
 import org.zarroboogs.weibo.dao.AtUserDao;
-import org.zarroboogs.weibo.database.AtUsersDBTask;
+import org.zarroboogs.weibo.db.task.AtUsersDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 
 import java.util.ArrayList;

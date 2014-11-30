@@ -10,7 +10,7 @@ import org.zarroboogs.weibo.bean.CommentTimeLineData;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
-import org.zarroboogs.weibo.database.CommentByMeTimeLineDBTask;
+import org.zarroboogs.weibo.db.task.CommentByMeTimeLineDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.CommentFloatingMenu;
@@ -20,6 +20,7 @@ import org.zarroboogs.weibo.ui.basefragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.ui.interfaces.IRemoveItem;
 import org.zarroboogs.weibo.ui.loader.CommentsByMeDBLoader;
 import org.zarroboogs.weibo.ui.loader.CommentsByMeMsgLoader;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;

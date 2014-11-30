@@ -9,7 +9,7 @@ import org.zarroboogs.weibo.dao.CreateGroupDao;
 import org.zarroboogs.weibo.dao.DestroyGroupDao;
 import org.zarroboogs.weibo.dao.FriendGroupDao;
 import org.zarroboogs.weibo.dao.UpdateGroupNameDao;
-import org.zarroboogs.weibo.database.GroupDBTask;
+import org.zarroboogs.weibo.db.task.GroupDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;

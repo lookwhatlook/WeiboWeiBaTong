@@ -16,7 +16,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.FriendshipsDao;
-import org.zarroboogs.weibo.database.FilterDBTask;
+import org.zarroboogs.weibo.db.task.FilterDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.ui.send.WriteWeiboActivity;
 import org.zarroboogs.weibo.ui.userinfo.ManageGroupDialog;

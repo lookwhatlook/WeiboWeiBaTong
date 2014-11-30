@@ -11,7 +11,7 @@ import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.bean.UnreadTabIndex;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DataItem;
-import org.zarroboogs.weibo.database.NotificationDBTask;
+import org.zarroboogs.weibo.db.task.NotificationDBTask;
 import org.zarroboogs.weibo.support.asyncdrawable.TaskCache;
 import org.zarroboogs.weibo.support.file.FileLocationMethod;
 import org.zarroboogs.weibo.support.file.FileManager;

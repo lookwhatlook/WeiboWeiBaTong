@@ -28,11 +28,11 @@ import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.http.util.TextUtils;
+import org.zarroboogs.utils.net.BroserContent;
+import org.zarroboogs.utils.net.HttpFactory;
 import org.zarroboogs.weibo.login.javabean.HasloginBean;
 import org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import org.zarroboogs.weibo.login.javabean.PreLoginResult;
-import org.zarroboogs.weibo.login.net.BroserContent;
-import org.zarroboogs.weibo.login.net.HttpFactory;
 import org.zarroboogs.weibo.login.utils.Constaces;
 
 import android.content.Context;

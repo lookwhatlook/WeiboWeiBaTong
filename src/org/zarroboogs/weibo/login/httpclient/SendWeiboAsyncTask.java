@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.login.httpclient;
 
-import org.zarroboogs.weibo.login.net.BroserContent;
+import org.zarroboogs.utils.net.BroserContent;
 
 import android.os.AsyncTask;
 

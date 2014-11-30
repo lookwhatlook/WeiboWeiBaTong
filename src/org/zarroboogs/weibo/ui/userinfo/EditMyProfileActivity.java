@@ -7,7 +7,7 @@ import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.EditMyProfileDao;
 import org.zarroboogs.weibo.dao.ShowUserDao;
-import org.zarroboogs.weibo.database.AccountDBTask;
+import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.asyncdrawable.ProfileAvatarReadWorker;
 import org.zarroboogs.weibo.support.utils.Utility;

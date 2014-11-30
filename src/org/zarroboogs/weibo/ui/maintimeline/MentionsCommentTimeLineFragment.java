@@ -14,7 +14,7 @@ import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
-import org.zarroboogs.weibo.database.MentionCommentsTimeLineDBTask;
+import org.zarroboogs.weibo.db.task.MentionCommentsTimeLineDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.othercomponent.unreadnotification.NotificationServiceHelper;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
@@ -30,6 +30,7 @@ import org.zarroboogs.weibo.ui.loader.MentionsCommentMsgLoader;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;
 import org.zarroboogs.weibo.ui.main.MentionsTimeLine;
 import org.zarroboogs.weibo.widget.TopTipsView;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.NotificationManager;

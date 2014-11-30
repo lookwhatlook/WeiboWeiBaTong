@@ -12,7 +12,7 @@ import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.MessageReCmtCountBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
-import org.zarroboogs.weibo.database.FavouriteDBTask;
+import org.zarroboogs.weibo.db.task.FavouriteDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.basefragment.AbstractMessageTimeLineFragment;

@@ -15,7 +15,7 @@ import org.zarroboogs.weibo.bean.MessageTimeLineData;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
-import org.zarroboogs.weibo.database.FriendsTimeLineDBTask;
+import org.zarroboogs.weibo.db.task.FriendsTimeLineDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.othercomponent.WifiAutoDownloadPictureRunnable;
 import org.zarroboogs.weibo.setting.SettingUtils;

@@ -6,7 +6,7 @@ import org.zarroboogs.weibo.bean.CommentListBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UnreadBean;
-import org.zarroboogs.weibo.database.NotificationDBTask;
+import org.zarroboogs.weibo.db.task.NotificationDBTask;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.NotificationUtility;
 import org.zarroboogs.weibo.ui.main.MainTimeLineActivity;

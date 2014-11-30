@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.ui.preference.filter;
 
-import org.zarroboogs.weibo.database.FilterDBTask;
+import org.zarroboogs.weibo.db.task.FilterDBTask;
 
 import java.util.Collection;
 import java.util.List;

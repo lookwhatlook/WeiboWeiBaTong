@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.net;
 
-import org.zarroboogs.weibo.login.net.BroserContent;
+import org.zarroboogs.utils.net.BroserContent;
 import org.zarroboogs.weibo.utils.NetEaseUtils;
 
 import android.os.AsyncTask;

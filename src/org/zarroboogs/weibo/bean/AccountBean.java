@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.bean;
 
-import org.zarroboogs.weibo.database.AccountDBTask;
+import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.support.utils.ObjectToStringUtility;
 
 import android.os.Parcel;

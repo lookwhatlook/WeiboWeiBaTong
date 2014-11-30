@@ -6,7 +6,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.bean.ReplyDraftBean;
-import org.zarroboogs.weibo.database.DraftDBManager;
+import org.zarroboogs.weibo.db.DraftDBManager;
 import org.zarroboogs.weibo.othercomponent.sendweiboservice.SendReplyToCommentService;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.search.AtUserActivity;

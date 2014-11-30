@@ -15,7 +15,7 @@ import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
-import org.zarroboogs.weibo.database.MentionWeiboTimeLineDBTask;
+import org.zarroboogs.weibo.db.task.MentionWeiboTimeLineDBTask;
 import org.zarroboogs.weibo.net.WeiboException;
 import org.zarroboogs.weibo.othercomponent.unreadnotification.NotificationServiceHelper;
 import org.zarroboogs.weibo.support.utils.AppEventAction;

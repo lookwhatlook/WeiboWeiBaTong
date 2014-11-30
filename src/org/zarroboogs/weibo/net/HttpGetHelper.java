@@ -12,7 +12,7 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicHeader;
-import org.zarroboogs.weibo.login.net.BroserContent;
+import org.zarroboogs.utils.net.BroserContent;
 
 import android.util.Log;
 

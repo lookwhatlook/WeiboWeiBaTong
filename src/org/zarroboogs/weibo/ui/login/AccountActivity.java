@@ -1,11 +1,11 @@
 package org.zarroboogs.weibo.ui.login;
 
+import org.zarroboogs.utils.net.BroserContent;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
 import org.zarroboogs.weibo.bean.AccountBean;
-import org.zarroboogs.weibo.database.AccountDBTask;
-import org.zarroboogs.weibo.login.net.BroserContent;
+import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
