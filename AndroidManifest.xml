@@ -278,9 +278,9 @@
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBMentionsCommentNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.othercomponent.unreadnotification.JBCommentsToMeNotificationServiceHelper" />
         <service android:name="org.zarroboogs.weibo.service.BigTextNotificationService" />
-        <service android:name="org.zarroboogs.weiborg.zarroboogs.weibo.othercomponent.SimpleTextNotificationService" />
+        <service android:name="org.zarroboogs.weibo.othercomponent.SimpleTextNotificationService" />
         <receiver
-            android:name="org.zarroboogs.weiborg.zarroboogs.weibo.othercomponent.UnreadMsgReceiver"
+            android:name="org.zarroboogs.weibo.othercomponent.UnreadMsgReceiver"
             android:exported="false" >
             <intent-filter>
                 <action android:name="org.zarroboogs.weibo.newmsg.priority" />
