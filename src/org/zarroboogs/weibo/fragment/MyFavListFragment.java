@@ -114,7 +114,7 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
 			getActivity().getActionBar().setIcon(R.drawable.ic_menu_fav);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
-			getActivity().getActionBar().setIcon(R.drawable.ic_launcher);
+			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
 		}
 
 		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

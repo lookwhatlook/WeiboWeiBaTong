@@ -449,7 +449,7 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 			getActivity().getActionBar().setIcon(R.drawable.ic_menu_home);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle("");
-			getActivity().getActionBar().setIcon(R.drawable.ic_launcher);
+			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
 		}
 
 		if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST && isVisible()) {

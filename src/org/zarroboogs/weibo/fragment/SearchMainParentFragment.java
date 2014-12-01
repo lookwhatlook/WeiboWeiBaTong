@@ -138,7 +138,7 @@ public class SearchMainParentFragment extends AbstractAppFragment implements Mai
 			getActivity().getActionBar().setIcon(R.drawable.search_light);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle("");
-			getActivity().getActionBar().setIcon(R.drawable.ic_launcher);
+			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
 		}
 
 		ActionBar actionBar = getActivity().getActionBar();

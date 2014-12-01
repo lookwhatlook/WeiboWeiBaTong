@@ -571,7 +571,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 			getActivity().getActionBar().setIcon(R.drawable.ic_menu_profile);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.profile));
-			getActivity().getActionBar().setIcon(R.drawable.ic_launcher);
+			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
 		}
 
 		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

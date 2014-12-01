@@ -68,7 +68,7 @@ public class DMUserListAdapter extends BaseAdapter {
 
 			convertView = initSimpleLayout(parent);
 			holder = buildHolder(convertView);
-			convertView.setTag(R.drawable.ic_launcher + getItemViewType(position), holder);
+			convertView.setTag(R.drawable.beebo_launcher + getItemViewType(position), holder);
 
 		} else {
 			holder = (DMViewHolder) convertView.getTag();
@@ -283,7 +283,7 @@ public class DMUserListAdapter extends BaseAdapter {
 		}
 
 		View wantedView = listView.getChildAt(wantedChild);
-		DMViewHolder holder = (DMViewHolder) wantedView.getTag(R.drawable.ic_launcher + getItemViewType(position));
+		DMViewHolder holder = (DMViewHolder) wantedView.getTag(R.drawable.beebo_launcher + getItemViewType(position));
 		return holder;
 
 	}
