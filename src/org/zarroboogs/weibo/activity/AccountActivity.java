@@ -152,7 +152,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.actionbar_menu_accountactivity, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	private void showAddAccountDialog() {
@@ -191,7 +191,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 
 			break;
 		}
-		return true;
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

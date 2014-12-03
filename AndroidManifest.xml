@@ -62,8 +62,7 @@
             android:value="AIzaSyA_Ozn9WNG58ImFlmOFOItHvn1JShWvIpE" />
 
         <activity
-            android:name="org.zarroboogs.weibo.activity.AccountActivity"
-            android:uiOptions="splitActionBarWhenNarrow" >
+            android:name="org.zarroboogs.weibo.activity.AccountActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
