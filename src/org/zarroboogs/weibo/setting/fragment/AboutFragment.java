@@ -10,8 +10,6 @@ import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.setting.activity.SettingActivity;
 import org.zarroboogs.weibo.widget.ChangeLogDialog;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
@@ -100,23 +98,6 @@ public class AboutFragment extends PreferenceFragment {
 		findPreference(SettingActivity.SAVED_PIC_PATH).setSummary(
 				Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath());
 
-	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		setInsets(getActivity(), container);
-		return super.onCreateView(inflater, container, savedInstanceState);
-	}
-
-	public static void setInsets(Activity context, View view) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-			return;
-		SystemBarTintManager tintManager = new SystemBarTintManager(context);
-		SystemBarTintManager.SystemBarConfig config = tintManager
-				.getConfig();
-		view.setPadding(0, config.getPixelInsetTop(true),
-				config.getPixelInsetRight(), config.getPixelInsetBottom());
 	}
 
 	private void detectDebugPreference() {

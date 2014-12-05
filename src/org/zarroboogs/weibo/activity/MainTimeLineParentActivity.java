@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
 
 import org.zarroboogs.util.net.WeiboException;
@@ -63,40 +62,14 @@ public class MainTimeLineParentActivity extends SlidingFragmentActivity {
 			theme = savedInstanceState.getInt("theme");
 		}
 		setTheme(theme);
-		if (VERSION.SDK_INT >= VERSION_CODES.KITKAT) {
-			// 透明状态栏
-			getWindow().addFlags( WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-			// 透明导航栏
-			getWindow().addFlags( WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-		}
 		super.onCreate(savedInstanceState);
 		forceShowActionBarOverflowMenu();
 		GlobalContext.getInstance().setActivity(this);
 		TimeLineBitmapDownloader.refreshThemePictureBackground();
 		
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			setTranslucentStatus(true);
-			SystemBarTintManager tintManager = new SystemBarTintManager(this);
-			tintManager.setStatusBarTintEnabled(true);
-			tintManager.setStatusBarTintColor(0xFF01579b);
-		}
-
 
 	}
 
-	@TargetApi(19) 
-	public void setTranslucentStatus(boolean on) {
-		Window win = getWindow();
-		WindowManager.LayoutParams winParams = win.getAttributes();
-		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-		if (on) {
-			winParams.flags |= bits;
-		} else {
-			winParams.flags &= ~bits;
-		}
-		win.setAttributes(winParams);
-	}
-	
 	private void forceShowActionBarOverflowMenu() {
 		try {
 			ViewConfiguration config = ViewConfiguration.get(this);

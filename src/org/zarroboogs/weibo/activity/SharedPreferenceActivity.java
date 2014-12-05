@@ -2,8 +2,6 @@ package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.weibo.bean.WeiboWeiba;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -37,28 +35,8 @@ public class SharedPreferenceActivity extends Activity implements OnSharedPrefer
 		mCookieSP = getSharedPreferences(getPackageName(), MODE_PRIVATE);
 		mCookie = mCookieSP.getString(KEY_COOKIE, "");
 		mCookieSP.registerOnSharedPreferenceChangeListener(this);
-		
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			setTranslucentStatus(true);
-			SystemBarTintManager tintManager = new SystemBarTintManager(this);
-			tintManager.setStatusBarTintEnabled(true);
-			tintManager.setStatusBarTintColor(0xFF01579b);
-		}
 	}
 
-	@TargetApi(19) 
-	public void setTranslucentStatus(boolean on) {
-		Window win = getWindow();
-		WindowManager.LayoutParams winParams = win.getAttributes();
-		final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-		if (on) {
-			winParams.flags |= bits;
-		} else {
-			winParams.flags &= ~bits;
-		}
-		win.setAttributes(winParams);
-	}
-	
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub

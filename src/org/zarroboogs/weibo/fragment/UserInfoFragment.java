@@ -39,8 +39,6 @@ import org.zarroboogs.weibo.widget.SwipeFrameLayout;
 import org.zarroboogs.weibo.widget.TimeLineAvatarImageView;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -275,7 +273,6 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 			result = swipeFrameLayout;
 		}
 
-		setInsets(getActivity(), container);
 		return result;
 	}
 
@@ -1026,14 +1023,5 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 	}
 
 
-	public static void setInsets(Activity context, View view) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-			return;
-		SystemBarTintManager tintManager = new SystemBarTintManager(context);
-		SystemBarTintManager.SystemBarConfig config = tintManager
-				.getConfig();
-		view.setPadding(0, config.getPixelInsetTop(true),
-				config.getPixelInsetRight(), config.getPixelInsetBottom());
-	}
 
 }

@@ -73,10 +73,6 @@ public class BlackMagicActivity extends AbstractAppActivity {
 			}
 		});
 		
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			setTranslucentStatus(true);
-		}
-
 	}
 
 	@Override

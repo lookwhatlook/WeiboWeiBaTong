@@ -44,8 +44,6 @@ import org.zarroboogs.weibo.widget.WeiboDetailImageView;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -372,8 +370,6 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 		listView.setHeaderDividersEnabled(false);
 
 		swipeFrameLayout.addView(pullToRefreshListView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		
-		setInsets(getActivity(), container);
 		
 		return swipeFrameLayout;
 	}
@@ -1191,14 +1187,4 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 		}
 	}
 
-
-	public static void setInsets(Activity context, View view) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-			return;
-		SystemBarTintManager tintManager = new SystemBarTintManager(context);
-		SystemBarTintManager.SystemBarConfig config = tintManager
-				.getConfig();
-		view.setPadding(0, config.getPixelInsetTop(true),
-				config.getPixelInsetRight(), config.getPixelInsetBottom());
-	}
 }

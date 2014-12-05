@@ -19,8 +19,6 @@ import org.zarroboogs.weibo.widget.SmileyPicker;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 
-import com.readystatesoftware.systembartint.SystemBarTintManager;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -208,7 +206,6 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 		});
 
 		buildListAdapter();
-		setInsets(getActivity(), container);
 		return view;
 	}
 
@@ -410,16 +407,6 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 	protected Loader<AsyncTaskLoaderResult<DMListBean>> onCreateOldMsgLoader(int id, Bundle args) {
 		String token = GlobalContext.getInstance().getSpecialToken();
 		return new DMConversationLoader(getActivity(), token, userBean.getId(), String.valueOf(page + 1));
-	}
-
-	public static void setInsets(Activity context, View view) {
-		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
-			return;
-		SystemBarTintManager tintManager = new SystemBarTintManager(context);
-		SystemBarTintManager.SystemBarConfig config = tintManager
-				.getConfig();
-		view.setPadding(0, config.getPixelInsetTop(true),
-				config.getPixelInsetRight(), config.getPixelInsetBottom());
 	}
 
 }
