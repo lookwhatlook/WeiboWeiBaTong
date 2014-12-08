@@ -25,8 +25,8 @@ import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.dialogfragment.RemoveDialog;
-import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
 import org.zarroboogs.weibo.fragment.BrowserWeiboMsgFragment;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.task.FavAsyncTask;
@@ -203,8 +203,8 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
 		this.mode = null;
 		listView.clearChoices();
 		adapter.notifyDataSetChanged();
-		if (fragment instanceof AbstractTimeLineFragment) {
-			((AbstractTimeLineFragment) fragment).setActionMode(null);
+		if (fragment instanceof AbsBaseTimeLineFragment) {
+			((AbsBaseTimeLineFragment) fragment).setActionMode(null);
 		}
 
 		if (fragment instanceof BrowserWeiboMsgFragment) {

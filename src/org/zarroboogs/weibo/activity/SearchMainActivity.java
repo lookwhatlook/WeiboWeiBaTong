@@ -2,9 +2,9 @@ package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.adapter.SearchSuggestionProvider;
-import org.zarroboogs.weibo.fragment.AbstractMessageTimeLineFragment;
 import org.zarroboogs.weibo.fragment.SearchStatusFragment;
 import org.zarroboogs.weibo.fragment.SearchUserFragment;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 
 import com.umeng.analytics.MobclickAgent;
@@ -181,8 +181,8 @@ public class SearchMainActivity extends AbstractAppActivity {
 		return getSupportFragmentManager().findFragmentByTag(SearchUserFragment.class.getName());
 	}
 
-	private AbstractMessageTimeLineFragment getSearchStatusFragment() {
-		return (AbstractMessageTimeLineFragment) getSupportFragmentManager().findFragmentByTag(SearchStatusFragment.class.getName());
+	private AbsTimeLineFragment getSearchStatusFragment() {
+		return (AbsTimeLineFragment) getSupportFragmentManager().findFragmentByTag(SearchStatusFragment.class.getName());
 	}
 
 	ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {

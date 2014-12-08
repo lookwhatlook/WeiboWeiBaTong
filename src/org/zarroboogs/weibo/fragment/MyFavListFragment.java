@@ -15,6 +15,7 @@ import org.zarroboogs.weibo.bean.MessageReCmtCountBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
 import org.zarroboogs.weibo.db.task.FavouriteDBTask;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.MyFavMsgLoader;
 import org.zarroboogs.weibo.support.utils.Utility;
 
@@ -32,7 +33,7 @@ import java.util.List;
 /**
  * User: qii Date: 12-8-18 this class need to refactor
  */
-public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBean> implements MainTimeLineActivity.ScrollableListFragment {
+public class MyFavListFragment extends AbsTimeLineFragment<FavListBean> implements MainTimeLineActivity.ScrollableListFragment {
 
 	private int page = 1;
 
@@ -120,7 +121,7 @@ public class MyFavListFragment extends AbstractMessageTimeLineFragment<FavListBe
 		getActivity().getActionBar().removeAllTabs();
 	}
 
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		startActivityForResult(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), bean.getItem(position), GlobalContext
 				.getInstance().getSpecialToken()), MainTimeLineActivity.REQUEST_CODE_UPDATE_MY_FAV_TIMELINE_COMMENT_REPOST_COUNT);
 

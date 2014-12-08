@@ -4,7 +4,7 @@ import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.ShareListBean;
-import org.zarroboogs.weibo.fragment.AbstractMessageTimeLineFragment;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.BrowserShareMsgLoader;
 
 import com.umeng.analytics.MobclickAgent;
@@ -76,7 +76,7 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 		return false;
 	}
 
-	public static class BrowserShareTimeLineFragment extends AbstractMessageTimeLineFragment<ShareListBean> {
+	public static class BrowserShareTimeLineFragment extends AbsTimeLineFragment<ShareListBean> {
 
 		private ShareListBean bean = new ShareListBean();
 
@@ -133,7 +133,7 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 		}
 
 		@Override
-		protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+		protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 			startActivityForResult(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), getList().getItemList().get(position),
 					GlobalContext.getInstance().getSpecialToken()), 0);
 		}

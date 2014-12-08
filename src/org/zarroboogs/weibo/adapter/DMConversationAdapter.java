@@ -6,7 +6,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.UserInfoActivity;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DMBean;
-import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.IWeiciyuanDrawable;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
@@ -206,7 +206,7 @@ public class DMConversationAdapter extends BaseAdapter {
 		String image_url = user.getProfile_image_url();
 		if (!TextUtils.isEmpty(image_url)) {
 			view.setVisibility(View.VISIBLE);
-			commander.downloadAvatar(view.getImageView(), user, (AbstractTimeLineFragment) fragment);
+			commander.downloadAvatar(view.getImageView(), user, (AbsBaseTimeLineFragment) fragment);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

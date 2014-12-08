@@ -12,6 +12,7 @@ import org.zarroboogs.weibo.bean.data.DMBean;
 import org.zarroboogs.weibo.bean.data.DMListBean;
 import org.zarroboogs.weibo.dao.SendDMDao;
 import org.zarroboogs.weibo.dialogfragment.QuickSendProgressFragment;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.loader.DMConversationLoader;
 import org.zarroboogs.weibo.support.utils.AppConfig;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
@@ -48,7 +49,7 @@ import java.util.Comparator;
 /**
  * User: qii Date: 12-11-15
  */
-public class DMConversationListFragment extends AbstractTimeLineFragment<DMListBean> {
+public class DMConversationListFragment extends AbsBaseTimeLineFragment<DMListBean> {
 
 	private UserBean userBean;
 
@@ -140,7 +141,7 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 	}
 
 	@Override
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 
 	}
 

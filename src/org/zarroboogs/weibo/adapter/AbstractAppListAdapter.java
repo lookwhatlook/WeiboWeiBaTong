@@ -11,7 +11,7 @@ import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DataItem;
 import org.zarroboogs.weibo.dialogfragment.UserDialog;
-import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.IPictureWorker;
 import org.zarroboogs.weibo.support.asyncdrawable.IWeiciyuanDrawable;
@@ -97,7 +97,7 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 
 	private ArrayDeque<PrefView> prefBigPicViews = new ArrayDeque<PrefView>(PREF_LISTVIEW_ITEM_VIEW_COUNT);
 
-	private int savedCurrentMiddleLoadingViewPosition = AbstractTimeLineFragment.NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
+	private int savedCurrentMiddleLoadingViewPosition = AbsBaseTimeLineFragment.NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
 
 	private class PrefView {
 
@@ -534,7 +534,7 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 		String image_url = user.getProfile_image_url();
 		if (!TextUtils.isEmpty(image_url)) {
 			view.setVisibility(View.VISIBLE);
-			TimeLineBitmapDownloader.getInstance().downloadAvatar(view, user, (AbstractTimeLineFragment) fragment);
+			TimeLineBitmapDownloader.getInstance().downloadAvatar(view, user, (AbsBaseTimeLineFragment) fragment);
 		} else {
 			view.setVisibility(View.GONE);
 		}
@@ -550,10 +550,10 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 				pic.setVisibility(View.VISIBLE);
 				if (SettingUtils.getEnableBigPic()) {
 					TimeLineBitmapDownloader.getInstance().displayMultiPicture(pic, msg.getHighPicUrls().get(i), FileLocationMethod.picture_large,
-							(AbstractTimeLineFragment) fragment);
+							(AbsBaseTimeLineFragment) fragment);
 				} else {
 					TimeLineBitmapDownloader.getInstance().displayMultiPicture(pic, msg.getThumbnailPicUrls().get(i), FileLocationMethod.picture_thumbnail,
-							(AbstractTimeLineFragment) fragment);
+							(AbsBaseTimeLineFragment) fragment);
 				}
 
 				final int finalI = i;
@@ -697,12 +697,12 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 
 	private void buildPic(final MessageBean msg, ImageView view) {
 		view.setVisibility(View.VISIBLE);
-		TimeLineBitmapDownloader.getInstance().downContentPic(view, msg, (AbstractTimeLineFragment) fragment);
+		TimeLineBitmapDownloader.getInstance().downContentPic(view, msg, (AbsBaseTimeLineFragment) fragment);
 	}
 
 	private void buildPic(final MessageBean msg, IWeiciyuanDrawable view) {
 		view.setVisibility(View.VISIBLE);
-		TimeLineBitmapDownloader.getInstance().downContentPic(view, msg, (AbstractTimeLineFragment) fragment);
+		TimeLineBitmapDownloader.getInstance().downContentPic(view, msg, (AbsBaseTimeLineFragment) fragment);
 	}
 
 	public static class ViewHolder {
@@ -801,7 +801,7 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 				return false;
 			}
 
-			boolean hasActionMode = ((AbstractTimeLineFragment) fragment).hasActionMode();
+			boolean hasActionMode = ((AbsBaseTimeLineFragment) fragment).hasActionMode();
 
 			return !hasActionMode && listener.onTouch(v, event);
 

@@ -28,6 +28,7 @@ import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.db.task.MyStatusDBTask;
 import org.zarroboogs.weibo.db.task.TopicDBTask;
 import org.zarroboogs.weibo.dialogfragment.UserAvatarDialog;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.StatusesByIdLoader;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
@@ -73,7 +74,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * User: qii Date: 13-6-20
  */
 @SuppressLint("ValidFragment")
-public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageListBean> implements MainTimeLineActivity.ScrollableListFragment,
+public class UserInfoFragment extends AbsTimeLineFragment<MessageListBean> implements MainTimeLineActivity.ScrollableListFragment,
 		Animator.AnimatorListener {
 
 	private static final String LIMITED_READ_MESSAGE_COUNT = "10";
@@ -573,7 +574,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 		getActivity().getActionBar().removeAllTabs();
 	}
 
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 
 		startActivityForResult(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), getList().getItem(position), GlobalContext
 				.getInstance().getSpecialToken()), 0);

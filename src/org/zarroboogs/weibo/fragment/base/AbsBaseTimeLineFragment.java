@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.fragment;
+package org.zarroboogs.weibo.fragment.base;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.MyAnimationListener;
@@ -7,7 +7,6 @@ import org.zarroboogs.weibo.adapter.AbstractAppListAdapter;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.DataItem;
 import org.zarroboogs.weibo.bean.data.DataListItem;
-import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.loader.AbstractAsyncNetRequestTaskLoader;
 import org.zarroboogs.weibo.loader.DummyLoader;
 import org.zarroboogs.weibo.setting.SettingUtils;
@@ -49,7 +48,7 @@ import android.widget.TextView;
  * solve Android configuration change(for example: change screen orientation,
  * change system language)
  */
-public abstract class AbstractTimeLineFragment<T extends DataListItem> extends BaseStateFragment {
+public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> extends BaseStateFragment {
 
 	protected PullToRefreshListView mPullToRefreshListView;
 
@@ -76,8 +75,6 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 	protected int savedCurrentLoadingMsgViewPositon = NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
 
 	public static final int NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION = -1;
-
-	public abstract T getList();
 
 	private int listViewScrollState = -1;
 
@@ -119,7 +116,9 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 		}
 	}
 
-	protected abstract void listViewItemClick(AdapterView parent, View view, int position, long id);
+    public abstract T getList();
+
+	protected abstract void onTimeListViewItemClick(AdapterView<?> parent, View view, int position, long id);
 
 	public void loadNewMsg() {
 		canLoadOldData = true;
@@ -198,7 +197,7 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 			savedCurrentLoadingMsgViewPositon = savedInstanceState.getInt("savedCurrentLoadingMsgViewPositon", NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION);
 		}
 		if (savedCurrentLoadingMsgViewPositon != NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION && timeLineAdapter instanceof AbstractAppListAdapter) {
-			((AbstractAppListAdapter) timeLineAdapter).setSavedMiddleLoadingViewPosition(savedCurrentLoadingMsgViewPositon);
+			((AbstractAppListAdapter<?>) timeLineAdapter).setSavedMiddleLoadingViewPosition(savedCurrentLoadingMsgViewPositon);
 		}
 	}
 
@@ -256,7 +255,7 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 				int indexInDataSource = position - headerViewsCount;
 				DataItem msg = getList().getItem(indexInDataSource);
 				if (!isNullFlag(msg)) {
-					listViewItemClick(parent, view, indexInDataSource, id);
+					onTimeListViewItemClick(parent, view, indexInDataSource, id);
 				} else {
 					String beginId = getList().getItem(indexInDataSource + 1).getId();
 					String endId = getList().getItem(indexInDataSource - 1).getId();
@@ -266,7 +265,7 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 						loadMiddleMsg(beginId, endId, indexInDataSource);
 						savedCurrentLoadingMsgViewPositon = indexInDataSource + headerViewsCount;
 						if (timeLineAdapter instanceof AbstractAppListAdapter) {
-							((AbstractAppListAdapter) timeLineAdapter).setSavedMiddleLoadingViewPosition(savedCurrentLoadingMsgViewPositon);
+							((AbstractAppListAdapter<?>) timeLineAdapter).setSavedMiddleLoadingViewPosition(savedCurrentLoadingMsgViewPositon);
 						}
 					}
 				}
@@ -519,7 +518,7 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 			loader = new DummyLoader<T>(getActivity());
 		}
 		if (loader instanceof AbstractAsyncNetRequestTaskLoader) {
-			((AbstractAsyncNetRequestTaskLoader) loader).setArgs(args);
+			((AbstractAsyncNetRequestTaskLoader<T>) loader).setArgs(args);
 		}
 		return loader;
 	}
@@ -619,7 +618,7 @@ public abstract class AbstractTimeLineFragment<T extends DataListItem> extends B
 				}
 				savedCurrentLoadingMsgViewPositon = NO_SAVED_CURRENT_LOADING_MSG_VIEW_POSITION;
 				if (timeLineAdapter instanceof AbstractAppListAdapter) {
-					((AbstractAppListAdapter) timeLineAdapter).setSavedMiddleLoadingViewPosition(savedCurrentLoadingMsgViewPositon);
+					((AbstractAppListAdapter<?>) timeLineAdapter).setSavedMiddleLoadingViewPosition(savedCurrentLoadingMsgViewPositon);
 				}
 				break;
 			case OLD_MSG_LOADER_ID:

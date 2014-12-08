@@ -6,7 +6,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.UserInfoActivity;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.data.DMUserBean;
-import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.IWeiciyuanDrawable;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
@@ -211,7 +211,7 @@ public class DMUserListAdapter extends BaseAdapter {
 		String image_url = user.getProfile_image_url();
 		if (!TextUtils.isEmpty(image_url)) {
 			view.setVisibility(View.VISIBLE);
-			commander.downloadAvatar(view, user, (AbstractTimeLineFragment) fragment);
+			commander.downloadAvatar(view, user, (AbsBaseTimeLineFragment) fragment);
 			view.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -252,7 +252,7 @@ public class DMUserListAdapter extends BaseAdapter {
 				return false;
 			}
 
-			boolean hasActionMode = ((AbstractTimeLineFragment) fragment).hasActionMode();
+			boolean hasActionMode = ((AbsBaseTimeLineFragment) fragment).hasActionMode();
 
 			return !hasActionMode && listener.onTouch(v, event);
 

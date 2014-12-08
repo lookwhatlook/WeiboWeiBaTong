@@ -6,6 +6,7 @@ import org.zarroboogs.weibo.activity.MainTimeLineActivity.ScrollableListFragment
 import org.zarroboogs.weibo.adapter.SearchSuggestionProvider;
 import org.zarroboogs.weibo.adapter.SearchTimeLinePagerAdapter;
 import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
@@ -289,8 +290,8 @@ public class SearchMainParentFragment extends BaseStateFragment implements MainT
 	@Override
 	public void scrollToTop() {
 		Fragment fragment = searchFragments.get(viewPager.getCurrentItem());
-		if (fragment instanceof AbstractTimeLineFragment) {
-			Utility.stopListViewScrollingAndScrollToTop(((AbstractTimeLineFragment) fragment).getListView());
+		if (fragment instanceof AbsBaseTimeLineFragment) {
+			Utility.stopListViewScrollingAndScrollToTop(((AbsBaseTimeLineFragment) fragment).getListView());
 		} else if (fragment instanceof AbstractUserListFragment) {
 			Utility.stopListViewScrollingAndScrollToTop(((AbstractUserListFragment) fragment).getListView());
 

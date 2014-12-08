@@ -20,6 +20,7 @@ import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
 import org.zarroboogs.weibo.db.task.MentionCommentsTimeLineDBTask;
 import org.zarroboogs.weibo.dialogfragment.CommentFloatingMenuDialog;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.loader.MentionsCommentDBLoader;
 import org.zarroboogs.weibo.loader.MentionsCommentMsgLoader;
 import org.zarroboogs.weibo.service.NotificationServiceHelper;
@@ -50,7 +51,7 @@ import android.widget.Toast;
  * User: qii Date: 13-1-23
  */
 @SuppressLint("ValidFragment")
-public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<CommentListBean> implements IRemoveItem {
+public class MentionsCommentTimeLineFragment extends AbsBaseTimeLineFragment<CommentListBean> implements IRemoveItem {
 
 	private AccountBean accountBean;
 
@@ -342,7 +343,7 @@ public class MentionsCommentTimeLineFragment extends AbstractTimeLineFragment<Co
 		mPullToRefreshListView.setAdapter(timeLineAdapter);
 	}
 
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		CommentFloatingMenuDialog menu = new CommentFloatingMenuDialog(getList().getItem(position));
 		menu.show(getFragmentManager(), "");
 	}

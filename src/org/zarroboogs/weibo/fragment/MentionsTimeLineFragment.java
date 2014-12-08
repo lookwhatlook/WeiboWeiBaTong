@@ -6,6 +6,7 @@ import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.adapter.MentionsTimeLinePagerAdapter;
 import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
 import org.zarroboogs.weibo.bean.UnreadTabIndex;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
@@ -227,7 +228,7 @@ public class MentionsTimeLineFragment extends BaseStateFragment implements MainT
 
 	@Override
 	public void scrollToTop() {
-		AbstractTimeLineFragment fragment = (AbstractTimeLineFragment) (childrenFragments.get(viewPager.getCurrentItem()));
+		AbsBaseTimeLineFragment fragment = (AbsBaseTimeLineFragment) (childrenFragments.get(viewPager.getCurrentItem()));
 		Utility.stopListViewScrollingAndScrollToTop(fragment.getListView());
 	}
 

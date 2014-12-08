@@ -20,6 +20,7 @@ import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.ClearUnreadDao;
 import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
 import org.zarroboogs.weibo.db.task.MentionWeiboTimeLineDBTask;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.MentionsWeiboMsgLoader;
 import org.zarroboogs.weibo.loader.MentionsWeiboTimeDBLoader;
 import org.zarroboogs.weibo.service.NotificationServiceHelper;
@@ -51,7 +52,7 @@ import java.util.List;
  * User: qii Date: 12-7-29
  */
 @SuppressLint("ValidFragment")
-public class MentionsWeiboTimeLineFragment extends AbstractMessageTimeLineFragment<MessageListBean> {
+public class MentionsWeiboTimeLineFragment extends AbsTimeLineFragment<MessageListBean> {
 
 	private AccountBean accountBean;
 
@@ -308,7 +309,7 @@ public class MentionsWeiboTimeLineFragment extends AbstractMessageTimeLineFragme
 	}
 
 	@Override
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		startActivityForResult(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), bean.getItemList().get(position), GlobalContext
 				.getInstance().getSpecialToken()), MainTimeLineActivity.REQUEST_CODE_UPDATE_MENTIONS_WEIBO_TIMELINE_COMMENT_REPOST_COUNT);
 

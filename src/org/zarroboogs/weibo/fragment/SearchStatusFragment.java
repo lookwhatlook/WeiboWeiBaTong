@@ -5,6 +5,7 @@ import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.SearchStatusListBean;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.SearchStatusLoader;
 
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.AdapterView;
 /**
  * User: qii Date: 12-11-10
  */
-public class SearchStatusFragment extends AbstractMessageTimeLineFragment<SearchStatusListBean> {
+public class SearchStatusFragment extends AbsTimeLineFragment<SearchStatusListBean> {
 
 	private int page = 1;
 
@@ -60,7 +61,7 @@ public class SearchStatusFragment extends AbstractMessageTimeLineFragment<Search
 
 	}
 
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		startActivity(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), bean.getItem(position), GlobalContext.getInstance()
 				.getSpecialToken()));
 	}

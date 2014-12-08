@@ -26,6 +26,7 @@ import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.dao.TimeLineReCmtCountDao;
 import org.zarroboogs.weibo.db.task.FriendsTimeLineDBTask;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.FriendsMsgLoader;
 import org.zarroboogs.weibo.othercomponent.WifiAutoDownloadPictureRunnable;
 import org.zarroboogs.weibo.setting.SettingUtils;
@@ -68,7 +69,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 
-public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<MessageListBean> implements GlobalContext.MyProfileInfoChangeListener,
+public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean> implements GlobalContext.MyProfileInfoChangeListener,
 		MainTimeLineActivity.ScrollableListFragment {
 
 	private AccountBean accountBean;
@@ -577,7 +578,7 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 	}
 
 	@Override
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		Intent mIntent = BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), getList().getItem(position), GlobalContext
 				.getInstance().getSpecialToken());
 		mIntent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);

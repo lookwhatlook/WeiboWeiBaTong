@@ -9,7 +9,7 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.UserBean;
-import org.zarroboogs.weibo.fragment.AbstractTimeLineFragment;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 
@@ -114,7 +114,7 @@ public class TimeLineBitmapDownloader {
 		downloadAvatar(view, user, false);
 	}
 
-	public void downloadAvatar(ImageView view, UserBean user, AbstractTimeLineFragment fragment) {
+	public void downloadAvatar(ImageView view, UserBean user, AbsBaseTimeLineFragment fragment) {
 		boolean isFling = fragment.isListViewFling();
 		downloadAvatar(view, user, isFling);
 	}
@@ -138,10 +138,10 @@ public class TimeLineBitmapDownloader {
 		displayImageView(view, url, method, isFling, false);
 	}
 
-	public void downContentPic(ImageView view, MessageBean msg, AbstractTimeLineFragment fragment) {
+	public void downContentPic(ImageView view, MessageBean msg, AbsBaseTimeLineFragment fragment) {
 		String picUrl;
 
-		boolean isFling = ((AbstractTimeLineFragment) fragment).isListViewFling();
+		boolean isFling = ((AbsBaseTimeLineFragment) fragment).isListViewFling();
 
 		if (SettingUtils.getEnableBigPic()) {
 			picUrl = msg.getOriginal_pic();
@@ -154,9 +154,9 @@ public class TimeLineBitmapDownloader {
 		}
 	}
 
-	public void displayMultiPicture(IWeiciyuanDrawable view, String picUrl, FileLocationMethod method, AbstractTimeLineFragment fragment) {
+	public void displayMultiPicture(IWeiciyuanDrawable view, String picUrl, FileLocationMethod method, AbsBaseTimeLineFragment fragment) {
 
-		boolean isFling = ((AbstractTimeLineFragment) fragment).isListViewFling();
+		boolean isFling = ((AbsBaseTimeLineFragment) fragment).isListViewFling();
 
 		display(view, picUrl, method, isFling, true);
 
@@ -168,10 +168,10 @@ public class TimeLineBitmapDownloader {
 
 	}
 
-	public void downContentPic(IWeiciyuanDrawable view, MessageBean msg, AbstractTimeLineFragment fragment) {
+	public void downContentPic(IWeiciyuanDrawable view, MessageBean msg, AbsBaseTimeLineFragment fragment) {
 		String picUrl;
 
-		boolean isFling = ((AbstractTimeLineFragment) fragment).isListViewFling();
+		boolean isFling = ((AbsBaseTimeLineFragment) fragment).isListViewFling();
 
 		if (SettingUtils.getEnableBigPic()) {
 			picUrl = msg.getOriginal_pic();

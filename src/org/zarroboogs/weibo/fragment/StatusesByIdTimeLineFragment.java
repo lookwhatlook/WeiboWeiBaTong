@@ -8,6 +8,7 @@ import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UserBean;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.StatusesByIdLoader;
 import org.zarroboogs.weibo.support.utils.AppConfig;
 
@@ -22,7 +23,7 @@ import android.widget.AdapterView;
 /**
  * User: Jiang Qi Date: 12-8-16
  */
-public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragment<MessageListBean> {
+public class StatusesByIdTimeLineFragment extends AbsTimeLineFragment<MessageListBean> {
 
 	protected UserBean userBean;
 
@@ -137,7 +138,7 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
 		super.onActivityCreated(savedInstanceState);
 	}
 
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		startActivityForResult(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), getList().getItem(position), GlobalContext
 				.getInstance().getSpecialToken()), 0);
 	}

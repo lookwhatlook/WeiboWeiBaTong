@@ -1,4 +1,4 @@
-package org.zarroboogs.weibo.fragment;
+package org.zarroboogs.weibo.fragment.base;
 
 import android.os.Bundle;
 import android.view.View;
@@ -20,7 +20,7 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.StatusSingleChoiceModeListener;
 
 
-public abstract class AbstractMessageTimeLineFragment<T extends DataListItem<MessageBean, ?>> extends AbstractTimeLineFragment<T> implements IRemoveItem {
+public abstract class AbsTimeLineFragment<T extends DataListItem<MessageBean, ?>> extends AbsBaseTimeLineFragment<T> implements IRemoveItem {
 
 	private RemoveTask removeTask;
 
@@ -55,7 +55,7 @@ public abstract class AbstractMessageTimeLineFragment<T extends DataListItem<Mes
 					&& timeLineAdapter.getItem(position - getListView().getHeaderViewsCount()) != null) {
 				MessageBean msg = getList().getItemList().get(position - getListView().getHeaderViewsCount());
 				StatusSingleChoiceModeListener choiceModeListener = new StatusSingleChoiceModeListener(((MainTimeLineActivity) getActivity()).getAccount(),
-						getListView(), (StatusListAdapter) timeLineAdapter, AbstractMessageTimeLineFragment.this, msg);
+						getListView(), (StatusListAdapter) timeLineAdapter, AbsTimeLineFragment.this, msg);
 				if (actionMode != null) {
 					actionMode.finish();
 					actionMode = null;

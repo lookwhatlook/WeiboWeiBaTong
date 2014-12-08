@@ -11,6 +11,7 @@ import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.DMUserListBean;
 import org.zarroboogs.weibo.db.task.DMDBTask;
+import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.loader.DMUserLoader;
 import org.zarroboogs.weibo.support.utils.Utility;
 
@@ -27,7 +28,7 @@ import android.widget.AdapterView;
 /**
  * User: qii Date: 12-11-14
  */
-public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean> implements MainTimeLineActivity.ScrollableListFragment {
+public class DMUserListFragment extends AbsBaseTimeLineFragment<DMUserListBean> implements MainTimeLineActivity.ScrollableListFragment {
 
 	private DMUserListBean bean = new DMUserListBean();
 
@@ -131,7 +132,7 @@ public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean>
 	}
 
 	@Override
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		Intent intent = new Intent(getActivity(), DMActivity.class);
 		intent.putExtra("user", bean.getItem(position).getUser());
 		startActivity(intent);

@@ -10,6 +10,7 @@ import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.TopicResultListBean;
 import org.zarroboogs.weibo.dao.TopicDao;
+import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.SearchTopicByNameLoader;
 import org.zarroboogs.weibo.support.utils.Utility;
 
@@ -28,7 +29,7 @@ import android.widget.Toast;
  * User: qii Date: 12-9-26
  */
 @SuppressLint("ValidFragment")
-public class SearchTopicByNameFragment extends AbstractMessageTimeLineFragment<TopicResultListBean> {
+public class SearchTopicByNameFragment extends AbsTimeLineFragment<TopicResultListBean> {
 
 	private String q;
 
@@ -148,7 +149,7 @@ public class SearchTopicByNameFragment extends AbstractMessageTimeLineFragment<T
 	}
 
 	@Override
-	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
+	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		startActivity(BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), bean.getItemList().get(position), GlobalContext
 				.getInstance().getSpecialToken()));
 	}
