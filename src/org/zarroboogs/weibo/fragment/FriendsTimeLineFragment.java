@@ -72,15 +72,15 @@ import java.util.concurrent.TimeUnit;
 public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean> implements GlobalContext.MyProfileInfoChangeListener,
 		MainTimeLineActivity.ScrollableListFragment {
 
-	private AccountBean accountBean;
+	private AccountBean mAccountBean;
 
-	private UserBean userBean;
+	private UserBean mUserBean;
 
-	private String token;
+	private String mToken;
 
-	private DBCacheTask dbTask;
+	private DBCacheTask mDBCacheTask;
 
-	private ScheduledExecutorService autoRefreshExecutor = null;
+	private ScheduledExecutorService mAutoRefreshExecutor = null;
 
 	public final static String ALL_GROUP_ID = "0";
 
@@ -94,11 +94,11 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
 	private MessageListBean bean = new MessageListBean();
 
-	private BaseAdapter navAdapter;
+	private BaseAdapter mBaseAdapter;
 
-	private Thread backgroundWifiDownloadPicThread = null;
+	private Thread mBackgroundWifiDownloadPicThread = null;
 
-	private Handler handler = new Handler(Looper.getMainLooper());
+	private Handler mHandler = new Handler(Looper.getMainLooper());
 
 	public static FriendsTimeLineFragment newInstance(AccountBean accountBean, UserBean userBean, String token) {
 		FriendsTimeLineFragment fragment = new FriendsTimeLineFragment(accountBean, userBean, token);
@@ -107,9 +107,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 	}
 	
     public FriendsTimeLineFragment(AccountBean accountBean, UserBean userBean, String token) {
-        this.accountBean = accountBean;
-        this.userBean = userBean;
-        this.token = token;
+        this.mAccountBean = accountBean;
+        this.mUserBean = userBean;
+        this.mToken = token;
     }
 
 	@Override
@@ -157,12 +157,12 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 	}
 
 	private void startDownloadingOtherPicturesOnWifiNetworkEnvironment() {
-		if (backgroundWifiDownloadPicThread == null && Utility.isWifi(getActivity()) && SettingUtils.getEnableBigPic() && SettingUtils.isWifiAutoDownloadPic()) {
+		if (mBackgroundWifiDownloadPicThread == null && Utility.isWifi(getActivity()) && SettingUtils.getEnableBigPic() && SettingUtils.isWifiAutoDownloadPic()) {
 			final int position = getListView().getFirstVisiblePosition();
 			int listVewOrientation = ((VelocityListView) getListView()).getTowardsOrientation();
 			WifiAutoDownloadPictureRunnable runnable = new WifiAutoDownloadPictureRunnable(getList(), position, listVewOrientation);
-			backgroundWifiDownloadPicThread = new Thread(runnable);
-			backgroundWifiDownloadPicThread.start();
+			mBackgroundWifiDownloadPicThread = new Thread(runnable);
+			mBackgroundWifiDownloadPicThread.start();
 			AppLoggerUtils.i("WifiAutoDownloadPictureRunnable startDownloadingOtherPicturesOnWifiNetworkEnvironment");
 
 		}
@@ -181,9 +181,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 	}
 
 	private void stopDownloadingOtherPicturesOnWifiNetworkEnvironment() {
-		if (backgroundWifiDownloadPicThread != null) {
-			backgroundWifiDownloadPicThread.interrupt();
-			backgroundWifiDownloadPicThread = null;
+		if (mBackgroundWifiDownloadPicThread != null) {
+			mBackgroundWifiDownloadPicThread.interrupt();
+			mBackgroundWifiDownloadPicThread = null;
 			AppLoggerUtils.i("WifiAutoDownloadPictureRunnable stopDownloadingOtherPicturesOnWifiNetworkEnvironment");
 
 		}
@@ -257,16 +257,16 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		Utility.cancelTasks(dbTask);
+		Utility.cancelTasks(mDBCacheTask);
 		GlobalContext.getInstance().unRegisterForAccountChangeListener(this);
 	}
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constants.ACCOUNT, accountBean);
-		outState.putParcelable(Constants.USERBEAN, userBean);
-		outState.putString(Constants.TOKEN, token);
+		outState.putParcelable(Constants.ACCOUNT, mAccountBean);
+		outState.putParcelable(Constants.USERBEAN, mUserBean);
+		outState.putString(Constants.TOKEN, mToken);
 
 		// outState.putSerializable(Constants.BEAN, getList());
 		// outState.putSerializable("groupDataCache", groupDataCache);
@@ -278,9 +278,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
 		switch (getCurrentState(savedInstanceState)) {
 		case FIRST_TIME_START:
-			if (Utility.isTaskStopped(dbTask) && getList().getSize() == 0) {
-				dbTask = new DBCacheTask(this, accountBean.getUid());
-				dbTask.executeOnIO();
+			if (Utility.isTaskStopped(mDBCacheTask) && getList().getSize() == 0) {
+				mDBCacheTask = new DBCacheTask(this, mAccountBean.getUid());
+				mDBCacheTask.executeOnIO();
 				GroupInfoTask groupInfoTask = new GroupInfoTask(GlobalContext.getInstance().getSpecialToken(), GlobalContext.getInstance()
 						.getCurrentAccountId());
 				groupInfoTask.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
@@ -304,13 +304,13 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 			setListViewPositionFromPositionsCache();
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			userBean = savedInstanceState.getParcelable(Constants.USERBEAN);
-			accountBean = savedInstanceState.getParcelable(Constants.ACCOUNT);
-			token = savedInstanceState.getString(Constants.TOKEN);
+			mUserBean = savedInstanceState.getParcelable(Constants.USERBEAN);
+			mAccountBean = savedInstanceState.getParcelable(Constants.ACCOUNT);
+			mToken = savedInstanceState.getString(Constants.TOKEN);
 
-			if (Utility.isTaskStopped(dbTask) && getList().getSize() == 0) {
-				dbTask = new DBCacheTask(this, accountBean.getUid());
-				dbTask.executeOnIO();
+			if (Utility.isTaskStopped(mDBCacheTask) && getList().getSize() == 0) {
+				mDBCacheTask = new DBCacheTask(this, mAccountBean.getUid());
+				mDBCacheTask.executeOnIO();
 				GroupInfoTask groupInfoTask = new GroupInfoTask(GlobalContext.getInstance().getSpecialToken(), GlobalContext.getInstance()
 						.getCurrentAccountId());
 				groupInfoTask.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
@@ -416,13 +416,13 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 		} else {
 			list = new ArrayList<GroupBean>();
 		}
-		navAdapter = new FriendsTimeLineListNavAdapter(getActivity(), buildListNavData(list));
+		mBaseAdapter = new FriendsTimeLineListNavAdapter(getActivity(), buildListNavData(list));
 		final List<GroupBean> finalList = list;
-		getActivity().getActionBar().setListNavigationCallbacks(navAdapter, new ActionBar.OnNavigationListener() {
+		getActivity().getActionBar().setListNavigationCallbacks(mBaseAdapter, new ActionBar.OnNavigationListener() {
 			@Override
 			public boolean onNavigationItemSelected(int which, long itemId) {
 
-				if (!Utility.isTaskStopped(dbTask)) {
+				if (!Utility.isTaskStopped(mDBCacheTask)) {
 					return true;
 				}
 
@@ -453,8 +453,8 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
 	@Override
 	public void onChange(UserBean newUserBean) {
-		if (navAdapter != null) {
-			navAdapter.notifyDataSetChanged();
+		if (mBaseAdapter != null) {
+			mBaseAdapter.notifyDataSetChanged();
 		}
 	}
 
@@ -581,7 +581,7 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {
 		Intent mIntent = BrowserWeiboMsgActivity.newIntent(GlobalContext.getInstance().getAccountBean(), getList().getItem(position), GlobalContext
 				.getInstance().getSpecialToken());
-		mIntent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
+		mIntent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, mAccountBean);
 		startActivityForResult(mIntent, MainTimeLineActivity.REQUEST_CODE_UPDATE_FRIENDS_TIMELINE_COMMENT_REPOST_COUNT);
 
 	}
@@ -603,9 +603,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 				clzz = WeiboMainActivity.class;
 			}
 			Intent intent = new Intent(getActivity(), clzz);
-			intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-			intent.putExtra(Constants.TOKEN, token);
-			intent.putExtra(Constants.ACCOUNT, accountBean);
+			intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, mAccountBean);
+			intent.putExtra(Constants.TOKEN, mToken);
+			intent.putExtra(Constants.ACCOUNT, mAccountBean);
 			startActivity(intent);
 			break;
 		case R.id.refresh:
@@ -642,7 +642,7 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 				}
 			}
 			putToGroupDataMemoryCache(currentGroupId, getList());
-			FriendsTimeLineDBTask.asyncReplace(getList(), accountBean.getUid(), currentGroupId);
+			FriendsTimeLineDBTask.asyncReplace(getList(), mAccountBean.getUid(), currentGroupId);
 		}
 	}
 
@@ -888,7 +888,7 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 		if (Utility.isAllNotNull(getActivity(), oldValue) && oldValue.getSize() > 1) {
 			getList().addOldData(oldValue);
 			putToGroupDataMemoryCache(currentGroupId, getList());
-			FriendsTimeLineDBTask.asyncReplace(getList(), accountBean.getUid(), currentGroupId);
+			FriendsTimeLineDBTask.asyncReplace(getList(), mAccountBean.getUid(), currentGroupId);
 
 		} else if (Utility.isAllNotNull(getActivity())) {
 			Toast.makeText(getActivity(), getString(R.string.older_message_empty), Toast.LENGTH_SHORT).show();
@@ -932,15 +932,15 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 	}
 
 	private void removeRefresh() {
-		if (autoRefreshExecutor != null && !autoRefreshExecutor.isShutdown()) {
-			autoRefreshExecutor.shutdownNow();
+		if (mAutoRefreshExecutor != null && !mAutoRefreshExecutor.isShutdown()) {
+			mAutoRefreshExecutor.shutdownNow();
 		}
 	}
 
 	protected void addRefresh() {
 
-		autoRefreshExecutor = new LogOnExceptionScheduledExecutor(1);
-		autoRefreshExecutor.scheduleAtFixedRate(new AutoTask(), AppConfig.AUTO_REFRESH_INITIALDELAY, AppConfig.AUTO_REFRESH_PERIOD, TimeUnit.SECONDS);
+		mAutoRefreshExecutor = new LogOnExceptionScheduledExecutor(1);
+		mAutoRefreshExecutor.scheduleAtFixedRate(new AutoTask(), AppConfig.AUTO_REFRESH_INITIALDELAY, AppConfig.AUTO_REFRESH_PERIOD, TimeUnit.SECONDS);
 
 	}
 
@@ -948,7 +948,7 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
 		@Override
 		public void run() {
-			handler.post(new Runnable() {
+			mHandler.post(new Runnable() {
 				@Override
 				public void run() {
 
@@ -964,7 +964,7 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 						return;
 					}
 
-					if (!Utility.isTaskStopped(dbTask)) {
+					if (!Utility.isTaskStopped(mDBCacheTask)) {
 						return;
 					}
 
@@ -1061,12 +1061,12 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 			}
 		}
 		getAdapter().notifyDataSetChanged();
-		FriendsTimeLineDBTask.asyncReplace(getList(), accountBean.getUid(), currentGroupId);
+		FriendsTimeLineDBTask.asyncReplace(getList(), mAccountBean.getUid(), currentGroupId);
 	}
 
 	protected Loader<AsyncTaskLoaderResult<MessageListBean>> onCreateNewMsgLoader(int id, Bundle args) {
-		String accountId = accountBean.getUid();
-		String token = accountBean.getAccess_token();
+		String accountId = mAccountBean.getUid();
+		String token = mAccountBean.getAccess_token();
 		String sinceId = null;
 		if (getList().getItemList().size() > 0) {
 			sinceId = getList().getItemList().get(0).getId();
@@ -1076,14 +1076,14 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
 	protected Loader<AsyncTaskLoaderResult<MessageListBean>> onCreateMiddleMsgLoader(int id, Bundle args, String middleBeginId, String middleEndId,
 			String middleEndTag, int middlePosition) {
-		String accountId = accountBean.getUid();
-		String token = accountBean.getAccess_token();
+		String accountId = mAccountBean.getUid();
+		String token = mAccountBean.getAccess_token();
 		return new FriendsMsgLoader(getActivity(), accountId, token, currentGroupId, middleBeginId, middleEndId);
 	}
 
 	protected Loader<AsyncTaskLoaderResult<MessageListBean>> onCreateOldMsgLoader(int id, Bundle args) {
-		String accountId = accountBean.getUid();
-		String token = accountBean.getAccess_token();
+		String accountId = mAccountBean.getUid();
+		String token = mAccountBean.getAccess_token();
 		String maxId = null;
 		if (getList().getItemList().size() > 0) {
 			maxId = getList().getItemList().get(getList().getItemList().size() - 1).getId();

@@ -1,54 +1,52 @@
+
 package org.zarroboogs.weibo.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * User: qii Date: 14-5-6
- */
 public class AdBean implements Parcelable {
 
-	private String id;
+    private String id;
 
-	private String mark;
+    private String mark;
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
+    public String getId() {
+        return id;
+    }
 
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(id);
-		dest.writeString(mark);
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public static final Parcelable.Creator<AdBean> CREATOR = new Parcelable.Creator<AdBean>() {
-		public AdBean createFromParcel(Parcel in) {
-			AdBean adBean = new AdBean();
-			adBean.id = in.readString();
-			adBean.mark = in.readString();
-			return adBean;
-		}
+    public String getMark() {
+        return mark;
+    }
 
-		public AdBean[] newArray(int size) {
-			return new AdBean[size];
-		}
-	};
+    public void setMark(String mark) {
+        this.mark = mark;
+    }
 
-	public String getId() {
-		return id;
-	}
+    @Override
+    public int describeContents() {
+        return 0;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(mark);
+    }
 
-	public String getMark() {
-		return mark;
-	}
+    public static final Creator<AdBean> CREATOR = new Creator<AdBean>() {
+        public AdBean createFromParcel(Parcel in) {
+            AdBean adBean = new AdBean();
+            adBean.id = in.readString();
+            adBean.mark = in.readString();
+            return adBean;
+        }
 
-	public void setMark(String mark) {
-		this.mark = mark;
-	}
+        public AdBean[] newArray(int size) {
+            return new AdBean[size];
+        }
+    };
 }
