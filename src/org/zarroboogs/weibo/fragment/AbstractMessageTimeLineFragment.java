@@ -1,11 +1,7 @@
 package org.zarroboogs.weibo.fragment;
 
-import android.app.Activity;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.Toast;
@@ -23,9 +19,7 @@ import org.zarroboogs.weibo.dao.DestroyStatusDao;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.StatusSingleChoiceModeListener;
 
-/**
- * User: qii Date: 12-7-29
- */
+
 public abstract class AbstractMessageTimeLineFragment<T extends DataListItem<MessageBean, ?>> extends AbstractTimeLineFragment<T> implements IRemoveItem {
 
 	private RemoveTask removeTask;

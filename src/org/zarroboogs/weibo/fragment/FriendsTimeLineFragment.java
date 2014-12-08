@@ -53,7 +53,6 @@ import android.view.View;
 import android.view.ViewGroupOverlay;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
-import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -68,10 +67,7 @@ import java.util.Set;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-/**
- * User: qii Date: 12-7-29
- */
-@SuppressLint({ "ValidFragment", "NewApi" })
+
 public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<MessageListBean> implements GlobalContext.MyProfileInfoChangeListener,
 		MainTimeLineActivity.ScrollableListFragment {
 
@@ -103,20 +99,17 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 
 	private Handler handler = new Handler(Looper.getMainLooper());
 
-	@Override
-	public MessageListBean getList() {
-		return bean;
-	}
-
-	public FriendsTimeLineFragment() {
-
-	}
-
 	public static FriendsTimeLineFragment newInstance(AccountBean accountBean, UserBean userBean, String token) {
 		FriendsTimeLineFragment fragment = new FriendsTimeLineFragment(accountBean, userBean, token);
 		fragment.setArguments(new Bundle());
 		return fragment;
 	}
+	
+    public FriendsTimeLineFragment(AccountBean accountBean, UserBean userBean, String token) {
+        this.accountBean = accountBean;
+        this.userBean = userBean;
+        this.token = token;
+    }
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -125,6 +118,11 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 		setHasOptionsMenu(true);
 
 	}
+
+    @Override
+    public MessageListBean getList() {
+        return bean;
+    }
 
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -148,12 +146,6 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 			}
 
 		}
-	}
-
-	public FriendsTimeLineFragment(AccountBean accountBean, UserBean userBean, String token) {
-		this.accountBean = accountBean;
-		this.userBean = userBean;
-		this.token = token;
 	}
 
 	@Override
