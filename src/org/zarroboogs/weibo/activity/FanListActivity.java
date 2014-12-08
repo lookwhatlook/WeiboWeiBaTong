@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
@@ -27,7 +27,7 @@ public class FanListActivity extends AbstractAppActivity {
 
 	public static Intent newIntent(String token, UserBean userBean) {
 		Intent intent = new Intent(GlobalContext.getInstance(), FanListActivity.class);
-		intent.putExtra(Constances.TOKEN, token);
+		intent.putExtra(Constants.TOKEN, token);
 		intent.putExtra("user", userBean);
 		return intent;
 	}
@@ -39,7 +39,7 @@ public class FanListActivity extends AbstractAppActivity {
 		getActionBar().setTitle(getString(R.string.fan_list));
 		getActionBar().setIcon(R.drawable.ic_ab_friendship);
 
-		token = getIntent().getStringExtra(Constances.TOKEN);
+		token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = (UserBean) getIntent().getParcelableExtra("user");
 
 		if (getSupportFragmentManager().findFragmentByTag(FanListFragment.class.getName()) == null) {

@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.SearchTopicByNameActivity;
@@ -69,7 +69,7 @@ public class UserTopicListFragment extends ListFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.USERBEAN, userBean);
+		outState.putParcelable(Constants.USERBEAN, userBean);
 		outState.putStringArrayList("topicList", result);
 	}
 
@@ -84,7 +84,7 @@ public class UserTopicListFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (savedInstanceState != null) {
-			userBean = (UserBean) savedInstanceState.getParcelable(Constances.USERBEAN);
+			userBean = (UserBean) savedInstanceState.getParcelable(Constants.USERBEAN);
 			result = (ArrayList<String>) savedInstanceState.getStringArrayList("topicList");
 		}
 		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, result);

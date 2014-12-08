@@ -14,9 +14,9 @@ import android.os.IBinder;
 import android.text.TextUtils;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.utils.file.FileUploaderHttpHelper;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteWeiboActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -55,8 +55,8 @@ public class SendWeiboService extends Service {
 
 		int lastNotificationId = intent.getIntExtra("lastNotificationId", -1);
 
-		String token = intent.getStringExtra(Constances.TOKEN);
-		AccountBean account = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		String token = intent.getStringExtra(Constants.TOKEN);
+		AccountBean account = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		String picPath = intent.getStringExtra("picPath");
 		String content = intent.getStringExtra("content");
 		GeoBean geoBean = (GeoBean) intent.getParcelableExtra("geo");
@@ -314,9 +314,9 @@ public class SendWeiboService extends Service {
 					}
 				}
 				Intent intent = new Intent(SendWeiboService.this, SendWeiboService.class);
-				intent.putExtra(Constances.TOKEN, token);
+				intent.putExtra(Constants.TOKEN, token);
 				intent.putExtra("picPath", picPath);
-				intent.putExtra(Constances.ACCOUNT, account);
+				intent.putExtra(Constants.ACCOUNT, account);
 				intent.putExtra("content", content);
 				intent.putExtra("geo", geoBean);
 				intent.putExtra("draft", statusDraftBean);

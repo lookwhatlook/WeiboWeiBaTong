@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ErrorCode;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteWeiboActivity;
@@ -74,9 +74,9 @@ public class UserDialog extends DialogFragment {
 			switch (which) {
 			case 0:
 				Intent intent = new Intent(getActivity(), WriteWeiboActivity.class);
-				intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+				intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 				intent.putExtra("content", "@" + user.getScreen_name());
-				intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
+				intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 				startActivity(intent);
 				break;
 			case 1:
@@ -98,9 +98,9 @@ public class UserDialog extends DialogFragment {
 			switch (which) {
 			case 0:
 				Intent intent = new Intent(getActivity(), WriteWeiboActivity.class);
-				intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+				intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 				intent.putExtra("content", "@" + user.getScreen_name());
-				intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
+				intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 				startActivity(intent);
 				break;
 			case 1:

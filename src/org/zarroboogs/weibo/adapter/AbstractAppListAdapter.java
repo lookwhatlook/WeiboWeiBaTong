@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.adapter;
 
 import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.file.FileLocationMethod;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.UserInfoActivity;
@@ -513,7 +513,7 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-				intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+				intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 				intent.putExtra("user", user);
 				getActivity().startActivity(intent);
 			}

@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
@@ -25,7 +25,7 @@ public class FriendListActivity extends AbstractAppActivity {
 
 	public static Intent newIntent(String token, UserBean userBean) {
 		Intent intent = new Intent(GlobalContext.getInstance(), FriendListActivity.class);
-		intent.putExtra(Constances.TOKEN, token);
+		intent.putExtra(Constants.TOKEN, token);
 		intent.putExtra("user", userBean);
 		return intent;
 	}

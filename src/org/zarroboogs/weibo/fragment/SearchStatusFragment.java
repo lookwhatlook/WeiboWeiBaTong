@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.fragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -44,14 +44,14 @@ public class SearchStatusFragment extends AbstractMessageTimeLineFragment<Search
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, bean);
+		outState.putParcelable(Constants.BEAN, bean);
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (savedInstanceState != null && bean.getItemList().size() == 0) {
-			clearAndReplaceValue((SearchStatusListBean) savedInstanceState.getParcelable(Constances.BEAN));
+			clearAndReplaceValue((SearchStatusListBean) savedInstanceState.getParcelable(Constants.BEAN));
 			timeLineAdapter.notifyDataSetChanged();
 
 		}

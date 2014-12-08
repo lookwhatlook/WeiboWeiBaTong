@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.service;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteReplyToCommentActivity;
@@ -48,8 +48,8 @@ public class SendReplyToCommentService extends Service {
 		Intent intent = new Intent(GlobalContext.getInstance(), SendReplyToCommentService.class);
 		intent.putExtra("oriMsg", commentBean);
 		intent.putExtra("content", content);
-		intent.putExtra(Constances.TOKEN, accountBean.getAccess_token());
-		intent.putExtra(Constances.ACCOUNT, accountBean);
+		intent.putExtra(Constants.TOKEN, accountBean.getAccess_token());
+		intent.putExtra(Constants.ACCOUNT, accountBean);
 		if (!TextUtils.isEmpty(repostContent)) {
 			intent.putExtra("repostContent", repostContent);
 		}
@@ -69,7 +69,7 @@ public class SendReplyToCommentService extends Service {
 			NotificationUtility.cancel(lastNotificationId);
 		}
 
-		String token = intent.getStringExtra(Constances.TOKEN);
+		String token = intent.getStringExtra(Constants.TOKEN);
 		AccountBean account = (AccountBean) intent.getParcelableExtra("account");
 		String content = intent.getStringExtra("content");
 		String repostContent = intent.getStringExtra("repostContent");
@@ -218,8 +218,8 @@ public class SendReplyToCommentService extends Service {
 				Intent intent = new Intent(SendReplyToCommentService.this, SendReplyToCommentService.class);
 				intent.putExtra("oriMsg", oriMsg);
 				intent.putExtra("content", content);
-				intent.putExtra(Constances.TOKEN, token);
-				intent.putExtra(Constances.ACCOUNT, account);
+				intent.putExtra(Constants.TOKEN, token);
+				intent.putExtra(Constants.ACCOUNT, account);
 				intent.putExtra("repostContent", repostContent);
 
 				intent.putExtra("lastNotificationId", tasksNotifications.get(task));

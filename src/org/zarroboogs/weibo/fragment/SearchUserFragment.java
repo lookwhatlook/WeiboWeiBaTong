@@ -5,7 +5,7 @@ import android.support.v4.content.Loader;
 import android.view.Menu;
 import android.view.MenuInflater;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.UserBean;
@@ -47,7 +47,7 @@ public class SearchUserFragment extends AbstractUserListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (savedInstanceState != null) {
-			clearAndReplaceValue((UserListBean) savedInstanceState.getParcelable(Constances.BEAN));
+			clearAndReplaceValue((UserListBean) savedInstanceState.getParcelable(Constants.BEAN));
 			getAdapter().notifyDataSetChanged();
 		}
 		refreshLayout(bean);

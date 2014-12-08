@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ImageEditUtility;
 import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.utils.file.FileLocationMethod;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.TextNumLimitWatcher;
@@ -109,8 +109,8 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 
 	public static Intent newIntent(AccountBean accountBean) {
 		Intent intent = new Intent(GlobalContext.getInstance(), WriteWeiboActivity.class);
-		intent.putExtra(Constances.TOKEN, accountBean.getAccess_token());
-		intent.putExtra(Constances.ACCOUNT, accountBean);
+		intent.putExtra(Constants.TOKEN, accountBean.getAccess_token());
+		intent.putExtra(Constants.ACCOUNT, accountBean);
 		return intent;
 	}
 
@@ -118,7 +118,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 			StatusDraftBean statusDraftBean, String failedReason) {
 		Intent intent = new Intent(context, WriteWeiboActivity.class);
 		intent.setAction(WriteWeiboActivity.ACTION_SEND_FAILED);
-		intent.putExtra(Constances.ACCOUNT, accountBean);
+		intent.putExtra(Constants.ACCOUNT, accountBean);
 		intent.putExtra("content", content);
 		intent.putExtra("failedReason", failedReason);
 		intent.putExtra("picPath", picPath);
@@ -128,7 +128,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	}
 
 	private void handleFailedOperation(Intent intent) {
-		accountBean = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		accountBean = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = accountBean.getAccess_token();
 		getActionBar().setSubtitle(accountBean.getUsernick());
 		String stringExtra = intent.getStringExtra("content");
@@ -373,7 +373,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	}
 
 	private void handleDraftOperation(Intent intent) {
-		accountBean = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		accountBean = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = accountBean.getAccess_token();
 		getActionBar().setSubtitle(accountBean.getUsernick());
 
@@ -397,7 +397,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	}
 
 	private void handleNormalOperation(Intent intent) {
-		accountBean = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		accountBean = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = accountBean.getAccess_token();
 		getActionBar().setSubtitle(accountBean.getUsernick());
 		String contentStr = intent.getStringExtra("content");
@@ -623,7 +623,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 			break;
 		case R.id.menu_at:
 			intent = new Intent(WriteWeiboActivity.this, AtUserActivity.class);
-			intent.putExtra(Constances.TOKEN, token);
+			intent.putExtra(Constants.TOKEN, token);
 			startActivityForResult(intent, AT_USER);
 			break;
 		case R.id.menu_txt_to_pic:
@@ -704,9 +704,9 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 
 	protected void executeTask(String contentString) {
 		Intent intent = new Intent(WriteWeiboActivity.this, SendWeiboService.class);
-		intent.putExtra(Constances.TOKEN, token);
+		intent.putExtra(Constants.TOKEN, token);
 		intent.putExtra("picPath", picPath);
-		intent.putExtra(Constances.ACCOUNT, accountBean);
+		intent.putExtra(Constants.ACCOUNT, accountBean);
 		intent.putExtra("content", contentString);
 		intent.putExtra("geo", geoBean);
 		intent.putExtra("draft", statusDraftBean);
@@ -767,7 +767,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 				break;
 			case R.id.menu_at:
 				Intent intent = new Intent(WriteWeiboActivity.this, AtUserActivity.class);
-				intent.putExtra(Constances.TOKEN, token);
+				intent.putExtra(Constants.TOKEN, token);
 				startActivityForResult(intent, AT_USER);
 				break;
 

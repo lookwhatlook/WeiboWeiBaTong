@@ -2,7 +2,7 @@ package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.AppLoggerUtils;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.MyAnimationListener;
 import org.zarroboogs.weibo.R;
@@ -271,11 +271,11 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.ACCOUNT, accountBean);
-		outState.putParcelable(Constances.USERBEAN, userBean);
-		outState.putString(Constances.TOKEN, token);
+		outState.putParcelable(Constants.ACCOUNT, accountBean);
+		outState.putParcelable(Constants.USERBEAN, userBean);
+		outState.putString(Constants.TOKEN, token);
 
-		// outState.putSerializable(Constances.BEAN, getList());
+		// outState.putSerializable(Constants.BEAN, getList());
 		// outState.putSerializable("groupDataCache", groupDataCache);
 		// outState.putString("currentGroupId", currentGroupId);
 	}
@@ -311,9 +311,9 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 			setListViewPositionFromPositionsCache();
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			userBean = savedInstanceState.getParcelable(Constances.USERBEAN);
-			accountBean = savedInstanceState.getParcelable(Constances.ACCOUNT);
-			token = savedInstanceState.getString(Constances.TOKEN);
+			userBean = savedInstanceState.getParcelable(Constants.USERBEAN);
+			accountBean = savedInstanceState.getParcelable(Constants.ACCOUNT);
+			token = savedInstanceState.getString(Constants.TOKEN);
 
 			if (Utility.isTaskStopped(dbTask) && getList().getSize() == 0) {
 				dbTask = new DBCacheTask(this, accountBean.getUid());
@@ -611,8 +611,8 @@ public class FriendsTimeLineFragment extends AbstractMessageTimeLineFragment<Mes
 			}
 			Intent intent = new Intent(getActivity(), clzz);
 			intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-			intent.putExtra(Constances.TOKEN, token);
-			intent.putExtra(Constances.ACCOUNT, accountBean);
+			intent.putExtra(Constants.TOKEN, token);
+			intent.putExtra(Constants.ACCOUNT, accountBean);
 			startActivity(intent);
 			break;
 		case R.id.refresh:

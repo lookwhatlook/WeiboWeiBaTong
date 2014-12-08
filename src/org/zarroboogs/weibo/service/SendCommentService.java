@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.service;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteCommentActivity;
@@ -48,8 +48,8 @@ public class SendCommentService extends Service {
 		intent.putExtra("oriMsg", msg);
 		intent.putExtra("content", content);
 		intent.putExtra("comment_ori", comment_ori);
-		intent.putExtra(Constances.TOKEN, accountBean.getAccess_token());
-		intent.putExtra(Constances.ACCOUNT, accountBean);
+		intent.putExtra(Constants.TOKEN, accountBean.getAccess_token());
+		intent.putExtra(Constants.ACCOUNT, accountBean);
 		return intent;
 	}
 
@@ -66,8 +66,8 @@ public class SendCommentService extends Service {
 			NotificationUtility.cancel(lastNotificationId);
 		}
 
-		String token = intent.getStringExtra(Constances.TOKEN);
-		AccountBean account = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		String token = intent.getStringExtra(Constants.TOKEN);
+		AccountBean account = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		String content = intent.getStringExtra("content");
 		MessageBean oriMsg = (MessageBean) intent.getParcelableExtra("oriMsg");
 		boolean comment_ori = intent.getBooleanExtra("comment_ori", false);
@@ -212,8 +212,8 @@ public class SendCommentService extends Service {
 				intent.putExtra("oriMsg", oriMsg);
 				intent.putExtra("content", content);
 				intent.putExtra("comment_ori", comment_ori);
-				intent.putExtra(Constances.TOKEN, token);
-				intent.putExtra(Constances.ACCOUNT, account);
+				intent.putExtra(Constants.TOKEN, token);
+				intent.putExtra(Constants.ACCOUNT, account);
 
 				intent.putExtra("lastNotificationId", tasksNotifications.get(task));
 

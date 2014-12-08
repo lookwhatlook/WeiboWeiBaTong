@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
@@ -21,7 +21,7 @@ public class UserTopicListActivity extends AbstractAppActivity {
 
 	public static Intent newIntent(UserBean userBean, ArrayList<String> topicList) {
 		Intent intent = new Intent(GlobalContext.getInstance(), UserTopicListActivity.class);
-		intent.putExtra(Constances.USERBEAN, userBean);
+		intent.putExtra(Constants.USERBEAN, userBean);
 		intent.putStringArrayListExtra("topicList", topicList);
 		return intent;
 	}
@@ -30,7 +30,7 @@ public class UserTopicListActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		UserBean userBean = (UserBean) getIntent().getParcelableExtra(Constances.USERBEAN);
+		UserBean userBean = (UserBean) getIntent().getParcelableExtra(Constants.USERBEAN);
 		ArrayList<String> topicList = getIntent().getStringArrayListExtra("topicList");
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setTitle(getString(R.string.topic));

@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.fragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.UserListBean;
@@ -84,7 +84,7 @@ public abstract class AbstractFriendsFanListFragment extends AbstractUserListFra
 			refreshLayout(bean);
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			clearAndReplaceValue((UserListBean) savedInstanceState.getParcelable(Constances.BEAN));
+			clearAndReplaceValue((UserListBean) savedInstanceState.getParcelable(Constants.BEAN));
 			getAdapter().notifyDataSetChanged();
 			break;
 		}

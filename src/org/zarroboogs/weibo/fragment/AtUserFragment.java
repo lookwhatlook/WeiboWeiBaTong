@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SearchView;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -60,7 +60,7 @@ public class AtUserFragment extends ListFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(Constances.TOKEN, token);
+		outState.putString(Constants.TOKEN, token);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class AtUserFragment extends ListFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (savedInstanceState != null) {
-			token = savedInstanceState.getString(Constances.TOKEN);
+			token = savedInstanceState.getString(Constants.TOKEN);
 		}
 		adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, result);
 		setListAdapter(adapter);

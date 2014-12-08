@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.MyAnimationListener;
 import org.zarroboogs.weibo.R;
@@ -108,7 +108,7 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, bean);
+		outState.putParcelable(Constants.BEAN, bean);
 
 	}
 
@@ -167,7 +167,7 @@ public abstract class AbstractUserListFragment extends AbstractAppFragment {
 
 	protected void listViewItemClick(AdapterView parent, View view, int position, long id) {
 		Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-		intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+		intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 		intent.putExtra("user", bean.getUsers().get(position));
 		startActivity(intent);
 	}

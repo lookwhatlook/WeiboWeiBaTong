@@ -16,7 +16,7 @@ import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.UserInfoActivity;
@@ -93,7 +93,7 @@ public class BrowserCommentFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-				intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+				intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 				intent.putExtra("user", msg.getUser());
 				startActivity(intent);
 			}
@@ -159,7 +159,7 @@ public class BrowserCommentFragment extends Fragment {
 
 		case R.id.menu_comment:
 			intent = new Intent(getActivity(), WriteReplyToCommentActivity.class);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 			intent.putExtra("msg", msg);
 			getActivity().startActivity(intent);
 

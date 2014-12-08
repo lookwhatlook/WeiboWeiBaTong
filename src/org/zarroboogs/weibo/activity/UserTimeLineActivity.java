@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.fragment.StatusesByIdTimeLineFragment;
@@ -18,7 +18,7 @@ public class UserTimeLineActivity extends AbstractAppActivity {
 
 	public static Intent newIntent(String token, UserBean userBean) {
 		Intent intent = new Intent(GlobalContext.getInstance(), UserTimeLineActivity.class);
-		intent.putExtra(Constances.TOKEN, token);
+		intent.putExtra(Constants.TOKEN, token);
 		intent.putExtra("user", userBean);
 		return intent;
 	}
@@ -29,7 +29,7 @@ public class UserTimeLineActivity extends AbstractAppActivity {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setDisplayShowTitleEnabled(true);
 		getActionBar().setDisplayShowHomeEnabled(false);
-		String token = getIntent().getStringExtra(Constances.TOKEN);
+		String token = getIntent().getStringExtra(Constants.TOKEN);
 		UserBean bean = getIntent().getParcelableExtra("user");
 		getActionBar().setTitle(bean.getScreen_name());
 		if (getSupportFragmentManager().findFragmentByTag(StatusesByIdTimeLineFragment.class.getName()) == null) {

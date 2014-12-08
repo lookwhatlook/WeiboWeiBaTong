@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.fragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.DMActivity;
@@ -47,7 +47,7 @@ public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean>
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, bean);
+		outState.putParcelable(Constants.BEAN, bean);
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class DMUserListFragment extends AbstractTimeLineFragment<DMUserListBean>
 			refreshLayout(getList());
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			bean.addNewData((DMUserListBean) savedInstanceState.getParcelable(Constances.BEAN));
+			bean.addNewData((DMUserListBean) savedInstanceState.getParcelable(Constants.BEAN));
 			getAdapter().notifyDataSetChanged();
 			refreshLayout(getList());
 			break;

@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.ui.actionmenu;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.BrowserCommentActivity;
@@ -123,7 +123,7 @@ public class CommentSingleChoiceModeListener implements ActionMode.Callback {
 		case R.id.menu_view:
 			intent = new Intent(getActivity(), BrowserCommentActivity.class);
 			intent.putExtra("comment", bean);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 			getActivity().startActivity(intent);
 			listView.clearChoices();
 			mode.finish();
@@ -132,7 +132,7 @@ public class CommentSingleChoiceModeListener implements ActionMode.Callback {
 
 		case R.id.menu_comment:
 			intent = new Intent(getActivity(), WriteReplyToCommentActivity.class);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 			intent.putExtra("msg", bean);
 			getActivity().startActivity(intent);
 			listView.clearChoices();

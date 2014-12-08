@@ -11,7 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteRepostActivity;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -53,8 +53,8 @@ public class SendRepostService extends Service {
 			NotificationUtility.cancel(lastNotificationId);
 		}
 
-		String token = intent.getStringExtra(Constances.TOKEN);
-		AccountBean account = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		String token = intent.getStringExtra(Constants.TOKEN);
+		AccountBean account = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		String content = intent.getStringExtra("content");
 		MessageBean oriMsg = (MessageBean) intent.getParcelableExtra("oriMsg");
 		String is_comment = intent.getStringExtra("is_comment");
@@ -191,8 +191,8 @@ public class SendRepostService extends Service {
 				intent.putExtra("oriMsg", oriMsg);
 				intent.putExtra("content", content);
 				intent.putExtra("is_comment", is_comment);
-				intent.putExtra(Constances.TOKEN, token);
-				intent.putExtra(Constances.ACCOUNT, account);
+				intent.putExtra(Constants.TOKEN, token);
+				intent.putExtra(Constants.ACCOUNT, account);
 
 				intent.putExtra("lastNotificationId", tasksNotifications.get(task));
 

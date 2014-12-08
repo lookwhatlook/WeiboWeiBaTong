@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.adapter.DMConversationAdapter;
@@ -87,7 +87,7 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 	public static DMConversationListFragment newInstance(UserBean userBean) {
 		DMConversationListFragment fragment = new DMConversationListFragment();
 		Bundle bundle = new Bundle();
-		bundle.putParcelable(Constances.USERBEAN, userBean);
+		bundle.putParcelable(Constants.USERBEAN, userBean);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -99,8 +99,8 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, bean);
-		outState.putParcelable(Constances.USERBEAN, userBean);
+		outState.putParcelable(Constants.BEAN, bean);
+		outState.putParcelable(Constants.USERBEAN, userBean);
 		outState.putInt("page", page);
 	}
 
@@ -110,7 +110,7 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 		setHasOptionsMenu(true);
 		setRetainInstance(true);
 
-		this.userBean = getArguments().getParcelable(Constances.USERBEAN);
+		this.userBean = getArguments().getParcelable(Constants.USERBEAN);
 
 		switch (getCurrentState(savedInstanceState)) {
 		case FIRST_TIME_START:
@@ -129,8 +129,8 @@ public class DMConversationListFragment extends AbstractTimeLineFragment<DMListB
 			refreshLayout(getList());
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			getList().addNewData((DMListBean) savedInstanceState.getParcelable(Constances.BEAN));
-			userBean = (UserBean) savedInstanceState.getParcelable(Constances.USERBEAN);
+			getList().addNewData((DMListBean) savedInstanceState.getParcelable(Constants.BEAN));
+			userBean = (UserBean) savedInstanceState.getParcelable(Constants.USERBEAN);
 			page = savedInstanceState.getInt("page");
 			getAdapter().notifyDataSetChanged();
 			refreshLayout(bean);

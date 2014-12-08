@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.ShareListBean;
@@ -108,7 +108,7 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 		@Override
 		public void onSaveInstanceState(Bundle outState) {
 			super.onSaveInstanceState(outState);
-			outState.putParcelable(Constances.BEAN, bean);
+			outState.putParcelable(Constants.BEAN, bean);
 		}
 
 		@Override
@@ -124,7 +124,7 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 				refreshLayout(bean);
 				break;
 			case ACTIVITY_DESTROY_AND_CREATE:
-				getList().addNewData((ShareListBean) savedInstanceState.getParcelable(Constances.BEAN));
+				getList().addNewData((ShareListBean) savedInstanceState.getParcelable(Constants.BEAN));
 				timeLineAdapter.notifyDataSetChanged();
 				refreshLayout(bean);
 				break;

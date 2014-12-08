@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.IRemoveItem;
 import org.zarroboogs.weibo.adapter.CommentListAdapter;
@@ -71,12 +71,12 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 
-		outState.putParcelable(Constances.ACCOUNT, accountBean);
-		outState.putParcelable(Constances.USERBEAN, userBean);
-		outState.putString(Constances.TOKEN, token);
+		outState.putParcelable(Constants.ACCOUNT, accountBean);
+		outState.putParcelable(Constants.USERBEAN, userBean);
+		outState.putString(Constants.TOKEN, token);
 
 		if (getActivity().isChangingConfigurations()) {
-			outState.putParcelable(Constances.BEAN, bean);
+			outState.putParcelable(Constants.BEAN, bean);
 			outState.putSerializable("timeLinePosition", timeLinePosition);
 		}
 	}
@@ -109,9 +109,9 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
 			getLoaderManager().initLoader(DB_CACHE_LOADER_ID, null, dbCallback);
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			userBean = (UserBean) savedInstanceState.getParcelable(Constances.USERBEAN);
-			accountBean = (AccountBean) savedInstanceState.getParcelable(Constances.ACCOUNT);
-			token = savedInstanceState.getString(Constances.TOKEN);
+			userBean = (UserBean) savedInstanceState.getParcelable(Constants.USERBEAN);
+			accountBean = (AccountBean) savedInstanceState.getParcelable(Constants.ACCOUNT);
+			token = savedInstanceState.getString(Constants.TOKEN);
 			timeLinePosition = (TimeLinePosition) savedInstanceState.getSerializable("timeLinePosition");
 
 			Loader<CommentTimeLineData> loader = getLoaderManager().getLoader(DB_CACHE_LOADER_ID);
@@ -119,7 +119,7 @@ public class CommentsByMeTimeLineFragment extends AbstractTimeLineFragment<Comme
 				getLoaderManager().initLoader(DB_CACHE_LOADER_ID, null, dbCallback);
 			}
 
-			CommentListBean savedBean = (CommentListBean) savedInstanceState.getParcelable(Constances.BEAN);
+			CommentListBean savedBean = (CommentListBean) savedInstanceState.getParcelable(Constants.BEAN);
 			if (savedBean != null && savedBean.getSize() > 0) {
 				clearAndReplaceValue(savedBean);
 				timeLineAdapter.notifyDataSetChanged();

@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.activity;
 
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.utils.file.FileLocationMethod;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.TextNumLimitWatcher;
@@ -98,7 +98,7 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity imple
 			actionBar.setIcon(new BitmapDrawable(getResources(), bitmap));
 		}
 
-		token = getIntent().getStringExtra(Constances.TOKEN);
+		token = getIntent().getStringExtra(Constants.TOKEN);
 
 		View title = getLayoutInflater().inflate(R.layout.writeweiboactivity_title_layout, null);
 		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
@@ -190,7 +190,7 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity imple
 			break;
 		case R.id.menu_at:
 			Intent intent = new Intent(AbstractWriteActivity.this, AtUserActivity.class);
-			intent.putExtra(Constances.TOKEN, token);
+			intent.putExtra(Constants.TOKEN, token);
 			startActivityForResult(intent, AT_USER);
 			break;
 		}

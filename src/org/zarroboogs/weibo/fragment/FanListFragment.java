@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.fragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.UserBean;
@@ -22,7 +22,7 @@ public class FanListFragment extends AbstractFriendsFanListFragment {
 	public static FanListFragment newInstance(UserBean userBean) {
 		FanListFragment fragment = new FanListFragment();
 		Bundle bundle = new Bundle();
-		bundle.putParcelable(Constances.USERBEAN, userBean);
+		bundle.putParcelable(Constants.USERBEAN, userBean);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -39,7 +39,7 @@ public class FanListFragment extends AbstractFriendsFanListFragment {
 
 	@Override
 	protected UserBean getCurrentUser() {
-		return getArguments().getParcelable(Constances.USERBEAN);
+		return getArguments().getParcelable(Constants.USERBEAN);
 	}
 
 	private class FanListOnItemLongClickListener implements AdapterView.OnItemLongClickListener {

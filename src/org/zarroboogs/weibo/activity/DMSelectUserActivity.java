@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
@@ -213,7 +213,7 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 		public static SelectFriendsListFragment newInstance(UserBean userBean) {
 			SelectFriendsListFragment fragment = new SelectFriendsListFragment();
 			Bundle bundle = new Bundle();
-			bundle.putParcelable(Constances.USERBEAN, userBean);
+			bundle.putParcelable(Constants.USERBEAN, userBean);
 			fragment.setArguments(bundle);
 			return fragment;
 		}
@@ -238,7 +238,7 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 
 		@Override
 		protected UserBean getCurrentUser() {
-			return getArguments().getParcelable(Constances.USERBEAN);
+			return getArguments().getParcelable(Constants.USERBEAN);
 		}
 
 		@Override

@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.fragment.MyFavListFragment;
@@ -27,7 +27,7 @@ public class MyFavActivity extends AbstractAppActivity {
 		super.onCreate(savedInstanceState);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		getActionBar().setTitle(getString(R.string.my_fav_list));
-		String token = getIntent().getStringExtra(Constances.TOKEN);
+		String token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = (UserBean) getIntent().getParcelableExtra("user");
 		if (getSupportFragmentManager().findFragmentByTag(MyFavListFragment.class.getName()) == null) {
 			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, MyFavListFragment.newInstance(), MyFavListFragment.class.getName())

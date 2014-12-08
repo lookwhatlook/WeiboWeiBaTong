@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity;
@@ -65,7 +65,7 @@ public class SearchTopicByNameFragment extends AbstractMessageTimeLineFragment<T
 		super.onSaveInstanceState(outState);
 		outState.putString("q", q);
 		outState.putInt("page", page);
-		outState.putParcelable(Constances.BEAN, bean);
+		outState.putParcelable(Constants.BEAN, bean);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class SearchTopicByNameFragment extends AbstractMessageTimeLineFragment<T
 		case ACTIVITY_DESTROY_AND_CREATE:
 			q = savedInstanceState.getString("q");
 			page = savedInstanceState.getInt("page");
-			getList().addNewData((TopicResultListBean) savedInstanceState.getParcelable(Constances.BEAN));
+			getList().addNewData((TopicResultListBean) savedInstanceState.getParcelable(Constants.BEAN));
 			getAdapter().notifyDataSetChanged();
 			refreshLayout(getList());
 			break;
@@ -121,8 +121,8 @@ public class SearchTopicByNameFragment extends AbstractMessageTimeLineFragment<T
 		switch (item.getItemId()) {
 		case R.id.menu_write:
 			Intent intent = new Intent(getActivity(), WriteWeiboActivity.class);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
-			intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 			intent.putExtra("content", "#" + q + "#");
 			startActivity(intent);
 			break;

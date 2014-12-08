@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.AppLoggerUtils;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteWeiboActivity;
@@ -82,9 +82,9 @@ public class MyFriendSingleChoiceModeListener implements ActionMode.Callback {
 		switch (item.getItemId()) {
 		case R.id.menu_at:
 			Intent intent = new Intent(getActivity(), WriteWeiboActivity.class);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 			intent.putExtra("content", "@" + bean.getScreen_name());
-			intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
+			intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 			getActivity().startActivity(intent);
 			listView.clearChoices();
 			mode.finish();

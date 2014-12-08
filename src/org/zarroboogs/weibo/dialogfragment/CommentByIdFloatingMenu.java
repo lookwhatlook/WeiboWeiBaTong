@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.BrowserCommentActivity;
@@ -26,7 +26,7 @@ public class CommentByIdFloatingMenu extends DialogFragment {
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, bean);
+		outState.putParcelable(Constants.BEAN, bean);
 	}
 
 	public CommentByIdFloatingMenu() {
@@ -41,7 +41,7 @@ public class CommentByIdFloatingMenu extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 
 		if (savedInstanceState != null) {
-			bean = (CommentBean) savedInstanceState.getParcelable(Constances.BEAN);
+			bean = (CommentBean) savedInstanceState.getParcelable(Constants.BEAN);
 		}
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -54,14 +54,14 @@ public class CommentByIdFloatingMenu extends DialogFragment {
 				switch (which) {
 				case 0:
 					intent = new Intent(getActivity(), WriteReplyToCommentActivity.class);
-					intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+					intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 					intent.putExtra("msg", bean);
 					getActivity().startActivity(intent);
 					break;
 				case 1:
 					intent = new Intent(getActivity(), BrowserCommentActivity.class);
 					intent.putExtra("comment", bean);
-					intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+					intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 					getActivity().startActivity(intent);
 					break;
 				}

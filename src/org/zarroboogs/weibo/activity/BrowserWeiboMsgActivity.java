@@ -1,7 +1,7 @@
 package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.util.net.WeiboException;
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -74,7 +74,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 		Intent intent = new Intent(GlobalContext.getInstance(), BrowserWeiboMsgActivity.class);
 		intent.putExtra("weiboId", weiboId);
 		intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-		intent.putExtra(Constances.TOKEN, token);
+		intent.putExtra(Constants.TOKEN, token);
 		intent.setAction(ACTION_WITH_ID);
 		return intent;
 	}
@@ -83,7 +83,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 		Intent intent = new Intent(GlobalContext.getInstance(), BrowserWeiboMsgActivity.class);
 		intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
 		intent.putExtra("msg", msg);
-		intent.putExtra(Constances.TOKEN, token);
+		intent.putExtra(Constants.TOKEN, token);
 		intent.setAction(ACTION_WITH_DETAIL);
 		return intent;
 	}
@@ -92,7 +92,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putParcelable("msg", msg);
-		outState.putString(Constances.TOKEN, token);
+		outState.putString(Constants.TOKEN, token);
 		outState.putParcelable("mAccountBean", mAccountBean);
 	}
 
@@ -106,7 +106,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 			Log.d("RpostWeiBo_activity_oncreate01", "AccountBean == null ? : " + (mAccountBean == null));
 
 			msg = savedInstanceState.getParcelable("msg");
-			token = savedInstanceState.getString(Constances.TOKEN);
+			token = savedInstanceState.getString(Constants.TOKEN);
 			if (msg != null) {
 				buildContent();
 			} else {
@@ -121,13 +121,13 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 
 			String action = getIntent().getAction();
 			if (ACTION_WITH_ID.equalsIgnoreCase(action)) {
-				token = getIntent().getStringExtra(Constances.TOKEN);
+				token = getIntent().getStringExtra(Constants.TOKEN);
 				msgId = getIntent().getStringExtra("weiboId");
 				fetchUserInfoFromServer();
 				findViewById(android.R.id.content).setBackgroundDrawable(ThemeUtility.getDrawable(android.R.attr.windowBackground));
 			} else if (ACTION_WITH_DETAIL.equalsIgnoreCase(action)) {
 				Intent intent = getIntent();
-				token = intent.getStringExtra(Constances.TOKEN);
+				token = intent.getStringExtra(Constants.TOKEN);
 				msg = intent.getParcelableExtra("msg");
 				buildContent();
 			} else {
@@ -228,7 +228,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 			intent = new Intent(this, RepostWeiboMainActivity.class);
 			Log.d("RpostWeiBo_activity_start", "AccountBean == null ? : " + (mAccountBean == null));
 			intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, mAccountBean);
-			intent.putExtra(Constances.TOKEN, getToken());
+			intent.putExtra(Constants.TOKEN, getToken());
 			intent.putExtra("id", getMsg().getId());
 			intent.putExtra("msg", getMsg());
 			startActivity(intent);
@@ -236,7 +236,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 		case R.id.menu_comment:
 
 			intent = new Intent(this, WriteCommentActivity.class);
-			intent.putExtra(Constances.TOKEN, getToken());
+			intent.putExtra(Constants.TOKEN, getToken());
 			intent.putExtra("id", getMsg().getId());
 			intent.putExtra("msg", getMsg());
 			startActivity(intent);

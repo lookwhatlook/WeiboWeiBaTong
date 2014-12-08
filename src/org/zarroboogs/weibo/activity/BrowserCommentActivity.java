@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.bean.CommentBean;
 import org.zarroboogs.weibo.fragment.BrowserCommentFragment;
 
@@ -20,7 +20,7 @@ public class BrowserCommentActivity extends AbstractAppActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putString(Constances.TOKEN, token);
+		outState.putString(Constants.TOKEN, token);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class BrowserCommentActivity extends AbstractAppActivity {
 
 		Intent intent = getIntent();
 		CommentBean bean = (CommentBean) intent.getParcelableExtra("comment");
-		token = intent.getStringExtra(Constances.TOKEN);
+		token = intent.getStringExtra(Constants.TOKEN);
 
 		if (getFragmentManager().findFragmentByTag(BrowserCommentActivity.class.getName()) == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new BrowserCommentFragment(bean), BrowserCommentFragment.class.getName())

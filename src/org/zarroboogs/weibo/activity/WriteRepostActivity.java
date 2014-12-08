@@ -9,7 +9,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -80,7 +80,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 	}
 	
 	private void handleDraftOperation(Intent intent) {
-		AccountBean account = (AccountBean) intent.getParcelableExtra(Constances.ACCOUNT);
+		AccountBean account = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = account.getAccess_token();
 
 		repostDraftBean = (RepostDraftBean) intent.getParcelableExtra("draft");
@@ -98,7 +98,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 			String failedReason) {
 		Intent intent = new Intent(context, WriteRepostActivity.class);
 		intent.setAction(WriteRepostActivity.ACTION_SEND_FAILED);
-		intent.putExtra(Constances.ACCOUNT, accountBean);
+		intent.putExtra(Constants.ACCOUNT, accountBean);
 		intent.putExtra("content", content);
 		intent.putExtra("oriMsg", oriMsg);
 		intent.putExtra("failedReason", failedReason);
@@ -107,7 +107,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 	}
 
 	private void handleFailedOperation(Intent intent) {
-		token = ((AccountBean) intent.getParcelableExtra(Constances.ACCOUNT)).getAccess_token();
+		token = ((AccountBean) intent.getParcelableExtra(Constants.ACCOUNT)).getAccess_token();
 
 		msg = (MessageBean) intent.getParcelableExtra("oriMsg");
 		getEditTextView().setText(intent.getStringExtra("content"));
@@ -123,7 +123,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 
 	private void handleNormalOperation(Intent intent) {
 
-		token = intent.getStringExtra(Constances.TOKEN);
+		token = intent.getStringExtra(Constants.TOKEN);
 		if (TextUtils.isEmpty(token))
 			token = GlobalContext.getInstance().getSpecialToken();
 
@@ -145,7 +145,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 			savedEnableComment = savedInstanceState.getBoolean("comment");
 			savedEnableOriComment = savedInstanceState.getBoolean("oriComment");
 
-			token = savedInstanceState.getString(Constances.TOKEN);
+			token = savedInstanceState.getString(Constants.TOKEN);
 			msg = (MessageBean) savedInstanceState.getParcelable("msg");
 			repostDraftBean = (RepostDraftBean) savedInstanceState.getParcelable("repostDraftBean");
 		}
@@ -157,7 +157,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 		outState.putBoolean("comment", menuEnableComment.isChecked());
 		outState.putBoolean("oriComment", menuEnableOriComment.isChecked());
 
-		outState.putString(Constances.TOKEN, token);
+		outState.putString(Constants.TOKEN, token);
 		outState.putParcelable("msg", msg);
 		outState.putParcelable("repostDraftBean", repostDraftBean);
 	}
@@ -259,7 +259,7 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 			break;
 		case R.id.menu_at:
 			Intent intent = new Intent(WriteRepostActivity.this, AtUserActivity.class);
-			intent.putExtra(Constances.TOKEN, token);
+			intent.putExtra(Constants.TOKEN, token);
 			startActivityForResult(intent, AT_USER);
 			break;
 		case R.id.menu_clear:
@@ -323,8 +323,8 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 			intent.putExtra("oriMsg", msg);
 			intent.putExtra("content", getEditTextView().getText().toString());
 			intent.putExtra("is_comment", is_comment);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
-			intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 			startService(intent);
 			finish();
 		}

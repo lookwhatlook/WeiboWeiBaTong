@@ -1,10 +1,10 @@
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ImageUtility;
 import org.zarroboogs.utils.file.FileLocationMethod;
 import org.zarroboogs.utils.file.FileManager;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity;
@@ -505,9 +505,9 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, getList());
-		outState.putParcelable(Constances.USERBEAN, userBean);
-		outState.putString(Constances.TOKEN, token);
+		outState.putParcelable(Constants.BEAN, getList());
+		outState.putParcelable(Constants.USERBEAN, userBean);
+		outState.putString(Constants.TOKEN, token);
 	}
 
 	@Override
@@ -528,9 +528,9 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 			}
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			getList().replaceData((MessageListBean) savedInstanceState.getParcelable(Constances.BEAN));
-			userBean = (UserBean) savedInstanceState.getParcelable(Constances.USERBEAN);
-			token = savedInstanceState.getString(Constances.TOKEN);
+			getList().replaceData((MessageListBean) savedInstanceState.getParcelable(Constants.BEAN));
+			userBean = (UserBean) savedInstanceState.getParcelable(Constants.USERBEAN);
+			token = savedInstanceState.getString(Constants.TOKEN);
 			getAdapter().notifyDataSetChanged();
 			refreshLayout(getList());
 			displayBasicInfo();
@@ -697,7 +697,7 @@ public class UserInfoFragment extends AbstractMessageTimeLineFragment<MessageLis
 		case R.id.menu_edit:
 			if (isMyself() && isOpenedFromMainPage()) {
 				Intent intent = new Intent(getActivity(), EditMyProfileActivity.class);
-				intent.putExtra(Constances.USERBEAN, GlobalContext.getInstance().getAccountBean().getInfo());
+				intent.putExtra(Constants.USERBEAN, GlobalContext.getInstance().getAccountBean().getInfo());
 				startActivity(intent);
 				return true;
 			} else {

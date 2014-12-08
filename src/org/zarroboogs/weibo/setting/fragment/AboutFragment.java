@@ -2,7 +2,6 @@ package org.zarroboogs.weibo.setting.fragment;
 
 import org.zarroboogs.utils.AppLoggerUtils;
 import org.zarroboogs.utils.file.FileManager;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteWeiboActivity;

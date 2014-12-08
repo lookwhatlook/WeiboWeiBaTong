@@ -4,7 +4,7 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.fragment.AtUserFragment;
 
@@ -23,7 +23,7 @@ public class AtUserActivity extends AbstractAppActivity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(R.string.at_other);
 
-		String token = getIntent().getStringExtra(Constances.TOKEN);
+		String token = getIntent().getStringExtra(Constants.TOKEN);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new AtUserFragment(token)).commit();
 		}

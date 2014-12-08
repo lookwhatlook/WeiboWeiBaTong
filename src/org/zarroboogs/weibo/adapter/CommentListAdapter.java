@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.adapter;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.activity.WriteReplyToCommentActivity;
 import org.zarroboogs.weibo.bean.CommentBean;
@@ -158,7 +158,7 @@ public class CommentListAdapter extends AbstractAppListAdapter<CommentBean> {
 						@Override
 						public void onClick(View v) {
 							Intent intent = new Intent(getActivity(), WriteReplyToCommentActivity.class);
-							intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+							intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 							intent.putExtra("msg", comment);
 							getActivity().startActivity(intent);
 						}

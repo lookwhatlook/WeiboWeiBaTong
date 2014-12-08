@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.setting.fragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.WriteCommentActivity;
@@ -99,7 +99,7 @@ public class DraftFragment extends ListFragment {
 					intent = new Intent(getActivity(), WriteWeiboActivity.class);
 					intent.setAction(WriteWeiboActivity.ACTION_DRAFT);
 					intent.putExtra("draft", item.getStatusDraftBean());
-					intent.putExtra(Constances.ACCOUNT, accountBean);
+					intent.putExtra(Constants.ACCOUNT, accountBean);
 					startActivity(intent);
 					break;
 
@@ -109,7 +109,7 @@ public class DraftFragment extends ListFragment {
 					intent = new Intent(getActivity(), WriteRepostActivity.class);
 					intent.setAction(WriteRepostActivity.ACTION_DRAFT);
 					intent.putExtra("draft", repostDraftBean);
-					intent.putExtra(Constances.ACCOUNT, accountBean);
+					intent.putExtra(Constants.ACCOUNT, accountBean);
 					startActivity(intent);
 					break;
 				case DraftTable.TYPE_COMMENT:

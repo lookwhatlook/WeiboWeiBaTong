@@ -6,7 +6,7 @@ import com.slidingmenu.lib.SlidingMenu;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -131,7 +131,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.ACCOUNT, mAccountBean);
+		outState.putParcelable(Constants.ACCOUNT, mAccountBean);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		UmengUpdateAgent.update(this);
 		
 		if (savedInstanceState != null) {
-			mAccountBean = savedInstanceState.getParcelable(Constances.ACCOUNT);
+			mAccountBean = savedInstanceState.getParcelable(Constants.ACCOUNT);
 			Log.d("ACCOUNTBEAN", "00000000000000000");
 		} else {
 			Intent intent = getIntent();

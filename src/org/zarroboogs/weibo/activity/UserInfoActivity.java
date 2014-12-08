@@ -2,8 +2,8 @@ package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ErrorCode;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -91,7 +91,7 @@ public class UserInfoActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initLayout();
-		token = getIntent().getStringExtra(Constances.TOKEN);
+		token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = getIntent().getParcelableExtra("user");
 		if (bean == null) {
 			String id = getIntent().getStringExtra("id");
@@ -126,12 +126,12 @@ public class UserInfoActivity extends AbstractAppActivity {
 				return;
 			}
 			Intent intent = new Intent(this, MyInfoActivity.class);
-			intent.putExtra(Constances.TOKEN, getToken());
+			intent.putExtra(Constants.TOKEN, getToken());
 
 			UserBean userBean = new UserBean();
 			userBean.setId(GlobalContext.getInstance().getCurrentAccountId());
 			intent.putExtra("user", bean);
-			intent.putExtra(Constances.ACCOUNT, GlobalContext.getInstance().getAccountBean());
+			intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 			startActivity(intent);
 			finish();
 		}
@@ -242,12 +242,12 @@ public class UserInfoActivity extends AbstractAppActivity {
 			return true;
 		case R.id.menu_edit:
 			intent = new Intent(this, EditMyProfileActivity.class);
-			intent.putExtra(Constances.USERBEAN, GlobalContext.getInstance().getAccountBean().getInfo());
+			intent.putExtra(Constants.USERBEAN, GlobalContext.getInstance().getAccountBean().getInfo());
 			startActivity(intent);
 			return true;
 		case R.id.menu_at:
 			intent = new Intent(this, WeiboMainActivity.class);
-			intent.putExtra(Constances.TOKEN, getToken());
+			intent.putExtra(Constants.TOKEN, getToken());
 			intent.putExtra("content", "@" + bean.getScreen_name());
 			intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, GlobalContext.getInstance().getAccountBean());
 			startActivity(intent);

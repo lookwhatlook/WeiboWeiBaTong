@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.fragment;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.BrowserWeiboMsgActivity;
@@ -33,8 +33,8 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
 	public static StatusesByIdTimeLineFragment newInstance(UserBean userBean, String token) {
 		StatusesByIdTimeLineFragment fragment = new StatusesByIdTimeLineFragment();
 		Bundle bundle = new Bundle();
-		bundle.putParcelable(Constances.USERBEAN, userBean);
-		bundle.putString(Constances.TOKEN, token);
+		bundle.putParcelable(Constants.USERBEAN, userBean);
+		bundle.putString(Constants.TOKEN, token);
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -46,8 +46,8 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		userBean = getArguments().getParcelable(Constances.USERBEAN);
-		token = getArguments().getString(Constances.TOKEN);
+		userBean = getArguments().getParcelable(Constants.USERBEAN);
+		token = getArguments().getString(Constants.TOKEN);
 	}
 
 	@Override
@@ -100,9 +100,9 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, getList());
-		outState.putParcelable(Constances.USERBEAN, userBean);
-		outState.putString(Constances.TOKEN, token);
+		outState.putParcelable(Constants.BEAN, getList());
+		outState.putParcelable(Constants.USERBEAN, userBean);
+		outState.putString(Constants.TOKEN, token);
 	}
 
 	@Override
@@ -126,9 +126,9 @@ public class StatusesByIdTimeLineFragment extends AbstractMessageTimeLineFragmen
 			refreshLayout(getList());
 			break;
 		case ACTIVITY_DESTROY_AND_CREATE:
-			getList().replaceData((MessageListBean) savedInstanceState.getParcelable(Constances.BEAN));
-			userBean = (UserBean) savedInstanceState.getParcelable(Constances.USERBEAN);
-			token = savedInstanceState.getString(Constances.TOKEN);
+			getList().replaceData((MessageListBean) savedInstanceState.getParcelable(Constants.BEAN));
+			userBean = (UserBean) savedInstanceState.getParcelable(Constants.USERBEAN);
+			token = savedInstanceState.getString(Constants.TOKEN);
 			getAdapter().notifyDataSetChanged();
 			refreshLayout(getList());
 			break;

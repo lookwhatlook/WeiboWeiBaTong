@@ -2,8 +2,8 @@ package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.AppLoggerUtils;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.WeiBoURLs;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -127,7 +127,7 @@ public class OAuthActivity extends AbstractAppActivity {
 
 		Map<String, String> parameters = new HashMap<String, String>();
 		parameters.put("client_id", WeiBoURLs.APP_KEY);
-		parameters.put("response_type", Constances.TOKEN);
+		parameters.put("response_type", Constants.TOKEN);
 		parameters.put("redirect_uri", WeiBoURLs.DIRECT_URL);
 		parameters.put("display", "mobile");
 		return WeiBoURLs.URL_OAUTH2_ACCESS_AUTHORIZE + "?" + Utility.encodeUrl(parameters) + "&scope=friendships_groups_read,friendships_groups_write";

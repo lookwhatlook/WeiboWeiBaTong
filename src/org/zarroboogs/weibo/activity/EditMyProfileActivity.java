@@ -1,8 +1,8 @@
 package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.ImageUtility;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -78,7 +78,7 @@ public class EditMyProfileActivity extends AbstractAppActivity implements Dialog
 		getActionBar().setTitle(getString(R.string.edit_my_profile));
 		setContentView(R.layout.editmyprofileactivity_layout);
 		initLayout();
-		userBean = (UserBean) getIntent().getParcelableExtra(Constances.USERBEAN);
+		userBean = (UserBean) getIntent().getParcelableExtra(Constants.USERBEAN);
 		initValue(savedInstanceState);
 
 	}

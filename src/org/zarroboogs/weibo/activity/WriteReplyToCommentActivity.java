@@ -1,6 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
@@ -44,7 +44,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constances.BEAN, bean);
+		outState.putParcelable(Constants.BEAN, bean);
 		outState.putParcelable("replyDraftBean", replyDraftBean);
 		outState.putBoolean("repost", enableRepost.isChecked());
 	}
@@ -54,7 +54,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 		super.onRestoreInstanceState(savedInstanceState);
 		if (savedInstanceState != null) {
 			savedEnableRepost = savedInstanceState.getBoolean("repost", false);
-			bean = (CommentBean) savedInstanceState.getParcelable(Constances.BEAN);
+			bean = (CommentBean) savedInstanceState.getParcelable(Constants.BEAN);
 			replyDraftBean = (ReplyDraftBean) savedInstanceState.getParcelable("replyDraftBean");
 		}
 	}
@@ -103,7 +103,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 			String repostContent, String failedReason) {
 		Intent intent = new Intent(context, WriteReplyToCommentActivity.class);
 		intent.setAction(WriteReplyToCommentActivity.ACTION_SEND_FAILED);
-		intent.putExtra(Constances.ACCOUNT, account);
+		intent.putExtra(Constants.ACCOUNT, account);
 		intent.putExtra("content", content);
 		intent.putExtra("oriMsg", oriMsg);
 		intent.putExtra("failedReason", failedReason);
@@ -115,13 +115,13 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 	public static Intent newIntentFromNotification(Context context, AccountBean account, CommentBean oriMsg) {
 		Intent intent = new Intent(context, WriteReplyToCommentActivity.class);
 		intent.setAction(WriteReplyToCommentActivity.ACTION_NOTIFICATION_REPLY);
-		intent.putExtra(Constances.ACCOUNT, account);
+		intent.putExtra(Constants.ACCOUNT, account);
 		intent.putExtra("oriMsg", oriMsg);
 		return intent;
 	}
 
 	private void handleFailedOperation(Intent intent) {
-		token = ((AccountBean) intent.getParcelableExtra(Constances.ACCOUNT)).getAccess_token();
+		token = ((AccountBean) intent.getParcelableExtra(Constants.ACCOUNT)).getAccess_token();
 		bean = (CommentBean) getIntent().getParcelableExtra("oriMsg");
 		getEditTextView().setHint("@" + bean.getUser().getScreen_name() + "：" + bean.getText());
 		getEditTextView().setError(intent.getStringExtra("failedReason"));
@@ -133,7 +133,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 	}
 
 	private void handleNotificationReplyOperation(Intent intent) {
-		token = ((AccountBean) intent.getParcelableExtra(Constances.ACCOUNT)).getAccess_token();
+		token = ((AccountBean) intent.getParcelableExtra(Constants.ACCOUNT)).getAccess_token();
 		bean = (CommentBean) getIntent().getParcelableExtra("oriMsg");
 		getEditTextView().setHint("@" + bean.getUser().getScreen_name() + "：" + bean.getText());
 		if (!TextUtils.isEmpty(intent.getStringExtra("repostContent"))) {
@@ -143,7 +143,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 
 	private void handleNormalOperation(Intent intent) {
 
-		token = intent.getStringExtra(Constances.TOKEN);
+		token = intent.getStringExtra(Constants.TOKEN);
 		if (TextUtils.isEmpty(token)) {
 			token = GlobalContext.getInstance().getSpecialToken();
 		}
@@ -153,7 +153,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 	}
 
 	private void handleDraftOperation(Intent intent) {
-		token = intent.getStringExtra(Constances.TOKEN);
+		token = intent.getStringExtra(Constants.TOKEN);
 		if (TextUtils.isEmpty(token)) {
 			token = GlobalContext.getInstance().getSpecialToken();
 		}
@@ -230,7 +230,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 			break;
 		case R.id.menu_at:
 			Intent intent = new Intent(WriteReplyToCommentActivity.this, AtUserActivity.class);
-			intent.putExtra(Constances.TOKEN, token);
+			intent.putExtra(Constants.TOKEN, token);
 			startActivityForResult(intent, AT_USER);
 			break;
 		case R.id.menu_clear:
@@ -297,7 +297,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 	protected AccountBean getCurrentAccountBean() {
 		if (WriteReplyToCommentActivity.ACTION_NOTIFICATION_REPLY.equals(getIntent().getAction())
 				|| WriteReplyToCommentActivity.ACTION_SEND_FAILED.equals(getIntent().getAction())) {
-			AccountBean accountBean = ((AccountBean) getIntent().getParcelableExtra(Constances.ACCOUNT));
+			AccountBean accountBean = ((AccountBean) getIntent().getParcelableExtra(Constants.ACCOUNT));
 			return accountBean;
 		} else {
 			return super.getCurrentAccountBean();

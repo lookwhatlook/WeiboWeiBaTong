@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
-import org.zarroboogs.weibo.Constances;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.RepostWeiboMainActivity;
@@ -133,7 +133,7 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
 		switch (item.getItemId()) {
 		case R.id.menu_repost:
 			intent = new Intent(getActivity(), RepostWeiboMainActivity.class);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 			intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, mAccountBean);
 			intent.putExtra("id", String.valueOf(ids[0]));
 			intent.putExtra("msg", bean);
@@ -143,7 +143,7 @@ public class StatusSingleChoiceModeListener implements ActionMode.Callback {
 			break;
 		case R.id.menu_comment:
 			intent = new Intent(getActivity(), WriteCommentActivity.class);
-			intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+			intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 			intent.putExtra("id", String.valueOf(ids[0]));
 			intent.putExtra("msg", bean);
 			getActivity().startActivity(intent);

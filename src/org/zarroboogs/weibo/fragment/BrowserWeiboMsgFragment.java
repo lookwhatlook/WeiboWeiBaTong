@@ -4,8 +4,8 @@ package org.zarroboogs.weibo.fragment;
 //import com.google.android.gms.maps.MapsInitializer;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.utils.file.FileLocationMethod;
-import org.zarroboogs.weibo.Constances;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.IRemoveItem;
 import org.zarroboogs.weibo.MyAnimationListener;
@@ -407,7 +407,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(getActivity(), UserInfoActivity.class);
-				intent.putExtra(Constances.TOKEN, GlobalContext.getInstance().getSpecialToken());
+				intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
 				intent.putExtra("user", msg.getUser());
 				startActivity(intent);
 			}
@@ -798,7 +798,7 @@ public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRem
 				// BrowserWeiboMsgActivity.class);
 				// intent.putExtra("msg", repostList.getItemList().get(position
 				// - listView.getHeaderViewsCount()));
-				// intent.putExtra(Constances.TOKEN,
+				// intent.putExtra(Constants.TOKEN,
 				// GlobalContext.getInstance().getSpecialToken());
 				// startActivity(intent);
 			} else {
