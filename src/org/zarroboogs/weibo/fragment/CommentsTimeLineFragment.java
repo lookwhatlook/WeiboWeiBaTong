@@ -6,6 +6,7 @@ import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.adapter.CommentsTimeLinePagerAdapter;
 import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
 import org.zarroboogs.weibo.bean.UnreadTabIndex;
+import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
@@ -26,7 +27,7 @@ import android.widget.TextView;
 /**
  * User: qii Date: 13-4-5
  */
-public class CommentsTimeLineFragment extends AbstractAppFragment implements MainTimeLineActivity.ScrollableListFragment {
+public class CommentsTimeLineFragment extends BaseStateFragment implements MainTimeLineActivity.ScrollableListFragment {
 
 	private ViewPager viewPager;
 

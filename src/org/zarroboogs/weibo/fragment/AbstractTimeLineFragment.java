@@ -7,6 +7,7 @@ import org.zarroboogs.weibo.adapter.AbstractAppListAdapter;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.DataItem;
 import org.zarroboogs.weibo.bean.data.DataListItem;
+import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.loader.AbstractAsyncNetRequestTaskLoader;
 import org.zarroboogs.weibo.loader.DummyLoader;
 import org.zarroboogs.weibo.setting.SettingUtils;
@@ -48,7 +49,7 @@ import android.widget.TextView;
  * solve Android configuration change(for example: change screen orientation,
  * change system language)
  */
-public abstract class AbstractTimeLineFragment<T extends DataListItem> extends AbstractAppFragment {
+public abstract class AbstractTimeLineFragment<T extends DataListItem> extends BaseStateFragment {
 
 	protected PullToRefreshListView mPullToRefreshListView;
 

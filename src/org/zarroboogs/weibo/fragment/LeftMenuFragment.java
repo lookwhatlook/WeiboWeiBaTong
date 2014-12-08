@@ -14,6 +14,7 @@ import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.db.task.CommentToMeTimeLineDBTask;
 import org.zarroboogs.weibo.db.task.MentionCommentsTimeLineDBTask;
 import org.zarroboogs.weibo.db.task.MentionWeiboTimeLineDBTask;
+import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.setting.activity.SettingActivity;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
@@ -47,7 +48,7 @@ import java.util.TreeSet;
 /**
  * User: qii Date: 13-1-22
  */
-public class LeftMenuFragment extends AbstractAppFragment {
+public class LeftMenuFragment extends BaseStateFragment {
 
 	private Layout layout;
 

@@ -6,6 +6,7 @@ import org.zarroboogs.weibo.activity.MainTimeLineActivity.ScrollableListFragment
 import org.zarroboogs.weibo.adapter.SearchSuggestionProvider;
 import org.zarroboogs.weibo.adapter.SearchTimeLinePagerAdapter;
 import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
+import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
@@ -34,7 +35,7 @@ import android.widget.TextView;
 /**
  * User: qii Date: 13-5-11
  */
-public class SearchMainParentFragment extends AbstractAppFragment implements MainTimeLineActivity.ScrollableListFragment {
+public class SearchMainParentFragment extends BaseStateFragment implements MainTimeLineActivity.ScrollableListFragment {
 
 	private ViewPager viewPager;
 

@@ -9,6 +9,7 @@ import org.zarroboogs.weibo.activity.UserInfoActivity;
 import org.zarroboogs.weibo.adapter.UserListAdapter;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.UserListBean;
+import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.loader.AbstractAsyncNetRequestTaskLoader;
 import org.zarroboogs.weibo.loader.DummyLoader;
 import org.zarroboogs.weibo.setting.SettingUtils;
@@ -39,7 +40,7 @@ import android.widget.Toast;
 /**
  * User: qii Date: 12-8-18
  */
-public abstract class AbstractUserListFragment extends AbstractAppFragment {
+public abstract class AbstractUserListFragment extends BaseStateFragment {
 
 	protected View footerView;
 

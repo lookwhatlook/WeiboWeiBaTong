@@ -24,6 +24,7 @@ import org.zarroboogs.weibo.bean.GeoBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.bean.data.RepostListBean;
 import org.zarroboogs.weibo.dao.DestroyCommentDao;
+import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.loader.CommentsByIdMsgLoader;
 import org.zarroboogs.weibo.loader.RepostByIdMsgLoader;
 import org.zarroboogs.weibo.setting.SettingUtils;
@@ -79,7 +80,7 @@ import java.util.ArrayList;
  * User: qii Date: 12-9-1
  */
 @SuppressLint("ValidFragment")
-public class BrowserWeiboMsgFragment extends AbstractAppFragment implements IRemoveItem {
+public class BrowserWeiboMsgFragment extends BaseStateFragment implements IRemoveItem {
 
 	private MessageBean msg;
 

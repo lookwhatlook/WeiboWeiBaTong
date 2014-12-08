@@ -3,9 +3,6 @@ package org.zarroboogs.weibo.support.utils;
 import android.app.Activity;
 import android.view.View;
 
-/**
- * User: qii Date: 14-1-31
- */
 public class ViewUtility {
 
 	@SuppressWarnings("unchecked")
