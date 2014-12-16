@@ -104,10 +104,10 @@
             android:name="org.zarroboogs.weibo.activity.WriteRepostActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="org.zarroboogs.weibo.activity.WriteCommentActivityty"
+            android:name="org.zarroboogs.weibo.activity.WriteCommentActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
         <activity
-            android:name="org.zarroboogs.weibo.activity.WriteReplyToCommentActivityity"
+            android:name="org.zarroboogs.weibo.activity.WriteReplyToCommentActivity"
             android:windowSoftInputMode="stateVisible|adjustResize" />
 
         <!-- browser activity -->
