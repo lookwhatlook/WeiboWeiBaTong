@@ -6,14 +6,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.fragment.MentionsCommentTimeLineFragment;
 import org.zarroboogs.weibo.fragment.MentionsTimeLineFragment;
 import org.zarroboogs.weibo.fragment.MentionsWeiboTimeLineFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 
-/**
- * User: qii Date: 13-3-8
- */
 public class MentionsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
 	private SparseArray<Fragment> fragmentList;
@@ -53,4 +51,11 @@ public class MentionsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 		return 2;
 	}
 
+	@Override
+	public CharSequence getPageTitle(int position) {
+	    if (position == 0) {
+            return fragmentList.get(position).getActivity().getResources().getString(R.string.mentions_to_me);
+        }
+	    return fragmentList.get(position).getActivity().getResources().getString(R.string.mentions_weibo);
+	}
 }

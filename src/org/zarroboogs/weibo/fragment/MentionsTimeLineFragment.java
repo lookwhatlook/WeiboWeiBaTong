@@ -4,7 +4,6 @@ import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.adapter.MentionsTimeLinePagerAdapter;
-import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
 import org.zarroboogs.weibo.bean.UnreadTabIndex;
 import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
@@ -12,7 +11,8 @@ import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
 
-import android.app.ActionBar;
+import com.example.android.common.view.SlidingTabLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -23,23 +23,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-/**
- * User: qii Date: 13-3-31
- */
 public class MentionsTimeLineFragment extends BaseStateFragment implements MainTimeLineActivity.ScrollableListFragment {
 
 	private ViewPager viewPager;
 
 	private SparseArray<Fragment> childrenFragments = new SparseArray<Fragment>();
 
-	private SparseArray<ActionBar.Tab> tabMap = new SparseArray<ActionBar.Tab>();
-
 	public static final int MENTIONS_WEIBO_CHILD_POSITION = 0;
 
 	public static final int MENTIONS_COMMENT_CHILD_POSITION = 1;
 
+	private SlidingTabLayout mSlidingTabLayout;
 	public static MentionsTimeLineFragment newInstance() {
 		MentionsTimeLineFragment fragment = new MentionsTimeLineFragment();
 		fragment.setArguments(new Bundle());
@@ -55,30 +50,31 @@ public class MentionsTimeLineFragment extends BaseStateFragment implements MainT
 		}
 	}
 
-	private ActionBar.Tab buildMentionsCommentTab(SimpleTwoTabsListener tabListener) {
-		ActionBar.Tab mentionsCommentTab;
-		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
-		((TextView) customView.findViewById(R.id.title)).setText(R.string.mentions_to_me);
-		mentionsCommentTab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(MentionsCommentTimeLineFragment.class.getName())
-				.setTabListener(tabListener);
-		tabMap.append(MENTIONS_COMMENT_CHILD_POSITION, mentionsCommentTab);
-		return mentionsCommentTab;
-	}
-
-	private ActionBar.Tab buildMentionsWeiboTab(SimpleTwoTabsListener tabListener) {
-		ActionBar.Tab mentionsWeiboTab;
-		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
-		((TextView) customView.findViewById(R.id.title)).setText(R.string.mentions_weibo);
-		mentionsWeiboTab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(MentionsWeiboTimeLineFragment.class.getName())
-				.setTabListener(tabListener);
-		tabMap.append(MENTIONS_WEIBO_CHILD_POSITION, mentionsWeiboTab);
-		return mentionsWeiboTab;
-	}
+//	private ActionBar.Tab buildMentionsCommentTab(SimpleTwoTabsListener tabListener) {
+//		ActionBar.Tab mentionsCommentTab;
+//		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
+//		((TextView) customView.findViewById(R.id.title)).setText(R.string.mentions_to_me);
+//		mentionsCommentTab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(MentionsCommentTimeLineFragment.class.getName())
+//				.setTabListener(tabListener);
+//		tabMap.append(MENTIONS_COMMENT_CHILD_POSITION, mentionsCommentTab);
+//		return mentionsCommentTab;
+//	}
+//
+//	private ActionBar.Tab buildMentionsWeiboTab(SimpleTwoTabsListener tabListener) {
+//		ActionBar.Tab mentionsWeiboTab;
+//		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
+//		((TextView) customView.findViewById(R.id.title)).setText(R.string.mentions_weibo);
+//		mentionsWeiboTab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(MentionsWeiboTimeLineFragment.class.getName())
+//				.setTabListener(tabListener);
+//		tabMap.append(MENTIONS_WEIBO_CHILD_POSITION, mentionsWeiboTab);
+//		return mentionsWeiboTab;
+//	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.viewpager_layout, container, false);
-		viewPager = (ViewPager) view;
+		View view = inflater.inflate(R.layout.mention_timeline_fragment_layout, container, false);
+		viewPager = (ViewPager) view.findViewById(R.id.mentionViewpager);
+		mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.mentionSlidingTab);
 		return view;
 	}
 
@@ -90,6 +86,7 @@ public class MentionsTimeLineFragment extends BaseStateFragment implements MainT
 		viewPager.setOnPageChangeListener(onPageChangeListener);
 		MentionsTimeLinePagerAdapter adapter = new MentionsTimeLinePagerAdapter(this, viewPager, getChildFragmentManager(), childrenFragments);
 		viewPager.setAdapter(adapter);
+		mSlidingTabLayout.setViewPager(viewPager);
 	}
 
 	@Override
@@ -131,55 +128,55 @@ public class MentionsTimeLineFragment extends BaseStateFragment implements MainT
 	public void buildActionBarAndViewPagerTitles(int nav) {
 		((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
 
-		if (Utility.isDevicePort()) {
-			((MainTimeLineActivity) getActivity()).setTitle(R.string.mentions);
-			getActivity().getActionBar().setIcon(R.drawable.repost_light);
-		} else {
-			((MainTimeLineActivity) getActivity()).setTitle("");
-			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
-		}
-		ActionBar actionBar = getActivity().getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(Utility.isDevicePort());
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.removeAllTabs();
-		SimpleTwoTabsListener tabListener = new SimpleTwoTabsListener(viewPager);
-
-		ActionBar.Tab mentionsWeiboTab = getWeiboTab();
-		if (mentionsWeiboTab == null) {
-			mentionsWeiboTab = buildMentionsWeiboTab(tabListener);
-		}
-		actionBar.addTab(mentionsWeiboTab);
-
-		ActionBar.Tab mentionsCommentTab = getCommentTab();
-		if (mentionsCommentTab == null) {
-			mentionsCommentTab = buildMentionsCommentTab(tabListener);
-		}
-
-		actionBar.addTab(mentionsCommentTab);
-
-		if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
-			if (viewPager != null) {
-				viewPager.setCurrentItem(nav, false);
-			}
-
-		}
+//		if (Utility.isDevicePort()) {
+//			((MainTimeLineActivity) getActivity()).setTitle(R.string.mentions);
+//			getActivity().getActionBar().setIcon(R.drawable.repost_light);
+//		} else {
+//			((MainTimeLineActivity) getActivity()).setTitle("");
+//			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
+//		}
+//		ActionBar actionBar = getActivity().getActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(Utility.isDevicePort());
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//		actionBar.removeAllTabs();
+//		SimpleTwoTabsListener tabListener = new SimpleTwoTabsListener(viewPager);
+//
+//		ActionBar.Tab mentionsWeiboTab = getWeiboTab();
+//		if (mentionsWeiboTab == null) {
+//			mentionsWeiboTab = buildMentionsWeiboTab(tabListener);
+//		}
+//		actionBar.addTab(mentionsWeiboTab);
+//
+//		ActionBar.Tab mentionsCommentTab = getCommentTab();
+//		if (mentionsCommentTab == null) {
+//			mentionsCommentTab = buildMentionsCommentTab(tabListener);
+//		}
+//
+//		actionBar.addTab(mentionsCommentTab);
+//
+//		if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
+//			if (viewPager != null) {
+//				viewPager.setCurrentItem(nav, false);
+//			}
+//
+//		}
 	}
 
-	public ActionBar.Tab getWeiboTab() {
-		return tabMap.get(MENTIONS_WEIBO_CHILD_POSITION);
-	}
-
-	public ActionBar.Tab getCommentTab() {
-		return tabMap.get(MENTIONS_COMMENT_CHILD_POSITION);
-	}
+//	public ActionBar.Tab getWeiboTab() {
+//		return tabMap.get(MENTIONS_WEIBO_CHILD_POSITION);
+//	}
+//
+//	public ActionBar.Tab getCommentTab() {
+//		return tabMap.get(MENTIONS_COMMENT_CHILD_POSITION);
+//	}
 
 	ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
 		@Override
 		public void onPageSelected(int position) {
-			ActionBar ab = getActivity().getActionBar();
-			if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && ab.getTabAt(position) == tabMap.get(position)) {
-				ab.setSelectedNavigationItem(position);
-			}
+//			ActionBar ab = getActivity().getActionBar();
+//			if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && ab.getTabAt(position) == tabMap.get(position)) {
+//				ab.setSelectedNavigationItem(position);
+//			}
 			((LeftMenuFragment) ((MainTimeLineActivity) getActivity()).getLeftMenuFragment()).mentionsTabIndex = position;
 			clearActionMode();
 		}

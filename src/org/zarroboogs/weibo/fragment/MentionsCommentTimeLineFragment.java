@@ -115,12 +115,12 @@ public class MentionsCommentTimeLineFragment extends AbsBaseTimeLineFragment<Com
 		super.onResume();
 		setListViewPositionFromPositionsCache();
 		LocalBroadcastManager.getInstance(getActivity()).registerReceiver(newBroadcastReceiver, new IntentFilter(AppEventAction.NEW_MSG_BROADCAST));
-		setActionBarTabCount(newMsgTipBar.getValues().size());
+//		setActionBarTabCount(newMsgTipBar.getValues().size());
 		getNewMsgTipBar().setOnChangeListener(new TopTipsView.OnChangeListener() {
 			@Override
 			public void onChange(int count) {
 				((MainTimeLineActivity) getActivity()).setMentionsCommentCount(count);
-				setActionBarTabCount(count);
+//				setActionBarTabCount(count);
 			}
 		});
 		checkUnreadInfo();
@@ -160,24 +160,24 @@ public class MentionsCommentTimeLineFragment extends AbsBaseTimeLineFragment<Com
 		}
 	}
 
-	private void setActionBarTabCount(int count) {
-		MentionsTimeLineFragment parent = (MentionsTimeLineFragment) getParentFragment();
-		ActionBar.Tab tab = parent.getCommentTab();
-		if (tab == null) {
-			return;
-		}
-		String tabTag = (String) tab.getTag();
-		if (MentionsCommentTimeLineFragment.class.getName().equals(tabTag)) {
-			View customView = tab.getCustomView();
-			TextView countTV = (TextView) customView.findViewById(R.id.tv_home_count);
-			countTV.setText(String.valueOf(count));
-			if (count > 0) {
-				countTV.setVisibility(View.VISIBLE);
-			} else {
-				countTV.setVisibility(View.GONE);
-			}
-		}
-	}
+//	private void setActionBarTabCount(int count) {
+//		MentionsTimeLineFragment parent = (MentionsTimeLineFragment) getParentFragment();
+//		ActionBar.Tab tab = parent.getCommentTab();
+//		if (tab == null) {
+//			return;
+//		}
+//		String tabTag = (String) tab.getTag();
+//		if (MentionsCommentTimeLineFragment.class.getName().equals(tabTag)) {
+//			View customView = tab.getCustomView();
+//			TextView countTV = (TextView) customView.findViewById(R.id.tv_home_count);
+//			countTV.setText(String.valueOf(count));
+//			if (count > 0) {
+//				countTV.setVisibility(View.VISIBLE);
+//			} else {
+//				countTV.setVisibility(View.GONE);
+//			}
+//		}
+//	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -329,7 +329,7 @@ public class MentionsCommentTimeLineFragment extends AbsBaseTimeLineFragment<Com
 	private void setListViewUnreadTipBar(TimeLinePosition p) {
 		if (p != null && p.newMsgIds != null) {
 			newMsgTipBar.setValue(p.newMsgIds);
-			setActionBarTabCount(newMsgTipBar.getValues().size());
+//			setActionBarTabCount(newMsgTipBar.getValues().size());
 			((MainTimeLineActivity) getActivity()).setMentionsCommentCount(newMsgTipBar.getValues().size());
 
 		}

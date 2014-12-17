@@ -48,10 +48,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: qii Date: 12-7-29
- */
-@SuppressLint("ValidFragment")
 public class MentionsWeiboTimeLineFragment extends AbsTimeLineFragment<MessageListBean> {
 
 	private AccountBean accountBean;
@@ -93,12 +89,12 @@ public class MentionsWeiboTimeLineFragment extends AbsTimeLineFragment<MessageLi
 		super.onResume();
 		setListViewPositionFromPositionsCache();
 		LocalBroadcastManager.getInstance(getActivity()).registerReceiver(newBroadcastReceiver, new IntentFilter(AppEventAction.NEW_MSG_BROADCAST));
-		setActionBarTabCount(newMsgTipBar.getValues().size());
+//		setActionBarTabCount(newMsgTipBar.getValues().size());
 		getNewMsgTipBar().setOnChangeListener(new TopTipsView.OnChangeListener() {
 			@Override
 			public void onChange(int count) {
 				((MainTimeLineActivity) getActivity()).setMentionsWeiboCount(count);
-				setActionBarTabCount(count);
+//				setActionBarTabCount(count);
 			}
 		});
 		checkUnreadInfo();
@@ -168,24 +164,24 @@ public class MentionsWeiboTimeLineFragment extends AbsTimeLineFragment<MessageLi
 		}
 	}
 
-	private void setActionBarTabCount(int count) {
-		MentionsTimeLineFragment parent = (MentionsTimeLineFragment) getParentFragment();
-		ActionBar.Tab tab = parent.getWeiboTab();
-		if (tab == null) {
-			return;
-		}
-		String tabTag = (String) tab.getTag();
-		if (MentionsWeiboTimeLineFragment.class.getName().equals(tabTag)) {
-			View customView = tab.getCustomView();
-			TextView countTV = (TextView) customView.findViewById(R.id.tv_home_count);
-			countTV.setText(String.valueOf(count));
-			if (count > 0) {
-				countTV.setVisibility(View.VISIBLE);
-			} else {
-				countTV.setVisibility(View.GONE);
-			}
-		}
-	}
+//	private void setActionBarTabCount(int count) {
+//		MentionsTimeLineFragment parent = (MentionsTimeLineFragment) getParentFragment();
+//		ActionBar.Tab tab = parent.getWeiboTab();
+//		if (tab == null) {
+//			return;
+//		}
+//		String tabTag = (String) tab.getTag();
+//		if (MentionsWeiboTimeLineFragment.class.getName().equals(tabTag)) {
+//			View customView = tab.getCustomView();
+//			TextView countTV = (TextView) customView.findViewById(R.id.tv_home_count);
+//			countTV.setText(String.valueOf(count));
+//			if (count > 0) {
+//				countTV.setVisibility(View.VISIBLE);
+//			} else {
+//				countTV.setVisibility(View.GONE);
+//			}
+//		}
+//	}
 
 	@Override
 	protected void newMsgLoaderSuccessCallback(MessageListBean newValue, Bundle loaderArgs) {
@@ -353,7 +349,7 @@ public class MentionsWeiboTimeLineFragment extends AbsTimeLineFragment<MessageLi
 	private void setListViewUnreadTipBar(TimeLinePosition p) {
 		if (p != null && p.newMsgIds != null) {
 			newMsgTipBar.setValue(p.newMsgIds);
-			setActionBarTabCount(newMsgTipBar.getValues().size());
+//			setActionBarTabCount(newMsgTipBar.getValues().size());
 			((MainTimeLineActivity) getActivity()).setMentionsWeiboCount(newMsgTipBar.getValues().size());
 		}
 	}
