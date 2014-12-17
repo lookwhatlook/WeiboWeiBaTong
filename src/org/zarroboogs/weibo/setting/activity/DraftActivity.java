@@ -4,24 +4,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.AbstractAppActivity;
 import org.zarroboogs.weibo.setting.fragment.DraftFragment;
 
 import com.umeng.analytics.MobclickAgent;
 
-/**
- * User: qii Date: 12-10-22
- */
 public class DraftActivity extends AbstractAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.draft));
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.draft));
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new DraftFragment()).commit();

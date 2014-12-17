@@ -10,17 +10,12 @@ import org.zarroboogs.weibo.support.lib.CheatSheet;
 
 import com.umeng.analytics.MobclickAgent;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-/**
- * User: qii Date: 13-2-19
- */
 public class BrowserWebActivity extends AbstractAppActivity {
 
 	private Button shareCountBtn;
@@ -45,9 +40,9 @@ public class BrowserWebActivity extends AbstractAppActivity {
 			url = getIntent().getStringExtra("url");
 		}
 
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(false);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(false);
 
 		View title = getLayoutInflater().inflate(R.layout.browserwebactivity_title_layout, null);
 		shareCountBtn = (Button) title.findViewById(R.id.share_count);
@@ -59,10 +54,10 @@ public class BrowserWebActivity extends AbstractAppActivity {
 				startActivity(intent);
 			}
 		});
-		getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
-		getActionBar().setDisplayShowCustomEnabled(true);
-
-		getActionBar().setTitle(url);
+//		getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		getActionBar().setDisplayShowCustomEnabled(true);
+//
+//		getActionBar().setTitle(url);
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new BrowserWebFragment(url)).commit();
 			new ShareCountTask().executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);

@@ -12,19 +12,16 @@ import org.zarroboogs.weibo.setting.fragment.AppearanceFragment;
 
 import com.umeng.analytics.MobclickAgent;
 
-/**
- * User: qii Date: 12-10-4
- */
 public class AppearanceActivity extends AbstractAppActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.pref_appearance_title));
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.pref_appearance_title));
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new AppearanceFragment()).commit();

@@ -17,19 +17,17 @@ import android.preference.PreferenceScreen;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-/**
- * User: qii Date: 13-9-17
- */
+
 public class OtherActivity extends AbstractAppActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.pref_other_title));
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.pref_other_title));
 
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction().replace(android.R.id.content, new OtherFragment()).commit();
