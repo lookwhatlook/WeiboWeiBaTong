@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.content.Loader;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.View;
 
 import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
@@ -43,6 +44,11 @@ public class SearchUserFragment extends AbstractUserListFragment {
 
 	}
 
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+	    super.onViewCreated(view, savedInstanceState);
+	    getBaseToolbar().setVisibility(View.GONE);
+	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

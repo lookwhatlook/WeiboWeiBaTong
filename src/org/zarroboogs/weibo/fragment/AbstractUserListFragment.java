@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -59,36 +60,7 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 	protected static final int OLD_USER_LOADER_ID = 2;
 
 	private boolean canLoadOldData = true;
-
-	public ListView getListView() {
-		return pullToRefreshListView.getRefreshableView();
-	}
-
-	protected UserListAdapter getAdapter() {
-		return userListAdapter;
-	}
-
-	protected void clearAndReplaceValue(UserListBean value) {
-
-		bean.setNext_cursor(value.getNext_cursor());
-		bean.getUsers().clear();
-		bean.getUsers().addAll(value.getUsers());
-		bean.setTotal_number(value.getTotal_number());
-		bean.setPrevious_cursor(value.getPrevious_cursor());
-
-	}
-
-	protected ActionMode actionMode;
-
-	public void setmActionMode(ActionMode mActionMode) {
-		this.actionMode = mActionMode;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		getListView().setFastScrollEnabled(SettingUtils.allowFastScroll());
-	}
+	private Toolbar mToolbar;
 
 	public AbstractUserListFragment() {
 
@@ -116,6 +88,8 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.listview_layout, container, false);
+		mToolbar = (Toolbar) view.findViewById(R.id.baseToolBar);
+		
 		empty = (TextView) view.findViewById(R.id.empty);
 		progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
 		pullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.listView);
@@ -135,6 +109,39 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 
 		return view;
 	}
+	   public ListView getListView() {
+	        return pullToRefreshListView.getRefreshableView();
+	    }
+	   
+	   public Toolbar getBaseToolbar(){
+	       return mToolbar;
+	   }
+
+	    protected UserListAdapter getAdapter() {
+	        return userListAdapter;
+	    }
+
+	    protected void clearAndReplaceValue(UserListBean value) {
+
+	        bean.setNext_cursor(value.getNext_cursor());
+	        bean.getUsers().clear();
+	        bean.getUsers().addAll(value.getUsers());
+	        bean.setTotal_number(value.getTotal_number());
+	        bean.setPrevious_cursor(value.getPrevious_cursor());
+
+	    }
+
+	    protected ActionMode actionMode;
+
+	    public void setmActionMode(ActionMode mActionMode) {
+	        this.actionMode = mActionMode;
+	    }
+
+	    @Override
+	    public void onResume() {
+	        super.onResume();
+	        getListView().setFastScrollEnabled(SettingUtils.allowFastScroll());
+	    }
 
 	private SoundPullEventListener<ListView> getPullEventListener() {
 		SoundPullEventListener<ListView> listener = new SoundPullEventListener<ListView>(getActivity());

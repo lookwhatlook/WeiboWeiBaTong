@@ -2,16 +2,16 @@ package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
-import org.zarroboogs.weibo.activity.MainTimeLineActivity.ScrollableListFragment;
 import org.zarroboogs.weibo.adapter.SearchSuggestionProvider;
 import org.zarroboogs.weibo.adapter.SearchTimeLinePagerAdapter;
-import org.zarroboogs.weibo.adapter.SimpleTwoTabsListener;
 import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
+
+import com.example.android.common.view.SlidingTabLayout;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -31,14 +31,11 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
-import android.widget.TextView;
 
-/**
- * User: qii Date: 13-5-11
- */
 public class SearchMainParentFragment extends BaseStateFragment implements MainTimeLineActivity.ScrollableListFragment {
 
 	private ViewPager viewPager;
+	private SlidingTabLayout mSlidingTabLayout;
 
 	private SparseArray<Fragment> searchFragments = new SparseArray<Fragment>();
 
@@ -79,28 +76,29 @@ public class SearchMainParentFragment extends BaseStateFragment implements MainT
 		}
 	}
 
-	private ActionBar.Tab buildSearchWeiboTab(SimpleTwoTabsListener tabListener) {
-		ActionBar.Tab tab;
-		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
-		((TextView) customView.findViewById(R.id.title)).setText(R.string.weibo);
-		tab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(SearchStatusFragment.class.getName()).setTabListener(tabListener);
-		tabMap.append(SEARCH_WEIBO_CHILD_POSITION, tab);
-		return tab;
-	}
-
-	private ActionBar.Tab buildSearchUserTab(SimpleTwoTabsListener tabListener) {
-		ActionBar.Tab tab;
-		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
-		((TextView) customView.findViewById(R.id.title)).setText(R.string.user);
-		tab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(SearchUserFragment.class.getName()).setTabListener(tabListener);
-		tabMap.append(SEARCH_USER_CHILD_POSITION, tab);
-		return tab;
-	}
+//	private ActionBar.Tab buildSearchWeiboTab(SimpleTwoTabsListener tabListener) {
+//		ActionBar.Tab tab;
+//		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
+//		((TextView) customView.findViewById(R.id.title)).setText(R.string.weibo);
+//		tab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(SearchStatusFragment.class.getName()).setTabListener(tabListener);
+//		tabMap.append(SEARCH_WEIBO_CHILD_POSITION, tab);
+//		return tab;
+//	}
+//
+//	private ActionBar.Tab buildSearchUserTab(SimpleTwoTabsListener tabListener) {
+//		ActionBar.Tab tab;
+//		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
+//		((TextView) customView.findViewById(R.id.title)).setText(R.string.user);
+//		tab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(SearchUserFragment.class.getName()).setTabListener(tabListener);
+//		tabMap.append(SEARCH_USER_CHILD_POSITION, tab);
+//		return tab;
+//	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.viewpager_layout, container, false);
-		viewPager = (ViewPager) view;
+		View view = inflater.inflate(R.layout.search_layout, container, false);
+		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+		mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.searchSTL);
 		return view;
 	}
 
@@ -113,6 +111,7 @@ public class SearchMainParentFragment extends BaseStateFragment implements MainT
 		SearchTimeLinePagerAdapter adapter = new SearchTimeLinePagerAdapter(this, viewPager, getChildFragmentManager(), (MainTimeLineActivity) getActivity(),
 				searchFragments);
 		viewPager.setAdapter(adapter);
+		mSlidingTabLayout.setViewPager(viewPager);
 	}
 
 	@Override
@@ -135,38 +134,38 @@ public class SearchMainParentFragment extends BaseStateFragment implements MainT
 	public void buildActionBarAndViewPagerTitles(int nav) {
 		((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
 
-		if (Utility.isDevicePort()) {
-			((MainTimeLineActivity) getActivity()).setTitle(R.string.search);
-			getActivity().getActionBar().setIcon(R.drawable.search_light);
-		} else {
-			((MainTimeLineActivity) getActivity()).setTitle("");
-			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
-		}
+//		if (Utility.isDevicePort()) {
+//			((MainTimeLineActivity) getActivity()).setTitle(R.string.search);
+//			getActivity().getActionBar().setIcon(R.drawable.search_light);
+//		} else {
+//			((MainTimeLineActivity) getActivity()).setTitle("");
+//			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
+//		}
 
-		ActionBar actionBar = getActivity().getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(Utility.isDevicePort());
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.removeAllTabs();
-		SimpleTwoTabsListener tabListener = new SimpleTwoTabsListener(viewPager);
-
-		ActionBar.Tab weiboTab = getWeiboTab();
-		if (weiboTab == null) {
-			weiboTab = buildSearchWeiboTab(tabListener);
-		}
-		actionBar.addTab(weiboTab);
-
-		ActionBar.Tab userTab = getUserTab();
-		if (userTab == null) {
-			userTab = buildSearchUserTab(tabListener);
-		}
-
-		actionBar.addTab(userTab);
-
-		if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
-			if (viewPager != null) {
-				viewPager.setCurrentItem(nav, false);
-			}
-		}
+//		ActionBar actionBar = getActivity().getActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(Utility.isDevicePort());
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//		actionBar.removeAllTabs();
+//		SimpleTwoTabsListener tabListener = new SimpleTwoTabsListener(viewPager);
+//
+//		ActionBar.Tab weiboTab = getWeiboTab();
+//		if (weiboTab == null) {
+//			weiboTab = buildSearchWeiboTab(tabListener);
+//		}
+//		actionBar.addTab(weiboTab);
+//
+//		ActionBar.Tab userTab = getUserTab();
+//		if (userTab == null) {
+//			userTab = buildSearchUserTab(tabListener);
+//		}
+//
+//		actionBar.addTab(userTab);
+//
+//		if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
+//			if (viewPager != null) {
+//				viewPager.setCurrentItem(nav, false);
+//			}
+//		}
 
 	}
 

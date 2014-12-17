@@ -16,9 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 
-/**
- * User: qii Date: 13-2-21
- */
 public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 
 	public static Intent newIntent(String url) {

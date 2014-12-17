@@ -19,7 +19,6 @@ import org.zarroboogs.weibo.fragment.base.AbsTimeLineFragment;
 import org.zarroboogs.weibo.loader.MyFavMsgLoader;
 import org.zarroboogs.weibo.support.utils.Utility;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -111,14 +110,12 @@ public class MyFavListFragment extends AbsTimeLineFragment<FavListBean> implemen
 
 		if (Utility.isDevicePort()) {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
-			getActivity().getActionBar().setIcon(R.drawable.ic_menu_fav);
+			getBaseToolbar().setLogo(R.drawable.ic_menu_fav);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
-			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
+			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
 		}
 
-		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getActivity().getActionBar().removeAllTabs();
 	}
 
 	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {

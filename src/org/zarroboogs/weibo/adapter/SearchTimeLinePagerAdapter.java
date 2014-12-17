@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.fragment.MentionsCommentTimeLineFragment;
 import org.zarroboogs.weibo.fragment.MentionsWeiboTimeLineFragment;
@@ -14,9 +15,6 @@ import org.zarroboogs.weibo.fragment.SearchStatusFragment;
 import org.zarroboogs.weibo.fragment.SearchUserFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 
-/**
- * User: qii Date: 13-5-11
- */
 public class SearchTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
 	private SparseArray<Fragment> fragmentList;
@@ -54,6 +52,14 @@ public class SearchTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 	@Override
 	public int getCount() {
 		return 2;
+	}
+	@Override
+	public CharSequence getPageTitle(int position) {
+	    if (position == 0) {
+            return fragmentList.get(position).getActivity().getResources().getString(R.string.weibo);
+        }else {
+            return fragmentList.get(position).getActivity().getResources().getString(R.string.user);
+        }
 	}
 
 }

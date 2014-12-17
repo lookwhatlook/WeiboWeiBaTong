@@ -10,9 +10,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-/**
- * User: qii Date: 12-9-19
- */
 public class BrowserCommentActivity extends AbstractAppActivity {
 
 	private String token;
@@ -27,7 +24,7 @@ public class BrowserCommentActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		Intent intent = getIntent();
 		CommentBean bean = (CommentBean) intent.getParcelableExtra("comment");

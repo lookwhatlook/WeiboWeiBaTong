@@ -45,9 +45,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-/**
- * User: qii Date: 13-1-22
- */
 public class LeftMenuFragment extends BaseStateFragment {
 
 	private Layout layout;
@@ -313,7 +310,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 	}
 
 	private boolean showCommentPage(boolean reset) {
-		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
+//		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == COMMENTS_INDEX && !reset) {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
@@ -369,7 +366,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 	}
 
 	private boolean showSearchPage(boolean reset) {
-		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
+//		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == SEARCH_INDEX && !reset) {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
@@ -427,7 +424,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 	}
 
 	private boolean showDMPage(boolean reset) {
-		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
+//		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == DM_INDEX && !reset) {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
@@ -476,7 +473,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 	}
 
 	private boolean showFavPage(boolean reset) {
-		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
+//		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == FAV_INDEX && !reset) {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
@@ -524,7 +521,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 	}
 
 	private boolean showProfilePage(boolean reset) {
-		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
+//		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == PROFILE_INDEX && !reset) {
 			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;

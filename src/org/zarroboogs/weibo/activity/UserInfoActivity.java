@@ -34,7 +34,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Parcelable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
@@ -44,9 +43,6 @@ import android.widget.Toast;
 
 import java.util.List;
 
-/**
- * User: Jiang Qi Date: 12-8-14
- */
 public class UserInfoActivity extends AbstractAppActivity {
 
 	private String token;
@@ -155,8 +151,8 @@ public class UserInfoActivity extends AbstractAppActivity {
 	}
 
 	private void fetchUserInfoFromServer() {
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayShowHomeEnabled(false);
 
 		String title = bean.getScreen_name();
 		if (TextUtils.isEmpty(title)) {
@@ -166,7 +162,7 @@ public class UserInfoActivity extends AbstractAppActivity {
 			title = bean.getId();
 		}
 
-		getActionBar().setTitle(title);
+//		getActionBar().setTitle(title);
 
 		CommonProgressDialogFragment dialog = CommonProgressDialogFragment.newInstance(getString(R.string.fetching_user_info));
 		getSupportFragmentManager().beginTransaction().add(dialog, CommonProgressDialogFragment.class.getName()).commit();
@@ -176,15 +172,15 @@ public class UserInfoActivity extends AbstractAppActivity {
 	private void initLayout() {
 		getWindow().setBackgroundDrawable(getResources().getDrawable(R.color.transparent));
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setTitle(getString(R.string.personal_info));
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setTitle(getString(R.string.personal_info));
 	}
 
 	private void buildContent() {
 		// if you open this activity with user id, must set title with nickname
 		// again
-		getActionBar().setTitle(bean.getScreen_name());
+//		getActionBar().setTitle(bean.getScreen_name());
 		new Handler(Looper.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run() {
