@@ -11,9 +11,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-/**
- * User: Jiang Qi Date: 12-8-6
- */
 public class SettingActivity extends AbstractAppActivity {
 
 	public static final String SOUND = "sound";
@@ -124,13 +121,14 @@ public class SettingActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.setting));
+		setContentView(R.layout.setting_activity_layout);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.setting));
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+			getFragmentManager().beginTransaction().replace(R.id.content_frame, new SettingsFragment()).commit();
 		}
 	}
 	

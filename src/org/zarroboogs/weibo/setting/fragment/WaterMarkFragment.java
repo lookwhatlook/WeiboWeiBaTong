@@ -1,17 +1,11 @@
 package org.zarroboogs.weibo.setting.fragment;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -22,9 +16,6 @@ import org.zarroboogs.weibo.setting.activity.SettingActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: qii Date: 12-10-24
- */
 public class WaterMarkFragment extends PreferenceFragment implements SharedPreferences.OnSharedPreferenceChangeListener {
 
 	private Preference frequency;
@@ -46,9 +37,9 @@ public class WaterMarkFragment extends PreferenceFragment implements SharedPrefe
 
 		View title = getActivity().getLayoutInflater().inflate(R.layout.filteractivity_title_layout, null);
 		Switch switchBtn = (Switch) title.findViewById(R.id.switchBtn);
-		getActivity().getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
-		getActivity().getActionBar().setDisplayShowCustomEnabled(true);
-		getActivity().getActionBar().setTitle("图片水印");
+//		getActivity().getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		getActivity().getActionBar().setDisplayShowCustomEnabled(true);
+//		getActivity().getActionBar().setTitle("图片水印");
 
 		switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override

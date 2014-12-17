@@ -1,28 +1,19 @@
 package org.zarroboogs.weibo.activity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.ViewConfiguration;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.GlobalContext;
-import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 
 import java.lang.reflect.Field;
 
-/**
- * User: Jiang Qi Date: 12-7-31
- */
+
 public class AbstractAppActivity extends FragmentActivity {
 
 	protected int theme = 0;

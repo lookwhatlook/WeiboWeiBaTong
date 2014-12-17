@@ -7,16 +7,13 @@ import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -58,8 +55,8 @@ public class NotificationFragment extends PreferenceFragment implements SharedPr
 
 		View title = getActivity().getLayoutInflater().inflate(R.layout.filteractivity_title_layout, null);
 		Switch switchBtn = (Switch) title.findViewById(R.id.switchBtn);
-		getActivity().getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
-		getActivity().getActionBar().setDisplayShowCustomEnabled(true);
+//		getActivity().getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		getActivity().getActionBar().setDisplayShowCustomEnabled(true);
 
 		switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override

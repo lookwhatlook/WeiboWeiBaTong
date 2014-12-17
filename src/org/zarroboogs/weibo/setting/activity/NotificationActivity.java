@@ -10,21 +10,19 @@ import org.zarroboogs.weibo.setting.fragment.NotificationFragment;
 
 import com.umeng.analytics.MobclickAgent;
 
-/**
- * User: qii Date: 12-10-24
- */
 public class NotificationActivity extends AbstractAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.notification));
+		setContentView(R.layout.setting_activity_layout);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.notification));
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction().replace(android.R.id.content, new NotificationFragment()).commit();
+			getFragmentManager().beginTransaction().replace(R.id.content_frame, new NotificationFragment()).commit();
 		}
 	}
 	

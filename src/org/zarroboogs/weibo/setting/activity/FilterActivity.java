@@ -1,9 +1,7 @@
 package org.zarroboogs.weibo.setting.activity;
 
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +9,6 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,22 +24,24 @@ import org.zarroboogs.weibo.setting.fragment.FilterTopicFragment;
 import org.zarroboogs.weibo.setting.fragment.FilterUserFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 
+import com.example.android.common.view.SlidingTabLayout;
 import com.umeng.analytics.MobclickAgent;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: qii Date: 12-9-21
- */
+
 public class FilterActivity extends AbstractAppActivity {
 
 	private ViewPager viewPager = null;
+	private SlidingTabLayout mSlidingTab;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+	      setContentView(R.layout.filter_activity_layout);
+	      
 		initLayout();
 
 	}
@@ -65,22 +64,22 @@ public class FilterActivity extends AbstractAppActivity {
 
 	private void initLayout() {
 
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowHomeEnabled(true);
-		getActionBar().setTitle(getString(R.string.filter));
-		setContentView(R.layout.viewpager_layout);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayShowHomeEnabled(true);
+//		getActionBar().setTitle(getString(R.string.filter));
 
-		ActionBar actionBar = getActionBar();
 
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.setTitle(getString(R.string.filter));
-		actionBar.setIcon(R.drawable.ic_filter);
+//		ActionBar actionBar = getActionBar();
+//
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.setTitle(getString(R.string.filter));
+//		actionBar.setIcon(R.drawable.ic_filter);
 
 		View title = getLayoutInflater().inflate(R.layout.filteractivity_title_layout, null);
 		Switch switchBtn = (Switch) title.findViewById(R.id.switchBtn);
-		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
-		actionBar.setDisplayShowCustomEnabled(true);
+//		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		actionBar.setDisplayShowCustomEnabled(true);
 
 		switchBtn.setChecked(SettingUtils.isEnableFilter());
 		switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -90,43 +89,45 @@ public class FilterActivity extends AbstractAppActivity {
 			}
 		});
 
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_keyword)).setTabListener(tabListener));
+//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+//		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_keyword)).setTabListener(tabListener));
+//
+//		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_user)).setTabListener(tabListener));
+//		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_topic)).setTabListener(tabListener));
+//
+//		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_source)).setTabListener(tabListener));
 
-		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_user)).setTabListener(tabListener));
-		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_topic)).setTabListener(tabListener));
-
-		actionBar.addTab(actionBar.newTab().setText(getString(R.string.filter_source)).setTabListener(tabListener));
-
-		viewPager = (ViewPager) findViewById(R.id.viewpager);
+		mSlidingTab = (SlidingTabLayout) findViewById(R.id.filterSTL);
+		viewPager = (ViewPager) findViewById(R.id.filterViewpager);
 		TimeLinePagerAdapter adapter = new TimeLinePagerAdapter(getSupportFragmentManager());
 		viewPager.setOffscreenPageLimit(4);
 		viewPager.setAdapter(adapter);
 		viewPager.setOnPageChangeListener(onPageChangeListener);
+		mSlidingTab.setViewPager(viewPager);
 
 	}
 
-	ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-
-		public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-			if (viewPager != null && viewPager.getCurrentItem() != tab.getPosition())
-				viewPager.setCurrentItem(tab.getPosition());
-
-		}
-
-		public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-		}
-
-		public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-		}
-	};
+//	ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+//
+//		public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+//			if (viewPager != null && viewPager.getCurrentItem() != tab.getPosition())
+//				viewPager.setCurrentItem(tab.getPosition());
+//
+//		}
+//
+//		public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//
+//		}
+//
+//		public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+//
+//		}
+//	};
 
 	ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
 		@Override
 		public void onPageSelected(int position) {
-			getActionBar().setSelectedNavigationItem(position);
+//			getActionBar().setSelectedNavigationItem(position);
 		}
 	};
 
@@ -178,6 +179,28 @@ public class FilterActivity extends AbstractAppActivity {
 		@Override
 		public int getCount() {
 			return list.size();
+		}
+		
+		@Override
+		public CharSequence getPageTitle(int position) {
+		    switch (position) {
+                case 0:{
+                    
+                   return FilterActivity.this.getResources().getString(R.string.filter_keyword);
+                }
+                case 1:{
+                    return FilterActivity.this.getResources().getString(R.string.filter_user);
+                }
+                case 2:{
+                    return FilterActivity.this.getResources().getString(R.string.filter_topic);
+                }
+                case 3:{
+                    return FilterActivity.this.getResources().getString(R.string.filter_source);
+                }
+
+                default:
+                    return "";
+            }
 		}
 	}
 

@@ -18,13 +18,14 @@ public class WaterMarkPrefActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.notification));
+	      setContentView(R.layout.setting_activity_layout);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.notification));
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction().replace(android.R.id.content, new WaterMarkFragment()).commit();
+			getFragmentManager().beginTransaction().replace(R.id.content_frame, new WaterMarkFragment()).commit();
 		}
 	}
 	
