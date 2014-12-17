@@ -6,14 +6,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.util.SparseArray;
 
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.fragment.CommentsByMeTimeLineFragment;
 import org.zarroboogs.weibo.fragment.CommentsTimeLineFragment;
 import org.zarroboogs.weibo.fragment.CommentsToMeTimeLineFragment;
 import org.zarroboogs.weibo.support.lib.AppFragmentPagerAdapter;
 
-/**
- * User: qii Date: 13-3-8
- */
 public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 
 	private SparseArray<Fragment> fragmentList;
@@ -52,4 +50,11 @@ public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 		return 2;
 	}
 
+	@Override
+	public CharSequence getPageTitle(int position) {
+	    if (position == 0) {
+	        return fragmentList.get(position).getActivity().getResources().getString(R.string.my_comment);
+        }
+	    return fragmentList.get(position).getActivity().getResources().getString(R.string.all_people_send_to_me);
+	}
 }

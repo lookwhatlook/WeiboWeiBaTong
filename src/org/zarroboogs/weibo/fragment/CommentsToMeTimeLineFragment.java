@@ -4,7 +4,6 @@ import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.IRemoveItem;
-import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.adapter.CommentListAdapter;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -30,8 +29,6 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.ui.actionmenu.CommentSingleChoiceModeListener;
 import org.zarroboogs.weibo.widget.TopTipsView;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -44,13 +41,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * User: qii Date: 12-7-29
- */
-@SuppressLint("ValidFragment")
 public class CommentsToMeTimeLineFragment extends AbsBaseTimeLineFragment<CommentListBean> implements IRemoveItem {
 
 	private AccountBean accountBean;
@@ -164,21 +156,21 @@ public class CommentsToMeTimeLineFragment extends AbsBaseTimeLineFragment<Commen
 
 	private void setActionBarTabCount(int count) {
 		CommentsTimeLineFragment parent = (CommentsTimeLineFragment) getParentFragment();
-		ActionBar.Tab tab = parent.getCommentsToMeTab();
-		if (tab == null) {
-			return;
-		}
-		String tabTag = (String) tab.getTag();
-		if (CommentsToMeTimeLineFragment.class.getName().equals(tabTag)) {
-			View customView = tab.getCustomView();
-			TextView countTV = (TextView) customView.findViewById(R.id.tv_home_count);
-			countTV.setText(String.valueOf(count));
-			if (count > 0) {
-				countTV.setVisibility(View.VISIBLE);
-			} else {
-				countTV.setVisibility(View.GONE);
-			}
-		}
+//		ActionBar.Tab tab = parent.getCommentsToMeTab();
+//		if (tab == null) {
+//			return;
+//		}
+//		String tabTag = (String) tab.getTag();
+//		if (CommentsToMeTimeLineFragment.class.getName().equals(tabTag)) {
+//			View customView = tab.getCustomView();
+//			TextView countTV = (TextView) customView.findViewById(R.id.tv_home_count);
+//			countTV.setText(String.valueOf(count));
+//			if (count > 0) {
+//				countTV.setVisibility(View.VISIBLE);
+//			} else {
+//				countTV.setVisibility(View.GONE);
+//			}
+//		}
 	}
 
 	@Override

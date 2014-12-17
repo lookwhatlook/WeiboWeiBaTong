@@ -15,7 +15,6 @@ import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.loader.DMUserLoader;
 import org.zarroboogs.weibo.support.utils.Utility;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
@@ -104,14 +103,14 @@ public class DMUserListFragment extends AbsBaseTimeLineFragment<DMUserListBean> 
 
 		if (Utility.isDevicePort()) {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.dm));
-			getActivity().getActionBar().setIcon(R.drawable.ic_menu_message);
+			getBaseToolbar().setLogo(R.drawable.ic_menu_message);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.dm));
-			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
+			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
 		}
 
-		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getActivity().getActionBar().removeAllTabs();
+//		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+//		getActivity().getActionBar().removeAllTabs();
 	}
 
 	@Override
