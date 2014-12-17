@@ -1,10 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="org.weibo.demo.MainActivity" >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/writeWeiboToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize" />
 
     <include
         android:id="@+id/smileLayout_ref"
@@ -59,17 +67,17 @@
 
         <TextView
             android:id="@+id/weiTextCountTV"
-            android:textSize="10sp"
-            android:layout_alignLeft="@id/sendWeiBoBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/sendWeiBoBtn"
             android:layout_centerVertical="true"
             android:text="@string/send_weibo"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="10sp" />
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_below="@id/writeWeiboToolBar"
         android:id="@+id/mainBoady"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -154,10 +162,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="20dp"
                     android:layout_below="@id/weiboContentET"
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="bottom"
+                    android:layout_marginBottom="20dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     layout="@layout/send_pic_layout" />
