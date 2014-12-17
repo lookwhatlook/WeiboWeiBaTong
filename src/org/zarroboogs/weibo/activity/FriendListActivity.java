@@ -10,36 +10,31 @@ import com.umeng.analytics.MobclickAgent;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-/**
- * User: Jiang Qi Date: 12-8-16
- */
+
 public class FriendListActivity extends AbstractAppActivity {
 
 	private UserBean bean;
 
-	public UserBean getUser() {
-		return bean;
-	}
 
-	public static Intent newIntent(String token, UserBean userBean) {
-		Intent intent = new Intent(GlobalContext.getInstance(), FriendListActivity.class);
-		intent.putExtra(Constants.TOKEN, token);
-		intent.putExtra("user", userBean);
-		return intent;
-	}
-
+	private Toolbar mToolBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.following_list));
-		getActionBar().setIcon(R.drawable.ic_ab_friendship);
+		setContentView(R.layout.setting_activity_layout);
+		mToolBar = (Toolbar) findViewById(R.id.settingToolBar);
+		
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.following_list));
+//		getActionBar().setIcon(R.drawable.ic_ab_friendship);
+		mToolBar.setLogo(R.drawable.ic_ab_friendship);
+		mToolBar.setTitle(R.string.following_list);
 		bean = (UserBean) getIntent().getParcelableExtra("user");
 		if (getSupportFragmentManager().findFragmentByTag(FriendsListFragment.class.getName()) == null) {
 			getSupportFragmentManager().beginTransaction()
-					.replace(android.R.id.content, FriendsListFragment.newInstance(bean), FriendsListFragment.class.getName()).commit();
+					.replace(R.id.content_frame, FriendsListFragment.newInstance(bean), FriendsListFragment.class.getName()).commit();
 		}
 
 	}
@@ -72,4 +67,14 @@ public class FriendListActivity extends AbstractAppActivity {
 		}
 		return false;
 	}
+	   public UserBean getUser() {
+	        return bean;
+	    }
+
+	    public static Intent newIntent(String token, UserBean userBean) {
+	        Intent intent = new Intent(GlobalContext.getInstance(), FriendListActivity.class);
+	        intent.putExtra(Constants.TOKEN, token);
+	        intent.putExtra("user", userBean);
+	        return intent;
+	    }
 }

@@ -101,6 +101,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
+    public FriendsTimeLineFragment(){
+        super();
+    }
     public static FriendsTimeLineFragment newInstance(AccountBean accountBean, UserBean userBean, String token) {
         FriendsTimeLineFragment fragment = new FriendsTimeLineFragment(accountBean, userBean, token);
         fragment.setArguments(new Bundle());
