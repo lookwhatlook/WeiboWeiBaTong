@@ -27,6 +27,7 @@ import com.umeng.analytics.MobclickAgent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -79,88 +80,8 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 	private int listViewScrollState = -1;
 
 	private boolean canLoadOldData = true;
-
-	public int getListViewScrollState() {
-		return listViewScrollState;
-	}
-
-	public PullToRefreshListView getPullToRefreshListView() {
-		return mPullToRefreshListView;
-	}
-
-	public ListView getListView() {
-		return mPullToRefreshListView.getRefreshableView();
-	}
-
-	public BaseAdapter getAdapter() {
-		return timeLineAdapter;
-	}
-
-	public TopTipsView getNewMsgTipBar() {
-		return newMsgTipBar;
-	}
-
-	protected void refreshLayout(T bean) {
-		if (bean != null && bean.getSize() > 0) {
-			// empty.setVisibility(View.INVISIBLE);
-			progressBar.setVisibility(View.INVISIBLE);
-			// listView.setVisibility(View.VISIBLE);
-		} else if (bean == null || bean.getSize() == 0) {
-			// empty.setVisibility(View.VISIBLE);
-			progressBar.setVisibility(View.INVISIBLE);
-			// listView.setVisibility(View.VISIBLE);
-		} else if (bean.getSize() == bean.getTotal_number()) {
-			// empty.setVisibility(View.INVISIBLE);
-			progressBar.setVisibility(View.INVISIBLE);
-			// listView.setVisibility(View.VISIBLE);
-		}
-	}
-
-    public abstract T getList();
-
-	protected abstract void onTimeListViewItemClick(AdapterView<?> parent, View view, int position, long id);
-
-	public void loadNewMsg() {
-		canLoadOldData = true;
-		getLoaderManager().destroyLoader(MIDDLE_MSG_LOADER_ID);
-		getLoaderManager().destroyLoader(OLD_MSG_LOADER_ID);
-		dismissFooterView();
-		getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
-	}
-
-	protected void loadOldMsg(View view) {
-
-		if (getLoaderManager().getLoader(OLD_MSG_LOADER_ID) != null || !canLoadOldData) {
-			return;
-		}
-
-		getLoaderManager().destroyLoader(NEW_MSG_LOADER_ID);
-		getPullToRefreshListView().onRefreshComplete();
-		getLoaderManager().destroyLoader(MIDDLE_MSG_LOADER_ID);
-		getLoaderManager().restartLoader(OLD_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
-	}
-
-	public void loadMiddleMsg(String beginId, String endId, int position) {
-		getLoaderManager().destroyLoader(NEW_MSG_LOADER_ID);
-		getLoaderManager().destroyLoader(OLD_MSG_LOADER_ID);
-		getPullToRefreshListView().onRefreshComplete();
-		dismissFooterView();
-
-		Bundle bundle = new Bundle();
-		bundle.putString("beginId", beginId);
-		bundle.putString("endId", endId);
-		bundle.putInt("position", position);
-		VelocityListView velocityListView = (VelocityListView) getListView();
-		bundle.putBoolean("towardsBottom", velocityListView.getTowardsOrientation() == VelocityListView.TOWARDS_BOTTOM);
-		getLoaderManager().restartLoader(MIDDLE_MSG_LOADER_ID, bundle, msgAsyncTaskLoaderCallback);
-
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putInt("savedCurrentLoadingMsgViewPositon", savedCurrentLoadingMsgViewPositon);
-	}
+	
+	private Toolbar mToolBar;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -170,6 +91,7 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 	}
 
 	protected void buildLayout(LayoutInflater inflater, View view) {
+	    mToolBar = ViewUtility.findViewById(view, R.id.baseToolBar);
 		empty = ViewUtility.findViewById(view, R.id.empty);
 		progressBar = ViewUtility.findViewById(view, R.id.progressbar);
 		progressBar.setVisibility(View.GONE);
@@ -201,6 +123,92 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 		}
 	}
 
+	   public int getListViewScrollState() {
+	        return listViewScrollState;
+	    }
+
+	    public PullToRefreshListView getPullToRefreshListView() {
+	        return mPullToRefreshListView;
+	    }
+
+	    public ListView getListView() {
+	        return mPullToRefreshListView.getRefreshableView();
+	    }
+	    
+	    public Toolbar getBaseToolbar(){
+	        return mToolBar;
+	    }
+
+	    public BaseAdapter getAdapter() {
+	        return timeLineAdapter;
+	    }
+
+	    public TopTipsView getNewMsgTipBar() {
+	        return newMsgTipBar;
+	    }
+
+	    protected void refreshLayout(T bean) {
+	        if (bean != null && bean.getSize() > 0) {
+	            // empty.setVisibility(View.INVISIBLE);
+	            progressBar.setVisibility(View.INVISIBLE);
+	            // listView.setVisibility(View.VISIBLE);
+	        } else if (bean == null || bean.getSize() == 0) {
+	            // empty.setVisibility(View.VISIBLE);
+	            progressBar.setVisibility(View.INVISIBLE);
+	            // listView.setVisibility(View.VISIBLE);
+	        } else if (bean.getSize() == bean.getTotal_number()) {
+	            // empty.setVisibility(View.INVISIBLE);
+	            progressBar.setVisibility(View.INVISIBLE);
+	            // listView.setVisibility(View.VISIBLE);
+	        }
+	    }
+
+	    public abstract T getList();
+
+	    protected abstract void onTimeListViewItemClick(AdapterView<?> parent, View view, int position, long id);
+
+	    public void loadNewMsg() {
+	        canLoadOldData = true;
+	        getLoaderManager().destroyLoader(MIDDLE_MSG_LOADER_ID);
+	        getLoaderManager().destroyLoader(OLD_MSG_LOADER_ID);
+	        dismissFooterView();
+	        getLoaderManager().restartLoader(NEW_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
+	    }
+
+	    protected void loadOldMsg(View view) {
+
+	        if (getLoaderManager().getLoader(OLD_MSG_LOADER_ID) != null || !canLoadOldData) {
+	            return;
+	        }
+
+	        getLoaderManager().destroyLoader(NEW_MSG_LOADER_ID);
+	        getPullToRefreshListView().onRefreshComplete();
+	        getLoaderManager().destroyLoader(MIDDLE_MSG_LOADER_ID);
+	        getLoaderManager().restartLoader(OLD_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
+	    }
+
+	    public void loadMiddleMsg(String beginId, String endId, int position) {
+	        getLoaderManager().destroyLoader(NEW_MSG_LOADER_ID);
+	        getLoaderManager().destroyLoader(OLD_MSG_LOADER_ID);
+	        getPullToRefreshListView().onRefreshComplete();
+	        dismissFooterView();
+
+	        Bundle bundle = new Bundle();
+	        bundle.putString("beginId", beginId);
+	        bundle.putString("endId", endId);
+	        bundle.putInt("position", position);
+	        VelocityListView velocityListView = (VelocityListView) getListView();
+	        bundle.putBoolean("towardsBottom", velocityListView.getTowardsOrientation() == VelocityListView.TOWARDS_BOTTOM);
+	        getLoaderManager().restartLoader(MIDDLE_MSG_LOADER_ID, bundle, msgAsyncTaskLoaderCallback);
+
+	    }
+
+	    @Override
+	    public void onSaveInstanceState(Bundle outState) {
+	        super.onSaveInstanceState(outState);
+	        outState.putInt("savedCurrentLoadingMsgViewPositon", savedCurrentLoadingMsgViewPositon);
+	    }
+	    
 	private PullToRefreshBase.OnLastItemVisibleListener listViewOnLastItemVisibleListener = new PullToRefreshBase.OnLastItemVisibleListener() {
 		@Override
 		public void onLastItemVisible() {

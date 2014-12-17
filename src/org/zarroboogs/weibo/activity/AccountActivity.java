@@ -21,6 +21,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.ActionMode;
@@ -60,19 +62,7 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 	private AccountAdapter listAdapter = null;
 
 	private List<AccountBean> accountList = new ArrayList<AccountBean>();
-
-	public static Intent newIntent() {
-		Intent intent = new Intent(GlobalContext.getInstance(), AccountActivity.class);
-		intent.setAction(ACTION_OPEN_FROM_APP_INNER);
-		return intent;
-	}
-
-	public static Intent newIntent(AccountBean refreshAccount) {
-		Intent intent = new Intent(GlobalContext.getInstance(), AccountActivity.class);
-		intent.setAction(ACTION_OPEN_FROM_APP_INNER_REFRESH_TOKEN);
-		intent.putExtra(REFRESH_ACTION_EXTRA, refreshAccount);
-		return intent;
-	}
+	private Toolbar mToolBar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -98,7 +88,26 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.accountactivity_layout);
-		getActionBar().setTitle(getString(R.string.app_name));
+		mToolBar = (Toolbar) findViewById(R.id.accountToolBar);
+
+		mToolBar.inflateMenu(R.menu.actionbar_menu_accountactivity);
+		mToolBar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+            
+            @Override
+            public boolean onMenuItemClick(MenuItem arg0) {
+                switch (arg0.getItemId()) {
+                    case R.id.menu_add_account:{
+                        showAddAccountDialog();
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
+
+//		getActionBar().setTitle(getString(R.string.app_name));
 		listAdapter = new AccountAdapter();
 		listView = (ListView) findViewById(R.id.listView);
 		listView.setOnItemClickListener(new AccountListItemClickListener());
@@ -123,6 +132,19 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 
 	}
 
+	   public static Intent newIntent() {
+	        Intent intent = new Intent(GlobalContext.getInstance(), AccountActivity.class);
+	        intent.setAction(ACTION_OPEN_FROM_APP_INNER);
+	        return intent;
+	    }
+
+	    public static Intent newIntent(AccountBean refreshAccount) {
+	        Intent intent = new Intent(GlobalContext.getInstance(), AccountActivity.class);
+	        intent.setAction(ACTION_OPEN_FROM_APP_INNER_REFRESH_TOKEN);
+	        intent.putExtra(REFRESH_ACTION_EXTRA, refreshAccount);
+	        return intent;
+	    }
+	    
 	@Override
 	public void onBackPressed() {
 		super.onBackPressed();
@@ -147,12 +169,6 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 			}
 		}
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.actionbar_menu_accountactivity, menu);
-		return super.onCreateOptionsMenu(menu);
 	}
 
 	private void showAddAccountDialog() {
@@ -181,17 +197,6 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 				startActivityForResult(intent, ADD_ACCOUNT_REQUEST_CODE);
 			}
 		}).show();
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_add_account:
-			showAddAccountDialog();
-
-			break;
-		}
-		return super.onOptionsItemSelected(item);
 	}
 
 	@Override

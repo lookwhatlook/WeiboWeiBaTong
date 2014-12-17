@@ -67,14 +67,14 @@
         <item name="split_line_between_content_and_bottom_button_panel">@drawable/ab_bottom_solid_inverse_holo</item>
     </style>
 
-    <style name="PrivateThemeHoloLightOnlyForInherit" parent="@android:style/Theme.Holo.Light.DarkActionBar">
-        <item name="android:windowBackground">@color/host_background</item>
+    <style name="PrivateThemeHoloLightOnlyForInherit" parent="@style/Theme.AppCompat.Light.NoActionBar">
+<!--         <item name="android:windowBackground">@color/host_background</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
         <item name="android:actionDropDownStyle">@style/ActionBarDropDownStyle</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabViewLight</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarTheme</item>
         <item name="android:actionBarItemBackground">@drawable/action_bar_item_background</item>
-        <item name="android:fastScrollTrackDrawable">@null</item>
+        <item name="android:fastScrollTrackDrawable">@null</item> -->
     </style>
 
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">

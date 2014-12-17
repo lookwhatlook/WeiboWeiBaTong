@@ -1,3 +1,4 @@
+
 package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.weibo.R;
@@ -10,11 +11,11 @@ import com.umeng.analytics.MobclickAgent;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -28,147 +29,145 @@ import android.widget.SpinnerAdapter;
  */
 public class BlackMagicActivity extends AbstractAppActivity {
 
-	private EditText username;
+    private EditText username;
 
-	private EditText password;
+    private EditText password;
 
-	private Spinner spinner;
+    private Spinner spinner;
 
-	private String appkey;
+    private String appkey;
 
-	private String appSecret;
+    private String appSecret;
 
-	private BlackMagicLoginTask loginTask;
+    private BlackMagicLoginTask loginTask;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.my_blackmagicactivity_layout);
+    private Toolbar mToobar;
 
-		getActionBar().setDisplayHomeAsUpEnabled(false);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setTitle(getString(R.string.hack_login));
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		username = (EditText) findViewById(R.id.username);
-		password = (EditText) findViewById(R.id.password);
-		spinner = (Spinner) findViewById(R.id.spinner);
+        setContentView(R.layout.my_blackmagicactivity_layout);
 
-		SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.tail, android.R.layout.simple_spinner_dropdown_item);
+        mToobar = (Toolbar) findViewById(R.id.loginToolBar);
+        mToobar.inflateMenu(R.menu.actionbar_menu_blackmagicactivity);
+        mToobar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
-		spinner.setAdapter(mSpinnerAdapter);
-		spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem arg0) {
 
-			@Override
-			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-				String[] array = getResources().getStringArray(R.array.tail_value);
-				String value = array[position];
-				appkey = value.substring(0, value.indexOf(","));
-				appSecret = value.substring(value.indexOf(",") + 1);
-			}
+                switch (arg0.getItemId()) {
+                    case R.id.menu_login:
+                        if (username.getText().toString().length() == 0) {
+                            username.setError(getString(R.string.email_cant_be_empty));
+                            return true;
+                        }
 
-			@Override
-			public void onNothingSelected(AdapterView<?> parent) {
+                        if (password.getText().toString().length() == 0) {
+                            password.setError(getString(R.string.password_cant_be_empty));
+                            return true;
+                        }
+                        if (Utility.isTaskStopped(loginTask)) {
 
-			}
-		});
-		
-	}
+                            String[] array = getResources().getStringArray(R.array.tail_value);
+                            String value = array[0];
+                            appkey = value.substring(0, value.indexOf(","));
+                            appSecret = value.substring(value.indexOf(",") + 1);
+                            Log.d("APPKEY", "key:" + appkey + "  secret:" + appSecret);
+                            loginTask = new BlackMagicLoginTask(BlackMagicActivity.this, username.getText().toString(),
+                                    password.getText().toString(), appkey, appSecret);
+                            loginTask.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
+                        }
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
 
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		MobclickAgent.onPageStart(this.getClass().getName());
-		MobclickAgent.onResume(this);
-	}
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
+        spinner = (Spinner) findViewById(R.id.spinner);
 
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		MobclickAgent.onPageEnd(this.getClass().getName());
-		MobclickAgent.onPause(this);
-	}
-	
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		Utility.cancelTasks(loginTask);
-	}
+        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.tail,
+                android.R.layout.simple_spinner_dropdown_item);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.actionbar_menu_blackmagicactivity, menu);
-		return super.onCreateOptionsMenu(menu);
-	}
+        spinner.setAdapter(mSpinnerAdapter);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_login:
-			if (username.getText().toString().length() == 0) {
-				username.setError(getString(R.string.email_cant_be_empty));
-				return true;
-			}
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String[] array = getResources().getStringArray(R.array.tail_value);
+                String value = array[position];
+                appkey = value.substring(0, value.indexOf(","));
+                appSecret = value.substring(value.indexOf(",") + 1);
+            }
 
-			if (password.getText().toString().length() == 0) {
-				password.setError(getString(R.string.password_cant_be_empty));
-				return true;
-			}
-			if (Utility.isTaskStopped(loginTask)) {
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-				String[] array = getResources().getStringArray(R.array.tail_value);
-				String value = array[0];
-				appkey = value.substring(0, value.indexOf(","));
-				appSecret = value.substring(value.indexOf(",") + 1);
+            }
+        });
 
-				Log.d("APPKEY", "key:" + appkey + "  secret:" + appSecret);
-				loginTask = new BlackMagicLoginTask(this, username.getText().toString(), 
-						password.getText().toString(), appkey, appSecret);
-				loginTask.executeOnExecutor(MyAsyncTask.THREAD_POOL_EXECUTOR);
-			}
-			return true;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-	}
+    }
 
-	public static class ProgressFragment extends DialogFragment {
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        MobclickAgent.onPageStart(this.getClass().getName());
+        MobclickAgent.onResume(this);
+    }
 
-		private MyAsyncTask<?, ?, ?> asyncTask = null;
+    @Override
+    protected void onPause() {
+        // TODO Auto-generated method stub
+        super.onPause();
+        MobclickAgent.onPageEnd(this.getClass().getName());
+        MobclickAgent.onPause(this);
+    }
 
-		public static ProgressFragment newInstance() {
-			ProgressFragment frag = new ProgressFragment();
-			frag.setRetainInstance(true);
-			Bundle args = new Bundle();
-			frag.setArguments(args);
-			return frag;
-		}
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Utility.cancelTasks(loginTask);
+    }
 
-		@Override
-		public Dialog onCreateDialog(Bundle savedInstanceState) {
+    public static class ProgressFragment extends DialogFragment {
 
-			ProgressDialog dialog = new ProgressDialog(getActivity());
-			dialog.setMessage(getString(R.string.logining));
-			dialog.setIndeterminate(false);
-			dialog.setCancelable(true);
+        private MyAsyncTask<?, ?, ?> asyncTask = null;
 
-			return dialog;
-		}
+        public static ProgressFragment newInstance() {
+            ProgressFragment frag = new ProgressFragment();
+            frag.setRetainInstance(true);
+            Bundle args = new Bundle();
+            frag.setArguments(args);
+            return frag;
+        }
 
-		@Override
-		public void onCancel(DialogInterface dialog) {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-			if (asyncTask != null) {
-				asyncTask.cancel(true);
-			}
+            ProgressDialog dialog = new ProgressDialog(getActivity());
+            dialog.setMessage(getString(R.string.logining));
+            dialog.setIndeterminate(false);
+            dialog.setCancelable(true);
 
-			super.onCancel(dialog);
-		}
+            return dialog;
+        }
 
-		public void setAsyncTask(MyAsyncTask<?, ?, ?> task) {
-			asyncTask = task;
-		}
-	}
+        @Override
+        public void onCancel(DialogInterface dialog) {
+
+            if (asyncTask != null) {
+                asyncTask.cancel(true);
+            }
+
+            super.onCancel(dialog);
+        }
+
+        public void setAsyncTask(MyAsyncTask<?, ?, ?> task) {
+            asyncTask = task;
+        }
+    }
 }

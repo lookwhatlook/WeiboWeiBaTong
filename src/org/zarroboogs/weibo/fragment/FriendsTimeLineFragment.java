@@ -407,9 +407,6 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 		}
 		((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
 
-		getActivity().getActionBar().setDisplayShowTitleEnabled(false);
-		getActivity().getActionBar().setDisplayHomeAsUpEnabled(Utility.isDevicePort());
-		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_LIST);
 		List<GroupBean> list = new ArrayList<GroupBean>();
 		if (GlobalContext.getInstance().getGroup() != null) {
 			list = GlobalContext.getInstance().getGroup().getLists();
@@ -418,36 +415,36 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 		}
 		mBaseAdapter = new FriendsTimeLineListNavAdapter(getActivity(), buildListNavData(list));
 		final List<GroupBean> finalList = list;
-		getActivity().getActionBar().setListNavigationCallbacks(mBaseAdapter, new ActionBar.OnNavigationListener() {
-			@Override
-			public boolean onNavigationItemSelected(int which, long itemId) {
-
-				if (!Utility.isTaskStopped(mDBCacheTask)) {
-					return true;
-				}
-
-				String groupId = getGroupIdFromIndex(which, finalList);
-
-				if (!groupId.equals(currentGroupId)) {
-
-					switchFriendsGroup(groupId);
-				}
-				return true;
-			}
-		});
+//		getActivity().getActionBar().setListNavigationCallbacks(mBaseAdapter, new ActionBar.OnNavigationListener() {
+//			@Override
+//			public boolean onNavigationItemSelected(int which, long itemId) {
+//
+//				if (!Utility.isTaskStopped(mDBCacheTask)) {
+//					return true;
+//				}
+//
+//				String groupId = getGroupIdFromIndex(which, finalList);
+//
+//				if (!groupId.equals(currentGroupId)) {
+//
+//					switchFriendsGroup(groupId);
+//				}
+//				return true;
+//			}
+//		});
 		currentGroupId = FriendsTimeLineDBTask.getRecentGroupId(GlobalContext.getInstance().getCurrentAccountId());
 
 		if (Utility.isDevicePort()) {
 			((MainTimeLineActivity) getActivity()).setTitle("");
-			getActivity().getActionBar().setIcon(R.drawable.ic_menu_home);
+			getBaseToolbar().setLogo(R.drawable.ic_menu_home);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle("");
-			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
+			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
 		}
 
-		if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST && isVisible()) {
-			getActivity().getActionBar().setSelectedNavigationItem(getRecentNavIndex());
-		}
+//		if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST && isVisible()) {
+//			getActivity().getActionBar().setSelectedNavigationItem(getRecentNavIndex());
+//		}
 
 	}
 
@@ -474,9 +471,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 		getPullToRefreshListView().setVisibility(View.VISIBLE);
 		getAdapter().notifyDataSetChanged();
 		setListViewPositionFromPositionsCache();
-		if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST) {
-			getActivity().getActionBar().setSelectedNavigationItem(getRecentNavIndex());
-		}
+//		if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST) {
+//			getActivity().getActionBar().setSelectedNavigationItem(getRecentNavIndex());
+//		}
 		refreshLayout(getList());
 		/**
 		 * when this account first open app,if he don't have any data in

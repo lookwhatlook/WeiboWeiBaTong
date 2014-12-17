@@ -41,8 +41,6 @@ import org.zarroboogs.weibo.widget.TimeLineAvatarImageView;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 
 import android.animation.Animator;
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
@@ -70,10 +68,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
-/**
- * User: qii Date: 13-6-20
- */
-@SuppressLint("ValidFragment")
+
 public class UserInfoFragment extends AbsTimeLineFragment<MessageListBean> implements MainTimeLineActivity.ScrollableListFragment,
 		Animator.AnimatorListener {
 
@@ -361,7 +356,7 @@ public class UserInfoFragment extends AbsTimeLineFragment<MessageListBean> imple
 			nickname.setText(userBean.getScreen_name() + "(" + userBean.getRemark() + ")");
 		}
 
-		getActivity().getActionBar().setTitle(userBean.getScreen_name());
+		getBaseToolbar().setTitle(userBean.getScreen_name());
 
 		avatar.checkVerified(userBean);
 
@@ -564,14 +559,11 @@ public class UserInfoFragment extends AbsTimeLineFragment<MessageListBean> imple
 
 		if (Utility.isDevicePort()) {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.profile));
-			getActivity().getActionBar().setIcon(R.drawable.ic_menu_profile);
+			getBaseToolbar().setLogo(R.drawable.ic_menu_profile);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.profile));
-			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
+			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
 		}
-
-		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
-		getActivity().getActionBar().removeAllTabs();
 	}
 
 	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {

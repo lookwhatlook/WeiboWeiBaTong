@@ -34,8 +34,6 @@ import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
 
-import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -51,17 +49,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * User: Jiang Qi Date: 12-7-27
- */
-@SuppressLint("ValidFragment")
+
 public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 	public static final int REQUEST_CODE_UPDATE_FRIENDS_TIMELINE_COMMENT_REPOST_COUNT = 0;
@@ -165,7 +158,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	}
 
 	private void buildInterface(Bundle savedInstanceState) {
-		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
+//		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
 		getWindow().setBackgroundDrawable(null);
 		setContentView(R.layout.layout_main_time_line_activity);
 		boolean isPhoneDevice = findViewById(R.id.menu_frame) == null;
@@ -309,17 +302,17 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 			}
 		});
-		ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,
-				Gravity.RIGHT);
-		getActionBar().setCustomView(title, layoutParams);
-		getActionBar().setDisplayShowCustomEnabled(true);
+//		ActionBar.LayoutParams layoutParams = new ActionBar.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT,
+//				Gravity.RIGHT);
+//		getActionBar().setCustomView(title, layoutParams);
+//		getActionBar().setDisplayShowCustomEnabled(true);
 	}
 
 	private void buildPhoneLeftRightSlidingMenu(Bundle savedInstanceState) {
 		setBehindContentView(R.layout.layout_left_menu_frame);
 		getSlidingMenu().setSlidingEnabled(true);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		// 右侧的Menu
 		getSlidingMenu().setSecondaryMenu(R.layout.layout_right_menu_frame);
@@ -519,11 +512,11 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 	public void saveNavigationPositionToDB() {
 		int navPosition = getLeftMenuFragment().getCurrentIndex() * 10;
-		ActionBar actionBar = getActionBar();
+//		ActionBar actionBar = getActionBar();
 		int second = 0;
-		if (actionBar.getNavigationMode() != ActionBar.NAVIGATION_MODE_STANDARD) {
-			second = actionBar.getSelectedNavigationIndex();
-		}
+//		if (actionBar.getNavigationMode() != ActionBar.NAVIGATION_MODE_STANDARD) {
+//			second = actionBar.getSelectedNavigationIndex();
+//		}
 		int result = navPosition + second;
 		GlobalContext.getInstance().getAccountBean().setNavigationPosition(result);
 		AccountDBTask.updateNavigationPosition(GlobalContext.getInstance().getAccountBean(), result);
