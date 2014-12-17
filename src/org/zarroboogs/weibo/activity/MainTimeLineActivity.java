@@ -47,6 +47,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -74,58 +75,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	private TextView titleText;
 
 	private View clickToTop;
-
-	public static interface ScrollableListFragment {
-
-		public void scrollToTop();
-	}
-
-	public static Intent newIntent() {
-		return new Intent(GlobalContext.getInstance(), MainTimeLineActivity.class);
-	}
-
-	public static Intent newIntent(AccountBean accountBean) {
-		Intent intent = newIntent();
-		intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-		return intent;
-	}
-
-	/*
-	 * notification bar
-	 */
-	public static Intent newIntent(AccountBean accountBean, MessageListBean mentionsWeiboData, CommentListBean mentionsCommentData,
-			CommentListBean commentsToMeData, UnreadBean unreadBean) {
-		Intent intent = newIntent();
-		intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-		intent.putExtra(BundleArgsConstants.MENTIONS_WEIBO_EXTRA, mentionsWeiboData);
-		intent.putExtra(BundleArgsConstants.MENTIONS_COMMENT_EXTRA, mentionsCommentData);
-		intent.putExtra(BundleArgsConstants.COMMENTS_TO_ME_EXTRA, commentsToMeData);
-		intent.putExtra(BundleArgsConstants.UNREAD_EXTRA, unreadBean);
-		return intent;
-	}
-
-	public String getToken() {
-		return mAccountBean.getAccess_token();
-	}
-
-	public void setTitle(String title) {
-		if (TextUtils.isEmpty(title)) {
-			titleText.setVisibility(View.GONE);
-		} else {
-			titleText.setText(title);
-			titleText.setVisibility(View.VISIBLE);
-		}
-	}
-
-	public void setTitle(int res) {
-		setTitle(getString(res));
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putParcelable(Constants.ACCOUNT, mAccountBean);
-	}
+	private Toolbar mToolbar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -161,6 +111,8 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 //		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
 		getWindow().setBackgroundDrawable(null);
 		setContentView(R.layout.layout_main_time_line_activity);
+		mToolbar = (Toolbar) findViewById(R.id.mainTimeLineToolBar);
+//		mToolbar.setNavigationIcon(android.R.drawable.ic_g)
 		boolean isPhoneDevice = findViewById(R.id.menu_frame) == null;
 		Log.d("MainTimeLine-buildInterface", "isPhoneDevice: " + isPhoneDevice);
 		if (isPhoneDevice) {
@@ -627,4 +579,56 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		LeftMenuFragment fragment = getLeftMenuFragment();
 		fragment.setCommentUnreadCount(count);
 	}
+	
+	   public static interface ScrollableListFragment {
+
+	        public void scrollToTop();
+	    }
+
+	    public static Intent newIntent() {
+	        return new Intent(GlobalContext.getInstance(), MainTimeLineActivity.class);
+	    }
+
+	    public static Intent newIntent(AccountBean accountBean) {
+	        Intent intent = newIntent();
+	        intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
+	        return intent;
+	    }
+
+	    /*
+	     * notification bar
+	     */
+	    public static Intent newIntent(AccountBean accountBean, MessageListBean mentionsWeiboData, CommentListBean mentionsCommentData,
+	            CommentListBean commentsToMeData, UnreadBean unreadBean) {
+	        Intent intent = newIntent();
+	        intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
+	        intent.putExtra(BundleArgsConstants.MENTIONS_WEIBO_EXTRA, mentionsWeiboData);
+	        intent.putExtra(BundleArgsConstants.MENTIONS_COMMENT_EXTRA, mentionsCommentData);
+	        intent.putExtra(BundleArgsConstants.COMMENTS_TO_ME_EXTRA, commentsToMeData);
+	        intent.putExtra(BundleArgsConstants.UNREAD_EXTRA, unreadBean);
+	        return intent;
+	    }
+
+	    public String getToken() {
+	        return mAccountBean.getAccess_token();
+	    }
+
+	    public void setTitle(String title) {
+	        if (TextUtils.isEmpty(title)) {
+	            titleText.setVisibility(View.GONE);
+	        } else {
+	            titleText.setText(title);
+	            titleText.setVisibility(View.VISIBLE);
+	        }
+	    }
+
+	    public void setTitle(int res) {
+	        setTitle(getString(res));
+	    }
+
+	    @Override
+	    protected void onSaveInstanceState(Bundle outState) {
+	        super.onSaveInstanceState(outState);
+	        outState.putParcelable(Constants.ACCOUNT, mAccountBean);
+	    }
 }

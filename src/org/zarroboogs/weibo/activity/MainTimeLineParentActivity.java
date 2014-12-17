@@ -1,14 +1,8 @@
 package org.zarroboogs.weibo.activity;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Build.VERSION;
-import android.os.Build.VERSION_CODES;
 import android.view.ViewConfiguration;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.slidingmenu.lib.app.SlidingFragmentActivity;
@@ -67,7 +61,6 @@ public class MainTimeLineParentActivity extends SlidingFragmentActivity {
 		GlobalContext.getInstance().setActivity(this);
 		TimeLineBitmapDownloader.refreshThemePictureBackground();
 		
-
 	}
 
 	private void forceShowActionBarOverflowMenu() {
