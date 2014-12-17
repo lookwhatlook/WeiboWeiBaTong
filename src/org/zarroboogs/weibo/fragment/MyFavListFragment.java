@@ -108,13 +108,13 @@ public class MyFavListFragment extends AbsTimeLineFragment<FavListBean> implemen
 	public void buildActionBarAndViewPagerTitles() {
 		((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
 
-		if (Utility.isDevicePort()) {
-			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
-			getBaseToolbar().setLogo(R.drawable.ic_menu_fav);
-		} else {
-			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
-			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
-		}
+//		if (Utility.isDevicePort()) {
+//			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
+//			getBaseToolbar().setLogo(R.drawable.ic_menu_fav);
+//		} else {
+//			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.favourite));
+//			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
+//		}
 
 	}
 
