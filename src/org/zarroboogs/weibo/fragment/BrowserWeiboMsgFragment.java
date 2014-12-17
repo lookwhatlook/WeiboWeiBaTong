@@ -1,7 +1,5 @@
 package org.zarroboogs.weibo.fragment;
 
-//import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
-//import com.google.android.gms.maps.MapsInitializer;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.Constants;
@@ -45,14 +43,11 @@ import org.zarroboogs.weibo.widget.WeiboDetailImageView;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.LoaderManager;
@@ -76,10 +71,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-/**
- * User: qii Date: 12-9-1
- */
-@SuppressLint("ValidFragment")
 public class BrowserWeiboMsgFragment extends BaseStateFragment implements IRemoveItem {
 
 	private MessageBean msg;
@@ -317,8 +308,10 @@ public class BrowserWeiboMsgFragment extends BaseStateFragment implements IRemov
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		SwipeFrameLayout swipeFrameLayout = new SwipeFrameLayout(getActivity());
-		PullToRefreshListView pullToRefreshListView = new PullToRefreshListView(getActivity());
+		        SwipeFrameLayout swipeFrameLayout = (SwipeFrameLayout) inflater.inflate(R.layout.browser_weibo_msg_layout, container, false);
+		PullToRefreshListView pullToRefreshListView = (PullToRefreshListView) swipeFrameLayout.findViewById(R.id.pullToFreshView);
+		
+		
 		pullToRefreshListView.setMode(PullToRefreshBase.Mode.DISABLED);
 		pullToRefreshListView.setOnLastItemVisibleListener(onLastItemVisibleListener);
 		pullToRefreshListView.setOnScrollListener(listViewOnScrollListener);
@@ -370,8 +363,6 @@ public class BrowserWeiboMsgFragment extends BaseStateFragment implements IRemov
 		adapter.notifyDataSetChanged();
 		listView.setHeaderDividersEnabled(false);
 
-		swipeFrameLayout.addView(pullToRefreshListView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-		
 		return swipeFrameLayout;
 	}
 

@@ -13,7 +13,6 @@ import org.zarroboogs.weibo.dao.ShowStatusDao;
 import org.zarroboogs.weibo.dialogfragment.CommonErrorDialogFragment;
 import org.zarroboogs.weibo.dialogfragment.CommonProgressDialogFragment;
 import org.zarroboogs.weibo.dialogfragment.RemoveWeiboMsgDialog;
-import org.zarroboogs.weibo.dialogfragment.RemoveWeiboMsgDialog.IRemove;
 import org.zarroboogs.weibo.fragment.BrowserWeiboMsgFragment;
 import org.zarroboogs.weibo.loader.AbstractAsyncNetRequestTaskLoader;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
@@ -69,32 +68,6 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 	private RemoveTask removeTask;
 
 	private AccountBean mAccountBean;
-
-	public static Intent newIntent(AccountBean accountBean, String weiboId, String token) {
-		Intent intent = new Intent(GlobalContext.getInstance(), BrowserWeiboMsgActivity.class);
-		intent.putExtra("weiboId", weiboId);
-		intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-		intent.putExtra(Constants.TOKEN, token);
-		intent.setAction(ACTION_WITH_ID);
-		return intent;
-	}
-
-	public static Intent newIntent(AccountBean accountBean, MessageBean msg, String token) {
-		Intent intent = new Intent(GlobalContext.getInstance(), BrowserWeiboMsgActivity.class);
-		intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-		intent.putExtra("msg", msg);
-		intent.putExtra(Constants.TOKEN, token);
-		intent.setAction(ACTION_WITH_DETAIL);
-		return intent;
-	}
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putParcelable("msg", msg);
-		outState.putString(Constants.TOKEN, token);
-		outState.putParcelable("mAccountBean", mAccountBean);
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -159,9 +132,35 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 		Utility.cancelTasks(removeTask);
 	}
 
+	   public static Intent newIntent(AccountBean accountBean, String weiboId, String token) {
+	        Intent intent = new Intent(GlobalContext.getInstance(), BrowserWeiboMsgActivity.class);
+	        intent.putExtra("weiboId", weiboId);
+	        intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
+	        intent.putExtra(Constants.TOKEN, token);
+	        intent.setAction(ACTION_WITH_ID);
+	        return intent;
+	    }
+
+	    public static Intent newIntent(AccountBean accountBean, MessageBean msg, String token) {
+	        Intent intent = new Intent(GlobalContext.getInstance(), BrowserWeiboMsgActivity.class);
+	        intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
+	        intent.putExtra("msg", msg);
+	        intent.putExtra(Constants.TOKEN, token);
+	        intent.setAction(ACTION_WITH_DETAIL);
+	        return intent;
+	    }
+
+	    @Override
+	    protected void onSaveInstanceState(Bundle outState) {
+	        super.onSaveInstanceState(outState);
+	        outState.putParcelable("msg", msg);
+	        outState.putString(Constants.TOKEN, token);
+	        outState.putParcelable("mAccountBean", mAccountBean);
+	    }
+	    
 	private void fetchUserInfoFromServer() {
 
-		getActionBar().setTitle(getString(R.string.fetching_weibo_info));
+//		getActionBar().setTitle(getString(R.string.fetching_weibo_info));
 
 		CommonProgressDialogFragment dialog = CommonProgressDialogFragment.newInstance(getString(R.string.fetching_weibo_info));
 		getSupportFragmentManager().beginTransaction().add(dialog, CommonProgressDialogFragment.class.getName()).commit();
@@ -170,8 +169,8 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 
 	private void initLayout() {
 		getWindow().setBackgroundDrawable(getResources().getDrawable(R.color.transparent));
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayShowHomeEnabled(false);
 	}
 
 	private void buildContent() {
@@ -188,7 +187,7 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 			}
 		});
 
-		getActionBar().setTitle(getString(R.string.detail));
+//		getActionBar().setTitle(getString(R.string.detail));
 
 		invalidateOptionsMenu();
 

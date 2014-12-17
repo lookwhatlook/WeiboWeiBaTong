@@ -13,13 +13,13 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
-import android.widget.FrameLayout;
 import android.widget.OverScroller;
+import android.widget.RelativeLayout;
 
 /**
  * User: qii Date: 13-10-15
  */
-public class SwipeFrameLayout extends FrameLayout {
+public class SwipeFrameLayout extends RelativeLayout {
 
 	private Activity activity;
 
