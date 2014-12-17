@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.fragment.DMConversationListFragment;
 
@@ -7,27 +8,29 @@ import com.umeng.analytics.MobclickAgent;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
-/**
- * User: qii Date: 12-11-10
- */
 public class DMActivity extends AbstractAppActivity {
 
+    private Toolbar mToolBar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+	      setContentView(R.layout.setting_activity_layout);
+	      mToolBar = (Toolbar) findViewById(R.id.settingToolBar);
+	      
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		UserBean bean = (UserBean) getIntent().getParcelableExtra("user");
 
-		setTitle(bean.getScreen_name());
+		mToolBar.setTitle(bean.getScreen_name());
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()
-					.replace(android.R.id.content, DMConversationListFragment.newInstance(bean), DMConversationListFragment.class.getName()).commit();
+					.replace(R.id.content_frame, DMConversationListFragment.newInstance(bean), DMConversationListFragment.class.getName()).commit();
 		}
 	}
 	
