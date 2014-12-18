@@ -206,11 +206,11 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 	private boolean showHomePage(boolean reset) {
 		if (currentIndex == HOME_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
 
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		currentIndex = HOME_INDEX;
 
 		if (Utility.isDevicePort() && !reset) {
@@ -230,7 +230,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		}
 
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -254,11 +254,11 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 	private boolean showMentionPage(boolean reset) {
 		if (currentIndex == MENTIONS_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
 
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 		currentIndex = MENTIONS_INDEX;
 
 		if (Utility.isDevicePort() && !reset) {
@@ -275,7 +275,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 		} else {
 			showMentionPageImp();
 		}
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -312,10 +312,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 	private boolean showCommentPage(boolean reset) {
 //		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == COMMENTS_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = COMMENTS_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -335,7 +335,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		}
 
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -368,10 +368,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 	private boolean showSearchPage(boolean reset) {
 //		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == SEARCH_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = SEARCH_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -391,7 +391,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		}
 
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -426,10 +426,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 	private boolean showDMPage(boolean reset) {
 //		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == DM_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = DM_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -449,7 +449,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		}
 
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -475,10 +475,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 	private boolean showFavPage(boolean reset) {
 //		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == FAV_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = FAV_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -498,7 +498,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		}
 
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -523,10 +523,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 	private boolean showProfilePage(boolean reset) {
 //		getActivity().getActionBar().setDisplayShowTitleEnabled(true);
 		if (currentIndex == PROFILE_INDEX && !reset) {
-			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//			((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 			return true;
 		}
-		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
+//		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
 		currentIndex = PROFILE_INDEX;
 		if (Utility.isDevicePort() && !reset) {
@@ -546,7 +546,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		}
 
-		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
+//		((MainTimeLineActivity) getActivity()).getSlidingMenu().showContent();
 
 		return false;
 	}
@@ -697,9 +697,9 @@ public class LeftMenuFragment extends BaseStateFragment {
 		}
 	}
 
-	private SlidingMenu getSlidingMenu() {
-		return ((MainTimeLineActivity) getActivity()).getSlidingMenu();
-	}
+//	private SlidingMenu getSlidingMenu() {
+//		return ((MainTimeLineActivity) getActivity()).getSlidingMenu();
+//	}
 
 	private void setTitle(int res) {
 		((MainTimeLineActivity) getActivity()).setTitle(res);

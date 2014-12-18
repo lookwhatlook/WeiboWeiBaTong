@@ -2,7 +2,6 @@ package org.zarroboogs.weibo.activity;
 
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
-import com.slidingmenu.lib.SlidingMenu;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
@@ -109,7 +108,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 	private void buildInterface(Bundle savedInstanceState) {
 //		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
-		getWindow().setBackgroundDrawable(null);
+//		getWindow().setBackgroundDrawable(null);
 		setContentView(R.layout.layout_main_time_line_activity);
 		mToolbar = (Toolbar) findViewById(R.id.mainTimeLineToolBar);
 //		mToolbar.setNavigationIcon(android.R.drawable.ic_g)
@@ -127,8 +126,13 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 			initFragments();
 			FragmentTransaction secondFragmentTransaction = getSupportFragmentManager().beginTransaction();
 			secondFragmentTransaction.replace(R.id.menu_frame, getLeftMenuFragment(), LeftMenuFragment.class.getName());
-			getSlidingMenu().showContent();
+//			getSlidingMenu().showContent();
 			secondFragmentTransaction.commit();
+			
+			
+//	         FragmentTransaction mainTransaction = getSupportFragmentManager().beginTransaction();
+//	         mainTransaction.replace(R.id.menu_right_fl, getFriendsTimeLineFragment(), FriendsTimeLineFragment.class.getName());
+//	         mainTransaction.commit();
 		}
 		configSlidingMenu(isPhoneDevice);
 	}
@@ -190,7 +194,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		}
 	}
 
-	private void configSlidingMenu(boolean isPhoneDevice) {
+	private void configSlidingMenu(boolean isPhoneDevice) {/*
 		SlidingMenu slidingMenu = getSlidingMenu();
 		slidingMenu.setShadowWidthRes(R.dimen.shadow_width);
 		slidingMenu.setShadowDrawable(R.drawable.shadow_slidingmenu);
@@ -227,7 +231,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 				LocalBroadcastManager.getInstance(MainTimeLineActivity.this).sendBroadcast(new Intent(AppEventAction.SLIDING_MENU_CLOSED_BROADCAST));
 			}
 		});
-	}
+	*/}
 
 	private void buildCustomActionBarTitle(Bundle savedInstanceState) {
 		View title = getLayoutInflater().inflate(R.layout.maintimelineactivity_title_layout, null);
@@ -260,7 +264,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 //		getActionBar().setDisplayShowCustomEnabled(true);
 	}
 
-	private void buildPhoneLeftRightSlidingMenu(Bundle savedInstanceState) {
+	private void buildPhoneLeftRightSlidingMenu(Bundle savedInstanceState) {/*
 		setBehindContentView(R.layout.layout_left_menu_frame);
 		getSlidingMenu().setSlidingEnabled(true);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
@@ -275,9 +279,9 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		getSlidingMenu().setMode(SlidingMenu.LEFT_RIGHT);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
-	}
+	*/}
 
-	private void buildPadLeftRightSlidingMenu(Bundle savedInstanceState) {
+	private void buildPadLeftRightSlidingMenu(Bundle savedInstanceState) {/*
 		View v = new View(this);
 		setBehindContentView(v);
 		// 右侧的Menu
@@ -287,7 +291,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		// end 右侧Menu
 		getSlidingMenu().setSlidingEnabled(false);
 		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-	}
+	*/}
 
 	private void scrollCurrentListViewToTop() {
 		if (this.currentFragment != null) {
@@ -350,7 +354,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
-			getSlidingMenu().showMenu();
+//			getSlidingMenu().showMenu();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -566,19 +570,19 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	}
 
 	public void setMentionsWeiboCount(int count) {
-		LeftMenuFragment fragment = getLeftMenuFragment();
-		fragment.setMentionWeiboUnreadCount(count);
+//		LeftMenuFragment fragment = getLeftMenuFragment();
+//		fragment.setMentionWeiboUnreadCount(count);
 	}
 
-	public void setMentionsCommentCount(int count) {
+	public void setMentionsCommentCount(int count) {/*
 		LeftMenuFragment fragment = getLeftMenuFragment();
 		fragment.setMentionCommentUnreadCount(count);
-	}
+	*/}
 
-	public void setCommentsToMeCount(int count) {
+	public void setCommentsToMeCount(int count) {/*
 		LeftMenuFragment fragment = getLeftMenuFragment();
 		fragment.setCommentUnreadCount(count);
-	}
+	*/}
 	
 	   public static interface ScrollableListFragment {
 

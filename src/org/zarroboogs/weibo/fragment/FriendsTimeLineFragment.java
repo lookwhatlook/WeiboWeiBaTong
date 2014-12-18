@@ -990,8 +990,8 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
                     if (!Utility.isWifi(getActivity())) {
                         return;
                     }
-                    if (isListViewFling() || !isVisible()
-                            || ((MainTimeLineActivity) getActivity()).getSlidingMenu().isMenuShowing()) {
+                    if (isListViewFling() || !isVisible()/*
+                            || ((MainTimeLineActivity) getActivity()).getSlidingMenu().isMenuShowing()*/) {
                         return;
                     }
 

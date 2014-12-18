@@ -2,6 +2,7 @@ package org.zarroboogs.weibo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
@@ -17,7 +18,7 @@ import java.lang.reflect.Field;
 /**
  * User: qii Date: 13-1-22
  */
-public class MainTimeLineParentActivity extends SlidingFragmentActivity {
+public class MainTimeLineParentActivity extends ActionBarActivity {
 
 	private int theme = 0;
 
