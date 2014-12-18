@@ -2,19 +2,16 @@ package org.zarroboogs.weibo.activity;
 
 import org.zarroboogs.weibo.bean.WeiboWeiba;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.view.Window;
+import android.support.v7.app.ActionBarActivity;
 import android.view.WindowManager;
 
-public class SharedPreferenceActivity extends Activity implements OnSharedPreferenceChangeListener {
+public class SharedPreferenceActivity extends ActionBarActivity implements OnSharedPreferenceChangeListener {
 	private SharedPreferences mCookieSP = null;
 	private String mCookie = "";
 	private static final String KEY_COOKIE = "cookie";

@@ -18,8 +18,9 @@
     <string name="send_tomanay_pics">最多同时发送9张图片</string>
     <string name="fetch_new_weiba">获取最新尾巴！</string>
     <string name="send_weibo">发送</string>
+    <string name="drawer_open">打开</string>
     
-    
+    <string name="drawer_close">关闭</string>
     
     <!--drawer menu-->
     <string name="home">首页</string>

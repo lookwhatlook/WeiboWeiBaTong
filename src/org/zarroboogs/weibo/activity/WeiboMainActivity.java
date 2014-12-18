@@ -27,14 +27,10 @@ import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import org.apache.commons.codec.binary.Base64;
 import org.zarroboogs.util.net.ExecuterManager;
 import org.zarroboogs.util.net.FetchWeiBoAsyncTask;
-import org.zarroboogs.util.net.LoginWeiboAsyncTask;
 import org.zarroboogs.util.net.UploadThread;
-import org.zarroboogs.util.net.WeiboAsyncTask;
 import org.zarroboogs.util.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
 import org.zarroboogs.util.net.UploadThread.WaterMark;
-import org.zarroboogs.util.net.UploadThread.WaterMark.POS;
-import org.zarroboogs.util.net.WeiboAsyncTask.OnSendFinished;
 import org.zarroboogs.utils.SendBitmapWorkerTask;
 import org.zarroboogs.utils.Utility;
 import org.zarroboogs.utils.WeiBaNetUtils;
@@ -42,11 +38,6 @@ import org.zarroboogs.utils.SendBitmapWorkerTask.OnCacheDoneListener;
 import org.zarroboogs.weibo.ChangeWeibaAdapter;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
-import org.zarroboogs.weibo.R.dimen;
-import org.zarroboogs.weibo.R.drawable;
-import org.zarroboogs.weibo.R.id;
-import org.zarroboogs.weibo.R.layout;
-import org.zarroboogs.weibo.R.string;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.UserBean;
 import org.zarroboogs.weibo.bean.WeibaGson;
@@ -67,10 +58,9 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.slidingmenu.lib.SlidingMenu;
-import com.slidingmenu.lib.SlidingMenu.OnOpenListener;
 import com.umeng.analytics.MobclickAgent;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -83,6 +73,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -165,18 +158,28 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	PullToRefreshListView listView;
 	ChangeWeibaAdapter listAdapter;
 	List<WeiboWeiba> listdata = new ArrayList<WeiboWeiba>();
-	SlidingMenu menu;
-
 	AppsrcDatabaseManager mDBmanager = null;// new
 											// AppsrcDatabaseManager(getApplicationContext());
 	private String atContent = "";
 
+	   private DrawerLayout mDrawerLayout;
+	    private ActionBarDrawerToggle mDrawerToggle;
+	    private Toolbar mToolbar;
+	    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getAppSrcSharedPreference().registerOnSharedPreferenceChangeListener(this);
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		setContentView(R.layout.activity_main);
+		// drawerLayout
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.writeWeiboDrawerL);
+        mToolbar = (Toolbar) findViewById(R.id.writeWeiboToolBar);
+        
+        mDrawerToggle = new MyDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open,R.string.drawer_close);
+        mDrawerToggle.syncState();
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
 		mJsEvaluator = new JsEvaluator(getApplicationContext());
 
 		mAccountBean = getIntent().getParcelableExtra(BundleArgsConstants.ACCOUNT_EXTRA);
@@ -246,20 +249,10 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 		options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
 
-		menu = new SlidingMenu(this);
-		menu.setMode(SlidingMenu.LEFT);
-		menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
-		menu.setShadowWidthRes(R.dimen.shadow_width);
-		menu.setShadowDrawable(R.drawable.shadow_slidingmenu);
-		menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
-		menu.setFadeDegree(0.35f);
-		menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
-		menu.setMenu(R.layout.activity_main_left_menu);
-
 		mDBmanager = new AppsrcDatabaseManager(getApplicationContext());
 
 		listAdapter = new ChangeWeibaAdapter(this);
-		listView = (PullToRefreshListView) menu.findViewById(R.id.left_menu_list_view);
+		listView = (PullToRefreshListView) findViewById(R.id.left_menu_list_view);
 		listView.setOnRefreshListener(new OnRefreshListener<ListView>() {
 
 			@Override
@@ -281,29 +274,40 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(this);
 
-		menu.setOnOpenListener(new OnOpenListener() {
-
-			@Override
-			public void onOpen() {
-				List<WeiboWeiba> list = mDBmanager.fetchAllAppsrc();
-				if (isKeyBoardShowed) {
-					imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
-				}
-				if (list.size() == 0) {
-					if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
-						fetchWeiBa();
-					} else {
-						Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
-						;
-					}
-				} else {
-					listAdapter.setWeibas(list);
-				}
-			}
-		});
-
 	}
 
+    class MyDrawerToggle extends ActionBarDrawerToggle {
+
+        public MyDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes,
+                int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            super.onDrawerClosed(drawerView);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+
+            List<WeiboWeiba> list = mDBmanager.fetchAllAppsrc();
+            if (isKeyBoardShowed) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+            if (list.size() == 0) {
+                if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
+                    fetchWeiBa();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
+                    ;
+                }
+            } else {
+                listAdapter.setWeibas(list);
+            }
+        }
+    }
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -640,7 +644,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 				if (isKeyBoardShowed) {
 					imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
 				}
-				menu.toggle();
+//				menu.toggle();
 			} else {
 				Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
 			}
@@ -883,7 +887,8 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		WeiboWeiba weiba = ((WeiboWeiba) parent.getItemAtPosition(position));
 		Log.d("CLICK", "" + weiba);
 		saveWeiba(weiba);
-		menu.toggle();
+//		menu.toggle();
+		mDrawerLayout.closeDrawer(findViewById(R.id.drawerLeft));
 	}
 	Handler mHandler = new Handler(){
 
