@@ -1,7 +1,5 @@
 package org.zarroboogs.weibo.fragment;
 
-import com.slidingmenu.lib.SlidingMenu;
-
 import org.zarroboogs.utils.file.FileLocationMethod;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
