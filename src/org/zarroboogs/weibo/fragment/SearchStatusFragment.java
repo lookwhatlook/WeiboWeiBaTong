@@ -63,7 +63,6 @@ public class SearchStatusFragment extends AbsTimeLineFragment<SearchStatusListBe
 	   @Override
 	    public void onViewCreated(View view, Bundle savedInstanceState) {
 	        super.onViewCreated(view, savedInstanceState);
-	        getBaseToolbar().setVisibility(View.GONE);
 	    }
 
 	protected void onTimeListViewItemClick(AdapterView parent, View view, int position, long id) {

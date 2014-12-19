@@ -1,23 +1,18 @@
 package org.zarroboogs.weibo.activity;
 
-import java.util.List;
-
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 import org.zarroboogs.utils.Constants;
-import org.zarroboogs.utils.WeiBaNetUtils;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
-import org.zarroboogs.weibo.activity.WeiboMainActivity.MyDrawerToggle;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentListBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.bean.UserBean;
-import org.zarroboogs.weibo.bean.WeiboWeiba;
 import org.zarroboogs.weibo.db.DatabaseManager;
 import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.fragment.CommentsTimeLineFragment;
@@ -32,7 +27,6 @@ import org.zarroboogs.weibo.fragment.UserInfoFragment;
 import org.zarroboogs.weibo.othercomponent.ConnectionChangeReceiver;
 import org.zarroboogs.weibo.othercomponent.MusicReceiver;
 import org.zarroboogs.weibo.setting.SettingUtils;
-import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.lib.RecordOperationAppBroadcastReceiver;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
@@ -51,7 +45,6 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -60,7 +53,6 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 

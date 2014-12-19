@@ -356,7 +356,7 @@ public class UserInfoFragment extends AbsTimeLineFragment<MessageListBean> imple
 			nickname.setText(userBean.getScreen_name() + "(" + userBean.getRemark() + ")");
 		}
 
-		getBaseToolbar().setTitle(userBean.getScreen_name());
+//		getBaseToolbar().setTitle(userBean.getScreen_name());
 
 		avatar.checkVerified(userBean);
 
@@ -559,10 +559,10 @@ public class UserInfoFragment extends AbsTimeLineFragment<MessageListBean> imple
 
 		if (Utility.isDevicePort()) {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.profile));
-			getBaseToolbar().setLogo(R.drawable.ic_menu_profile);
+//			getBaseToolbar().setLogo(R.drawable.ic_menu_profile);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.profile));
-			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
+//			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
 		}
 	}
 

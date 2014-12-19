@@ -47,7 +47,7 @@ public class SearchUserFragment extends AbstractUserListFragment {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 	    super.onViewCreated(view, savedInstanceState);
-	    getBaseToolbar().setVisibility(View.GONE);
+//	    getBaseToolbar().setVisibility(View.GONE);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

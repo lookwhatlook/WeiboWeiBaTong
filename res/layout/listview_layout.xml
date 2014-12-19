@@ -4,14 +4,6 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/baseToolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:title="@string/app_name" />
-
     <TextView
         android:id="@+id/empty"
         android:layout_width="wrap_content"
@@ -28,7 +20,6 @@
     -->
 
     <org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView
-        android:layout_below="@id/baseToolBar"
         android:id="@+id/listView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

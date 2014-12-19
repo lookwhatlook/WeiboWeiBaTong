@@ -103,10 +103,10 @@ public class DMUserListFragment extends AbsBaseTimeLineFragment<DMUserListBean> 
 
 		if (Utility.isDevicePort()) {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.dm));
-			getBaseToolbar().setLogo(R.drawable.ic_menu_message);
+//			getBaseToolbar().setLogo(R.drawable.ic_menu_message);
 		} else {
 			((MainTimeLineActivity) getActivity()).setTitle(getString(R.string.dm));
-			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
+//			getBaseToolbar().setLogo(R.drawable.beebo_launcher);
 		}
 
 //		getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);

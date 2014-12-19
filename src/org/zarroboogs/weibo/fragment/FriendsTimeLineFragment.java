@@ -46,6 +46,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Pair;
 import android.view.Menu;
@@ -100,6 +101,8 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
     private Thread mBackgroundWifiDownloadPicThread = null;
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
+    
+    private Toolbar mToolbar;
 
     public FriendsTimeLineFragment(){
         super();
@@ -132,8 +135,9 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        getBaseToolbar().inflateMenu(R.menu.actionbar_menu_friendstimelinefragment);
-        getBaseToolbar().setOnMenuItemClickListener(new OnMenuItemClickListener() {
+        mToolbar = (Toolbar) getActivity().findViewById(R.id.mainTimeLineToolBar);
+        mToolbar.inflateMenu(R.menu.actionbar_menu_friendstimelinefragment);
+        mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -486,13 +490,13 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
         // });
         currentGroupId = FriendsTimeLineDBTask.getRecentGroupId(GlobalContext.getInstance().getCurrentAccountId());
 
-        if (Utility.isDevicePort()) {
-            ((MainTimeLineActivity) getActivity()).setTitle("");
-            getBaseToolbar().setLogo(R.drawable.ic_menu_home);
-        } else {
-            ((MainTimeLineActivity) getActivity()).setTitle("");
-            getBaseToolbar().setLogo(R.drawable.beebo_launcher);
-        }
+//        if (Utility.isDevicePort()) {
+//            ((MainTimeLineActivity) getActivity()).setTitle("");
+//            getBaseToolbar().setLogo(R.drawable.ic_menu_home);
+//        } else {
+//            ((MainTimeLineActivity) getActivity()).setTitle("");
+//            getBaseToolbar().setLogo(R.drawable.beebo_launcher);
+//        }
 
         // if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_LIST &&
         // isVisible()) {

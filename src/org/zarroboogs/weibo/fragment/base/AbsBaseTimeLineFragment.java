@@ -81,8 +81,6 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 
 	private boolean canLoadOldData = true;
 	
-	private Toolbar mToolBar;
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.listview_layout, container, false);
@@ -91,7 +89,6 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 	}
 
 	protected void buildLayout(LayoutInflater inflater, View view) {
-	    mToolBar = ViewUtility.findViewById(view, R.id.baseToolBar);
 		empty = ViewUtility.findViewById(view, R.id.empty);
 		progressBar = ViewUtility.findViewById(view, R.id.progressbar);
 		progressBar.setVisibility(View.GONE);
@@ -135,9 +132,6 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 	        return mPullToRefreshListView.getRefreshableView();
 	    }
 	    
-	    public Toolbar getBaseToolbar(){
-	        return mToolBar;
-	    }
 
 	    public BaseAdapter getAdapter() {
 	        return timeLineAdapter;

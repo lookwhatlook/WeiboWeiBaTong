@@ -60,7 +60,7 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 	protected static final int OLD_USER_LOADER_ID = 2;
 
 	private boolean canLoadOldData = true;
-	private Toolbar mToolbar;
+//	private Toolbar mToolbar;
 
 	public AbstractUserListFragment() {
 
@@ -88,7 +88,7 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.listview_layout, container, false);
-		mToolbar = (Toolbar) view.findViewById(R.id.baseToolBar);
+//		mToolbar = (Toolbar) view.findViewById(R.id.baseToolBar);
 		
 		empty = (TextView) view.findViewById(R.id.empty);
 		progressBar = (ProgressBar) view.findViewById(R.id.progressbar);
@@ -113,9 +113,9 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 	        return pullToRefreshListView.getRefreshableView();
 	    }
 	   
-	   public Toolbar getBaseToolbar(){
-	       return mToolbar;
-	   }
+//	   public Toolbar getBaseToolbar(){
+//	       return mToolbar;
+//	   }
 
 	    protected UserListAdapter getAdapter() {
 	        return userListAdapter;
