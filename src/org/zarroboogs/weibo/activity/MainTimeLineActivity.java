@@ -1,18 +1,23 @@
 package org.zarroboogs.weibo.activity;
 
+import java.util.List;
+
 import com.espian.showcaseview.ShowcaseView;
 import com.espian.showcaseview.targets.ViewTarget;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.update.UmengUpdateAgent;
 
 import org.zarroboogs.utils.Constants;
+import org.zarroboogs.utils.WeiBaNetUtils;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.WeiboMainActivity.MyDrawerToggle;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.CommentListBean;
 import org.zarroboogs.weibo.bean.MessageListBean;
 import org.zarroboogs.weibo.bean.UnreadBean;
 import org.zarroboogs.weibo.bean.UserBean;
+import org.zarroboogs.weibo.bean.WeiboWeiba;
 import org.zarroboogs.weibo.db.DatabaseManager;
 import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.fragment.CommentsTimeLineFragment;
@@ -33,6 +38,7 @@ import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ClipData;
@@ -46,11 +52,15 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -75,6 +85,8 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 	private View clickToTop;
 	private Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -110,7 +122,15 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 //		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
 //		getWindow().setBackgroundDrawable(null);
 		setContentView(R.layout.layout_main_time_line_activity);
-		mToolbar = (Toolbar) findViewById(R.id.mainTimeLineToolBar);
+        mToolbar = (Toolbar) findViewById(R.id.mainTimeLineToolBar);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.writeWeiboDrawerL);
+        mDrawerToggle = new MyDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        mDrawerToggle.syncState();
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+        
 //		mToolbar.setNavigationIcon(android.R.drawable.ic_g)
 		boolean isPhoneDevice = findViewById(R.id.menu_frame) == null;
 		Log.d("MainTimeLine-buildInterface", "isPhoneDevice: " + isPhoneDevice);
@@ -137,6 +157,38 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		configSlidingMenu(isPhoneDevice);
 	}
 
+    class MyDrawerToggle extends ActionBarDrawerToggle {
+
+        public MyDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes,
+                int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            super.onDrawerClosed(drawerView);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+        }
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            Log.d("onOptionsItemSelected", "onOptionsItemSelected 0000000000");
+            if (item != null && item.getItemId() == android.R.id.home) {
+                Log.d("onOptionsItemSelected", "onOptionsItemSelected 111111111");
+                if (mDrawerLayout.isDrawerOpen(findViewById(R.id.menu_frame_right))) {
+                    Log.d("onOptionsItemSelected", "onOptionsItemSelected 222222222");
+                    mDrawerLayout.closeDrawer(Gravity.END);
+                } else {
+                    mDrawerLayout.openDrawer(Gravity.END);
+                }
+            }
+            return false;
+        }
+    }
+    
 	private void initFragments() {
 		Fragment friend = getFriendsTimeLineFragment();
 		Fragment mentions = getMentionsTimeLineFragment();
@@ -349,16 +401,16 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 		GlobalContext.getInstance().getBitmapCache().evictAll();
 		finish();
 	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-//			getSlidingMenu().showMenu();
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+////			getSlidingMenu().showMenu();
+//			return true;
+//		}
+//		return super.onOptionsItemSelected(item);
+//	}
 
 	public UserBean getUser() {
 		return mAccountBean.getInfo();

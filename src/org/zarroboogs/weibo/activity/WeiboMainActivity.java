@@ -162,9 +162,9 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 											// AppsrcDatabaseManager(getApplicationContext());
 	private String atContent = "";
 
-	   private DrawerLayout mDrawerLayout;
-	    private ActionBarDrawerToggle mDrawerToggle;
-	    private Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private Toolbar mToolbar;
 	    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

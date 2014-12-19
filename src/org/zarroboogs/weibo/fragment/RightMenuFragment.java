@@ -35,7 +35,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -43,9 +42,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-/**
- * User: qii Date: 13-1-22
- */
 public class RightMenuFragment extends BaseStateFragment {
 
 	private Layout layout;
