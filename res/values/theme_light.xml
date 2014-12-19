@@ -67,7 +67,7 @@
         <item name="split_line_between_content_and_bottom_button_panel">@drawable/ab_bottom_solid_inverse_holo</item>
     </style>
     
-    <style name="PrivateThemeHoloLightOnlyForInherit" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="PrivateThemeHoloLightOnlyForInherit" parent="@style/Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@color/host_background</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
         <item name="android:actionDropDownStyle">@style/ActionBarDropDownStyle</item>

@@ -45,6 +45,7 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -110,6 +111,9 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 	}
 
+	public void closeLeftDrawer(){
+	    mDrawerLayout.closeDrawer(Gravity.START);
+	}
 	private void buildInterface(Bundle savedInstanceState) {
 //		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
 //		getWindow().setBackgroundDrawable(null);
@@ -159,6 +163,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
         @Override
         public void onDrawerClosed(View drawerView) {
             super.onDrawerClosed(drawerView);
+            LocalBroadcastManager.getInstance(MainTimeLineActivity.this).sendBroadcast(new Intent(AppEventAction.SLIDING_MENU_CLOSED_BROADCAST));
         }
 
         @Override

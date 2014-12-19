@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -317,18 +318,22 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		currentIndex = COMMENTS_INDEX;
 		if (Utility.isDevicePort() && !reset) {
+		    Log.d("Left_menu_fr", "onReceiver_change_if");
 			BroadcastReceiver receiver = new BroadcastReceiver() {
 				@Override
 				public void onReceive(Context context, Intent intent) {
+				    Log.d("Left_menu_fr", "onReceiver_");
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == COMMENTS_INDEX) {
 						showCommentPageImp();
+						Log.d("Left_menu_fr", "onReceiver_change");
 					}
 
 				}
 			};
 			LocalBroadcastManager.getInstance(getActivity()).registerReceiver(receiver, new IntentFilter(AppEventAction.SLIDING_MENU_CLOSED_BROADCAST));
 		} else {
+		    Log.d("Left_menu_fr", "onReceiver_change_else");
 			showCommentPageImp();
 
 		}
@@ -657,6 +662,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				showAccountSwitchPage();
 				break;
 			}
+			((MainTimeLineActivity)getActivity()).closeLeftDrawer();
 		}
 	};
 
