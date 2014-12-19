@@ -6,6 +6,7 @@ import org.zarroboogs.weibo.asynctask.BlackMagicLoginTask;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
 import org.zarroboogs.weibo.support.utils.Utility;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Dialog;
@@ -17,23 +18,15 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 
 /**
  * User: qii Date: 12-11-9
  */
 public class BlackMagicActivity extends AbstractAppActivity {
 
-    private EditText username;
+    private MaterialEditText username;
 
-    private EditText password;
-
-    private Spinner spinner;
+    private MaterialEditText password;
 
     private String appkey;
 
@@ -85,29 +78,28 @@ public class BlackMagicActivity extends AbstractAppActivity {
             }
         });
 
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        username = (MaterialEditText) findViewById(R.id.username);
+        password = (MaterialEditText) findViewById(R.id.password);
 
-        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.tail,
-                android.R.layout.simple_spinner_dropdown_item);
+//        SpinnerAdapter mSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.tail,
+//                android.R.layout.simple_spinner_dropdown_item);
 
-        spinner.setAdapter(mSpinnerAdapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String[] array = getResources().getStringArray(R.array.tail_value);
-                String value = array[position];
-                appkey = value.substring(0, value.indexOf(","));
-                appSecret = value.substring(value.indexOf(",") + 1);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//        spinner.setAdapter(mSpinnerAdapter);
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String[] array = getResources().getStringArray(R.array.tail_value);
+//                String value = array[position];
+//                appkey = value.substring(0, value.indexOf(","));
+//                appSecret = value.substring(value.indexOf(",") + 1);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
     }
 

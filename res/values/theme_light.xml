@@ -68,13 +68,13 @@
     </style>
     
     <style name="PrivateThemeHoloLightOnlyForInherit" parent="@style/Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@color/host_background</item>
+<!--         <item name="android:windowBackground">@color/host_background</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
         <item name="android:actionDropDownStyle">@style/ActionBarDropDownStyle</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabViewLight</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarTheme</item>
         <item name="android:actionBarItemBackground">@drawable/action_bar_item_background</item>
-        <item name="android:fastScrollTrackDrawable">@null</item>
+        <item name="android:fastScrollTrackDrawable">@null</item> -->
 
         <!-- toolbar（actionbar）颜色 -->
         <item name="colorPrimary">@color/actionbar_dark</item>
@@ -84,6 +84,8 @@
         <item name="android:windowBackground">@android:color/white</item>
         <!-- 设置字体的颜色 -->
         <item name="android:textColorPrimary">@android:color/white</item>
+        <!-- 设置EditText光标的颜色跟输入的字一样 -->
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
