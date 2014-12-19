@@ -130,9 +130,9 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 			secondFragmentTransaction.commit();
 			
 			
-//	         FragmentTransaction mainTransaction = getSupportFragmentManager().beginTransaction();
-//	         mainTransaction.replace(R.id.menu_right_fl, getFriendsTimeLineFragment(), FriendsTimeLineFragment.class.getName());
-//	         mainTransaction.commit();
+	         FragmentTransaction mainTransaction = getSupportFragmentManager().beginTransaction();
+	         mainTransaction.replace(R.id.menu_frame_right, getRightMenuFragment(), RightMenuFragment.class.getName());
+	         mainTransaction.commit();
 		}
 		configSlidingMenu(isPhoneDevice);
 	}

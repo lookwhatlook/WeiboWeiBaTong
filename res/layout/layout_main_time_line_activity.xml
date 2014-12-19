@@ -19,26 +19,25 @@
         android:layout_height="match_parent"
         android:layout_below="@id/mainTimeLineToolBar" >
 
-        <LinearLayout
-            android:id="@+id/drawerLeft"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="start"
-            android:background="#FF00FF00"
-            android:orientation="vertical" >
-
-            <FrameLayout
-                android:id="@+id/menu_frame"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/gray" />
-        </LinearLayout>
-
         <FrameLayout
             android:id="@+id/menu_right_fl"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/mainTimeLineToolBar" />
+
+        <FrameLayout
+            android:id="@+id/menu_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="@color/gray" />
+
+        <FrameLayout
+            android:id="@+id/menu_frame_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/gray" />
     </android.support.v4.widget.DrawerLayout>
 
 </RelativeLayout>
