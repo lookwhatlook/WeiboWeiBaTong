@@ -315,7 +315,7 @@
     <color name="listview_checked_color_holo_light">#66ffffff</color>
     <color name="progress_horizontal_progress">#0099CC</color>
     <color name="ics_blue_semi">#66FFFFFF</color>
-    <color name="host_background">#ffe5e5e5</color>
+    <color name="host_background">#FFE2E2E2</color>
 
     <!-- TopTipBar error color -->
     <color name="top_tip_bar_error">#7FFF4444</color>
