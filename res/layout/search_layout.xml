@@ -6,16 +6,6 @@
     android:fitsSystemWindows="true"
     android:useDefaultMargins="true" >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/viewPagerToolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:title="@string/app_name" >
-    </android.support.v7.widget.Toolbar>
-
     <com.example.android.common.view.SlidingTabLayout
         android:id="@+id/searchSTL"
         android:layout_width="match_parent"

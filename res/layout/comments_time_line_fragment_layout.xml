@@ -6,22 +6,11 @@
     android:fitsSystemWindows="true"
     android:useDefaultMargins="true" >
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/commentsToolBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:title="@string/app_name" >
-    </android.support.v7.widget.Toolbar>
-
     <com.example.android.common.view.SlidingTabLayout
         android:id="@+id/commentsSlingTab"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/commentsToolBar" />
+        android:layout_alignParentRight="true"/>
 
     <android.support.v4.view.ViewPager
         xmlns:android="http://schemas.android.com/apk/res/android"

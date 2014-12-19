@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -84,6 +85,8 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 	public static final int SETTING_INDEX = 8;
 
+	   private Toolbar mToolbar;
+	   
 	public static LeftMenuFragment newInstance() {
 		LeftMenuFragment fragment = new LeftMenuFragment();
 		fragment.setArguments(new Bundle());
@@ -218,6 +221,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				public void onReceive(Context context, Intent intent) {
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == HOME_INDEX) {
+					    mToolbar.setTitle(R.string.home);
 						showHomePageImp();
 					}
 
@@ -266,6 +270,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				public void onReceive(Context context, Intent intent) {
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == MENTIONS_INDEX) {
+					    mToolbar.setTitle(R.string.mentions);
 						showMentionPageImp();
 					}
 				}
@@ -325,6 +330,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				    Log.d("Left_menu_fr", "onReceiver_");
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == COMMENTS_INDEX) {
+					    mToolbar.setTitle(R.string.comments);
 						showCommentPageImp();
 						Log.d("Left_menu_fr", "onReceiver_change");
 					}
@@ -383,6 +389,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				public void onReceive(Context context, Intent intent) {
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == SEARCH_INDEX) {
+					    mToolbar.setTitle(R.string.search);
 						showSearchPageImp();
 					}
 
@@ -441,6 +448,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				public void onReceive(Context context, Intent intent) {
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == DM_INDEX) {
+					    mToolbar.setTitle(R.string.dm);
 						showDMPageImp();
 					}
 
@@ -490,6 +498,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 				public void onReceive(Context context, Intent intent) {
 					LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(this);
 					if (currentIndex == FAV_INDEX) {
+					    mToolbar.setTitle(R.string.favourite);
 						showFavPageImp();
 					}
 
@@ -617,6 +626,8 @@ public class LeftMenuFragment extends BaseStateFragment {
 		// layout.location.setOnClickListener(onClickListener);
 		layout.dm.setOnClickListener(onClickListener);
 		layout.fav.setOnClickListener(onClickListener);
+		
+		mToolbar = (Toolbar) getActivity().findViewById(R.id.mainTimeLineToolBar);
 	}
 
 	private View.OnClickListener onClickListener = new View.OnClickListener() {

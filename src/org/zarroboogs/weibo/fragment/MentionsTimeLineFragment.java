@@ -13,11 +13,13 @@ import org.zarroboogs.weibo.support.utils.Utility;
 
 import com.example.android.common.view.SlidingTabLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +37,8 @@ public class MentionsTimeLineFragment extends BaseStateFragment implements MainT
 	public static final int MENTIONS_COMMENT_CHILD_POSITION = 1;
 
 	private SlidingTabLayout mSlidingTabLayout;
+	
+	
 	public static MentionsTimeLineFragment newInstance() {
 		MentionsTimeLineFragment fragment = new MentionsTimeLineFragment();
 		fragment.setArguments(new Bundle());
