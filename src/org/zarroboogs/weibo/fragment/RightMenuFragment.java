@@ -627,6 +627,7 @@ public class RightMenuFragment extends BaseStateFragment {
 				showAccountSwitchPage();
 				break;
 			}
+			((MainTimeLineActivity)getActivity()).closeRightDrawer();
 		}
 	};
 

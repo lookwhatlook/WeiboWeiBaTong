@@ -114,6 +114,10 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 	public void closeLeftDrawer(){
 	    mDrawerLayout.closeDrawer(Gravity.START);
 	}
+	
+	   public void closeRightDrawer(){
+	        mDrawerLayout.closeDrawer(Gravity.END);
+	    }
 	private void buildInterface(Bundle savedInstanceState) {
 //		getActionBar().setTitle(GlobalContext.getInstance().getCurrentAccountName());
 //		getWindow().setBackgroundDrawable(null);
