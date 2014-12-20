@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.AbstractAppActivity;
 import org.zarroboogs.weibo.setting.fragment.AboutFragment;
 
@@ -15,13 +16,14 @@ public class AboutActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.setting_activity_layout);
 //		getActionBar().setDisplayShowHomeEnabled(false);
 //		getActionBar().setDisplayShowTitleEnabled(true);
 //		getActionBar().setDisplayHomeAsUpEnabled(true);
 //		getActionBar().setTitle(getString(R.string.pref_about_title));
 
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction().replace(android.R.id.content, new AboutFragment()).commit();
+			getFragmentManager().beginTransaction().replace(R.id.content_frame, new AboutFragment()).commit();
 		}
 	}
 

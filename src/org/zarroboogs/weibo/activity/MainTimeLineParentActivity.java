@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
 /**
  * User: qii Date: 13-1-22
  */
-public class MainTimeLineParentActivity extends ActionBarActivity {
+public class MainTimeLineParentActivity extends TranslucentStatusBarActivity {
 
 	private int theme = 0;
 

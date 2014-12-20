@@ -1,16 +1,18 @@
 
 package org.zarroboogs.weibo.activity;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class TranslucentStatusBarActivity extends Activity {
+public class TranslucentStatusBarActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +25,9 @@ public class TranslucentStatusBarActivity extends Activity {
         super.onCreate(savedInstanceState);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             setTranslucentStatus(true);
-            //SystemBarTintManager tintManager = new SystemBarTintManager(this);
-//            tintManager.setStatusBarTintEnabled(true);
-//            tintManager.setStatusBarTintColor(0xFF01579b);
+            SystemBarTintManager tintManager = new SystemBarTintManager(this);
+            tintManager.setStatusBarTintEnabled(true);
+            tintManager.setStatusBarTintColor(0xFF01579b);
         }
     }
 

@@ -1,6 +1,8 @@
 
 package org.zarroboogs.weibo.fragment;
 
+import com.readystatesoftware.systembartint.SystemBarTintManager;
+
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Build;
@@ -15,11 +17,11 @@ public class TransLucentFragment extends Fragment {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return;
         }
-        // SystemBarTintManager tintManager = new SystemBarTintManager(context);
-        // SystemBarTintManager.SystemBarConfig config = tintManager
-        // .getConfig();
-        // view.setPadding(0, config.getPixelInsetTop(true),
-        // config.getPixelInsetRight(), config.getPixelInsetBottom());
+         SystemBarTintManager tintManager = new SystemBarTintManager(context);
+         SystemBarTintManager.SystemBarConfig config = tintManager
+         .getConfig();
+         view.setPadding(0, config.getPixelInsetTop(true),
+         config.getPixelInsetRight(), config.getPixelInsetBottom());
     }
 
     @Override

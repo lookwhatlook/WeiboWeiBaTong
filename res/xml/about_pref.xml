@@ -17,7 +17,7 @@
             android:summary="GPL v3.0"
             android:title="@string/pref_open_source_license_title" >
             <intent
-                android:targetClass="org.zarroboogs.weibo.ui.preference.LicenseActivity"
+                android:targetClass="org.zarroboogs.weibo.setting.activity.LicenseActivity"
                 android:targetPackage="org.zarroboogs.weibo" />
         </Preference>
     </PreferenceCategory>

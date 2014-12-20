@@ -19,9 +19,6 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.webkit.WebView;
 
-/**
- * User: qii Date: 13-4-18
- */
 @TargetApi(Build.VERSION_CODES.KITKAT)
 public class LicenseActivity extends AbstractAppActivity {
 

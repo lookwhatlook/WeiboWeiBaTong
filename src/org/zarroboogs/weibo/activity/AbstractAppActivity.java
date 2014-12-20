@@ -2,7 +2,6 @@ package org.zarroboogs.weibo.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
@@ -14,7 +13,7 @@ import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import java.lang.reflect.Field;
 
 
-public class AbstractAppActivity extends ActionBarActivity {
+public class AbstractAppActivity extends TranslucentStatusBarActivity {
 
 	protected int theme = 0;
 
