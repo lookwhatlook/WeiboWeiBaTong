@@ -86,6 +86,8 @@ public class UserInfoActivity extends AbstractAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.userinfoactivity_layout);
+		
 		initLayout();
 		token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = getIntent().getParcelableExtra("user");
@@ -111,9 +113,9 @@ public class UserInfoActivity extends AbstractAppActivity {
 				}
 			}
 			fetchUserInfoFromServer();
-			findViewById(android.R.id.content).setBackgroundDrawable(ThemeUtility.getDrawable(android.R.attr.windowBackground));
+			//findViewById(android.R.id.content).setBackgroundDrawable(ThemeUtility.getDrawable(android.R.attr.windowBackground));
 		} else {
-			findViewById(android.R.id.content).setBackgroundDrawable(ThemeUtility.getDrawable(android.R.attr.windowBackground));
+//			findViewById(android.R.id.content).setBackgroundDrawable(ThemeUtility.getDrawable(android.R.attr.windowBackground));
 			buildContent();
 		}
 
@@ -186,7 +188,7 @@ public class UserInfoActivity extends AbstractAppActivity {
 			public void run() {
 				if (getSupportFragmentManager().findFragmentByTag(UserInfoFragment.class.getName()) == null) {
 					UserInfoFragment userInfoFragment = UserInfoFragment.newInstance(getUser(), getToken());
-					getSupportFragmentManager().beginTransaction().replace(android.R.id.content, userInfoFragment, UserInfoFragment.class.getName()).commit();
+					getSupportFragmentManager().beginTransaction().replace(R.id.content, userInfoFragment, UserInfoFragment.class.getName()).commit();
 					getSupportFragmentManager().executePendingTransactions();
 
 					AnimationUtility.translateFragmentY(userInfoFragment, -400, 0, userInfoFragment);

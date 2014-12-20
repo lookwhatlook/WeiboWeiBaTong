@@ -40,9 +40,6 @@ import android.view.MenuItem;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
-/**
- * User: Jiang Qi Date: 12-8-1
- */
 public class BrowserWeiboMsgActivity extends AbstractAppActivity implements RemoveWeiboMsgDialog.IRemove {
 
 	private static final String ACTION_WITH_ID = "action_with_id";

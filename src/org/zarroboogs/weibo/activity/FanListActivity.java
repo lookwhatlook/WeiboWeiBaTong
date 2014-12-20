@@ -35,15 +35,16 @@ public class FanListActivity extends AbstractAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.fan_list));
-		getActionBar().setIcon(R.drawable.ic_ab_friendship);
+		setContentView(R.layout.fan_list_activity_layout);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.fan_list));
+//		getActionBar().setIcon(R.drawable.ic_ab_friendship);
 
 		token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = (UserBean) getIntent().getParcelableExtra("user");
 
 		if (getSupportFragmentManager().findFragmentByTag(FanListFragment.class.getName()) == null) {
-			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, FanListFragment.newInstance(bean), FanListFragment.class.getName())
+			getSupportFragmentManager().beginTransaction().replace(R.id.content, FanListFragment.newInstance(bean), FanListFragment.class.getName())
 					.commit();
 		}
 

@@ -157,7 +157,7 @@ public class SearchTopicByNameFragment extends AbsTimeLineFragment<TopicResultLi
 	private void buildActionBatSubtitle() {
 		int newSize = bean.getTotal_number();
 		String number = bean.getSize() + "/" + newSize;
-		getActivity().getActionBar().setSubtitle(number);
+//		getActivity().getActionBar().setSubtitle(number);
 	}
 
 	private class FollowTopicTask extends MyAsyncTask<Void, Boolean, Boolean> {

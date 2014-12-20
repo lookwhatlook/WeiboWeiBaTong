@@ -1,5 +1,6 @@
 package org.zarroboogs.weibo.activity;
 
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.fragment.SearchTopicByNameFragment;
 
 import com.umeng.analytics.MobclickAgent;
@@ -10,14 +11,12 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
-/**
- * User: qii Date: 12-9-8
- */
 public class SearchTopicByNameActivity extends AbstractAppActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.search_topic_byname_activity_layout);
 		String q = getIntent().getStringExtra("q");
 		if (TextUtils.isEmpty(q)) {
 			Uri data = getIntent().getData();
@@ -25,11 +24,11 @@ public class SearchTopicByNameActivity extends AbstractAppActivity {
 			int index = d.indexOf("#");
 			q = d.substring(index + 1, d.length() - 1);
 		}
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setTitle("#" + q + "#");
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setTitle("#" + q + "#");
 		if (savedInstanceState == null) {
-			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new SearchTopicByNameFragment(q)).commit();
+			getSupportFragmentManager().beginTransaction().replace(R.id.content, new SearchTopicByNameFragment(q)).commit();
 		}
 
 	}

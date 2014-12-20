@@ -57,7 +57,7 @@ public abstract class AbstractFriendsFanListFragment extends AbstractUserListFra
 			} else {
 				number = bean.getUsers().size() + "/" + newSize;
 			}
-			getActivity().getActionBar().setSubtitle(number);
+//			getActivity().getActionBar().setSubtitle(number);
 		}
 	}
 

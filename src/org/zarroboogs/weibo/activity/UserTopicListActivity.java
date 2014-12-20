@@ -14,9 +14,6 @@ import android.view.MenuItem;
 
 import java.util.ArrayList;
 
-/**
- * User: qii Date: 12-11-18
- */
 public class UserTopicListActivity extends AbstractAppActivity {
 
 	public static Intent newIntent(UserBean userBean, ArrayList<String> topicList) {
@@ -30,10 +27,11 @@ public class UserTopicListActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		setContentView(R.layout.user_topic_list_activity_layout);
 		UserBean userBean = (UserBean) getIntent().getParcelableExtra(Constants.USERBEAN);
 		ArrayList<String> topicList = getIntent().getStringArrayListExtra("topicList");
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.topic));
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.topic));
 
 		if (savedInstanceState == null) {
 			UserTopicListFragment fragment;
@@ -42,7 +40,7 @@ public class UserTopicListActivity extends AbstractAppActivity {
 			} else {
 				fragment = new UserTopicListFragment(userBean);
 			}
-			getFragmentManager().beginTransaction().replace(android.R.id.content, fragment).commit();
+			getFragmentManager().beginTransaction().replace(R.id.content, fragment).commit();
 		}
 	}
 	
