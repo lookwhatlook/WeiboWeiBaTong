@@ -1,3 +1,4 @@
+
 package org.zarroboogs.weibo.fragment;
 
 import org.zarroboogs.weibo.R;
@@ -8,297 +9,288 @@ import org.zarroboogs.weibo.fragment.base.AbsBaseTimeLineFragment;
 import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
-import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import com.example.android.common.view.SlidingTabLayout;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.provider.SearchRecentSuggestions;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.SearchView;
 
 public class SearchMainParentFragment extends BaseStateFragment implements MainTimeLineActivity.ScrollableListFragment {
 
-	private ViewPager viewPager;
-	private SlidingTabLayout mSlidingTabLayout;
+    private ViewPager viewPager;
+    private SlidingTabLayout mSlidingTabLayout;
 
-	private SparseArray<Fragment> searchFragments = new SparseArray<Fragment>();
+    private SparseArray<Fragment> searchFragments = new SparseArray<Fragment>();
 
-	private SparseArray<ActionBar.Tab> tabMap = new SparseArray<ActionBar.Tab>();
+    private SparseArray<ActionBar.Tab> tabMap = new SparseArray<ActionBar.Tab>();
 
-	private static final int SEARCH_WEIBO_CHILD_POSITION = 0;
+    private static final int SEARCH_WEIBO_CHILD_POSITION = 0;
 
-	private static final int SEARCH_USER_CHILD_POSITION = 1;
+    private static final int SEARCH_USER_CHILD_POSITION = 1;
 
-	private SearchView searchView;
+    private SearchView searchView;
 
-	public static SearchMainParentFragment newInstance() {
-		SearchMainParentFragment fragment = new SearchMainParentFragment();
-		fragment.setArguments(new Bundle());
-		return fragment;
-	}
+    private Toolbar mSearchToolbar;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setHasOptionsMenu(true);
-	}
+    private Handler mHandler = new Handler(Looper.getMainLooper());
+    
+    public static SearchMainParentFragment newInstance() {
+        SearchMainParentFragment fragment = new SearchMainParentFragment();
+        fragment.setArguments(new Bundle());
+        return fragment;
+    }
 
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString("q", q);
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        MyLogger("onCreate");
+    }
 
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		if (savedInstanceState != null) {
-			this.q = savedInstanceState.getString("q");
-		}
-		if ((((MainTimeLineActivity) getActivity()).getLeftMenuFragment()).getCurrentIndex() == LeftMenuFragment.SEARCH_INDEX) {
-			buildActionBarAndViewPagerTitles(((MainTimeLineActivity) getActivity()).getLeftMenuFragment().searchTabIndex);
-		}
-	}
+    private static void MyLogger(String method) {
+        Log.d("Seatch_event: ", method);
+    }
 
-//	private ActionBar.Tab buildSearchWeiboTab(SimpleTwoTabsListener tabListener) {
-//		ActionBar.Tab tab;
-//		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
-//		((TextView) customView.findViewById(R.id.title)).setText(R.string.weibo);
-//		tab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(SearchStatusFragment.class.getName()).setTabListener(tabListener);
-//		tabMap.append(SEARCH_WEIBO_CHILD_POSITION, tab);
-//		return tab;
-//	}
-//
-//	private ActionBar.Tab buildSearchUserTab(SimpleTwoTabsListener tabListener) {
-//		ActionBar.Tab tab;
-//		View customView = getActivity().getLayoutInflater().inflate(R.layout.ab_tab_custom_view_layout, null);
-//		((TextView) customView.findViewById(R.id.title)).setText(R.string.user);
-//		tab = getActivity().getActionBar().newTab().setCustomView(customView).setTag(SearchUserFragment.class.getName()).setTabListener(tabListener);
-//		tabMap.append(SEARCH_USER_CHILD_POSITION, tab);
-//		return tab;
-//	}
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("q", q);
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.search_layout, container, false);
-		viewPager = (ViewPager) view.findViewById(R.id.viewpager);
-		mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.searchSTL);
-		return view;
-	}
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            this.q = savedInstanceState.getString("q");
+        }
+    }
 
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
-		viewPager.setOffscreenPageLimit(2);
-		viewPager.setOnPageChangeListener(onPageChangeListener);
-		SearchTimeLinePagerAdapter adapter = new SearchTimeLinePagerAdapter(this, viewPager, getChildFragmentManager(), (MainTimeLineActivity) getActivity(),
-				searchFragments);
-		viewPager.setAdapter(adapter);
-		mSlidingTabLayout.setViewPager(viewPager);
-	}
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.search_layout, container, false);
+        viewPager = (ViewPager) view.findViewById(R.id.viewpager);
+        mSlidingTabLayout = (SlidingTabLayout) view.findViewById(R.id.searchSTL);
+        MyLogger("onCreateView");
+        return view;
+    }
 
-	@Override
-	public void onHiddenChanged(boolean hidden) {
-		super.onHiddenChanged(hidden);
-		if (!hidden) {
-			int searchTabIndex = getArguments().getInt("searchTabIndex");
-			buildActionBarAndViewPagerTitles(searchTabIndex);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        viewPager.setOverScrollMode(View.OVER_SCROLL_NEVER);
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setOnPageChangeListener(onPageChangeListener);
+        SearchTimeLinePagerAdapter adapter = new SearchTimeLinePagerAdapter(this, viewPager, getChildFragmentManager(),
+                (MainTimeLineActivity) getActivity(),
+                searchFragments);
+        viewPager.setAdapter(adapter);
+        mSlidingTabLayout.setViewPager(viewPager);
 
-			if (searchView != null) {
-				SmileyPickerUtility.showKeyBoard(searchView);
-			}
-		} else {
-			if (searchView != null) {
-				SmileyPickerUtility.hideSoftInput(searchView);
-			}
-		}
-	}
+        mSearchToolbar = (Toolbar) ((MainTimeLineActivity) getActivity()).findViewById(R.id.mainTimeLineToolBar);
+        MyLogger("onViewCreated");
+    }
 
-	public void buildActionBarAndViewPagerTitles(int nav) {
-		((MainTimeLineActivity) getActivity()).setCurrentFragment(this);
+    @Override
+    public void onStart() {
+        super.onStart();
+        MyLogger("onStart");
+    }
 
-//		if (Utility.isDevicePort()) {
-//			((MainTimeLineActivity) getActivity()).setTitle(R.string.search);
-//			getActivity().getActionBar().setIcon(R.drawable.search_light);
-//		} else {
-//			((MainTimeLineActivity) getActivity()).setTitle("");
-//			getActivity().getActionBar().setIcon(R.drawable.beebo_launcher);
-//		}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        MyLogger("onAttach");
+    }
 
-//		ActionBar actionBar = getActivity().getActionBar();
-//		actionBar.setDisplayHomeAsUpEnabled(Utility.isDevicePort());
-//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-//		actionBar.removeAllTabs();
-//		SimpleTwoTabsListener tabListener = new SimpleTwoTabsListener(viewPager);
-//
-//		ActionBar.Tab weiboTab = getWeiboTab();
-//		if (weiboTab == null) {
-//			weiboTab = buildSearchWeiboTab(tabListener);
-//		}
-//		actionBar.addTab(weiboTab);
-//
-//		ActionBar.Tab userTab = getUserTab();
-//		if (userTab == null) {
-//			userTab = buildSearchUserTab(tabListener);
-//		}
-//
-//		actionBar.addTab(userTab);
-//
-//		if (actionBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && nav > -1) {
-//			if (viewPager != null) {
-//				viewPager.setCurrentItem(nav, false);
-//			}
-//		}
+    @Override
+    public void onResume() {
+        super.onResume();
+        showSearchMenu();
+    }
 
-	}
+    public void showSearchMenu() {
+        mHandler.postDelayed(new Runnable() {
+            
+            @Override
+            public void run() {
+                if (SearchMainParentFragment.this.isVisible() && mSearchToolbar != null) {
 
-	@Override
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.actionbar_menu_searchmainactivity, menu);
-		final SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-		searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-		searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-		searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
-		searchView.setIconifiedByDefault(false);
-		searchView.setSubmitButtonEnabled(false);
-		searchView.setMaxWidth(Utility.dip2px(250));
-		ThemeUtility.customActionBarSearchViewTextColor(searchView);
-		searchView.requestFocus();
-		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-			@Override
-			public boolean onQueryTextSubmit(String query) {
-				search(q);
-				return false;
-			}
+                    mSearchToolbar.getMenu().clear();
+                    mSearchToolbar.inflateMenu(R.menu.actionbar_menu_searchmainactivity);
 
-			@Override
-			public boolean onQueryTextChange(String newText) {
-				SearchMainParentFragment.this.q = newText;
-				return false;
-			}
-		});
-		searchView.setOnSearchClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				search(q);
-			}
-		});
-		if (!TextUtils.isEmpty(this.q)) {
-			searchView.setQuery(this.q, false);
-		}
-	}
+                    createSearch(mSearchToolbar.getMenu());
+                }
+            }
+        }, 200);
 
-	public String getSearchWord() {
-		return this.q;
-	}
+    }
 
-	private String q;
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (searchView != null) {
+                SmileyPickerUtility.showKeyBoard(searchView);
+            }
+        } else {
+            if (searchView != null) {
+                SmileyPickerUtility.hideSoftInput(searchView);
+            }
+        }
+    }
 
-	private void search(final String q) {
-		if (!TextUtils.isEmpty(q)) {
-			this.q = q;
-			SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(), SearchSuggestionProvider.AUTHORITY, SearchSuggestionProvider.MODE);
-			suggestions.saveRecentQuery(this.q, null);
-			switch (viewPager.getCurrentItem()) {
-			case 0:
-				((SearchStatusFragment) getSearchWeiboFragment()).search();
-				break;
-			case 1:
-				((SearchUserFragment) getSearchUserFragment()).search();
-				break;
-			}
-		}
-	}
+    private void createSearch(Menu menu) {
+        final SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
+        searchView.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        searchView.setIconifiedByDefault(false);
+        searchView.setSubmitButtonEnabled(false);
+        searchView.setMaxWidth(Utility.dip2px(250));
 
-	public ActionBar.Tab getWeiboTab() {
-		return tabMap.get(SEARCH_WEIBO_CHILD_POSITION);
-	}
+        searchView.requestFocus();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                search(q);
+                return false;
+            }
 
-	public ActionBar.Tab getUserTab() {
-		return tabMap.get(SEARCH_USER_CHILD_POSITION);
-	}
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                SearchMainParentFragment.this.q = newText;
+                return false;
+            }
+        });
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search(q);
+            }
+        });
+        if (!TextUtils.isEmpty(this.q)) {
+            searchView.setQuery(this.q, false);
+        }
+    }
 
-	ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
-		@Override
-		public void onPageSelected(int position) {
-			ActionBar ab = getActivity().getActionBar();
-			if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS && ab.getTabAt(position) == tabMap.get(position)) {
-				ab.setSelectedNavigationItem(position);
-			}
+    public String getSearchWord() {
+        return this.q;
+    }
 
-			((LeftMenuFragment) ((MainTimeLineActivity) getActivity()).getLeftMenuFragment()).searchTabIndex = position;
-			clearActionMode();
-		}
+    private String q;
 
-		@Override
-		public void onPageScrollStateChanged(int state) {
-			super.onPageScrollStateChanged(state);
-			switch (state) {
-			case ViewPager.SCROLL_STATE_SETTLING:
-				new Handler().postDelayed(new Runnable() {
-					@Override
-					public void run() {
-						LongClickableLinkMovementMethod.getInstance().setLongClickable(true);
+    private void search(final String q) {
+        if (!TextUtils.isEmpty(q)) {
+            this.q = q;
+            SearchRecentSuggestions suggestions = new SearchRecentSuggestions(getActivity(),
+                    SearchSuggestionProvider.AUTHORITY, SearchSuggestionProvider.MODE);
+            suggestions.saveRecentQuery(this.q, null);
+            switch (viewPager.getCurrentItem()) {
+                case 0:
+                    ((SearchStatusFragment) getSearchWeiboFragment()).search();
+                    break;
+                case 1:
+                    ((SearchUserFragment) getSearchUserFragment()).search();
+                    break;
+            }
+        }
+    }
 
-					}
-				}, ViewConfiguration.getLongPressTimeout());
-				break;
-			default:
-				LongClickableLinkMovementMethod.getInstance().setLongClickable(false);
-				break;
-			}
-		}
-	};
+    public ActionBar.Tab getWeiboTab() {
+        return tabMap.get(SEARCH_WEIBO_CHILD_POSITION);
+    }
 
-	public SearchUserFragment getSearchUserFragment() {
-		SearchUserFragment fragment = ((SearchUserFragment) getChildFragmentManager().findFragmentByTag(SearchUserFragment.class.getName()));
-		if (fragment == null) {
-			fragment = new SearchUserFragment();
-		}
+    public ActionBar.Tab getUserTab() {
+        return tabMap.get(SEARCH_USER_CHILD_POSITION);
+    }
 
-		return fragment;
-	}
+    ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+        @Override
+        public void onPageSelected(int position) {
+            ActionBar ab = getActivity().getActionBar();
+            if (getActivity().getActionBar().getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS
+                    && ab.getTabAt(position) == tabMap.get(position)) {
+                ab.setSelectedNavigationItem(position);
+            }
 
-	public SearchStatusFragment getSearchWeiboFragment() {
-		SearchStatusFragment fragment = ((SearchStatusFragment) getChildFragmentManager().findFragmentByTag(SearchStatusFragment.class.getName()));
-		if (fragment == null) {
-			fragment = new SearchStatusFragment();
-		}
+            ((LeftMenuFragment) ((MainTimeLineActivity) getActivity()).getLeftMenuFragment()).searchTabIndex = position;
+            clearActionMode();
+            MyLogger("onPageSelected");
+        }
 
-		return fragment;
-	}
+        @Override
+        public void onPageScrollStateChanged(int state) {
+            super.onPageScrollStateChanged(state);
+            switch (state) {
+                case ViewPager.SCROLL_STATE_SETTLING:
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            LongClickableLinkMovementMethod.getInstance().setLongClickable(true);
 
-	@Override
-	public void scrollToTop() {
-		Fragment fragment = searchFragments.get(viewPager.getCurrentItem());
-		if (fragment instanceof AbsBaseTimeLineFragment) {
-			Utility.stopListViewScrollingAndScrollToTop(((AbsBaseTimeLineFragment) fragment).getListView());
-		} else if (fragment instanceof AbstractUserListFragment) {
-			Utility.stopListViewScrollingAndScrollToTop(((AbstractUserListFragment) fragment).getListView());
+                        }
+                    }, ViewConfiguration.getLongPressTimeout());
+                    break;
+                default:
+                    LongClickableLinkMovementMethod.getInstance().setLongClickable(false);
+                    break;
+            }
+        }
+    };
 
-		}
-	}
+    public SearchUserFragment getSearchUserFragment() {
+        SearchUserFragment fragment = ((SearchUserFragment) getChildFragmentManager().findFragmentByTag(
+                SearchUserFragment.class.getName()));
+        if (fragment == null) {
+            fragment = new SearchUserFragment();
+        }
 
-	public void clearActionMode() {
-		getSearchUserFragment().clearActionMode();
-		getSearchWeiboFragment().clearActionMode();
-	}
+        return fragment;
+    }
+
+    public SearchStatusFragment getSearchWeiboFragment() {
+        SearchStatusFragment fragment = ((SearchStatusFragment) getChildFragmentManager().findFragmentByTag(
+                SearchStatusFragment.class.getName()));
+        if (fragment == null) {
+            fragment = new SearchStatusFragment();
+        }
+
+        return fragment;
+    }
+
+    @Override
+    public void scrollToTop() {
+        Fragment fragment = searchFragments.get(viewPager.getCurrentItem());
+        if (fragment instanceof AbsBaseTimeLineFragment) {
+            Utility.stopListViewScrollingAndScrollToTop(((AbsBaseTimeLineFragment) fragment).getListView());
+        } else if (fragment instanceof AbstractUserListFragment) {
+            Utility.stopListViewScrollingAndScrollToTop(((AbstractUserListFragment) fragment).getListView());
+
+        }
+    }
+
+    public void clearActionMode() {
+        getSearchUserFragment().clearActionMode();
+        getSearchWeiboFragment().clearActionMode();
+    }
 }

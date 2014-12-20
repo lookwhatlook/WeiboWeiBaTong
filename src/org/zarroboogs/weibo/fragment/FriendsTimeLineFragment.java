@@ -54,10 +54,12 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewGroupOverlay;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
@@ -136,6 +138,14 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
     public MessageListBean getList() {
         return bean;
     }
+    
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        View view = inflater.inflate(R.layout.friends_time_line_listview_layout, container, false);
+//        buildLayout(inflater, view);
+//        return view;
+//    }
+    
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {

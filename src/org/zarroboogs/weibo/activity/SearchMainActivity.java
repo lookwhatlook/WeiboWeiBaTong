@@ -30,9 +30,6 @@ import android.widget.SearchView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * User: qii Date: 12-8-29
- */
 public class SearchMainActivity extends AbstractAppActivity {
 
 	private ViewPager mViewPager = null;

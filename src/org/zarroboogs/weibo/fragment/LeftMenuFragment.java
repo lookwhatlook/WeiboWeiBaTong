@@ -429,7 +429,7 @@ public class LeftMenuFragment extends BaseStateFragment {
 		ft.show(fragment);
 		ft.commit();
 
-		((SearchMainParentFragment) fragment).buildActionBarAndViewPagerTitles(searchTabIndex);
+		((SearchMainParentFragment)fragment).showSearchMenu();
 
 	}
 

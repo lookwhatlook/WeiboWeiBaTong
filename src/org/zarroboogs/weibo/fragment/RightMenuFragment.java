@@ -416,8 +416,6 @@ public class RightMenuFragment extends BaseStateFragment {
 		ft.show(fragment);
 		ft.commit();
 
-		((SearchMainParentFragment) fragment).buildActionBarAndViewPagerTitles(searchTabIndex);
-
 	}
 
 	private boolean showDMPage(boolean reset) {
