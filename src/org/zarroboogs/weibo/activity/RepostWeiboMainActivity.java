@@ -24,7 +24,6 @@ import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 
 import org.apache.commons.codec.binary.Base64;
 import org.zarroboogs.util.net.ExecuterManager;
-import org.zarroboogs.util.net.LoginWeiboAsyncTask;
 import org.zarroboogs.util.net.RepostWeiboAsyncTask;
 import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
 import org.zarroboogs.util.net.RepostWeiboAsyncTask.OnRepostFinished;
@@ -32,9 +31,6 @@ import org.zarroboogs.utils.Utility;
 import org.zarroboogs.utils.WeiBaNetUtils;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
-import org.zarroboogs.weibo.R.id;
-import org.zarroboogs.weibo.R.layout;
-import org.zarroboogs.weibo.R.string;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
 import org.zarroboogs.weibo.selectphoto.ImgFileListActivity;
@@ -138,6 +134,7 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 		mJsEvaluator = new JsEvaluator(getApplicationContext());
 		
 		mAccountBean = getIntent().getParcelableExtra(BundleArgsConstants.ACCOUNT_EXTRA);
+//		mAccountBean = getAccount();
 		Log.d("RpostWeiBo_activity", "AccountBean == null ? : " + (mAccountBean == null));
 		mEmptyToast = Toast.makeText(getApplicationContext(), R.string.text_is_empty, Toast.LENGTH_SHORT);
 		mDialog = new ProgressDialog(this);

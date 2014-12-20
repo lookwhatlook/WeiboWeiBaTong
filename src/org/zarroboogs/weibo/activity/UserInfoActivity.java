@@ -23,7 +23,6 @@ import org.zarroboogs.weibo.fragment.UserInfoFragment;
 import org.zarroboogs.weibo.loader.AbstractAsyncNetRequestTaskLoader;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
-import org.zarroboogs.weibo.support.utils.ThemeUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import com.umeng.analytics.MobclickAgent;

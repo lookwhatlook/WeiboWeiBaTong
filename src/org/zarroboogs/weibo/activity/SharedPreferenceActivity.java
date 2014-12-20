@@ -8,10 +8,9 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.os.Bundle;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
-import android.support.v7.app.ActionBarActivity;
 import android.view.WindowManager;
 
-public class SharedPreferenceActivity extends ActionBarActivity implements OnSharedPreferenceChangeListener {
+public class SharedPreferenceActivity extends AbstractAppActivity implements OnSharedPreferenceChangeListener {
 	private SharedPreferences mCookieSP = null;
 	private String mCookie = "";
 	private static final String KEY_COOKIE = "cookie";
