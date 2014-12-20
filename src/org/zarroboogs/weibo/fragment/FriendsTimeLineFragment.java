@@ -33,6 +33,7 @@ import org.zarroboogs.weibo.othercomponent.WifiAutoDownloadPictureRunnable;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.lib.LogOnExceptionScheduledExecutor;
 import org.zarroboogs.weibo.support.utils.AppConfig;
+import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.Utility;
 import org.zarroboogs.weibo.widget.HeaderListView;
@@ -40,12 +41,16 @@ import org.zarroboogs.weibo.widget.TopTipsView;
 import org.zarroboogs.weibo.widget.VelocityListView;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.Loader;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.util.Pair;
@@ -306,13 +311,35 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
         } else {
             this.newMsgTipBar.setType(TopTipsView.Type.AUTO);
         }
+        
+        
+        LocalBroadcastManager.getInstance(getActivity()).registerReceiver(switchReceiver, new IntentFilter(AppEventAction.SWITCH_WEIBO_GROUP_BROADCAST));
     }
 
+    BroadcastReceiver switchReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            List<GroupBean> list = new ArrayList<GroupBean>();
+            if (GlobalContext.getInstance().getGroup() != null) {
+                list = GlobalContext.getInstance().getGroup().getLists();
+            } else {
+                list = new ArrayList<GroupBean>();
+            }
+            final List<GroupBean> finalList = list;
+
+            int intgroupId = intent.getIntExtra(RightMenuFragment.SWITCH_GROUP_KEY, 0);
+            String groupId = getGroupIdFromIndex(intgroupId, finalList);
+            switchFriendsGroup(groupId);
+        }
+    };
+    
     @Override
     public void onDestroy() {
         super.onDestroy();
         Utility.cancelTasks(mDBCacheTask);
         GlobalContext.getInstance().unRegisterForAccountChangeListener(this);
+        
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(switchReceiver);
     }
 
     @Override

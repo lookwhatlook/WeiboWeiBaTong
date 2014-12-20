@@ -11,9 +11,7 @@ import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.bean.AccountBean;
 
-/**
- * User: qii Date: 13-2-11
- */
+
 public class FriendsTimeLineListNavAdapter extends BaseAdapter {
 	private Activity activity;
 	private String[] valueArray;
@@ -46,7 +44,7 @@ public class FriendsTimeLineListNavAdapter extends BaseAdapter {
 			LayoutInflater inflater = activity.getLayoutInflater();
 			convertView = inflater.inflate(R.layout.spinner_selector_text_view, parent, false);
 			holder = new ViewHolder();
-			holder.textView = (TextView) convertView;
+			holder.textView = (TextView) convertView.findViewById(R.id.weiboGroupName);
 		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
@@ -57,26 +55,27 @@ public class FriendsTimeLineListNavAdapter extends BaseAdapter {
 			AccountBean accountBean = GlobalContext.getInstance().getAccountBean();
 			holder.textView.setText(accountBean.getUsernick());
 		}
+		
 		return convertView;
 	}
 
-	@Override
-	public View getDropDownView(int position, View convertView, ViewGroup parent) {
-		ViewHolder holder;
-
-		if (convertView == null || convertView.getTag() == null) {
-			LayoutInflater inflater = activity.getLayoutInflater();
-			convertView = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
-			holder = new ViewHolder();
-			holder.textView = (TextView) convertView;
-		} else {
-			holder = (ViewHolder) convertView.getTag();
-		}
-
-		holder.textView.setText(valueArray[position]);
-		return convertView;
-
-	}
+//	@Override
+//	public View getDropDownView(int position, View convertView, ViewGroup parent) {
+//		ViewHolder holder;
+//
+//		if (convertView == null || convertView.getTag() == null) {
+//			LayoutInflater inflater = activity.getLayoutInflater();
+//			convertView = inflater.inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
+//			holder = new ViewHolder();
+//			holder.textView = (TextView) convertView;
+//		} else {
+//			holder = (ViewHolder) convertView.getTag();
+//		}
+//
+//		holder.textView.setText(valueArray[position]);
+//		return convertView;
+//
+//	}
 
 	private static class ViewHolder {
 		TextView textView;

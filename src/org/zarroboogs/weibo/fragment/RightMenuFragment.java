@@ -6,7 +6,9 @@ import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.AccountActivity;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.activity.NearbyTimeLineActivity;
+import org.zarroboogs.weibo.adapter.FriendsTimeLineListNavAdapter;
 import org.zarroboogs.weibo.bean.AccountBean;
+import org.zarroboogs.weibo.bean.GroupBean;
 import org.zarroboogs.weibo.bean.TimeLinePosition;
 import org.zarroboogs.weibo.db.task.AccountDBTask;
 import org.zarroboogs.weibo.db.task.CommentToMeTimeLineDBTask;
@@ -18,6 +20,7 @@ import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.Utility;
+import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -31,6 +34,8 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,6 +45,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 public class RightMenuFragment extends BaseStateFragment {
@@ -82,6 +88,10 @@ public class RightMenuFragment extends BaseStateFragment {
 
 	public static final int SETTING_INDEX = 8;
 
+	public static final String SWITCH_GROUP_KEY = "switch_group";
+	private PullToRefreshListView mPullToRefreshListView;
+	private BaseAdapter mBaseAdapter;
+	
 	public static RightMenuFragment newInstance() {
 		RightMenuFragment fragment = new RightMenuFragment();
 		fragment.setArguments(new Bundle());
@@ -561,7 +571,30 @@ public class RightMenuFragment extends BaseStateFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
+		
+		 List<GroupBean> list = new ArrayList<GroupBean>();
+	        if (GlobalContext.getInstance().getGroup() != null) {
+	            list = GlobalContext.getInstance().getGroup().getLists();
+	        } else {
+	            list = new ArrayList<GroupBean>();
+	        }
+	        
+		mBaseAdapter = new FriendsTimeLineListNavAdapter(getActivity(), buildListNavData(list));
 	}
+	
+    private String[] buildListNavData(List<GroupBean> list) {
+        List<String> name = new ArrayList<String>();
+
+        name.add(getString(R.string.all_people));
+        name.add(getString(R.string.bilateral));
+
+        for (GroupBean b : list) {
+            name.add(b.getName());
+        }
+
+        String[] valueArray = name.toArray(new String[0]);
+        return valueArray;
+    }
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -572,6 +605,21 @@ public class RightMenuFragment extends BaseStateFragment {
 		layout.profile = (Button) view.findViewById(R.id.btn_profile);
 		layout.setting = (Button) view.findViewById(R.id.btn_setting);
 		layout.logout = (Button) view.findViewById(R.id.btn_logout);
+		
+		
+		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.rightGroupListView);
+		mPullToRefreshListView.setAdapter(mBaseAdapter);
+		mPullToRefreshListView.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ((MainTimeLineActivity)getActivity()).closeRightDrawer();
+                Intent mIntent = new Intent(AppEventAction.SWITCH_WEIBO_GROUP_BROADCAST);
+                mIntent.putExtra(SWITCH_GROUP_KEY, position);
+                LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(mIntent);
+            }
+		    
+        });
 		return view;
 	}
 

@@ -4,26 +4,8 @@
     android:layout_height="match_parent"
     android:background="#ff2f2f2f" >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="fill_parent" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:baselineAligned="false"
-            android:divider="@drawable/drawer_menu_divider"
-            android:dividerPadding="0dp"
-            android:orientation="vertical"
-            android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:paddingTop="8dp"
-            android:showDividers="middle" >
-        </LinearLayout>
-    </ScrollView>
-
     <LinearLayout
+        android:id="@+id/rightBottomView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -70,5 +52,17 @@
             android:drawableLeft="@drawable/ic_menu_settings"
             android:text="@string/setting" />
     </LinearLayout>
+
+    <org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/rightGroupListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/rightBottomView"
+        android:layout_gravity="center"
+        android:fastScrollEnabled="false"
+        android:overScrollMode="never"
+        android:scrollingCache="true"
+        android:smoothScrollbar="true"
+        android:visibility="visible" />
 
 </RelativeLayout>
