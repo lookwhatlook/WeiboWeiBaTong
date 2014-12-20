@@ -94,7 +94,7 @@ public final class GlobalContext extends Application {
 		CrashManagerConstants.loadFromContext(this);
 		CrashManager.registerHandler();
 		if (Utility.isCertificateFingerprintCorrect(this)) {
-			Crashlytics.start(this);
+//			Crashlytics.start(this);
 		}
 	}
 

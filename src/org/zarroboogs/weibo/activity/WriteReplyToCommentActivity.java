@@ -62,8 +62,8 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setTitle(getString(R.string.reply_to_comment));
-		getActionBar().setSubtitle(getCurrentAccountBean().getUsernick());
+//		getActionBar().setTitle(getString(R.string.reply_to_comment));
+//		getActionBar().setSubtitle(getCurrentAccountBean().getUsernick());
 
 		if (savedInstanceState == null) {
 

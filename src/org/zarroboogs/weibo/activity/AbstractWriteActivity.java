@@ -14,14 +14,11 @@ import org.zarroboogs.weibo.support.lib.CheatSheet;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.widget.SmileyPicker;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
@@ -79,11 +76,11 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity imple
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.abstractwriteactivity_layout);
 
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(false);
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.setDisplayShowTitleEnabled(true);
-		actionBar.setDisplayShowCustomEnabled(true);
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(false);
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.setDisplayShowTitleEnabled(true);
+//		actionBar.setDisplayShowCustomEnabled(true);
 
 		int avatarWidth = getResources().getDimensionPixelSize(R.dimen.timeline_avatar_width);
 		int avatarHeight = getResources().getDimensionPixelSize(R.dimen.timeline_avatar_height);
@@ -95,13 +92,13 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity imple
 					FileLocationMethod.avatar_small);
 		}
 		if (bitmap != null) {
-			actionBar.setIcon(new BitmapDrawable(getResources(), bitmap));
+//			actionBar.setIcon(new BitmapDrawable(getResources(), bitmap));
 		}
 
 		token = getIntent().getStringExtra(Constants.TOKEN);
 
 		View title = getLayoutInflater().inflate(R.layout.writeweiboactivity_title_layout, null);
-		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
 
 		et = ((AutoCompleteTextView) findViewById(R.id.status_new_content));
 		et.addTextChangedListener(new TextNumLimitWatcher((TextView) findViewById(R.id.menu_send), et, this));
