@@ -58,15 +58,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class MainTimeLineActivity extends MainTimeLineParentActivity {
+public class MainTimeLineActivity extends AbstractAppActivity {
 
 	public static final int REQUEST_CODE_UPDATE_FRIENDS_TIMELINE_COMMENT_REPOST_COUNT = 0;
 
 	public static final int REQUEST_CODE_UPDATE_MENTIONS_WEIBO_TIMELINE_COMMENT_REPOST_COUNT = 1;
 
 	public static final int REQUEST_CODE_UPDATE_MY_FAV_TIMELINE_COMMENT_REPOST_COUNT = 2;
-
-	private AccountBean mAccountBean;
 
 	private NewMsgInterruptBroadcastReceiver newMsgInterruptBroadcastReceiver;
 
@@ -418,9 +416,7 @@ public class MainTimeLineActivity extends MainTimeLineParentActivity {
 
 	}
 
-	public AccountBean getAccount() {
-		return mAccountBean;
-	}
+
 
 	private void readClipboard() {
 		ClipboardManager cm = (ClipboardManager) getApplicationContext().getSystemService(Context.CLIPBOARD_SERVICE);

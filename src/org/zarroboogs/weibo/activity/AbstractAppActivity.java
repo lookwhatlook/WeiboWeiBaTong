@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.GlobalContext;
+import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 
@@ -16,7 +17,7 @@ import java.lang.reflect.Field;
 public class AbstractAppActivity extends TranslucentStatusBarActivity {
 
 	protected int theme = 0;
-
+	public AccountBean mAccountBean;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (savedInstanceState == null) {
@@ -32,6 +33,9 @@ public class AbstractAppActivity extends TranslucentStatusBarActivity {
 		
 	}
 
+	public AccountBean getAccount() {
+		return mAccountBean;
+	}
 
 	@Override
 	protected void onResume() {
@@ -76,7 +80,7 @@ public class AbstractAppActivity extends TranslucentStatusBarActivity {
 
 
 
-	private void reload() {
+	public void reload() {
 
 		Intent intent = getIntent();
 		overridePendingTransition(0, 0);

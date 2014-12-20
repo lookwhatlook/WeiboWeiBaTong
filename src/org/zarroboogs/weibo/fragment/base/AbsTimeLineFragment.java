@@ -10,6 +10,7 @@ import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.IRemoveItem;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.AbstractAppActivity;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
 import org.zarroboogs.weibo.adapter.StatusListAdapter;
 import org.zarroboogs.weibo.asynctask.MyAsyncTask;
@@ -54,7 +55,7 @@ public abstract class AbsTimeLineFragment<T extends DataListItem<MessageBean, ?>
 			if (position - getListView().getHeaderViewsCount() < getList().getSize() && position - getListView().getHeaderViewsCount() >= 0
 					&& timeLineAdapter.getItem(position - getListView().getHeaderViewsCount()) != null) {
 				MessageBean msg = getList().getItemList().get(position - getListView().getHeaderViewsCount());
-				StatusSingleChoiceModeListener choiceModeListener = new StatusSingleChoiceModeListener(((MainTimeLineActivity) getActivity()).getAccount(),
+				StatusSingleChoiceModeListener choiceModeListener = new StatusSingleChoiceModeListener(((AbstractAppActivity) getActivity()).getAccount(),
 						getListView(), (StatusListAdapter) timeLineAdapter, AbsTimeLineFragment.this, msg);
 				if (actionMode != null) {
 					actionMode.finish();
