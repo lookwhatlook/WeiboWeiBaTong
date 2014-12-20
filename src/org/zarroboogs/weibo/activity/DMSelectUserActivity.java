@@ -12,6 +12,7 @@ import org.zarroboogs.weibo.loader.FriendUserLoader;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.widget.PerformanceImageView;
 
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 import com.umeng.analytics.MobclickAgent;
 
 import android.content.Intent;
@@ -22,7 +23,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ProgressBar;
@@ -59,7 +59,7 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 					.replace(R.id.list_content, SelectFriendsListFragment.newInstance(GlobalContext.getInstance().getAccountBean().getInfo())).commit();
 		}
 
-		AutoCompleteTextView search = (AutoCompleteTextView) findViewById(R.id.search);
+		MaterialAutoCompleteTextView search = (MaterialAutoCompleteTextView) findViewById(R.id.search);
 		AutoCompleteAdapter adapter = new AutoCompleteAdapter(this, android.R.layout.simple_dropdown_item_1line);
 		search.setAdapter(adapter);
 		search.setOnItemClickListener(new AdapterView.OnItemClickListener() {

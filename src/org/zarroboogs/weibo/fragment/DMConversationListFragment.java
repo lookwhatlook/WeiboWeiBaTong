@@ -20,6 +20,8 @@ import org.zarroboogs.weibo.widget.SmileyPicker;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 
+import com.rengwuxian.materialedittext.MaterialEditText;
+
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
@@ -35,7 +37,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -57,7 +58,7 @@ public class DMConversationListFragment extends AbsBaseTimeLineFragment<DMListBe
 
 	private DMListBean bean = new DMListBean();
 
-	private EditText et;
+	private MaterialEditText et;
 
 	private SmileyPicker smiley;
 
@@ -176,7 +177,7 @@ public class DMConversationListFragment extends AbsBaseTimeLineFragment<DMListBe
 		getListView().addFooterView(footerView);
 		dismissFooterView();
 
-		et = (EditText) view.findViewById(R.id.content);
+		et = (MaterialEditText) view.findViewById(R.id.content);
 		view.findViewById(R.id.send).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
