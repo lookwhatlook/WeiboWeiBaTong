@@ -69,6 +69,8 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		setContentView(R.layout.browser_weibo_msg_activity_layout);
 		initLayout();
 		if (savedInstanceState != null) {
 			mAccountBean = savedInstanceState.getParcelable("mAccountBean");
@@ -176,10 +178,10 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 			public void run() {
 				if (getSupportFragmentManager().findFragmentByTag(BrowserWeiboMsgFragment.class.getName()) == null) {
 					getSupportFragmentManager().beginTransaction()
-							.replace(android.R.id.content, BrowserWeiboMsgFragment.newInstance(msg), BrowserWeiboMsgFragment.class.getName())
+							.replace(R.id.content, BrowserWeiboMsgFragment.newInstance(msg), BrowserWeiboMsgFragment.class.getName())
 							.commitAllowingStateLoss();
 					getSupportFragmentManager().executePendingTransactions();
-					findViewById(android.R.id.content).setBackgroundDrawable(null);
+					findViewById(R.id.content).setBackgroundDrawable(null);
 				}
 			}
 		});
