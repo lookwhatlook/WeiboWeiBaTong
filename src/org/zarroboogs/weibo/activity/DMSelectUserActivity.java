@@ -14,11 +14,9 @@ import org.zarroboogs.weibo.widget.PerformanceImageView;
 
 import com.umeng.analytics.MobclickAgent;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.content.Loader;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,15 +44,15 @@ public class DMSelectUserActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.dmselectuseractivity_layout);
-		getActionBar().setTitle(R.string.select_dm_receiver);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(R.string.select_dm_receiver);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
 
 		View title = getLayoutInflater().inflate(R.layout.dmselectuseractivity_title_layout, null);
 		suggestProgressBar = (ProgressBar) title.findViewById(R.id.have_suggest_progressbar);
-		getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
-		getActionBar().setDisplayShowCustomEnabled(true);
+//		getActionBar().setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		getActionBar().setDisplayShowCustomEnabled(true);
 
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction()

@@ -480,6 +480,8 @@ public class LeftMenuFragment extends BaseStateFragment {
 		ft.show(fragment);
 		ft.commit();
 
+		((DMUserListFragment)fragment).showWriteDmMenu();
+		
 		((DMUserListFragment) fragment).buildActionBarAndViewPagerTitles();
 	}
 
