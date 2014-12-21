@@ -7,7 +7,6 @@ import org.zarroboogs.weibo.support.utils.Utility;
 import com.umeng.analytics.MobclickAgent;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -27,25 +26,27 @@ public class LicenseActivity extends AbstractAppActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		switch (theme) {
-		case R.style.AppTheme_Light:
-			setTheme(android.R.style.Theme_Holo_Light_DialogWhenLarge);
-			break;
-		default:
-			
-			setTheme(android.R.style.Theme_Holo_DialogWhenLarge);
-		}
-		ActionBar actionBar = getActionBar();
-		if (actionBar != null) {
-			actionBar.setDisplayShowHomeEnabled(false);
-			actionBar.setDisplayShowTitleEnabled(true);
-			actionBar.setDisplayHomeAsUpEnabled(true);
-			actionBar.setTitle(getString(R.string.pref_open_source_license_title));
-		} else {
-			setTitle(getString(R.string.pref_open_source_license_title));
-		}
-		webView = new WebView(this);
-		setContentView(webView);
+//		switch (theme) {
+//		case R.style.AppTheme_Light:
+//			setTheme(android.R.style.Theme_Holo_Light_DialogWhenLarge);
+//			break;
+//		default:
+//			
+//			setTheme(android.R.style.Theme_Holo_DialogWhenLarge);
+//		}
+//		ActionBar actionBar = getActionBar();
+//		if (actionBar != null) {
+//			actionBar.setDisplayShowHomeEnabled(false);
+//			actionBar.setDisplayShowTitleEnabled(true);
+//			actionBar.setDisplayHomeAsUpEnabled(true);
+//			actionBar.setTitle(getString(R.string.pref_open_source_license_title));
+//		} else {
+//			setTitle(getString(R.string.pref_open_source_license_title));
+//		}
+//		webView = new WebView(this);
+		setContentView(R.layout.license_activity_layout);
+		webView = (WebView) findViewById(R.id.licenseWebview);
+		
 		if (getWindow().isFloating()) {
 			WindowManager.LayoutParams layout = new WindowManager.LayoutParams();
 			layout.copyFrom(getWindow().getAttributes());
