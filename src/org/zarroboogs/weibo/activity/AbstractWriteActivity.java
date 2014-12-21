@@ -18,6 +18,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -44,6 +45,11 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity imple
 	public static final int AT_USER = 3;
 
 	protected String token;
+	
+	private Toolbar abstractWriteToolbar;
+	
+	
+	
 
 	protected EditText getEditTextView() {
 		return et;
@@ -71,11 +77,15 @@ public abstract class AbstractWriteActivity<T> extends AbstractAppActivity imple
 
 	}
 
+	public Toolbar getToolbar(){
+		return abstractWriteToolbar;
+	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.abstractwriteactivity_layout);
 
+		abstractWriteToolbar = (Toolbar) findViewById(R.id.abstractWriteToolbar);
 //		ActionBar actionBar = getActionBar();
 //		actionBar.setDisplayHomeAsUpEnabled(false);
 //		actionBar.setDisplayShowHomeEnabled(true);

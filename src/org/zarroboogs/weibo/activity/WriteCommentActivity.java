@@ -25,9 +25,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * User: Jiang Qi Date: 12-8-2
- */
 public class WriteCommentActivity extends AbstractWriteActivity<DataItem> {
 
 	public static final String ACTION_DRAFT = "org.zarroboogs.weibo.DRAFT";
@@ -49,13 +46,13 @@ public class WriteCommentActivity extends AbstractWriteActivity<DataItem> {
 	private boolean savedEnableCommentOri;
 
 	private boolean savedEnableRepost;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getActionBar().setTitle(R.string.comments);
-		getActionBar().setSubtitle(getCurrentAccountBean().getUsernick());
+//		getActionBar().setTitle(R.string.comments);
+//		getActionBar().setSubtitle(getCurrentAccountBean().getUsernick());
 
 		if (savedInstanceState == null) {
 
@@ -74,8 +71,52 @@ public class WriteCommentActivity extends AbstractWriteActivity<DataItem> {
 			}
 		}
 
+		getToolbar().inflateMenu(R.menu.actionbar_menu_commentnewactivity);
+		
+		
+		enableCommentOri = getToolbar().getMenu().findItem(R.id.menu_enable_ori_comment);
+		enableRepost = getToolbar().getMenu().findItem(R.id.menu_enable_repost);
+
+		enableCommentOri.setChecked(savedEnableCommentOri);
+		enableRepost.setChecked(savedEnableRepost);
+		
+		if (msg != null && msg.getRetweeted_status() != null) {
+			enableCommentOri.setVisible(true);
+		}
+		String contentStr = getEditTextView().getText().toString();
+		if (!TextUtils.isEmpty(contentStr)) {
+			getToolbar().getMenu().findItem(R.id.menu_clear).setVisible(true);
+		} else {
+			getToolbar().getMenu().findItem(R.id.menu_clear).setVisible(false);
+		}
+		
 	}
 
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.actionbar_menu_commentnewactivity, menu);
+//		enableCommentOri = menu.findItem(R.id.menu_enable_ori_comment);
+//		enableRepost = menu.findItem(R.id.menu_enable_repost);
+//
+//		enableCommentOri.setChecked(savedEnableCommentOri);
+//		enableRepost.setChecked(savedEnableRepost);
+//		return true;
+//	}
+
+//	@Override
+//	public boolean onPrepareOptionsMenu(Menu menu) {
+//		if (msg != null && msg.getRetweeted_status() != null) {
+//			enableCommentOri.setVisible(true);
+//		}
+//		String contentStr = getEditTextView().getText().toString();
+//		if (!TextUtils.isEmpty(contentStr)) {
+//			menu.findItem(R.id.menu_clear).setVisible(true);
+//		} else {
+//			menu.findItem(R.id.menu_clear).setVisible(false);
+//		}
+//		return super.onPrepareOptionsMenu(menu);
+//	}
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -205,30 +246,7 @@ public class WriteCommentActivity extends AbstractWriteActivity<DataItem> {
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.actionbar_menu_commentnewactivity, menu);
-		enableCommentOri = menu.findItem(R.id.menu_enable_ori_comment);
-		enableRepost = menu.findItem(R.id.menu_enable_repost);
 
-		enableCommentOri.setChecked(savedEnableCommentOri);
-		enableRepost.setChecked(savedEnableRepost);
-		return true;
-	}
-
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (msg != null && msg.getRetweeted_status() != null) {
-			enableCommentOri.setVisible(true);
-		}
-		String contentStr = getEditTextView().getText().toString();
-		if (!TextUtils.isEmpty(contentStr)) {
-			menu.findItem(R.id.menu_clear).setVisible(true);
-		} else {
-			menu.findItem(R.id.menu_clear).setVisible(false);
-		}
-		return super.onPrepareOptionsMenu(menu);
-	}
 
 	@Override
 	protected boolean canSend() {

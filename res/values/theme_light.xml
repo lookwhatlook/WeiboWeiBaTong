@@ -4,6 +4,7 @@
     <!-- if you want to modify holo theme, you should modify PrivateThemeHoloLightOnlyForInherit style instead of AppTheme_Light style -->
 
     <style name="AppTheme_Light" parent="@style/PrivateThemeHoloLightOnlyForInherit">
+
         <!-- 去掉ActionBar下面的阴影 -->
         <item name="android:windowContentOverlay">@null</item>
         <item name="account">@drawable/account_dark</item>
@@ -66,16 +67,21 @@
         <item name="browser_weibo_detail_comments_reposts_category_color_unselected">@color/black</item>
         <item name="split_line_between_content_and_bottom_button_panel">@drawable/ab_bottom_solid_inverse_holo</item>
     </style>
-    
+
     <style name="PrivateThemeHoloLightOnlyForInherit" parent="@style/Theme.AppCompat.Light.NoActionBar">
-<!--         <item name="android:windowBackground">@color/host_background</item>
+
+        
+        <item name="android:windowBackground">@color/host_background</item>
         <item name="android:actionBarStyle">@style/ActionBarStyle</item>
         <item name="android:actionDropDownStyle">@style/ActionBarDropDownStyle</item>
         <item name="android:actionBarTabStyle">@style/ActionBarTabViewLight</item>
         <item name="android:actionBarWidgetTheme">@style/ActionBarTheme</item>
         <item name="android:actionBarItemBackground">@drawable/action_bar_item_background</item>
-        <item name="android:fastScrollTrackDrawable">@null</item> -->
-<item name="android:windowBackground">@color/host_background</item>
+        <item name="android:fastScrollTrackDrawable">@null</item>
+       
+        <item name="actionModeBackground">?attr/colorPrimary</item>
+        
+        <item name="android:windowBackground">@color/host_background</item>
         <!-- toolbar（actionbar）颜色 -->
         <item name="colorPrimary">@color/actionbar_dark</item>
         <!-- 状态栏颜色 -->
@@ -89,7 +95,8 @@
     </style>
 
     <style name="ActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <!-- <item name="android:background">@drawable/ab_solid_custom_blue_inverse_holo</item> 4CI-->
+
+        <!-- <item name="android:background">@drawable/ab_solid_custom_blue_inverse_holo</item> 4CI -->
         <item name="android:background">@drawable/actionbar_background_dark</item>
         <item name="android:backgroundStacked">@drawable/ab_stacked_solid_inverse_holo</item>
         <item name="android:titleTextStyle">@style/ActionBar.Title.Text</item>
