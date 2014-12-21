@@ -22,6 +22,7 @@ import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
 import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 import org.zarroboogs.weibo.widget.pulltorefresh.SoundPullEventListener;
 
+import com.melnykov.fab.FloatingActionButton;
 import com.umeng.analytics.MobclickAgent;
 
 import android.os.Bundle;
@@ -60,6 +61,8 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 	protected TopTipsView newMsgTipBar;
 
 	protected BaseAdapter timeLineAdapter;
+	
+	public FloatingActionButton mFab;
 
 	protected View footerView;
 
@@ -101,6 +104,9 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 		footerView = inflater.inflate(R.layout.listview_footer_layout, null);
 		getListView().addFooterView(footerView);
 		dismissFooterView();
+		mFab = ViewUtility.findViewById(view, R.id.absTimeLineFab);
+		
+		mFab.attachToListView(getListView());
 	}
 
 	@Override
