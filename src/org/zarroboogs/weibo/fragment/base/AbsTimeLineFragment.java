@@ -55,7 +55,7 @@ public abstract class AbsTimeLineFragment<T extends DataListItem<MessageBean, ?>
 			if (position - getListView().getHeaderViewsCount() < getList().getSize() && position - getListView().getHeaderViewsCount() >= 0
 					&& timeLineAdapter.getItem(position - getListView().getHeaderViewsCount()) != null) {
 				MessageBean msg = getList().getItemList().get(position - getListView().getHeaderViewsCount());
-				StatusSingleChoiceModeListener choiceModeListener = new StatusSingleChoiceModeListener(((AbstractAppActivity) getActivity()).getAccount(),
+				StatusSingleChoiceModeListener choiceModeListener = new StatusSingleChoiceModeListener(GlobalContext.getInstance().getAccountBean(),
 						getListView(), (StatusListAdapter) timeLineAdapter, AbsTimeLineFragment.this, msg);
 				if (actionMode != null) {
 					actionMode.finish();

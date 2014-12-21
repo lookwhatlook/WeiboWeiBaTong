@@ -2,6 +2,7 @@ package org.zarroboogs.weibo.fragment.base;
 
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.utils.Constants;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.MyAnimationListener;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.activity.MainTimeLineActivity;
@@ -126,9 +127,9 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 					clzz = WeiboMainActivity.class;
 				}
 				Intent intent = new Intent(getActivity(), clzz);
-//				intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
-//				intent.putExtra(Constants.TOKEN, token);
-//				intent.putExtra(Constants.ACCOUNT, accountBean);
+				intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, GlobalContext.getInstance().getAccountBean());
+				intent.putExtra(Constants.TOKEN, GlobalContext.getInstance().getSpecialToken());
+				intent.putExtra(Constants.ACCOUNT, GlobalContext.getInstance().getAccountBean());
 				startActivity(intent);
 			}
 		});
