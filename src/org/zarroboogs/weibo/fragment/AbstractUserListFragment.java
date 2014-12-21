@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,7 +86,7 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.listview_layout, container, false);
+		View view = inflater.inflate(R.layout.abs_userlist_listview_layout, container, false);
 //		mToolbar = (Toolbar) view.findViewById(R.id.baseToolBar);
 		
 		empty = (TextView) view.findViewById(R.id.empty);
@@ -167,6 +166,7 @@ public abstract class AbstractUserListFragment extends BaseStateFragment {
 		if (loader != null) {
 			getLoaderManager().initLoader(OLD_USER_LOADER_ID, null, userAsyncTaskLoaderCallback);
 		}
+		
 	}
 
 	protected void listViewFooterViewClick(View view) {

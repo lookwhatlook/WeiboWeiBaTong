@@ -1,8 +1,12 @@
 package org.zarroboogs.weibo.fragment.base;
 
 import org.zarroboogs.util.net.WeiboException;
+import org.zarroboogs.utils.Constants;
 import org.zarroboogs.weibo.MyAnimationListener;
 import org.zarroboogs.weibo.R;
+import org.zarroboogs.weibo.activity.MainTimeLineActivity;
+import org.zarroboogs.weibo.activity.WeiboMainActivity;
+import org.zarroboogs.weibo.activity.WriteWeiboActivity;
 import org.zarroboogs.weibo.adapter.AbstractAppListAdapter;
 import org.zarroboogs.weibo.bean.AsyncTaskLoaderResult;
 import org.zarroboogs.weibo.bean.data.DataItem;
@@ -25,6 +29,7 @@ import org.zarroboogs.weibo.widget.pulltorefresh.SoundPullEventListener;
 import com.melnykov.fab.FloatingActionButton;
 import com.umeng.analytics.MobclickAgent;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -32,6 +37,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -107,7 +113,27 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 		mFab = ViewUtility.findViewById(view, R.id.absTimeLineFab);
 		
 		mFab.attachToListView(getListView());
+		
+		mFab.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				Class<?> clzz = null;
+				if (SettingUtils.isDebug()) {
+					clzz = WriteWeiboActivity.class;
+				} else {
+					clzz = WeiboMainActivity.class;
+				}
+				Intent intent = new Intent(getActivity(), clzz);
+//				intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, accountBean);
+//				intent.putExtra(Constants.TOKEN, token);
+//				intent.putExtra(Constants.ACCOUNT, accountBean);
+				startActivity(intent);
+			}
+		});
 	}
+	
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -474,6 +500,12 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 		loader = getLoaderManager().getLoader(OLD_MSG_LOADER_ID);
 		if (loader != null) {
 			getLoaderManager().initLoader(OLD_MSG_LOADER_ID, null, msgAsyncTaskLoaderCallback);
+		}
+		
+		if (getActivity() instanceof MainTimeLineActivity) {
+			mFab.setVisibility(View.VISIBLE);
+		}else {
+			mFab.setVisibility(View.GONE);
 		}
 	}
 
