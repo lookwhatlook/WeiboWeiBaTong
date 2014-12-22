@@ -10,6 +10,7 @@ import org.zarroboogs.weibo.fragment.base.BaseStateFragment;
 import org.zarroboogs.weibo.support.lib.LongClickableLinkMovementMethod;
 import org.zarroboogs.weibo.support.utils.SmileyPickerUtility;
 import org.zarroboogs.weibo.support.utils.Utility;
+import org.zarroboogs.weibo.support.utils.ViewUtility;
 
 import com.example.android.common.view.SlidingTabLayout;
 
@@ -139,6 +140,7 @@ public class SearchMainParentFragment extends BaseStateFragment implements MainT
                     mSearchToolbar.inflateMenu(R.menu.actionbar_menu_searchmainactivity);
 
                     createSearch(mSearchToolbar.getMenu());
+                    ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.GONE);
                 }
             }
         }, 200);

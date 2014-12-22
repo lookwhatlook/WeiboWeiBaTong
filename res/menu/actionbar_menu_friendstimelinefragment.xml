@@ -5,7 +5,8 @@
     <item
         android:id="@+id/write_weibo"
         android:icon="?write_weibo"
-        app:showAsAction="always"
+        app:showAsAction="never"
+        android:visible="false"
         android:title="@string/write_weibo"/>
     <item
         android:id="@+id/switch_theme"

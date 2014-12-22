@@ -149,41 +149,41 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
         mToolbar = (Toolbar) getActivity().findViewById(R.id.mainTimeLineToolBar);
         mToolbar.setTitle(R.string.home);
         mToolbar.inflateMenu(R.menu.actionbar_menu_friendstimelinefragment);
-        mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-
-                switch (item.getItemId()) {
-                    case R.id.write_weibo:
-                        Class<?> clzz = null;
-                        if (SettingUtils.isDebug()) {
-                            clzz = WriteWeiboActivity.class;
-                        } else {
-                            clzz = WeiboMainActivity.class;
-                        }
-                        Intent intent = new Intent(getActivity(), clzz);
-                        intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, mAccountBean);
-                        intent.putExtra(Constants.TOKEN, mToken);
-                        intent.putExtra(Constants.ACCOUNT, mAccountBean);
-                        startActivity(intent);
-                        break;
-                    case R.id.refresh:
-                        if (allowRefresh()) {
-                            getPullToRefreshListView().setRefreshing();
-                            loadNewMsg();
-                        }
-                        break;
-                    case R.id.switch_theme:
-                        // make sure activity has saved current left menu position
-                        ((MainTimeLineActivity) getActivity()).saveNavigationPositionToDB();
-                        SettingUtils.switchToAnotherTheme();
-                        ((MainTimeLineActivity) getActivity()).reload();
-                        break;
-                }
-                return false;
-            }
-        });
+//        mToolbar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+//
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//
+//                switch (item.getItemId()) {
+//                    case R.id.write_weibo:
+//                        Class<?> clzz = null;
+//                        if (SettingUtils.isDebug()) {
+//                            clzz = WriteWeiboActivity.class;
+//                        } else {
+//                            clzz = WeiboMainActivity.class;
+//                        }
+//                        Intent intent = new Intent(getActivity(), clzz);
+//                        intent.putExtra(BundleArgsConstants.ACCOUNT_EXTRA, mAccountBean);
+//                        intent.putExtra(Constants.TOKEN, mToken);
+//                        intent.putExtra(Constants.ACCOUNT, mAccountBean);
+//                        startActivity(intent);
+//                        break;
+//                    case R.id.refresh:
+//                        if (allowRefresh()) {
+//                            getPullToRefreshListView().setRefreshing();
+//                            loadNewMsg();
+//                        }
+//                        break;
+//                    case R.id.switch_theme:
+//                        // make sure activity has saved current left menu position
+//                        ((MainTimeLineActivity) getActivity()).saveNavigationPositionToDB();
+//                        SettingUtils.switchToAnotherTheme();
+//                        ((MainTimeLineActivity) getActivity()).reload();
+//                        break;
+//                }
+//                return false;
+//            }
+//        });
     }
 
     @Override

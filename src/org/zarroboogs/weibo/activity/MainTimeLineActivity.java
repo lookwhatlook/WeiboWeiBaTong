@@ -54,6 +54,8 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,6 +80,8 @@ public class MainTimeLineActivity extends AbstractAppActivity {
 	private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    
+    private Button mScrollTopBtn;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -106,6 +110,16 @@ public class MainTimeLineActivity extends AbstractAppActivity {
 		SettingUtils.setDefaultAccountId(mAccountBean.getUid());
 
 		buildInterface(savedInstanceState);
+		
+		mScrollTopBtn = (Button) findViewById(R.id.scrollToTopBtn);
+		mScrollTopBtn.setOnClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "TOP", Toast.LENGTH_LONG).show();
+                scrollCurrentListViewToTop();
+            }
+        });
 
 	}
 

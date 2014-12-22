@@ -18,6 +18,7 @@ import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
 import org.zarroboogs.weibo.support.utils.AnimationUtility;
 import org.zarroboogs.weibo.support.utils.AppEventAction;
 import org.zarroboogs.weibo.support.utils.Utility;
+import org.zarroboogs.weibo.support.utils.ViewUtility;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -251,7 +252,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 		FriendsTimeLineFragment fragment = (FriendsTimeLineFragment) rightFragments.get(HOME_INDEX);
 		ft.show(fragment);
 		ft.commit();
-		setTitle("");
+//		setTitle("");
+		ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.VISIBLE);
+		mToolbar.getMenu().clear();
+		
 		fragment.buildActionBarNav();
 	}
 
@@ -305,6 +309,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		ft.show(m);
 		ft.commit();
+		
+	      ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.VISIBLE);
+	        mToolbar.getMenu().clear();
+	        
 
 		((MentionsTimeLineFragment) m).buildActionBarAndViewPagerTitles(mentionsTabIndex);
 	}
@@ -371,6 +379,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 		ft.show(fragment);
 		ft.commit();
 
+	      ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.VISIBLE);
+	        mToolbar.getMenu().clear();
+	        
+	        
 		((CommentsTimeLineFragment) fragment).buildActionBarAndViewPagerTitles(commentsTabIndex);
 	}
 
@@ -481,6 +493,8 @@ public class LeftMenuFragment extends BaseStateFragment {
 		ft.commit();
 
 		((DMUserListFragment)fragment).showWriteDmMenu();
+	      ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.VISIBLE);
+	        
 		
 		((DMUserListFragment) fragment).buildActionBarAndViewPagerTitles();
 	}
@@ -531,6 +545,9 @@ public class LeftMenuFragment extends BaseStateFragment {
 
 		ft.show(fragment);
 		ft.commit();
+	      ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.VISIBLE);
+	        mToolbar.getMenu().clear();
+	        
 		((MyFavListFragment) fragment).buildActionBarAndViewPagerTitles();
 	}
 
@@ -581,6 +598,10 @@ public class LeftMenuFragment extends BaseStateFragment {
 		ft.commit();
 		((UserInfoFragment) fragment).buildActionBarAndViewPagerTitles();
 
+	      ViewUtility.findViewById(getActivity(), R.id.scrollToTopBtn).setVisibility(View.VISIBLE);
+	        mToolbar.getMenu().clear();
+	        
+	        
 		AnimationUtility.translateFragmentY(fragment, -400, 0, fragment);
 	}
 
