@@ -365,7 +365,7 @@ public class MainTimeLineActivity extends AbstractAppActivity {
 	}
 
 	public View getClickToTopView() {
-		return clickToTop;
+		return mScrollTopBtn;
 	}
 
 	public void setCurrentFragment(ScrollableListFragment fragment) {
