@@ -81,7 +81,25 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 				handleNormalOperation(intent);
 			}
 		}
+		
+		getToolbar().inflateMenu(R.menu.actionbar_menu_commentnewactivity);
+		
+		getToolbar().getMenu().findItem(R.id.menu_enable_ori_comment).setVisible(false);
+		getToolbar().getMenu().findItem(R.id.menu_enable_repost).setVisible(true);
+		enableRepost = getToolbar().getMenu().findItem(R.id.menu_enable_repost);
+		enableRepost.setChecked(savedEnableRepost);
+		
 	}
+	
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+////		getMenuInflater().inflate(R.menu.actionbar_menu_commentnewactivity, menu);
+//		menu.findItem(R.id.menu_enable_ori_comment).setVisible(false);
+//		menu.findItem(R.id.menu_enable_repost).setVisible(true);
+//		enableRepost = menu.findItem(R.id.menu_enable_repost);
+//		enableRepost.setChecked(savedEnableRepost);
+//		return true;
+//	}
 
 	@Override
 	protected void onResume() {
@@ -189,15 +207,7 @@ public class WriteReplyToCommentActivity extends AbstractWriteActivity<CommentBe
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.actionbar_menu_commentnewactivity, menu);
-		menu.findItem(R.id.menu_enable_ori_comment).setVisible(false);
-		menu.findItem(R.id.menu_enable_repost).setVisible(true);
-		enableRepost = menu.findItem(R.id.menu_enable_repost);
-		enableRepost.setChecked(savedEnableRepost);
-		return true;
-	}
+
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {

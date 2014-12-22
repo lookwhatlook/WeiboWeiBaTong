@@ -72,7 +72,7 @@ public class WriteCommentActivity extends AbstractWriteActivity<DataItem> {
 		}
 
 		getToolbar().inflateMenu(R.menu.actionbar_menu_commentnewactivity);
-		
+		getToolbar().setTitle(R.string.comments);
 		
 		enableCommentOri = getToolbar().getMenu().findItem(R.id.menu_enable_ori_comment);
 		enableRepost = getToolbar().getMenu().findItem(R.id.menu_enable_repost);

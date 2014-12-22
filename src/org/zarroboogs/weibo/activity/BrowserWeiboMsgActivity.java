@@ -33,6 +33,8 @@ import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Menu;
@@ -65,12 +67,20 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 	private RemoveTask removeTask;
 
 	private AccountBean mAccountBean;
+	
+	private Toolbar mToolbar;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.browser_weibo_msg_activity_layout);
+		mToolbar = (Toolbar) findViewById(R.id.accountToolBar);
+		mToolbar.setTitle(R.string.detail);
+		setSupportActionBar(mToolbar);
+		
+		mToolbar.inflateMenu(R.menu.actionbar_menu_browserweibomsgactivity);
+		
 		initLayout();
 		if (savedInstanceState != null) {
 			mAccountBean = savedInstanceState.getParcelable("mAccountBean");
@@ -209,8 +219,9 @@ public class BrowserWeiboMsgActivity extends AbstractAppActivity implements Remo
 			menu.findItem(R.id.menu_delete).setVisible(true);
 		}
 
-		MenuItem item = menu.findItem(R.id.menu_share);
-		shareActionProvider = (ShareActionProvider) item.getActionProvider();
+//		MenuItem item = menu.findItem(R.id.menu_share);
+//		
+//		shareActionProvider = (ShareActionProvider) item.getActionProvider();
 		return super.onCreateOptionsMenu(menu);
 	}
 
