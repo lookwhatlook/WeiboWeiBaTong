@@ -53,6 +53,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
+import android.util.Log;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
@@ -335,6 +336,7 @@ public class FriendsTimeLineFragment extends AbsTimeLineFragment<MessageListBean
 
             int intgroupId = intent.getIntExtra(RightMenuFragment.SWITCH_GROUP_KEY, 0);
             String groupId = getGroupIdFromIndex(intgroupId, finalList);
+            Log.d("SwitchGroup", "" + intgroupId + "     " + groupId);
             switchFriendsGroup(groupId);
         }
     };

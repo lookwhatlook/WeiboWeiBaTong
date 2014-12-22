@@ -613,7 +613,7 @@ public class RightMenuFragment extends BaseStateFragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ((MainTimeLineActivity)getActivity()).closeRightDrawer();
                 Intent mIntent = new Intent(AppEventAction.SWITCH_WEIBO_GROUP_BROADCAST);
-                mIntent.putExtra(SWITCH_GROUP_KEY, position);
+                mIntent.putExtra(SWITCH_GROUP_KEY, position - 1);
                 LocalBroadcastManager.getInstance(getActivity()).sendBroadcast(mIntent);
             }
 		    
