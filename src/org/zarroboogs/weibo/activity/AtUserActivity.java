@@ -1,31 +1,29 @@
 package org.zarroboogs.weibo.activity;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import org.zarroboogs.utils.Constants;
+import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.fragment.AtUserFragment;
 
 import com.umeng.analytics.MobclickAgent;
 
-/**
- * User: qii Date: 12-10-8
- */
 public class AtUserActivity extends AbstractAppActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setTitle(R.string.at_other);
+		setContentView(R.layout.setting_activity_layout);
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setTitle(R.string.at_other);
 
 		String token = getIntent().getStringExtra(Constants.TOKEN);
 		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction().replace(android.R.id.content, new AtUserFragment(token)).commit();
+			getFragmentManager().beginTransaction().replace(R.id.content_frame, new AtUserFragment(token)).commit();
 		}
 	}
 	@Override

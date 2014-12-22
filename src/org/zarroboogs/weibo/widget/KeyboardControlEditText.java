@@ -1,13 +1,13 @@
 package org.zarroboogs.weibo.widget;
 
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
+
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.AutoCompleteTextView;
 
-/**
- * User: qii Date: 13-1-31
- */
-public class KeyboardControlEditText extends AutoCompleteTextView {
+
+//com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
+public class KeyboardControlEditText extends MaterialAutoCompleteTextView {
 	private boolean mShowKeyboard = true;
 
 	public void setShowKeyboard(boolean value) {

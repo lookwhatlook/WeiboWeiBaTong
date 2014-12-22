@@ -58,6 +58,7 @@ import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
@@ -110,7 +111,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	List<String> mList = new ArrayList<String>();
 	Map<Integer, String> map = new HashMap<Integer, String>();
 	InputMethodManager imm = null;
-	EditText mEditText;
+	MaterialEditText mEditText;
 	RelativeLayout mRootView;
 
 	RelativeLayout editTextLayout;
@@ -226,7 +227,7 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 
 		mSelectPhoto = (ImageButton) findViewById(R.id.imageButton1);
 		mRootView = (RelativeLayout) findViewById(R.id.container);
-		mEditText = (EditText) findViewById(R.id.weiboContentET);
+		mEditText = (com.rengwuxian.materialedittext.MaterialEditText) findViewById(R.id.weiboContentET);
 		mEmotionRelativeLayout = (RelativeLayout) findViewById(R.id.smileLayout_ref);
 		smileButton = (ImageButton) findViewById(R.id.smileImgButton);
 		mSendBtn = (ImageButton) findViewById(R.id.sendWeiBoBtn);

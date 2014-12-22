@@ -139,11 +139,19 @@ public class MainTimeLineActivity extends AbstractAppActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.writeWeiboDrawerL);
         mDrawerToggle = new MyDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         mDrawerToggle.syncState();
+        mDrawerToggle.setToolbarNavigationClickListener(new OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                Log.d("onOptionsItemSelected", " setToolbarNavigationClickListener");
+            }
+        });
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 //        setSupportActionBar(mToolbar);
 //        getSupportActionBar().setHomeButtonEnabled(true);
         
 //		mToolbar.setNavigationIcon(android.R.drawable.ic_g)
+        
 		boolean isPhoneDevice = findViewById(R.id.menu_frame) == null;
 		Log.d("MainTimeLine-buildInterface", "isPhoneDevice: " + isPhoneDevice);
 		if (isPhoneDevice) {
@@ -180,25 +188,17 @@ public class MainTimeLineActivity extends AbstractAppActivity {
         public void onDrawerClosed(View drawerView) {
             super.onDrawerClosed(drawerView);
             LocalBroadcastManager.getInstance(MainTimeLineActivity.this).sendBroadcast(new Intent(AppEventAction.SLIDING_MENU_CLOSED_BROADCAST));
+            Log.d("onOptionsItemSelected", " onDrawerClosed ");
         }
 
         @Override
         public void onDrawerOpened(View drawerView) {
             super.onDrawerOpened(drawerView);
-        }
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            Log.d("onOptionsItemSelected", "onOptionsItemSelected 0000000000");
-            if (item != null && item.getItemId() == android.R.id.home) {
-                Log.d("onOptionsItemSelected", "onOptionsItemSelected 111111111");
-                if (mDrawerLayout.isDrawerOpen(findViewById(R.id.menu_frame_right))) {
-                    Log.d("onOptionsItemSelected", "onOptionsItemSelected 222222222");
-                    mDrawerLayout.closeDrawer(Gravity.END);
-                } else {
-                    mDrawerLayout.openDrawer(Gravity.END);
-                }
+            Log.d("onOptionsItemSelected", " onDrawerOpened");
+            if (mDrawerLayout.isDrawerOpen(findViewById(R.id.menu_frame_right))) {
+                mDrawerLayout.closeDrawer(Gravity.END);
             }
-            return false;
+
         }
     }
     
