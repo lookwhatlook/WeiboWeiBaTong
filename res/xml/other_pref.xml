@@ -3,7 +3,7 @@
 
     <PreferenceCategory android:title="@string/pref_web_browser_title" >
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:key="enable_internal_web_browser"
             android:summary="@string/pref_web_browser_summary"
             android:title="@string/pref_enable_internal_web_browser" />

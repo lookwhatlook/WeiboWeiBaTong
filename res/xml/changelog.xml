@@ -25,4 +25,13 @@
         <change>添加发现版本自动升级功能</change>
     </release>
     
+	<release version="V2.0.0-2014.12.22" versioncode="9">
+	    <change>去掉二次登陆</change>
+        <change>修改UI</change>
+        <change>改名为：Beebo</change>
+        <change>修正一些崩溃</change>
+        <change>添加了无图模式</change>
+        <change>还有一些小细节，忘记了</change>
+    </release>
+    
 </changelog>

@@ -317,7 +317,7 @@ public class SettingUtils {
 	}
 
 	public static boolean allowInternalWebBrowser() {
-		return SettingHelper.getSharedPreferences(getContext(), SettingActivity.ENABLE_INTERNAL_WEB_BROWSER, true);
+		return false;//SettingHelper.getSharedPreferences(getContext(), SettingActivity.ENABLE_INTERNAL_WEB_BROWSER, true);
 
 	}
 
