@@ -356,7 +356,7 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 	private View initMylayout(ViewGroup parent) {
 		View convertView;
 		if (SettingUtils.getEnableBigPic()) {
-			convertView = inflater.inflate(R.layout.timeline_listview_item_big_pic_layout, parent, false);
+			convertView = inflater.inflate(R.layout.timeline_listview_item_layout, parent, false);
 		} else {
 			convertView = inflater.inflate(R.layout.timeline_listview_item_layout, parent, false);
 		}
@@ -368,7 +368,7 @@ public abstract class AbstractAppListAdapter<T extends DataItem> extends BaseAda
 	}
 
 	private View initBigPicLayout(ViewGroup parent) {
-		return inflater.inflate(R.layout.timeline_listview_item_big_pic_layout, parent, false);
+		return inflater.inflate(R.layout.timeline_listview_item_layout, parent, false);
 	}
 
 	// weibo image widgets and its forward weibo image widgets are the same
