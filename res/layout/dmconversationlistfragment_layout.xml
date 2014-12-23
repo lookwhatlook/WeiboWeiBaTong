@@ -6,11 +6,18 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical" >
 
-    <LinearLayout
+        <org.zarroboogs.weibo.widget.SmileyPicker
         android:layout_alignParentBottom="true"
+        android:id="@+id/smiley_picker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+        
+    <LinearLayout
+        android:layout_above="@id/smiley_picker"
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1.0"
         android:orientation="vertical" >
 
@@ -92,10 +99,6 @@
         </LinearLayout>
     </LinearLayout>
 
-    <org.zarroboogs.weibo.widget.SmileyPicker
-        android:id="@+id/smiley_picker"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:visibility="gone" />
+
 
 </RelativeLayout>

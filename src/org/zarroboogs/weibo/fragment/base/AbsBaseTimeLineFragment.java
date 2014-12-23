@@ -506,7 +506,9 @@ public abstract class AbsBaseTimeLineFragment<T extends DataListItem<?, ?>> exte
 		if (getActivity() instanceof MainTimeLineActivity) {
 			mFab.setVisibility(View.VISIBLE);
 		}else {
-			mFab.setVisibility(View.GONE);
+			if (mFab != null) {
+				mFab.setVisibility(View.GONE);
+			}
 		}
 	}
 

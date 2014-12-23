@@ -41,6 +41,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -237,9 +238,9 @@ public class DMConversationListFragment extends AbsBaseTimeLineFragment<DMListBe
 		if (this.smiley.isShown()) {
 			if (showKeyBoard) {
 				// this time softkeyboard is hidden
-				LinearLayout.LayoutParams localLayoutParams = (LinearLayout.LayoutParams) this.mContainer.getLayoutParams();
-				localLayoutParams.height = smiley.getTop();
-				localLayoutParams.weight = 0.0F;
+				//RelativeLayout.LayoutParams localLayoutParams = (RelativeLayout.LayoutParams) this.mContainer.getLayoutParams();
+				//localLayoutParams.height = smiley.getTop();
+				//localLayoutParams.weight = 0.0F;
 				this.smiley.hide(getActivity());
 
 				SmileyPickerUtility.showKeyBoard(et);
@@ -258,14 +259,14 @@ public class DMConversationListFragment extends AbsBaseTimeLineFragment<DMListBe
 	}
 
 	private void lockContainerHeight(int paramInt) {
-		LinearLayout.LayoutParams localLayoutParams = (LinearLayout.LayoutParams) this.mContainer.getLayoutParams();
-		localLayoutParams.height = paramInt;
-		localLayoutParams.weight = 0.0F;
+		//RelativeLayout.LayoutParams localLayoutParams = (RelativeLayout.LayoutParams) this.mContainer.getLayoutParams();
+		//localLayoutParams.height = paramInt;
+//		localLayoutParams.weight = 0.0F;
 	}
 
 	public void unlockContainerHeightDelayed() {
 
-		((LinearLayout.LayoutParams) mContainer.getLayoutParams()).weight = 1.0F;
+		//((RelativeLayout.LayoutParams) mContainer.getLayoutParams()).height = 0;
 
 	}
 
