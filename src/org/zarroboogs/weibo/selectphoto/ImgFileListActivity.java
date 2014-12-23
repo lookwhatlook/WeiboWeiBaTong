@@ -8,7 +8,7 @@ import org.zarroboogs.weibo.R;
 
 import com.umeng.analytics.MobclickAgent;
 
-import android.app.ActionBar;
+//import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,11 +30,11 @@ public class ImgFileListActivity extends Activity implements OnItemClickListener
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.imgfilelist);
-		ActionBar actionBar = getActionBar();
-		actionBar.setHomeButtonEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.show();
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setHomeButtonEnabled(true);
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.show();
 
 		listView = (ListView) findViewById(R.id.listView1);
 		util = new Util(this);

@@ -8,7 +8,6 @@ import org.zarroboogs.weibo.selectphoto.ImgsAdapter.OnItemClickClass;
 
 import com.umeng.analytics.MobclickAgent;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -41,11 +40,11 @@ public class ImgsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.photogrally);
-		ActionBar actionBar = getActionBar();
-		actionBar.setHomeButtonEnabled(true);
-		actionBar.setDisplayHomeAsUpEnabled(true);
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.show();
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setHomeButtonEnabled(true);
+//		actionBar.setDisplayHomeAsUpEnabled(true);
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.show();
 
 		mButton = (Button) findViewById(R.id.img_select_done);
 		updateCount();
