@@ -14,7 +14,6 @@ import org.zarroboogs.weibo.bean.WeiboWeiba;
 import com.google.gson.Gson;
 import com.umeng.analytics.MobclickAgent;
 
-import android.app.ActionBar;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,11 +40,11 @@ public class ChangeWeibaActivity extends SharedPreferenceActivity implements OnI
 		mDialog.setMessage(getString(R.string.fetch_new_weiba));
 		mDialog.setCancelable(false);
 
-		ActionBar actionBar = getActionBar();
+/*		ActionBar actionBar = getActionBar();
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.show();
+		actionBar.show();*/
 
 		listView = (ListView) findViewById(R.id.weibaListView);
 		listAdapter = new ChangeWeibaAdapter(this);

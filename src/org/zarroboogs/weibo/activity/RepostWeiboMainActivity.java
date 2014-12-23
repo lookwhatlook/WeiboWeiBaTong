@@ -24,29 +24,43 @@ import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 
 import org.apache.commons.codec.binary.Base64;
 import org.zarroboogs.util.net.ExecuterManager;
+import org.zarroboogs.util.net.FetchWeiBoAsyncTask;
 import org.zarroboogs.util.net.RepostWeiboAsyncTask;
+import org.zarroboogs.util.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
 import org.zarroboogs.util.net.RepostWeiboAsyncTask.OnRepostFinished;
 import org.zarroboogs.utils.Utility;
 import org.zarroboogs.utils.WeiBaNetUtils;
+import org.zarroboogs.weibo.ChangeWeibaAdapter;
 import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.WebViewActivity;
+import org.zarroboogs.weibo.activity.WeiboMainActivity.MyDrawerToggle;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.bean.MessageBean;
+import org.zarroboogs.weibo.bean.WeibaGson;
+import org.zarroboogs.weibo.bean.WeibaTree;
+import org.zarroboogs.weibo.bean.WeiboWeiba;
+import org.zarroboogs.weibo.db.AppsrcDatabaseManager;
 import org.zarroboogs.weibo.selectphoto.ImgFileListActivity;
 import org.zarroboogs.weibo.selectphoto.SendImgData;
 import org.zarroboogs.weibo.support.utils.BundleArgsConstants;
 import org.zarroboogs.weibo.support.utils.TimeLineUtility;
+import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase;
+import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
+import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener;
 
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -54,19 +68,26 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -74,7 +95,8 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class RepostWeiboMainActivity extends SharedPreferenceActivity implements LoginCallBack, OnClickListener, OnGlobalLayoutListener, OnRepostFinished {
+public class RepostWeiboMainActivity extends SharedPreferenceActivity implements LoginCallBack, 
+OnClickListener, OnGlobalLayoutListener, OnRepostFinished, OnItemClickListener {
 	private MessageBean msg;
 	String pidC = "";
 	RelativeLayout mEmotionRelativeLayout;
@@ -125,12 +147,28 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 	HasloginBean mHasloginBean;
 	String rsaPwd = "";
 
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
+    private Toolbar mToolbar;
+    
+    AppsrcDatabaseManager mDBmanager = null;
+    PullToRefreshListView listView;
+    ChangeWeibaAdapter listAdapter;
+    List<WeiboWeiba> listdata = new ArrayList<WeiboWeiba>();
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		setContentView(R.layout.activity_main);
 
+	      mDrawerLayout = (DrawerLayout) findViewById(R.id.writeWeiboDrawerL);
+	        mToolbar = (Toolbar) findViewById(R.id.writeWeiboToolBar);
+	        
+	        mDrawerToggle = new MyDrawerToggle(this, mDrawerLayout, mToolbar, R.string.drawer_open,R.string.drawer_close);
+	        mDrawerToggle.syncState();
+	        mDrawerLayout.setDrawerListener(mDrawerToggle);
+	        
 		mJsEvaluator = new JsEvaluator(getApplicationContext());
 		
 		mAccountBean = getIntent().getParcelableExtra(BundleArgsConstants.ACCOUNT_EXTRA);
@@ -196,8 +234,93 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 		options = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisk(true).considerExifParams(true).bitmapConfig(Bitmap.Config.RGB_565).build();
 		Intent intent = getIntent();
 		handleNormalOperation(intent);
+		mDBmanager = new AppsrcDatabaseManager(getApplicationContext());
+		listAdapter = new ChangeWeibaAdapter(this);
+        listView = (PullToRefreshListView) findViewById(R.id.left_menu_list_view);
+        listView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+
+            @Override
+            public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+                if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
+                    listView.setRefreshing();
+                    fetchWeiBa();
+                } else {
+                    listView.post(new Runnable() {
+                        public void run() {
+                            listView.onRefreshComplete();
+                        }
+                    });
+                    Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+        listView.setAdapter(listAdapter);
+        listView.setOnItemClickListener(this);
+
 	}
 
+    class MyDrawerToggle extends ActionBarDrawerToggle {
+
+        public MyDrawerToggle(Activity activity, DrawerLayout drawerLayout, Toolbar toolbar, int openDrawerContentDescRes,
+                int closeDrawerContentDescRes) {
+            super(activity, drawerLayout, toolbar, openDrawerContentDescRes, closeDrawerContentDescRes);
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+            super.onDrawerClosed(drawerView);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+            super.onDrawerOpened(drawerView);
+
+            List<WeiboWeiba> list = mDBmanager.fetchAllAppsrc();
+/*            if (isKeyBoardShowed) {
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
+            }*/
+            if (list.size() == 0) {
+                if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
+                    fetchWeiBa();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
+                    ;
+                }
+            } else {
+                listAdapter.setWeibas(list);
+            }
+        }
+    }
+    
+    private void fetchWeiBa() {
+        showDialogForWeiBo();
+        FetchWeiBoAsyncTask mFetchWeiBoAsyncTask = new FetchWeiBoAsyncTask(new OnFetchDoneListener() {
+
+            @Override
+            public void onFetchDone(String isSuccess) {
+                // TODO Auto-generated method stub
+
+                Gson gson = new Gson();
+                WeibaGson weibaGson = gson.fromJson(isSuccess, WeibaGson.class);
+                List<WeibaTree> weibaTrees = weibaGson.getData();
+
+                for (WeibaTree weibaTree : weibaTrees) {
+                    List<WeiboWeiba> weibas = weibaTree.getData();
+                    for (WeiboWeiba weiba : weibas) {
+                        if (mDBmanager.searchAppsrcByCode(weiba.getCode()) == null) {
+                            mDBmanager.insertCategoryTree(0, weiba.getCode(), weiba.getText());
+                        }
+                    }
+                }
+
+                listView.onRefreshComplete();
+                listAdapter.setWeibas(mDBmanager.fetchAllAppsrc());
+                hideDialogForWeiBo();
+            }
+        });
+        mFetchWeiBoAsyncTask.execute();
+    }
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -384,6 +507,12 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 		}
 	}
 
+	@Override
+	public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+	    super.onSharedPreferenceChanged(sharedPreferences, key);
+	    appSrcBtn.setText(getWeiba().getText());
+	}
+	
 	private boolean checkDataEmpty() {
 		if (TextUtils.isEmpty(mEditText.getText().toString()) && SendImgData.getInstance().getSendImgs().size() < 1) {
 			return true;
@@ -405,8 +534,10 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 		}
 		case R.id.appSrcBtn: {
 			if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
-				Intent weibaIntent = new Intent(this, ChangeWeibaActivity.class);
-				startActivityForResult(weibaIntent, ChangeWeibaActivity.REQUEST);
+			    mDrawerLayout.openDrawer(Gravity.START);
+//				Intent weibaIntent = new Intent(this, ChangeWeibaActivity.class);
+			    
+//				startActivityForResult(weibaIntent, ChangeWeibaActivity.REQUEST);
 			} else {
 				Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
 				;
@@ -681,4 +812,13 @@ public class RepostWeiboMainActivity extends SharedPreferenceActivity implements
 			}
 		}
 	};
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        WeiboWeiba weiba = ((WeiboWeiba) parent.getItemAtPosition(position));
+        Log.d("CLICK", "" + weiba);
+        saveWeiba(weiba);
+//      menu.toggle();
+        mDrawerLayout.closeDrawer(findViewById(R.id.drawerLeft));
+    }
 }

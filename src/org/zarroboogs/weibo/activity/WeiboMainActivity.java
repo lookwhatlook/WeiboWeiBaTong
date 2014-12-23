@@ -81,6 +81,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -642,9 +643,10 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 		}
 		case R.id.appSrcBtn: {
 			if (WeiBaNetUtils.isNetworkAvaliable(getApplicationContext())) {
-				if (isKeyBoardShowed) {
+			    mDrawerLayout.openDrawer(Gravity.START);
+				/*if (isKeyBoardShowed) {
 					imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_NOT_ALWAYS);
-				}
+				}*/
 //				menu.toggle();
 			} else {
 				Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
