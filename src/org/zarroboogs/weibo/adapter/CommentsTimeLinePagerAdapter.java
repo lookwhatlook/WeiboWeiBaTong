@@ -53,8 +53,8 @@ public class CommentsTimeLinePagerAdapter extends AppFragmentPagerAdapter {
 	@Override
 	public CharSequence getPageTitle(int position) {
 	    if (position == 0) {
-	        return fragmentList.get(position).getActivity().getResources().getString(R.string.my_comment);
+	        return fragmentList.get(position).getActivity().getResources().getString(R.string.all_people_send_to_me);
         }
-	    return fragmentList.get(position).getActivity().getResources().getString(R.string.all_people_send_to_me);
+	    return fragmentList.get(position).getActivity().getResources().getString(R.string.my_comment);
 	}
 }
