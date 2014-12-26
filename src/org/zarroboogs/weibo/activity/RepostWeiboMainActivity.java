@@ -3,9 +3,7 @@ package org.zarroboogs.weibo.activity;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask;
 import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
@@ -70,7 +68,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,8 +77,7 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
 	private MessageBean msg;
 	String pidC = "";
 	RelativeLayout mEmotionRelativeLayout;
-	List<String> mList = new ArrayList<String>();
-	Map<Integer, String> map = new HashMap<Integer, String>();
+	
 	InputMethodManager imm = null;
 	EditText mEditText;
 	RelativeLayout mRootView;
@@ -92,23 +88,8 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
 	ImageButton smileButton;
 
 	Button appSrcBtn;
-	TableLayout sendImgTL;
-
 	AccountBean mAccountBean;
 	private ScrollView mEditPicScrollView;
-	private RelativeLayout mRow001;
-	private RelativeLayout mRow002;
-	private RelativeLayout mRow003;
-
-	private ImageView mImageView001;
-	private ImageView mImageView002;
-	private ImageView mImageView003;
-	private ImageView mImageView004;
-	private ImageView mImageView005;
-	private ImageView mImageView006;
-	private ImageView mImageView007;
-	private ImageView mImageView008;
-	private ImageView mImageView009;
 
 	private TextView weiTextCountTV;
 
@@ -118,7 +99,6 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
 	ProgressDialog mDialog;
 
 	Toast mEmptyToast;
-	private ImageLoader mImageLoader = ImageLoader.getInstance();
 	DisplayImageOptions options;
 	
     private DrawerLayout mDrawerLayout;
@@ -134,7 +114,7 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.repost_with_weibo_activity);
 
 	      mDrawerLayout = (DrawerLayout) findViewById(R.id.writeWeiboDrawerL);
 	        mToolbar = (Toolbar) findViewById(R.id.writeWeiboToolBar);
@@ -155,35 +135,10 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
 		editTextLayout = (RelativeLayout) findViewById(R.id.editTextLayout);
 
 		weiTextCountTV = (TextView) findViewById(R.id.weiTextCountTV);
-		sendImgTL = (TableLayout) findViewById(R.id.sendImgTL_ref);
-		sendImgTL.setVisibility(View.GONE);
 
-		mRow001 = (RelativeLayout) findViewById(R.id.sendPicRow01);
-		mRow002 = (RelativeLayout) findViewById(R.id.sendPicRow02);
-		mRow003 = (RelativeLayout) findViewById(R.id.sendPicRow03);
 
 		appSrcBtn = (Button) findViewById(R.id.appSrcBtn);
 		appSrcBtn.setText(getWeiba().getText());
-		Log.d("MAIN_", "" + sendImgTL.getChildCount());
-		mImageView001 = (ImageView) findViewById(R.id.IVRow101);
-		mImageView002 = (ImageView) findViewById(R.id.IVRow102);
-		mImageView003 = (ImageView) findViewById(R.id.IVRow103);
-		mImageView004 = (ImageView) findViewById(R.id.IVRow201);
-		mImageView005 = (ImageView) findViewById(R.id.IVRow202);
-		mImageView006 = (ImageView) findViewById(R.id.IVRow203);
-		mImageView007 = (ImageView) findViewById(R.id.IVRow301);
-		mImageView008 = (ImageView) findViewById(R.id.IVRow302);
-		mImageView009 = (ImageView) findViewById(R.id.IVRow303);
-
-		mSelectImageViews.add(mImageView001);
-		mSelectImageViews.add(mImageView002);
-		mSelectImageViews.add(mImageView003);
-		mSelectImageViews.add(mImageView004);
-		mSelectImageViews.add(mImageView005);
-		mSelectImageViews.add(mImageView006);
-		mSelectImageViews.add(mImageView007);
-		mSelectImageViews.add(mImageView008);
-		mSelectImageViews.add(mImageView009);
 
 		mSelectPhoto = (ImageButton) findViewById(R.id.imageButton1);
 		mRootView = (RelativeLayout) findViewById(R.id.container);
@@ -399,49 +354,7 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK && requestCode == ChangeWeibaActivity.REQUEST) {
 			appSrcBtn.setText(getWeiba().getText());
-		} else if (resultCode == RESULT_OK && requestCode == ImgFileListActivity.REQUEST_CODE) {
-			SendImgData sid = SendImgData.getInstance();
-			ArrayList<String> imgs = sid.getSendImgs();
-			if (imgs.size() > 0) {
-				sendImgTL.setVisibility(View.VISIBLE);
-			}
-			for (int i = 0; i < imgs.size(); i++) {
-				ImageView iv = mSelectImageViews.get(i);
-				mImageLoader.displayImage("file://" + imgs.get(i), iv, options);
-				iv.setVisibility(View.VISIBLE);
-				// BitmapWorkerTask mWorkerTask = new BitmapWorkerTask(iv);
-				// mWorkerTask.execute(imgs.get(i));
-			}
-
-			int offset = imgs.size() % 3;
-			int row = offset == 0 ? imgs.size() / 3 : imgs.size() / 3 + 1;
-			if (imgs.size() > 0) {
-				switch (row) {
-				case 1:
-					mRow001.setVisibility(View.VISIBLE);
-					break;
-				case 2: {
-					mRow001.setVisibility(View.VISIBLE);
-					mRow002.setVisibility(View.VISIBLE);
-					break;
-				}
-
-				case 3: {
-					mRow001.setVisibility(View.VISIBLE);
-					mRow002.setVisibility(View.VISIBLE);
-					mRow003.setVisibility(View.VISIBLE);
-					break;
-				}
-
-				default:
-					break;
-				}
-			}
-
-			for (String s : imgs) {
-				Log.d("IMG_", "   " + s + "/////" + mSelectImageViews.size());
-			}
-		}
+		} 
 	}
 
 	@Override

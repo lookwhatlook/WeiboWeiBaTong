@@ -21,9 +21,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
 import org.zarroboogs.weibo.setting.SettingUtils;
@@ -38,6 +36,7 @@ import android.util.Log;
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.ResponseHandlerInterface;
 
 public class BaseLoginActivity extends SharedPreferenceActivity {
     private SinaPreLogin mSinaPreLogin;
@@ -54,7 +53,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
     private String mWeibaCode;
     private String mWeiboText;
     private List<String> mPics;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,28 +62,27 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         mSinaPreLogin = new SinaPreLogin();
     }
 
-    public void sendWeibo(String uname, String upwd,WaterMark mark, final String weiboCode, final String text, List<String> pics) {
+    public void sendWeibo(String uname, String upwd, WaterMark mark, final String weiboCode, final String text,
+            List<String> pics) {
         this.mUserName = uname;
         this.mPassword = upwd;
-        
-        
+
         this.mWaterMark = mark;
         this.mWeibaCode = weiboCode;
         this.mWeiboText = text;
         this.mPics = pics;
         LogTool.D("sendWeibo   start" + " name:" + uname + "   password:" + upwd + "  weiba:" + weiboCode);
-        
-        doPreLogin();
 
+        doPreLogin();
 
     }
 
     private void dosend(WaterMark mark, final String weiboCode, final String text, List<String> pics) {
         if (pics == null || pics.isEmpty()) {
             sendWeiboWidthPids(weiboCode, text, null);
-//            sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "", null);
+            // sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "", null);
             LogTool.D("uploadFile     Not Upload");
-        }else {
+        } else {
             LogTool.D("uploadFile    upload");
             UploadHelper mUploadHelper = new UploadHelper(getApplicationContext(), getAsyncHttpClient());
             mUploadHelper.uploadFiles(buildMark(mark), pics, new OnUpFilesListener() {
@@ -126,21 +124,23 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                     doLogin();
                     break;
                 }
-                 case Constaces.MSG_LONGIN_SUCCESS:{
-//                     sendWeibo("");
-                     dosend(mWaterMark, mWeibaCode, mWeiboText, mPics);
-//                 sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "", null);
-                     break;
-                 }
+                case Constaces.MSG_LONGIN_SUCCESS: {
+                    // sendWeibo("");
+                    dosend(mWaterMark, mWeibaCode, mWeiboText, mPics);
+                    // sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "",
+                    // null);
+                    break;
+                }
 
                 default:
                     break;
             }
         }
     };
-    
+
     protected void sendWeibo(String pid) {
-        HttpEntity sendEntity = mSinaPreLogin.sendWeiboEntity("ZwpYj", SystemClock.uptimeMillis() + "",getCookieStore().toString(), pid);
+        HttpEntity sendEntity = mSinaPreLogin.sendWeiboEntity("ZwpYj", SystemClock.uptimeMillis() + "", getCookieStore()
+                .toString(), pid);
         getAsyncHttpClient().post(getApplicationContext(), Constaces.ADDBLOGURL, mSinaPreLogin.sendWeiboHeaders("ZwpYj"),
                 sendEntity,
                 "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
@@ -156,7 +156,6 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                     }
                 });
     }
-    
 
     /**
      * @param weiboCode "ZwpYj"
@@ -166,18 +165,11 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         HttpEntity sendEntity = mSinaPreLogin.sendWeiboEntity(weiboCode, text, getCookieStore().toString(), pids);
         getAsyncHttpClient().post(getApplicationContext(), Constaces.ADDBLOGURL, mSinaPreLogin.sendWeiboHeaders(weiboCode),
                 sendEntity,
-                "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        LogTool.D("sendWeibo   onSuccess" + new String(responseBody));
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        LogTool.D("sendWeibo   onFailure" + new String(responseBody));
-                    }
-                });
+                "application/x-www-form-urlencoded", this.mSendWeiboHandler);
+    }
+    private ResponseHandlerInterface mSendWeiboHandler;
+    public void setOnSendWeiboListener(ResponseHandlerInterface rhi){
+        this.mSendWeiboHandler = rhi;
     }
 
     public void repostWeibo(String app_src, String content, String cookie, String mid) {

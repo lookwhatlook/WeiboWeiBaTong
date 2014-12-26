@@ -244,6 +244,18 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 		listView.setAdapter(listAdapter);
 		listView.setOnItemClickListener(this);
 
+		setOnSendWeiboListener(new AsyncHttpResponseHandler() {
+            
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                onSendFinished(true);
+            }
+            
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                onSendFinished(false);
+            }
+        });
 	}
 
     class MyDrawerToggle extends ActionBarDrawerToggle {
