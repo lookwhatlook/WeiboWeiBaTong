@@ -79,7 +79,8 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         this.mPics = pics;
         LogTool.D("sendWeibo   start" + " name:" + uname + "   password:" + upwd + "  weiba:" + weiboCode);
 
-        doPreLogin(this.mUserName, this.mPassword);
+//        doPreLogin(this.mUserName, this.mPassword);
+        dosend(mark, weiboCode, text, pics);
 
     }
 
@@ -132,7 +133,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                 }
                 case Constaces.MSG_LONGIN_SUCCESS: {
                     // sendWeibo("");
-                    dosend(mWaterMark, mWeibaCode, mWeiboText, mPics);
+//                    dosend(mWaterMark, mWeibaCode, mWeiboText, mPics);
                     // sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "",
                     // null);
                     break;

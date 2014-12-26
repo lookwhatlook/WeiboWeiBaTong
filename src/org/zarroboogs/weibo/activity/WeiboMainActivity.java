@@ -9,7 +9,9 @@ import java.util.Map;
 
 import lib.org.zarroboogs.weibo.login.httpclient.WaterMark;
 import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask;
+import lib.org.zarroboogs.weibo.login.javabean.RequestResultBean;
 import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
+import lib.org.zarroboogs.weibo.login.utils.LogTool;
 
 import org.apache.http.Header;
 import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
@@ -84,6 +86,7 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 		OnGlobalLayoutListener, OnItemClickListener, OnSharedPreferenceChangeListener {
 
 	public static final String LOGIN_TAG = "START_SEND_WEIBO ";
+    protected static final String TAG = "WeiboMainActivity  ";
 	RelativeLayout mEmotionRelativeLayout;
 	Map<Integer, String> map = new HashMap<Integer, String>();
 	InputMethodManager imm = null;
@@ -138,6 +141,7 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
     private ActionBarDrawerToggle mDrawerToggle;
     private Toolbar mToolbar;
 	    
+    private SendImgData sendImgData;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -249,11 +253,36 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 onSendFinished(true);
+                
+                
+                LogTool.D(TAG + "onSuccess " + new String(responseBody));
+                
+                RequestResultBean sendResultBean = getRequestResultParser().parse(responseBody, RequestResultBean.class);
+                LogTool.D(TAG + "onSuccess " + sendResultBean.getMsg());
+                if (sendResultBean.getMsg().equals("未登录") ) {
+                    doPreLogin(mAccountBean.getUname(), mAccountBean.getPwd());
+                }
+                if (sendResultBean.getCode().equals("100000")) {
+                    onSendFinished(true);
+                }
+                
             }
             
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 onSendFinished(false);
+            }
+        });
+		
+		setOnLoginListener(new AsyncHttpResponseHandler() {
+            
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                sendWeibo(sendImgData);
+            }
+            
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
             }
         });
 	}
@@ -498,7 +527,7 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 		if (!isSuccess) {
 			startLogIn();
 		} else {
-			final SendImgData sendImgData = SendImgData.getInstance();
+			sendImgData = SendImgData.getInstance();
 
 			ArrayList<String> send = sendImgData.getSendImgs();
 			final int count = send.size();

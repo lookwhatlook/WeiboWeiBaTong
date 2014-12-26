@@ -196,13 +196,18 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                hideDialogForWeiBo();
+                
                 LogTool.D(TAG + "onSuccess " + new String(responseBody));
                 
                 RequestResultBean sendResultBean = getRequestResultParser().parse(responseBody, RequestResultBean.class);
                 LogTool.D(TAG + "onSuccess " + sendResultBean.getMsg());
                 if (sendResultBean.getMsg().equals("未登录") ) {
                     doPreLogin(mAccountBean.getUname(), mAccountBean.getPwd());
+                }
+                
+                if (sendResultBean.getCode().equals("100000")) {
+                    hideDialogForWeiBo();
+                    mEditText.setText("");
                 }
             }
 
