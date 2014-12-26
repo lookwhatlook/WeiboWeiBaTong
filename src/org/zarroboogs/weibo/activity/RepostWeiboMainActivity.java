@@ -185,6 +185,18 @@ OnClickListener, OnGlobalLayoutListener, OnItemClickListener {
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(this);
 
+        setOnRepostWeiboListener(new AsyncHttpResponseHandler() {
+            
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                hideDialogForWeiBo();
+            }
+            
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                hideDialogForWeiBo();
+            }
+        });
 	}
 
     class MyDrawerToggle extends ActionBarDrawerToggle {

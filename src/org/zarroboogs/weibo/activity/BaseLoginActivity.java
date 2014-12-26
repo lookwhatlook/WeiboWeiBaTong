@@ -214,18 +214,14 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         }
 
         getAsyncHttpClient().post(getApplicationContext(), Constaces.REPOST_WEIBO, repostHeaders, repostEntity,
-                "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    }
-                });
+                "application/x-www-form-urlencoded", mRepostHandler);
     }
 
+    private ResponseHandlerInterface mRepostHandler;
+    public void setOnRepostWeiboListener(ResponseHandlerInterface rhi){
+        this.mRepostHandler = rhi;
+    }
+    
     protected void doLogin() {
         getAsyncHttpClient().get(mHelper.getUserPageUrl(), new AsyncHttpResponseHandler() {
 
