@@ -2,23 +2,40 @@ package lib.org.zarroboogs.weibo.login.javabean;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLDecoder;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
 import org.apache.http.util.EntityUtils;
 
+import com.google.gson.Gson;
+
+import android.text.TextUtils;
 import android.util.Log;
 
-public class LoginResultHelper {
+public class RequestResultParser {
 
 	private boolean mIsLogin = false;
 	private String mErrorReason = "";
 	private String mResponseString;
 	private String mUserPageUrl;
+	private Gson mGson;
 
-	   public LoginResultHelper(String entity) {
+	public RequestResultParser() {
+        mGson = new Gson();
+    }
+	
+    public <T extends Object> T parse(byte[] response, Class<T> bean) {
+        if (response == null) {
+            return null;
+        }
+        String responseString = new String(response);
+        if (TextUtils.isEmpty(responseString)) {
+            return null;
+        }
+        return mGson.fromJson(responseString, bean);
+    }
+	   public RequestResultParser(String entity) {
 	        try {
 //	            String entityString = EntityUtils.toString(entity, "GBK");
 	            
@@ -56,7 +73,7 @@ public class LoginResultHelper {
 	        }
 	    }
 	   
-	public LoginResultHelper(HttpEntity entity) {
+	public RequestResultParser(HttpEntity entity) {
 		try {
 			String entityString = EntityUtils.toString(entity, "GBK");
 			

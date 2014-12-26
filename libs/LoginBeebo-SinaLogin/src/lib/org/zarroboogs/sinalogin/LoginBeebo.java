@@ -11,7 +11,7 @@ import lib.org.zarroboogs.weibo.login.httpclient.RealLibrary;
 import lib.org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper.OnUpFilesListener;
-import lib.org.zarroboogs.weibo.login.javabean.LoginResultHelper;
+import lib.org.zarroboogs.weibo.login.javabean.RequestResultParser;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import lib.org.zarroboogs.weibo.login.utils.Constaces;
 import lib.org.zarroboogs.weibo.login.utils.LogTool;
@@ -50,7 +50,7 @@ public class LoginBeebo extends Activity {
     private JsEvaluator mJsEvaluator;
     private String rsaPwd;
 
-    private LoginResultHelper mHelper;
+    private RequestResultParser mHelper;
 
     public static final String UNAME = "86898@163.com";
     public static final String PASSWORD = "";
@@ -167,7 +167,7 @@ public class LoginBeebo extends Activity {
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-                        mHelper = new LoginResultHelper(response);
+                        mHelper = new RequestResultParser(response);
                         if (mHelper.isLogin()) {
                             LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Success");
                         } else {

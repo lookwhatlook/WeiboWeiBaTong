@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import lib.org.zarroboogs.utils.net.BroserContent;
 import lib.org.zarroboogs.utils.net.HttpFactory;
 import lib.org.zarroboogs.weibo.login.javabean.HasloginBean;
-import lib.org.zarroboogs.weibo.login.javabean.LoginResultHelper;
+import lib.org.zarroboogs.weibo.login.javabean.RequestResultParser;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import lib.org.zarroboogs.weibo.login.utils.Constaces;
 
@@ -56,15 +56,15 @@ public class SinaPreLogin {
 
 
 
-	public LoginResultHelper doLoginAfterPreLogin(String userName, String passWord,String door, PreLoginResult params) {
+	public RequestResultParser doLoginAfterPreLogin(String userName, String passWord,String door, PreLoginResult params) {
 		HttpClient client = mBroserContent.getHttpClient();
 		
 		HttpPost post = doLoginAfterLogIn(userName, passWord,door, params);
         HttpResponse response;
-        LoginResultHelper helper = null;
+        RequestResultParser helper = null;
 		try {
 			response = client.execute(post);
-			helper = new LoginResultHelper(response.getEntity());
+			helper = new RequestResultParser(response.getEntity());
 		} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,7 +75,7 @@ public class SinaPreLogin {
 		return helper;
 	}
 	
-	public HasloginBean loginUserPage(LoginResultHelper helper) {
+	public HasloginBean loginUserPage(RequestResultParser helper) {
 		HttpClient client = mBroserContent.getHttpClient();
 		
 		HttpGet userPageGet = HttpFactory.createHttpGet(helper.getUserPageUrl(), null);

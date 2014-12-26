@@ -12,8 +12,9 @@ import lib.org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper.OnUpFilesListener;
 import lib.org.zarroboogs.weibo.login.httpclient.WaterMark;
-import lib.org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
+import lib.org.zarroboogs.weibo.login.javabean.RequestResultParser;
+import lib.org.zarroboogs.weibo.login.javabean.SendResultBean;
 import lib.org.zarroboogs.weibo.login.utils.Constaces;
 import lib.org.zarroboogs.weibo.login.utils.LogTool;
 
@@ -45,7 +46,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
     private JsEvaluator mJsEvaluator;
     private String rsaPwd;
 
-    private LoginResultHelper mHelper;
+    private RequestResultParser mRequestResultParser;
 
     private String mUserName;
     private String mPassword;
@@ -60,8 +61,13 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         mJsEvaluator = new JsEvaluator(getApplicationContext());
 
         mSinaPreLogin = new SinaPreLogin();
+        
+        mRequestResultParser = new RequestResultParser();
     }
 
+    public RequestResultParser getRequestResultParser(){
+        return mRequestResultParser;
+    }
     public void sendWeibo(String uname, String upwd, WaterMark mark, final String weiboCode, final String text,
             List<String> pics) {
         this.mUserName = uname;
@@ -73,7 +79,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         this.mPics = pics;
         LogTool.D("sendWeibo   start" + " name:" + uname + "   password:" + upwd + "  weiba:" + weiboCode);
 
-        doPreLogin();
+        doPreLogin(this.mUserName, this.mPassword);
 
     }
 
@@ -147,7 +153,9 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        LogTool.D("sendWeibo   onSuccess" + new String(responseBody));
+                        
+                        SendResultBean sendResultBean = mRequestResultParser.parse(responseBody, SendResultBean.class);
+                        LogTool.D("sendWeibo   onSuccess" + sendResultBean.getMsg());
                     }
 
                     @Override
@@ -222,19 +230,13 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         this.mRepostHandler = rhi;
     }
     
-    protected void doLogin() {
-        getAsyncHttpClient().get(mHelper.getUserPageUrl(), new AsyncHttpResponseHandler() {
-
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                LogTool.D("doLogin onSuccess" + " " + new String(responseBody));
-                mHandler.sendEmptyMessage(Constaces.MSG_LONGIN_SUCCESS);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-            }
-        });
+    private void doLogin() {
+        getAsyncHttpClient().get(mRequestResultParser.getUserPageUrl(), mLoginHandler);
+    }
+    
+    private ResponseHandlerInterface mLoginHandler;;
+    public void setOnLoginListener(ResponseHandlerInterface rhi){
+        this.mLoginHandler = rhi;
     }
 
     private void doAfterPreLogin() {
@@ -251,11 +253,11 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-                        mHelper = new LoginResultHelper(response);
-                        if (mHelper.isLogin()) {
+                        mRequestResultParser = new RequestResultParser(response);
+                        if (mRequestResultParser.isLogin()) {
                             LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Success");
                         } else {
-                            LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Failed : " + mHelper.getErrorReason());
+                            LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Failed : " + mRequestResultParser.getErrorReason());
                         }
                         mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
                     }
@@ -322,7 +324,10 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         }
     }
 
-    private void doPreLogin() {
+    public void doPreLogin(String uname, String upwd) {
+        this.mUserName = uname;
+        this.mPassword = upwd;
+        
         long time = new Date().getTime();
         String encodeName = mSinaPreLogin.encodeAccount(mUserName);
         String url = mSinaPreLogin.buildPreLoginUrl(encodeName, Constaces.SSOLOGIN_JS, time + "");
