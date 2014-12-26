@@ -25,10 +25,9 @@ import lib.org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.Header;
 import org.zarroboogs.util.net.ExecuterManager;
-import org.zarroboogs.util.net.FetchWeiBoAsyncTask;
 import org.zarroboogs.util.net.UploadThread;
-import org.zarroboogs.util.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
 import org.zarroboogs.util.net.UploadThread.WaterMark;
 import org.zarroboogs.utils.SendBitmapWorkerTask;
@@ -56,6 +55,7 @@ import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshListView;
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.rengwuxian.materialedittext.MaterialEditText;
@@ -90,7 +90,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -328,31 +327,39 @@ public class WeiboMainActivity extends SharedPreferenceActivity implements Login
 	
 	private void fetchWeiBa() {
 		showDialogForWeiBo();
-		FetchWeiBoAsyncTask mFetchWeiBoAsyncTask = new FetchWeiBoAsyncTask(new OnFetchDoneListener() {
+		
+		
+        String url = "http://appsrc.sinaapp.com/";
+    getAsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
+        
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+            String resp = new String(responseBody);
+            String jsonString = resp.split("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">")[1];
+            Log.d("FETCH_WEIBA: ", "" + jsonString);
+            Gson gson = new Gson();
+            WeibaGson weibaGson = gson.fromJson(jsonString, WeibaGson.class);
+            List<WeibaTree> weibaTrees = weibaGson.getData();
 
-			@Override
-			public void onFetchDone(String isSuccess) {
-				// TODO Auto-generated method stub
+            for (WeibaTree weibaTree : weibaTrees) {
+                List<WeiboWeiba> weibas = weibaTree.getData();
+                for (WeiboWeiba weiba : weibas) {
+                    if (mDBmanager.searchAppsrcByCode(weiba.getCode()) == null) {
+                        mDBmanager.insertCategoryTree(0, weiba.getCode(), weiba.getText());
+                    }
+                }
+            }
 
-				Gson gson = new Gson();
-				WeibaGson weibaGson = gson.fromJson(isSuccess, WeibaGson.class);
-				List<WeibaTree> weibaTrees = weibaGson.getData();
-
-				for (WeibaTree weibaTree : weibaTrees) {
-					List<WeiboWeiba> weibas = weibaTree.getData();
-					for (WeiboWeiba weiba : weibas) {
-						if (mDBmanager.searchAppsrcByCode(weiba.getCode()) == null) {
-							mDBmanager.insertCategoryTree(0, weiba.getCode(), weiba.getText());
-						}
-					}
-				}
-
-				listView.onRefreshComplete();
-				listAdapter.setWeibas(mDBmanager.fetchAllAppsrc());
-				hideDialogForWeiBo();
-			}
-		});
-		mFetchWeiBoAsyncTask.execute();
+            listView.onRefreshComplete();
+            listAdapter.setWeibas(mDBmanager.fetchAllAppsrc());
+            hideDialogForWeiBo();
+            
+        }
+        
+        @Override
+        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+        }
+    });
 	}
 
 	private TextWatcher watcher = new TextWatcher() {

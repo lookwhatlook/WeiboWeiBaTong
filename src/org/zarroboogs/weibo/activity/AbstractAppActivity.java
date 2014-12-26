@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.view.ViewConfiguration;
 import android.widget.Toast;
 
+import org.apache.http.client.CookieStore;
 import org.zarroboogs.util.net.WeiboException;
 import org.zarroboogs.weibo.GlobalContext;
 import org.zarroboogs.weibo.bean.AccountBean;
 import org.zarroboogs.weibo.setting.SettingUtils;
 import org.zarroboogs.weibo.support.asyncdrawable.TimeLineBitmapDownloader;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.PersistentCookieStore;
 
 import java.lang.reflect.Field;
 
@@ -18,6 +22,9 @@ public class AbstractAppActivity extends TranslucentStatusBarActivity {
 
 	protected int theme = 0;
 	public AccountBean mAccountBean;
+    private AsyncHttpClient mAsyncHttoClient;
+    private CookieStore cookieStore;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		if (savedInstanceState == null) {
@@ -28,9 +35,19 @@ public class AbstractAppActivity extends TranslucentStatusBarActivity {
 		setTheme(theme);
 
 		super.onCreate(savedInstanceState);
+		
+        cookieStore = new PersistentCookieStore(getApplicationContext());
+        mAsyncHttoClient = new AsyncHttpClient();
+
+        mAsyncHttoClient.setCookieStore(cookieStore);
+        
 		forceShowActionBarOverflowMenu();
 		GlobalContext.getInstance().setActivity(this);
 		
+	}
+	
+	public AsyncHttpClient getAsyncHttpClient(){
+	    return mAsyncHttoClient;
 	}
 
 	public AccountBean getAccount() {

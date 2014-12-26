@@ -23,10 +23,9 @@ import lib.org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.http.Header;
 import org.zarroboogs.util.net.ExecuterManager;
-import org.zarroboogs.util.net.FetchWeiBoAsyncTask;
 import org.zarroboogs.util.net.RepostWeiboAsyncTask;
-import org.zarroboogs.util.net.FetchWeiBoAsyncTask.OnFetchDoneListener;
 import org.zarroboogs.util.net.LoginWeiboAsyncTask.LoginCallBack;
 import org.zarroboogs.util.net.RepostWeiboAsyncTask.OnRepostFinished;
 import org.zarroboogs.utils.Utility;
@@ -52,6 +51,7 @@ import org.zarroboogs.weibo.widget.pulltorefresh.PullToRefreshBase.OnRefreshList
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
 import com.google.gson.Gson;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.umeng.analytics.MobclickAgent;
@@ -295,14 +295,15 @@ OnClickListener, OnGlobalLayoutListener, OnRepostFinished, OnItemClickListener {
     
     private void fetchWeiBa() {
         showDialogForWeiBo();
-        FetchWeiBoAsyncTask mFetchWeiBoAsyncTask = new FetchWeiBoAsyncTask(new OnFetchDoneListener() {
-
+        String url = "http://appsrc.sinaapp.com/";
+        getAsyncHttpClient().get(url, new AsyncHttpResponseHandler() {
+            
             @Override
-            public void onFetchDone(String isSuccess) {
-                // TODO Auto-generated method stub
-
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String resp = new String(responseBody);
+                String jsonString = resp.split("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">")[1];
                 Gson gson = new Gson();
-                WeibaGson weibaGson = gson.fromJson(isSuccess, WeibaGson.class);
+                WeibaGson weibaGson = gson.fromJson(jsonString, WeibaGson.class);
                 List<WeibaTree> weibaTrees = weibaGson.getData();
 
                 for (WeibaTree weibaTree : weibaTrees) {
@@ -317,9 +318,13 @@ OnClickListener, OnGlobalLayoutListener, OnRepostFinished, OnItemClickListener {
                 listView.onRefreshComplete();
                 listAdapter.setWeibas(mDBmanager.fetchAllAppsrc());
                 hideDialogForWeiBo();
+                
+            }
+            
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
             }
         });
-        mFetchWeiBoAsyncTask.execute();
     }
 	@Override
 	protected void onResume() {

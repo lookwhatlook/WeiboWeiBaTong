@@ -93,9 +93,11 @@ public class HttpGetHelper {
 	}
 
 	public String getWeiboWeiba(BroserContent broserContent) {
+	    CloseableHttpClient httpClient = broserContent.getHttpClient();
+	    
 		// http://appsrc.sinaapp.com/
 		String url = "http://appsrc.sinaapp.com/";
-		CloseableHttpClient httpClient = broserContent.getHttpClient();
+		
 		Header[] loginHeaders = {
 				new BasicHeader("Cache-Control", "max-age=0"),
 				new BasicHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"),
