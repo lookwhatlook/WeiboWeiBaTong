@@ -1,5 +1,5 @@
 
-package lib.org.zarroboogs.sinalogin;
+package org.zarroboogs.weibo.activity;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -11,6 +11,7 @@ import lib.org.zarroboogs.weibo.login.httpclient.RealLibrary;
 import lib.org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper.OnUpFilesListener;
+import lib.org.zarroboogs.weibo.login.httpclient.WaterMark;
 import lib.org.zarroboogs.weibo.login.javabean.LoginResultHelper;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import lib.org.zarroboogs.weibo.login.utils.Constaces;
@@ -19,31 +20,26 @@ import lib.org.zarroboogs.weibo.login.utils.LogTool;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.message.BasicNameValuePair;
+import org.zarroboogs.weibo.setting.SettingUtils;
 
-import com.evgenii.jsevaluator.JsEvaluator;
-import com.evgenii.jsevaluator.interfaces.JsCallback;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.PersistentCookieStore;
-
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 
-public class LoginBeebo extends Activity {
+import com.evgenii.jsevaluator.JsEvaluator;
+import com.evgenii.jsevaluator.interfaces.JsCallback;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 
-    private Button mLoginButton;
-    private AsyncHttpClient mAsyncHttoClient;
-    private CookieStore cookieStore;
-
+public class BaseLoginActivity extends SharedPreferenceActivity {
     private SinaPreLogin mSinaPreLogin;
     private PreLoginResult mPreLoginResult;
 
@@ -52,52 +48,73 @@ public class LoginBeebo extends Activity {
 
     private LoginResultHelper mHelper;
 
-    public static final String UNAME = "86898@163.com";
-    public static final String PASSWORD = "";
-
+    private String mUserName;
+    private String mPassword;
+    private WaterMark mWaterMark;
+    private String mWeibaCode;
+    private String mWeiboText;
+    private List<String> mPics;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.sina_login_activity_main);
-
         mJsEvaluator = new JsEvaluator(getApplicationContext());
 
         mSinaPreLogin = new SinaPreLogin();
+    }
 
-        cookieStore = new PersistentCookieStore(getApplicationContext());
-        mAsyncHttoClient = new AsyncHttpClient();
+    public void sendWeibo(String uname, String upwd,WaterMark mark, final String weiboCode, final String text, List<String> pics) {
+        this.mUserName = uname;
+        this.mPassword = upwd;
+        
+        
+        this.mWaterMark = mark;
+        this.mWeibaCode = weiboCode;
+        this.mWeiboText = text;
+        this.mPics = pics;
+        LogTool.D("sendWeibo   start" + " name:" + uname + "   password:" + upwd + "  weiba:" + weiboCode);
+        
+        doPreLogin();
 
-        mAsyncHttoClient.setCookieStore(cookieStore);
 
-        mLoginButton = (Button) findViewById(R.id.sinaLoginBtn);
-        mLoginButton.setOnClickListener(new OnClickListener() {
+    }
 
-            @Override
-            public void onClick(View v) {
-                doPreLogin();
+    private void dosend(WaterMark mark, final String weiboCode, final String text, List<String> pics) {
+        if (pics == null || pics.isEmpty()) {
+            sendWeiboWidthPids(weiboCode, text, null);
+//            sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "", null);
+            LogTool.D("uploadFile     Not Upload");
+        }else {
+            LogTool.D("uploadFile    upload");
+            UploadHelper mUploadHelper = new UploadHelper(getApplicationContext(), getAsyncHttpClient());
+            mUploadHelper.uploadFiles(buildMark(mark), pics, new OnUpFilesListener() {
 
-                UploadHelper mUploadHelper = new UploadHelper(getApplicationContext(), mAsyncHttoClient);
-                List<String> files = new ArrayList<String>();
-                files.add("/sdcard/tencent/zebrasdk/Photoplus.jpg");
-                files.add("/sdcard/tencent/zebrasdk/Photoplus~01.jpg");
-                files.add("/sdcard/tencent/zebrasdk/Photoplus~02.jpg");
-                mUploadHelper.uploadFiles(null,files, new OnUpFilesListener() {
+                @Override
+                public void onUpSuccess(String pids) {
+                    LogTool.D("uploadFile pids: " + pids);
+                    sendWeiboWidthPids(weiboCode, text, pids);
+                }
+            });
+        }
+    }
 
-                    @Override
-                    public void onUpSuccess(String pids) {
-                        LogTool.D("uploadFile pids: " + pids);
-                        sendWeibo(pids);
-                    }
-                });
-            }
-        });
+    public String buildMark(WaterMark mark) {
+        if (SettingUtils.getEnableWaterMark()) {
+            String markpos = SettingUtils.getWaterMarkPos();
+            String logo = SettingUtils.isWaterMarkWeiboICONShow() ? "1" : "0";
+            String nick = SettingUtils.isWaterMarkScreenNameShow() ? "%40" + mark.getNick() : "";
+            String url = SettingUtils.isWaterMarkWeiboURlShow() ? mark.getUrl() : "";
+            return "&marks=1&markpos=" + markpos + "&logo=" + logo + "&nick=" + nick + "&url=" + url;
+        } else {
+            return "&marks=0";
+        }
     }
 
     Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case Constaces.MSG_ENCODE_PWD: {
-                    encodePassword(PASSWORD, mPreLoginResult);
+                    encodePassword(mPassword, mPreLoginResult);
                     break;
                 }
 
@@ -109,20 +126,45 @@ public class LoginBeebo extends Activity {
                     doLogin();
                     break;
                 }
-                // case Constaces.MSG_LONGIN_SUCCESS:{
-                // sendWeibo();
-                // }
+                 case Constaces.MSG_LONGIN_SUCCESS:{
+//                     sendWeibo("");
+                     dosend(mWaterMark, mWeibaCode, mWeiboText, mPics);
+//                 sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "", null);
+                     break;
+                 }
 
                 default:
                     break;
             }
         }
     };
-
+    
     protected void sendWeibo(String pid) {
-        HttpEntity sendEntity = mSinaPreLogin.sendWeiboEntity("ZwpYj", SystemClock.uptimeMillis() + "",
-                cookieStore.toString(), pid);
-        mAsyncHttoClient.post(getApplicationContext(), Constaces.ADDBLOGURL, mSinaPreLogin.sendWeiboHeaders("ZwpYj"),
+        HttpEntity sendEntity = mSinaPreLogin.sendWeiboEntity("ZwpYj", SystemClock.uptimeMillis() + "",getCookieStore().toString(), pid);
+        getAsyncHttpClient().post(getApplicationContext(), Constaces.ADDBLOGURL, mSinaPreLogin.sendWeiboHeaders("ZwpYj"),
+                sendEntity,
+                "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                        LogTool.D("sendWeibo   onSuccess" + new String(responseBody));
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        LogTool.D("sendWeibo   onFailure" + new String(responseBody));
+                    }
+                });
+    }
+    
+
+    /**
+     * @param weiboCode "ZwpYj"
+     * @param pid
+     */
+    protected void sendWeiboWidthPids(String weiboCode, String text, String pids) {
+        HttpEntity sendEntity = mSinaPreLogin.sendWeiboEntity(weiboCode, text, getCookieStore().toString(), pids);
+        getAsyncHttpClient().post(getApplicationContext(), Constaces.ADDBLOGURL, mSinaPreLogin.sendWeiboHeaders(weiboCode),
                 sendEntity,
                 "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
 
@@ -138,8 +180,62 @@ public class LoginBeebo extends Activity {
                 });
     }
 
+    public void repostWeibo(String app_src, String content, String cookie, String mid) {
+        List<Header> headerList = new ArrayList<Header>();
+        headerList.add(new BasicHeader("Accept", "*/*"));
+        headerList.add(new BasicHeader("Accept-Encoding", "gzip, deflate"));
+        headerList.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
+        headerList.add(new BasicHeader("Connection", "keep-alive"));
+        headerList.add(new BasicHeader("Content-Type", "application/x-www-form-urlencoded"));
+        headerList.add(new BasicHeader("Host", "widget.weibo.com"));
+        headerList.add(new BasicHeader("Origin", "http://widget.weibo.com"));
+        headerList.add(new BasicHeader("X-Requested-With", "XMLHttpRequest"));
+        headerList.add(new BasicHeader("Referer",
+                "http://widget.weibo.com/dialog/publish.php?button=forward&language=zh_cn&mid=" + mid +
+                        "&app_src=" + app_src + "&refer=1&rnd=14128245"));
+        headerList.add(new BasicHeader("User-Agent", Constaces.User_Agent));
+        Header[] repostHeaders = new Header[headerList.size()];
+        headerList.toArray(repostHeaders);
+
+        List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        nvs.add(new BasicNameValuePair("content", content));
+        nvs.add(new BasicNameValuePair("visible", "0"));
+        nvs.add(new BasicNameValuePair("refer", ""));
+
+        nvs.add(new BasicNameValuePair("app_src", app_src));
+        nvs.add(new BasicNameValuePair("mid", mid));
+        nvs.add(new BasicNameValuePair("return_type", "2"));
+
+        nvs.add(new BasicNameValuePair("vsrc", "publish_web"));
+        nvs.add(new BasicNameValuePair("wsrc", "app_publish"));
+        nvs.add(new BasicNameValuePair("ext", "login=>1;url=>"));
+        nvs.add(new BasicNameValuePair("html_type", "2"));
+        nvs.add(new BasicNameValuePair("is_comment", "1"));
+        nvs.add(new BasicNameValuePair("_t", "0"));
+
+        UrlEncodedFormEntity repostEntity = null;
+        try {
+            repostEntity = new UrlEncodedFormEntity(nvs, "UTF-8");
+        } catch (UnsupportedEncodingException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+
+        getAsyncHttpClient().post(getApplicationContext(), Constaces.REPOST_WEIBO, repostHeaders, repostEntity,
+                "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    }
+                });
+    }
+
     protected void doLogin() {
-        mAsyncHttoClient.get(mHelper.getUserPageUrl(), new AsyncHttpResponseHandler() {
+        getAsyncHttpClient().get(mHelper.getUserPageUrl(), new AsyncHttpResponseHandler() {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -154,8 +250,8 @@ public class LoginBeebo extends Activity {
     }
 
     private void doAfterPreLogin() {
-        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(UNAME), rsaPwd, null, mPreLoginResult);
-        mAsyncHttoClient.post(getApplicationContext(), Constaces.LOGIN_FIRST_URL, mSinaPreLogin.afterPreLoginHeaders(),
+        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, null, mPreLoginResult);
+        getAsyncHttpClient().post(getApplicationContext(), Constaces.LOGIN_FIRST_URL, mSinaPreLogin.afterPreLoginHeaders(),
                 httpEntity, "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
 
                     @Override
@@ -240,9 +336,9 @@ public class LoginBeebo extends Activity {
 
     private void doPreLogin() {
         long time = new Date().getTime();
-        String encodeName = mSinaPreLogin.encodeAccount(UNAME);
+        String encodeName = mSinaPreLogin.encodeAccount(mUserName);
         String url = mSinaPreLogin.buildPreLoginUrl(encodeName, Constaces.SSOLOGIN_JS, time + "");
-        mAsyncHttoClient.get(getApplicationContext(), url, mSinaPreLogin.preloginHeaders(), null,
+        getAsyncHttpClient().get(getApplicationContext(), url, mSinaPreLogin.preloginHeaders(), null,
                 new AsyncHttpResponseHandler() {
 
                     @Override

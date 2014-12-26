@@ -8,7 +8,7 @@ import android.os.AsyncTask;
 public class LoginWeiboAsyncTask extends AsyncTask<Context, Integer, Boolean> {
 
 	public static interface LoginCallBack {
-		public void onDoLogInFinish(boolean isSuccess);
+		public void reSizeWeiboPictures(boolean isSuccess);
 	}
 
 	public LoginCallBack mInSuccessListener;
@@ -34,7 +34,7 @@ public class LoginWeiboAsyncTask extends AsyncTask<Context, Integer, Boolean> {
 	protected void onPostExecute(Boolean result) {
 		// TODO Auto-generated method stub
 		super.onPostExecute(result);
-		this.mInSuccessListener.onDoLogInFinish(result);
+		this.mInSuccessListener.reSizeWeiboPictures(result);
 	}
 
 }

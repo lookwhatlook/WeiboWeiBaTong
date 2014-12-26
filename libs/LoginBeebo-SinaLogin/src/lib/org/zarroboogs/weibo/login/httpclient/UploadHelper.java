@@ -39,24 +39,25 @@ public class UploadHelper {
     private List<String> mNeedToUpload = new ArrayList<String>();
     
     private OnUpFilesListener mOnUpFilesListener;
-    
+    private String mWaterMark;
     
     public static interface OnUpFilesListener{
         public void onUpSuccess(String pids);
     }
     
     
-    public void uploadFiles(List<String> files, OnUpFilesListener listener){
+    public void uploadFiles(String waterMark, List<String> files, OnUpFilesListener listener){
         this.mNeedToUpload = files;
         this.mOnUpFilesListener = listener;
         mHasUploadFlag = 0;
+        this.mWaterMark = waterMark;
         mHandler.sendEmptyMessage(MSG_UPLOAD);
     }
     Handler mHandler = new Handler(){
       public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_UPLOAD: {
-                    uploadFile(mNeedToUpload.get(mHasUploadFlag));
+                    uploadFile(mWaterMark, mNeedToUpload.get(mHasUploadFlag));
                     break;
                 }
                 case MSG_UPLOAD_DONE: {
@@ -73,7 +74,7 @@ public class UploadHelper {
     };
     
     
-    private void uploadFile(String file) {
+    private void uploadFile(String waterMark, String file) {
         // "/sdcard/tencent/zebrasdk/Photoplus.jpg"
 
         Header[] getHeader = {
@@ -97,10 +98,9 @@ public class UploadHelper {
 
         FileEntity reqEntity = new FileEntity(uploadFile, "binary/octet-stream");
 
-        String unMark = "http://picupload.service.weibo.com/interface/pic_upload.php?app="
-                + "miniblog&data=1&mime=image/png&ct=0.2805887470021844";
-        String url = "http://picupload.service.weibo.com/interface/pic_upload.php?cb=http://weibo.com/aj/static/upimgback.html?_wv=5&callback=STK_ijax_141952136307389&url=weibo.com/u/2294141594&markpos=1&logo=1&nick=@iBeebo&marks=0&app=miniblog&s=rdxt";
-        // http://picupload.service.weibo.com/interface/pic_upload.php?cb=http://weibo.com/aj/static/upimgback.html?_wv=5&callback=STK_ijax_141952136307389&url=weibo.com/u/2294141594&markpos=1&logo=1&nick=@iBeebo&marks=0&app=miniblog&s=rdxt
+        String markUrl = "http://picupload.service.weibo.com/interface/pic_upload.php?" + "app=miniblog&data=1" + waterMark
+                + "&mime=image/png&ct=0.2805887470021844";
+        String unMark = "http://picupload.service.weibo.com/interface/pic_upload.php?app=" + "miniblog&data=1&mime=image/png&ct=0.2805887470021844";
 
         mAsyncHttpClient.post(mContext.getApplicationContext(), unMark, getHeader, reqEntity, contentType,
                 new AsyncHttpResponseHandler() {

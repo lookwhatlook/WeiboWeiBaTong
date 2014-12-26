@@ -178,12 +178,12 @@ public class SinaPreLogin {
         return mEncodedFormEntity;
     }
     
-    public HttpEntity sendWeiboEntity(String app_src, String content, String cookie, String pid) {
+    public HttpEntity sendWeiboEntity(String app_src, String content, String cookie, String pids) {
         List<NameValuePair> sendWeiboParam = new ArrayList<NameValuePair>();
             sendWeiboParam.add(new BasicNameValuePair("app_src", app_src));
             sendWeiboParam.add(new BasicNameValuePair("content", content));
-            if (!TextUtils.isEmpty(pid)) {
-                sendWeiboParam.add(new BasicNameValuePair("pic_id", pid));
+            if (!TextUtils.isEmpty(pids)) {
+                sendWeiboParam.add(new BasicNameValuePair("pic_id", pids));
             }
             sendWeiboParam.add(new BasicNameValuePair("return_type", "2"));
             sendWeiboParam.add(new BasicNameValuePair("refer", ""));
@@ -192,7 +192,10 @@ public class SinaPreLogin {
             sendWeiboParam.add(new BasicNameValuePair("ext", "login=>1;url=>"));
             sendWeiboParam.add(new BasicNameValuePair("html_type", "2"));
             sendWeiboParam.add(new BasicNameValuePair("_t", "0"));
-            sendWeiboParam.add(new BasicNameValuePair("Cookie", cookie));
+            if (!android.text.TextUtils.isEmpty(cookie)) {
+                sendWeiboParam.add(new BasicNameValuePair("Cookie", cookie));
+            }
+
         
         UrlEncodedFormEntity mEncodedFormEntity = null;
         try {
@@ -236,7 +239,7 @@ public class SinaPreLogin {
 	        loginParams.add(new BasicNameValuePair("ext", "login=>1;url=>"));
 	        loginParams.add(new BasicNameValuePair("html_type", "2"));
 	        loginParams.add(new BasicNameValuePair("_t", "0"));
-        // loginParams.add(new BasicNameValuePair("Cookie", cookie));
+         loginParams.add(new BasicNameValuePair("Cookie", cookie));
 
 	        Log.d("sendWeibo-PIC", "[" + pid + "]");
 	        

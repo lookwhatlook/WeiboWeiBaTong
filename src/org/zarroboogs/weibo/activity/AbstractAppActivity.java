@@ -1,3 +1,4 @@
+
 package org.zarroboogs.weibo.activity;
 
 import android.content.Intent;
@@ -17,103 +18,114 @@ import com.loopj.android.http.PersistentCookieStore;
 
 import java.lang.reflect.Field;
 
-
 public class AbstractAppActivity extends TranslucentStatusBarActivity {
 
-	protected int theme = 0;
-	public AccountBean mAccountBean;
-    private AsyncHttpClient mAsyncHttoClient;
-    private CookieStore cookieStore;
-    
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		if (savedInstanceState == null) {
-			theme = SettingUtils.getAppTheme();
-		} else {
-			theme = savedInstanceState.getInt("theme");
-		}
-		setTheme(theme);
+    protected int theme = 0;
+    public AccountBean mAccountBean;
+    private static AsyncHttpClient mAsyncHttoClient;
+    private static CookieStore cookieStore;
 
-		super.onCreate(savedInstanceState);
-		
-        cookieStore = new PersistentCookieStore(getApplicationContext());
-        mAsyncHttoClient = new AsyncHttpClient();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            theme = SettingUtils.getAppTheme();
+        } else {
+            theme = savedInstanceState.getInt("theme");
+        }
+        setTheme(theme);
+
+        super.onCreate(savedInstanceState);
+
+        if (cookieStore == null) {
+            cookieStore = new PersistentCookieStore(getApplicationContext());
+        }
+
+        if (mAsyncHttoClient == null) {
+            mAsyncHttoClient = new AsyncHttpClient();
+        }
 
         mAsyncHttoClient.setCookieStore(cookieStore);
-        
-		forceShowActionBarOverflowMenu();
-		GlobalContext.getInstance().setActivity(this);
-		
-	}
-	
-	public AsyncHttpClient getAsyncHttpClient(){
-	    return mAsyncHttoClient;
-	}
 
-	public AccountBean getAccount() {
-		return mAccountBean;
-	}
+        forceShowActionBarOverflowMenu();
+        GlobalContext.getInstance().setActivity(this);
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		GlobalContext.getInstance().setCurrentRunningActivity(this);
+    }
 
-		if (theme != SettingUtils.getAppTheme()) {
-			reload();
-		}
+    public AsyncHttpClient getAsyncHttpClient() {
+        if (mAsyncHttoClient == null) {
+            mAsyncHttoClient = new AsyncHttpClient();
+        }
+        return mAsyncHttoClient;
+    }
 
-	}
+    public CookieStore getCookieStore() {
+        if (cookieStore == null) {
+            cookieStore = new PersistentCookieStore(getApplicationContext());
+        }
+        return cookieStore;
+    }
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		if (GlobalContext.getInstance().getCurrentRunningActivity() == this) {
-			GlobalContext.getInstance().setCurrentRunningActivity(null);
-		}
+    public AccountBean getAccount() {
+        return mAccountBean;
+    }
 
-	}
+    @Override
+    protected void onResume() {
+        super.onResume();
+        GlobalContext.getInstance().setCurrentRunningActivity(this);
 
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putInt("theme", theme);
+        if (theme != SettingUtils.getAppTheme()) {
+            reload();
+        }
 
-	}
-	
-	private void forceShowActionBarOverflowMenu() {
-		try {
-			ViewConfiguration config = ViewConfiguration.get(this);
-			Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
-			if (menuKeyField != null) {
-				menuKeyField.setAccessible(true);
-				menuKeyField.setBoolean(config, false);
-			}
-		} catch (Exception ignored) {
+    }
 
-		}
-	}
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (GlobalContext.getInstance().getCurrentRunningActivity() == this) {
+            GlobalContext.getInstance().setCurrentRunningActivity(null);
+        }
 
+    }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("theme", theme);
 
+    }
 
-	public void reload() {
+    private void forceShowActionBarOverflowMenu() {
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if (menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception ignored) {
 
-		Intent intent = getIntent();
-		overridePendingTransition(0, 0);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-		finish();
+        }
+    }
 
-		overridePendingTransition(0, 0);
-		startActivity(intent);
-		TimeLineBitmapDownloader.refreshThemePictureBackground();
-	}
+    public void reload() {
 
-	public TimeLineBitmapDownloader getBitmapDownloader() {
-		return TimeLineBitmapDownloader.getInstance();
-	}
+        Intent intent = getIntent();
+        overridePendingTransition(0, 0);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        finish();
 
-	protected void dealWithException(WeiboException e) {
-		Toast.makeText(this, e.getError(), Toast.LENGTH_SHORT).show();
-	}
+        overridePendingTransition(0, 0);
+        startActivity(intent);
+        TimeLineBitmapDownloader.refreshThemePictureBackground();
+    }
+
+    public TimeLineBitmapDownloader getBitmapDownloader() {
+        return TimeLineBitmapDownloader.getInstance();
+    }
+
+    protected void dealWithException(WeiboException e) {
+        Toast.makeText(this, e.getError(), Toast.LENGTH_SHORT).show();
+    }
 }
