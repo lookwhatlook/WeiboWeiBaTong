@@ -8,13 +8,13 @@
     android:orientation="vertical" >
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/accountToolBar"
+        android:id="@+id/userTopicListToolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:title="@string/account_management" />
+        app:title="@string/topic_list" />
 
     <FrameLayout
         android:id="@+id/content"
