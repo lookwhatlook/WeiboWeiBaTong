@@ -252,9 +252,6 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
             
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                onSendFinished(true);
-                
-                
                 LogTool.D(TAG + "onSuccess " + new String(responseBody));
                 
                 RequestResultBean sendResultBean = getRequestResultParser().parse(responseBody, RequestResultBean.class);
@@ -555,8 +552,9 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 	}
 	
     private void sendWeibo(SendImgData sendImgData) {
-        String text = mEditText.getText().toString();
+        String text = mEditText.getEditableText().toString();
         if (TextUtils.isEmpty(text)) {
+        	LogTool.D("sendWeibo    text is empty");
             text = getString(R.string.default_text_pic_weibo);
         }
 
@@ -569,7 +567,7 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
         }
         WaterMark mark = new WaterMark(mAccountBean.getUsernick(), url);
 
-        sendWeibo(mAccountBean.getUname(), mAccountBean.getPwd(), mark, getWeiba().getCode(), text, sendImgData.getReSizeImgs());
+        executeSendWeibo(mAccountBean.getUname(), mAccountBean.getPwd(), mark, getWeiba().getCode(), text, sendImgData.getReSizeImgs());
     }
 	
 

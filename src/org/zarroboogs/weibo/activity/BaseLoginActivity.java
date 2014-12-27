@@ -33,6 +33,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.evgenii.jsevaluator.JsEvaluator;
 import com.evgenii.jsevaluator.interfaces.JsCallback;
@@ -68,7 +69,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
     public RequestResultParser getRequestResultParser(){
         return mRequestResultParser;
     }
-    public void sendWeibo(String uname, String upwd, WaterMark mark, final String weiboCode, final String text,
+    public void executeSendWeibo(String uname, String upwd, WaterMark mark, final String weiboCode, final String text,
             List<String> pics) {
         this.mUserName = uname;
         this.mPassword = upwd;
@@ -257,10 +258,11 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                         mRequestResultParser = new RequestResultParser(response);
                         if (mRequestResultParser.isLogin()) {
                             LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Success");
+                            mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
                         } else {
+                        	Toast.makeText(getApplicationContext(), mRequestResultParser.getErrorReason(), Toast.LENGTH_LONG).show();
                             LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Failed : " + mRequestResultParser.getErrorReason());
                         }
-                        mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
                     }
 
                     @Override
