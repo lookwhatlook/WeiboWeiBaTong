@@ -26,6 +26,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.Toolbar.OnMenuItemClickListener;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -62,22 +64,71 @@ public class EditMyProfileActivity extends AbstractAppActivity implements Dialog
 	private Uri imageFileUri;
 
 	private String picPath;
-
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString("picPath", picPath);
-	}
+	
+	private Toolbar mEditToolBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.editmyprofileactivity_layout);
+		mEditToolBar = (Toolbar) findViewById(R.id.editMyProFileToolbar);
+		
 		initLayout();
 		userBean = (UserBean) getIntent().getParcelableExtra(Constants.USERBEAN);
 		initValue(savedInstanceState);
-
+		
+		mEditToolBar.inflateMenu(R.menu.actionbar_menu_editmyprofileactivity);
+		save = mEditToolBar.getMenu().findItem(R.id.menu_save);
+		mEditToolBar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+			
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				// TODO Auto-generated method stub
+				Intent intent;
+				switch (item.getItemId()) {
+				case android.R.id.home:
+					intent = MainTimeLineActivity.newIntent();
+					intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+					startActivity(intent);
+					return true;
+				case R.id.menu_save:
+					save();
+					return true;
+				}
+				return false;
+			}
+		});
 	}
+	
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.actionbar_menu_editmyprofileactivity, menu);
+//		save = menu.findItem(R.id.menu_save);
+//		return super.onCreateOptionsMenu(menu);
+//	}
+//
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		Intent intent;
+//		switch (item.getItemId()) {
+//		case android.R.id.home:
+//			intent = MainTimeLineActivity.newIntent();
+//			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+//			startActivity(intent);
+//			return true;
+//		case R.id.menu_save:
+//			save();
+//			return true;
+//		}
+//		return false;
+//	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putString("picPath", picPath);
+	}
+	
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
@@ -300,28 +351,7 @@ public class EditMyProfileActivity extends AbstractAppActivity implements Dialog
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.actionbar_menu_editmyprofileactivity, menu);
-		save = menu.findItem(R.id.menu_save);
-		return super.onCreateOptionsMenu(menu);
-	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			intent = MainTimeLineActivity.newIntent();
-			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-			startActivity(intent);
-			return true;
-		case R.id.menu_save:
-			save();
-			return true;
-		}
-		return false;
-	}
 
 	private class Layout {
 
