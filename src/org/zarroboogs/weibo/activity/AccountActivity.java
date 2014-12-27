@@ -45,7 +45,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-public class AccountActivity extends AbstractAppActivity implements LoaderManager.LoaderCallbacks<List<AccountBean>> {
+public class AccountActivity extends BaseLoginActivity implements LoaderManager.LoaderCallbacks<List<AccountBean>> {
 
 	private static final String ACTION_OPEN_FROM_APP_INNER = "org.zarroboogs.weibo:accountactivity";
 
@@ -294,6 +294,9 @@ public class AccountActivity extends AbstractAppActivity implements LoaderManage
 				Intent intent = MainTimeLineActivity.newIntent(selectAccountBean);
 				intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(intent);
+				
+				getCookieStore().clear();
+				
 				finish();
 			}
 

@@ -33,6 +33,9 @@ public class RequestResultParser {
         if (TextUtils.isEmpty(responseString)) {
             return null;
         }
+        if (mGson == null) {
+        	mGson = new Gson();
+		}
         return mGson.fromJson(responseString, bean);
     }
 	   public RequestResultParser(String entity) {
