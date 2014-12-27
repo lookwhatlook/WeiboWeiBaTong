@@ -16,6 +16,7 @@ import org.apache.http.message.BasicHeader;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -33,6 +34,8 @@ public class UploadHelper {
     
     public static final int MSG_UPLOAD = 0x1000;
     public static final int MSG_UPLOAD_DONE = 0x1001;
+    public static final int MSG_UPLOAD_FAILED = 0x1002;
+    
     public int mHasUploadFlag = -1;
 
     private String mPids = "";
@@ -43,6 +46,7 @@ public class UploadHelper {
     
     public static interface OnUpFilesListener{
         public void onUpSuccess(String pids);
+        public void onUpLoadFailed();
     }
     
     
@@ -66,7 +70,12 @@ public class UploadHelper {
                     }
                     break;
                 }
-
+                case MSG_UPLOAD_FAILED:{
+                	if (mOnUpFilesListener != null) {
+                        mOnUpFilesListener.onUpLoadFailed();
+                    }
+                	break;
+                }
                 default:
                     break;
             }
@@ -108,24 +117,34 @@ public class UploadHelper {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         String result = new String(responseBody);
-
+                        Log.d("uploadFile   RES======: ", result);
                         Gson mGson = new Gson();
                         UploadPicResult ur = mGson.fromJson(PatternUtils.preasePid(result), UploadPicResult.class);
-                        Log.d("uploadFile   pid: ", ur.getPid());
-                        LogTool.D("uploadFile onSuccess" + " " + result);
-                        mHasUploadFlag++;
-                        mPids += ur.getPid() + ",";
-                        if (mHasUploadFlag < mNeedToUpload.size()) {
-                            mHandler.sendEmptyMessage(MSG_UPLOAD);
-                        }else {
-                            mHandler.sendEmptyMessage(MSG_UPLOAD_DONE);
-                        }
+                        if (ur != null) {
+                        	if (TextUtils.isEmpty(ur.getPid())) {
+								mHandler.sendEmptyMessage(MSG_UPLOAD_FAILED);
+								return;
+							}
+                        	Log.d("uploadFile   pid: ", ur.getPid());
+                            LogTool.D("uploadFile onSuccess" + " " + result);
+                            mHasUploadFlag++;
+                            mPids += ur.getPid() + ",";
+                            if (mHasUploadFlag < mNeedToUpload.size()) {
+                                mHandler.sendEmptyMessage(MSG_UPLOAD);
+                            }else {
+                                mHandler.sendEmptyMessage(MSG_UPLOAD_DONE);
+                            }
+						}else {
+							mHandler.sendEmptyMessage(MSG_UPLOAD_DONE);
+						}
+                        
 
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                         LogTool.D("uploadFile onFailure" + " statusCode:" + statusCode + "   " + error.getLocalizedMessage());
+                        mHandler.sendEmptyMessage(MSG_UPLOAD_FAILED);
                     }
                 });
     }

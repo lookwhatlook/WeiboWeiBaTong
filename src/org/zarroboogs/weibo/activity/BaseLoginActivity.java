@@ -100,6 +100,11 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                     LogTool.D("uploadFile pids: " + pids);
                     sendWeiboWidthPids(weiboCode, text, pids);
                 }
+                @Override
+                public void onUpLoadFailed() {
+                	// TODO Auto-generated method stub
+                	doPreLogin(mUserName, mPassword);
+                }
             });
         }
     }

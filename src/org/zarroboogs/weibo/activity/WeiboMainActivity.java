@@ -309,7 +309,6 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
                     fetchWeiBa();
                 } else {
                     Toast.makeText(getApplicationContext(), R.string.net_not_avaliable, Toast.LENGTH_SHORT).show();
-                    ;
                 }
             } else {
                 listAdapter.setWeibas(list);
@@ -365,6 +364,7 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
         
         @Override
         public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+        	Log.d("FETCH_WEIBA: ", "" + error.getLocalizedMessage());
         }
     });
 	}

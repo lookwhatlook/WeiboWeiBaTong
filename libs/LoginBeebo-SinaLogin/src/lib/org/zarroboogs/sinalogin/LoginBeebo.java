@@ -88,6 +88,12 @@ public class LoginBeebo extends Activity {
                         LogTool.D("uploadFile pids: " + pids);
                         sendWeibo(pids);
                     }
+
+					@Override
+					public void onUpLoadFailed() {
+						// TODO Auto-generated method stub
+						
+					}
                 });
             }
         });
