@@ -10,6 +10,7 @@ import com.umeng.analytics.MobclickAgent;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 /**
@@ -20,6 +21,7 @@ public class FanListActivity extends AbstractAppActivity {
 	private String token;
 
 	private UserBean bean;
+	private Toolbar mFanToolbar;
 
 	public UserBean getUser() {
 		return bean;
@@ -36,9 +38,12 @@ public class FanListActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fan_list_activity_layout);
+		mFanToolbar = (Toolbar) findViewById(R.id.fanListToolbar);
+		
 //		getActionBar().setDisplayHomeAsUpEnabled(true);
 //		getActionBar().setTitle(getString(R.string.fan_list));
 //		getActionBar().setIcon(R.drawable.ic_ab_friendship);
+		mFanToolbar.setTitle(getString(R.string.fan_list));
 
 		token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = (UserBean) getIntent().getParcelableExtra("user");

@@ -35,6 +35,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +54,8 @@ public class UserInfoActivity extends AbstractAppActivity {
 	private ModifyGroupMemberTask modifyGroupMemberTask;
 
 	private static final int REFRESH_LOADER_ID = 0;
+	
+	private Toolbar mUserInfoToolbar;
 
 	public String getToken() {
 		if (TextUtils.isEmpty(token)) {
@@ -86,7 +89,7 @@ public class UserInfoActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.userinfoactivity_layout);
-		
+		mUserInfoToolbar = (Toolbar) findViewById(R.id.userInfoToolBar);
 		initLayout();
 		token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = getIntent().getParcelableExtra("user");
@@ -165,6 +168,8 @@ public class UserInfoActivity extends AbstractAppActivity {
 
 //		getActionBar().setTitle(title);
 
+		mUserInfoToolbar.setTitle(title);
+		
 		CommonProgressDialogFragment dialog = CommonProgressDialogFragment.newInstance(getString(R.string.fetching_user_info));
 		getSupportFragmentManager().beginTransaction().add(dialog, CommonProgressDialogFragment.class.getName()).commit();
 		getSupportLoaderManager().initLoader(REFRESH_LOADER_ID, null, refreshCallback);
@@ -176,12 +181,14 @@ public class UserInfoActivity extends AbstractAppActivity {
 //		getActionBar().setDisplayHomeAsUpEnabled(true);
 //		getActionBar().setDisplayShowHomeEnabled(false);
 //		getActionBar().setTitle(getString(R.string.personal_info));
+		mUserInfoToolbar.setTitle(getString(R.string.personal_info));
 	}
 
 	private void buildContent() {
 		// if you open this activity with user id, must set title with nickname
 		// again
 //		getActionBar().setTitle(bean.getScreen_name());
+		mUserInfoToolbar.setTitle(bean.getScreen_name());
 		new Handler(Looper.getMainLooper()).post(new Runnable() {
 			@Override
 			public void run() {

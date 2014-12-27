@@ -17,9 +17,9 @@
         app:title="@string/topic_list" />
 
     <FrameLayout
+        android:layout_below="@id/userTopicListToolbar"
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/accountToolBar" />
+        android:layout_height="match_parent" />
 
 </RelativeLayout>

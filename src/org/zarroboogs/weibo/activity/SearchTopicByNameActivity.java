@@ -8,15 +8,19 @@ import com.umeng.analytics.MobclickAgent;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.MenuItem;
 
 public class SearchTopicByNameActivity extends AbstractAppActivity {
 
+	private Toolbar mSearchTopicToolbar;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.search_topic_byname_activity_layout);
+		mSearchTopicToolbar = (Toolbar) findViewById(R.id.searchTopicToolbar);
+		
 		String q = getIntent().getStringExtra("q");
 		if (TextUtils.isEmpty(q)) {
 			Uri data = getIntent().getData();
@@ -27,6 +31,7 @@ public class SearchTopicByNameActivity extends AbstractAppActivity {
 //		getActionBar().setDisplayHomeAsUpEnabled(true);
 //		getActionBar().setDisplayShowHomeEnabled(false);
 //		getActionBar().setTitle("#" + q + "#");
+		mSearchTopicToolbar.setTitle("#" + q + "#");
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction().replace(R.id.content, new SearchTopicByNameFragment(q)).commit();
 		}
