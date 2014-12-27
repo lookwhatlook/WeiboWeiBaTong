@@ -18,10 +18,10 @@ public class DMUserListActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.dm));
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.dm));
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new DMUserListFragment()).commit();
 		}

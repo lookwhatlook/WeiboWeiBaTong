@@ -44,8 +44,8 @@ public class WriteRepostActivity extends AbstractWriteActivity<MessageBean> {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getActionBar().setTitle(getString(R.string.repost));
-		getActionBar().setSubtitle(GlobalContext.getInstance().getCurrentAccountName());
+//		getActionBar().setTitle(getString(R.string.repost));
+//		getActionBar().setSubtitle(GlobalContext.getInstance().getCurrentAccountName());
 
 		if (savedInstanceState == null) {
 

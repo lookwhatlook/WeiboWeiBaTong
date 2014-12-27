@@ -130,7 +130,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	private void handleFailedOperation(Intent intent) {
 		accountBean = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = accountBean.getAccess_token();
-		getActionBar().setSubtitle(accountBean.getUsernick());
+//		getActionBar().setSubtitle(accountBean.getUsernick());
 		String stringExtra = intent.getStringExtra("content");
 		content.setText(stringExtra);
 		String failedReason = intent.getStringExtra("failedReason");
@@ -331,7 +331,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 			accountBean = (AccountBean) savedInstanceState.getParcelable("accountBean");
 			token = accountBean.getAccess_token();
 
-			getActionBar().setSubtitle(getAccount().getUsernick());
+//			getActionBar().setSubtitle(getAccount().getUsernick());
 
 		}
 	}
@@ -375,7 +375,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	private void handleDraftOperation(Intent intent) {
 		accountBean = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = accountBean.getAccess_token();
-		getActionBar().setSubtitle(accountBean.getUsernick());
+//		getActionBar().setSubtitle(accountBean.getUsernick());
 
 		statusDraftBean = (StatusDraftBean) intent.getParcelableExtra("draft");
 		if (statusDraftBean != null) {
@@ -399,7 +399,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	private void handleNormalOperation(Intent intent) {
 		accountBean = (AccountBean) intent.getParcelableExtra(Constants.ACCOUNT);
 		token = accountBean.getAccess_token();
-		getActionBar().setSubtitle(accountBean.getUsernick());
+//		getActionBar().setSubtitle(accountBean.getUsernick());
 		String contentStr = intent.getStringExtra("content");
 		if (!TextUtils.isEmpty(contentStr)) {
 			content.setText(contentStr + " ");
@@ -410,11 +410,11 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 	private void buildInterface() {
 		setContentView(R.layout.writeweiboactivity_layout);
 
-		ActionBar actionBar = getActionBar();
-		actionBar.setDisplayHomeAsUpEnabled(false);
-		actionBar.setTitle(R.string.write_weibo);
-		actionBar.setDisplayShowHomeEnabled(true);
-		actionBar.setDisplayShowTitleEnabled(true);
+//		ActionBar actionBar = getActionBar();
+//		actionBar.setDisplayHomeAsUpEnabled(false);
+//		actionBar.setTitle(R.string.write_weibo);
+//		actionBar.setDisplayShowHomeEnabled(true);
+//		actionBar.setDisplayShowTitleEnabled(true);
 
 		int avatarWidth = getResources().getDimensionPixelSize(R.dimen.timeline_avatar_width);
 		int avatarHeight = getResources().getDimensionPixelSize(R.dimen.timeline_avatar_height);
@@ -426,7 +426,7 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 					avatarHeight, FileLocationMethod.avatar_small);
 		}
 		if (bitmap != null) {
-			actionBar.setIcon(new BitmapDrawable(getResources(), bitmap));
+//			actionBar.setIcon(new BitmapDrawable(getResources(), bitmap));
 		}
 
 		View title = getLayoutInflater().inflate(R.layout.writeweiboactivity_title_layout, null);
@@ -478,8 +478,8 @@ public class WriteWeiboActivity extends AbstractAppActivity implements DialogInt
 			}
 		});
 
-		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
-		actionBar.setDisplayShowCustomEnabled(true);
+//		actionBar.setCustomView(title, new ActionBar.LayoutParams(Gravity.RIGHT));
+//		actionBar.setDisplayShowCustomEnabled(true);
 		content = ((KeyboardControlEditText) findViewById(R.id.status_new_content));
 		content.addTextChangedListener(new TextNumLimitWatcher((TextView) findViewById(R.id.menu_send), content, this));
 		content.setDrawingCacheEnabled(true);

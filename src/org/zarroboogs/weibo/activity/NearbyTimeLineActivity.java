@@ -69,10 +69,10 @@ public class NearbyTimeLineActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.map);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(false);
-		getActionBar().setTitle(getString(R.string.nearby));
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(false);
+//		getActionBar().setTitle(getString(R.string.nearby));
 		addLocation();
 	}
 

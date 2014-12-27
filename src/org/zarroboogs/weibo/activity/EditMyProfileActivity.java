@@ -72,10 +72,6 @@ public class EditMyProfileActivity extends AbstractAppActivity implements Dialog
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.edit_my_profile));
 		setContentView(R.layout.editmyprofileactivity_layout);
 		initLayout();
 		userBean = (UserBean) getIntent().getParcelableExtra(Constants.USERBEAN);

@@ -185,7 +185,7 @@ public class SearchMainActivity extends AbstractAppActivity {
 	ViewPager.SimpleOnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
 		@Override
 		public void onPageSelected(int position) {
-			getActionBar().setSelectedNavigationItem(position);
+//			getActionBar().setSelectedNavigationItem(position);
 		}
 	};
 

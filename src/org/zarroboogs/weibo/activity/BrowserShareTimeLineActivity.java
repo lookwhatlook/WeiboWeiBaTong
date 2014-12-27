@@ -28,10 +28,10 @@ public class BrowserShareTimeLineActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		String url = getIntent().getStringExtra("url");
-		getActionBar().setDisplayShowHomeEnabled(false);
-		getActionBar().setDisplayShowTitleEnabled(true);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(url);
+//		getActionBar().setDisplayShowHomeEnabled(false);
+//		getActionBar().setDisplayShowTitleEnabled(true);
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(url);
 		if (savedInstanceState == null) {
 			getSupportFragmentManager().beginTransaction().replace(android.R.id.content, BrowserShareTimeLineFragment.newInstance(url)).commit();
 		}

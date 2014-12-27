@@ -12,7 +12,7 @@ import org.zarroboogs.weibo.dialogfragment.CommonProgressDialogFragment;
 import org.zarroboogs.weibo.support.utils.Utility;
 
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
+//import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.ClipData;
@@ -284,13 +284,13 @@ public class BrowserWebFragment extends Fragment {
 			if (getActivity() == null) {
 				return;
 			}
-			ActionBar actionBar = getActivity().getActionBar();
-			if (actionBar == null) {
-				return;
-			}
-			if (!TextUtils.isEmpty(view.getTitle())) {
-				actionBar.setTitle(view.getTitle());
-			}
+//			ActionBar actionBar = getActivity().getActionBar();
+//			if (actionBar == null) {
+//				return;
+//			}
+//			if (!TextUtils.isEmpty(view.getTitle())) {
+//				actionBar.setTitle(view.getTitle());
+//			}
 			finishRefreshAnimation();
 		}
 	}
@@ -304,13 +304,13 @@ public class BrowserWebFragment extends Fragment {
 				if (getActivity() == null) {
 					return;
 				}
-				ActionBar actionBar = getActivity().getActionBar();
-				if (actionBar == null) {
-					return;
-				}
-				if (!TextUtils.isEmpty(view.getTitle())) {
-					actionBar.setTitle(view.getTitle());
-				}
+//				ActionBar actionBar = getActivity().getActionBar();
+//				if (actionBar == null) {
+//					return;
+//				}
+//				if (!TextUtils.isEmpty(view.getTitle())) {
+//					actionBar.setTitle(view.getTitle());
+//				}
 			}
 		}
 

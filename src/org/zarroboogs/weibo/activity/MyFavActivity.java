@@ -25,8 +25,8 @@ public class MyFavActivity extends AbstractAppActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setTitle(getString(R.string.my_fav_list));
+//		getActionBar().setDisplayHomeAsUpEnabled(true);
+//		getActionBar().setTitle(getString(R.string.my_fav_list));
 		String token = getIntent().getStringExtra(Constants.TOKEN);
 		bean = (UserBean) getIntent().getParcelableExtra("user");
 		if (getSupportFragmentManager().findFragmentByTag(MyFavListFragment.class.getName()) == null) {
