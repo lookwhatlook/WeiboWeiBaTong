@@ -113,6 +113,7 @@ public class SinaPreLogin {
 		headers.add(new BasicHeader("Accept-Encoding", "gzip,deflate"));
 		headers.add(new BasicHeader("Accept-Language", "zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4"));
 
+		
 		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
 		nvps.add(new BasicNameValuePair("entry", "weibo"));
 		nvps.add(new BasicNameValuePair("gateway", "1"));
@@ -143,6 +144,8 @@ public class SinaPreLogin {
 	}
 	
     public HttpEntity afterPreLoginEntity(String encodeUserName, String encondePassWord, String door, PreLoginResult params) {
+    	
+    		
         List<NameValuePair> nvps = new ArrayList<NameValuePair>();
         nvps.add(new BasicNameValuePair("entry", "weibo"));
         nvps.add(new BasicNameValuePair("gateway", "1"));
@@ -329,11 +332,20 @@ public class SinaPreLogin {
 
 
     public String buildPreLoginUrl(String su, String ssoLoginjs, String time) {
+//    	entry:weibo
+//    	callback:sinaSSOController.preloginCallBack
+//    	su:MTMyMDAyMjM1MiU0MHFxLmNvbQ==
+//    	rsakt:mod
+//    	checkpin:1
+//    	client:ssologin.js(v1.4.18)
+//    	_:1419780466785
+    	
         String url = "http://login.sina.com.cn/sso/prelogin.php?";
         url = url + "entry=weibo&";
         url = url + "callback=sinaSSOController.preloginCallBack&";
         url = url + "su=" + su + "&";
         url = url + "rsakt=mod&";
+        url = url + "checkpin=0&";
         url = url + "client=" + ssoLoginjs + "&";
         // time = new Date().getTime();
         url = url + "_=" + time;

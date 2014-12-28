@@ -2,10 +2,13 @@
 package org.zarroboogs.weibo.activity;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import lib.org.zarroboogs.weibo.login.httpclient.RealLibrary;
 import lib.org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
@@ -38,6 +41,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.util.Config;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -53,6 +57,7 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.ResponseHandlerInterface;
 
 public class BaseLoginActivity extends SharedPreferenceActivity {
+	private static final String TAG = "Beebo_Login: ";
     private SinaPreLogin mSinaPreLogin;
     private PreLoginResult mPreLoginResult;
 
@@ -126,21 +131,22 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         if (pics == null || pics.isEmpty()) {
             sendWeiboWidthPids(weiboCode, text, null);
             // sendWeiboWidthPids("ZwpYj", "Test: " + SystemClock.uptimeMillis() + "", null);
-            LogTool.D("uploadFile     Not Upload");
+            LogTool.D(TAG + "uploadFile     Not Upload");
         } else {
-            LogTool.D("uploadFile    upload");
+            LogTool.D(TAG + "uploadFile    upload");
             UploadHelper mUploadHelper = new UploadHelper(getApplicationContext(), getAsyncHttpClient());
             mUploadHelper.uploadFiles(buildMark(mark), pics, new OnUpFilesListener() {
 
                 @Override
                 public void onUpSuccess(String pids) {
-                    LogTool.D("uploadFile pids: " + pids);
+                	LogTool.D(TAG + " UploadPic:  [onUpSuccess] " + pids);
                     sendWeiboWidthPids(weiboCode, text, pids);
                 }
                 @Override
                 public void onUpLoadFailed() {
                 	// TODO Auto-generated method stub
                 	doPreLogin(mUserName, mPassword);
+                	LogTool.D(TAG + " UploadPic:  [onUpLoadFailed] doPreLogin");
                 }
             });
         }
@@ -165,9 +171,21 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                     encodePassword(mPassword, mPreLoginResult);
                     break;
                 }
+                case Constaces.MSG_SHOW_DOOR:{
+                	showDoorDialog();
+                	break;
+                }
 
                 case Constaces.MSG_ENCODE_PWD_DONW: {
-                    doAfterPreLogin(mDoor);
+                	
+                	if (mPreLoginResult.getShowpin() == 1) {
+                		LogTool.D(TAG + "   需要验证码");
+						showDoorDialog();
+					}else {
+						LogTool.D(TAG + "   不不需要验证码");
+						doAfterPreLogin(mPreLoginResult, null);
+					}
+                    
                     break;
                 }
                 case Constaces.MSG_AFTER_LOGIN_DONE: {
@@ -282,38 +300,59 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
     public void setOnLoginListener(ResponseHandlerInterface rhi){
         this.mLoginHandler = rhi;
     }
+    
 
-    private void doAfterPreLogin(String door) {
-        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, door, mPreLoginResult);
+    private void doAfterPreLogin(PreLoginResult preLoginResult, String door) {
+        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, door, preLoginResult);
         getAsyncHttpClient().post(getApplicationContext(), Constaces.LOGIN_FIRST_URL, mSinaPreLogin.afterPreLoginHeaders(),
                 httpEntity, "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-                        String response = null;
-                        try {
-                            response = new String(responseBody, "GBK");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
+						String response = null;
+						String result = null;
+						try {
+							response = new String(responseBody, "GBK");
+							result = URLDecoder.decode(response, "GBK");
+				            result = URLDecoder.decode(response, "GBK");
+				            
+//							response = new String(response.getBytes("ISO-8859-1"), "UTF-8"); 
+							
+				            result.replaceAll("[\\t\\n\\r]", "");
+				            
+				            String[] s = result.split("\n\t\t");
+				            LogTool.D(TAG + " AfterPreLogin:  [ response length: ]: " + s.length );
+				            for (String string : s) {
+				            	LogTool.D(TAG + " AfterPreLogin:  [ response : ]: " + string );
+							}
+		                            
+						} catch (UnsupportedEncodingException e) {
+							e.printStackTrace();
+						}
                         mRequestResultParser = new RequestResultParser(response);
+                        
+                        LogTool.D(TAG + " AfterPreLogin:  [onSuccess-Response]: " + mRequestResultParser.getResponseString() );
+                        
                         if (mRequestResultParser.isLogin()) {
-                            LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Success");
+                        	LogTool.D(TAG + " AfterPreLogin:  [onSuccess] " + response);
                             mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
                         } else {
                         	if (mRequestResultParser.getErrorReason().contains("验证码")) {
                         		hideDialogForWeiBo();
                         		showDoorDialog();
+							}else {
+								hideDialogForWeiBo();
+								LogTool.D(TAG + " AfterPreLogin:  [onSuccess] No Door" );
 							}
                         	Toast.makeText(getApplicationContext(), mRequestResultParser.getErrorReason(), Toast.LENGTH_LONG).show();
-                            LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Failed : " + response);
                         }
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        LogTool.D("doAfterPrelogin onFailure  statusCode:" + statusCode + "  reason:"+ error.getLocalizedMessage());
+                    	LogTool.D(TAG + " AfterPreLogin:  [onFailure] " + error.getLocalizedMessage());
+                    	
                     }
                 });
     };
@@ -330,22 +369,22 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
 		
 		mDoorAlertDialog.getWindow().setContentView(R.layout.door_img_dialog_layout);
 		
-		executeDoor((ImageView)mDoorAlertDialog.findViewById(R.id.doorImageView));
+		executeDoor(mPreLoginResult, (ImageView)mDoorAlertDialog.findViewById(R.id.doorImageView));
+		
 		final EditText doorEdittext = (EditText) mDoorAlertDialog.findViewById(R.id.doorEditText);
 		Button checkButton = (Button) mDoorAlertDialog.findViewById(R.id.doorCheckBtn);
 		checkButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				showDialogForWeiBo();
-				doAfterPreLogin(doorEdittext.getText().toString().trim());
+				doAfterPreLogin(mPreLoginResult, doorEdittext.getText().toString().trim());
 				hideDoorDialog();
 			}
 		});
 	}
 	
-	private void executeDoor(final ImageView iv) {
+	private void executeDoor(PreLoginResult preLoginResult, final ImageView iv) {
 		DoorImageAsyncTask doorImageAsyncTask = new DoorImageAsyncTask();
 		doorImageAsyncTask.setOnDoorOpenListener(new OnDoorOpenListener() {
 			
@@ -355,7 +394,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
 				iv.setImageBitmap(result);
 			}
 		});
-		doorImageAsyncTask.execute(mPreLoginResult.getPcid());
+		doorImageAsyncTask.execute(preLoginResult.getPcid());
 	}
 
     private String encodeAccount(String account) {
@@ -425,15 +464,14 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
 
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                        LogTool.D("LoginBeebo " + "onSuccess " + statusCode + new String(responseBody));
+                        LogTool.D(TAG + " PreLogin:  [Success] " + new String(responseBody));
                         mPreLoginResult = mSinaPreLogin.buildPreLoginResult(new String(responseBody));
                         mHandler.sendEmptyMessage(Constaces.MSG_ENCODE_PWD);
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                        LogTool.D("LoginBeebo " + "onFailure " + statusCode + error.getLocalizedMessage());
+                    	LogTool.D(TAG + " PreLogin:  [Failure] " + error.getLocalizedMessage());
                     }
                 });
     }
