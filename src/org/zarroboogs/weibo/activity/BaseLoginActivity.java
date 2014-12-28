@@ -12,9 +12,11 @@ import lib.org.zarroboogs.weibo.login.httpclient.SinaPreLogin;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper;
 import lib.org.zarroboogs.weibo.login.httpclient.UploadHelper.OnUpFilesListener;
 import lib.org.zarroboogs.weibo.login.httpclient.WaterMark;
+import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask;
 import lib.org.zarroboogs.weibo.login.javabean.PreLoginResult;
 import lib.org.zarroboogs.weibo.login.javabean.RequestResultParser;
 import lib.org.zarroboogs.weibo.login.javabean.SendResultBean;
+import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
 import lib.org.zarroboogs.weibo.login.utils.Constaces;
 import lib.org.zarroboogs.weibo.login.utils.LogTool;
 
@@ -25,14 +27,24 @@ import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.message.BasicNameValuePair;
+import org.zarroboogs.weibo.R;
 import org.zarroboogs.weibo.setting.SettingUtils;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
 import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.evgenii.jsevaluator.JsEvaluator;
@@ -51,10 +63,14 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
 
     private String mUserName;
     private String mPassword;
+    private String mDoor = null;
+    
     private WaterMark mWaterMark;
     private String mWeibaCode;
     private String mWeiboText;
     private List<String> mPics;
+    private ProgressDialog mDialog;
+    private AlertDialog mDoorAlertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +80,29 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         mSinaPreLogin = new SinaPreLogin();
         
         mRequestResultParser = new RequestResultParser();
+        
+		mDialog = new ProgressDialog(this);
+		mDialog.setMessage(getString(R.string.send_wei_ing));
+		mDialog.setCancelable(false);
+		
+		
+		Builder builder = new Builder(BaseLoginActivity.this);
+		mDoorAlertDialog = builder.create();
+
     }
 
+	public void showDialogForWeiBo() {
+		if (!mDialog.isShowing()) {
+			mDialog.show();
+		}
+
+	}
+
+	public void hideDialogForWeiBo() {
+		mDialog.cancel();
+		mDialog.hide();
+	}
+	
     public RequestResultParser getRequestResultParser(){
         return mRequestResultParser;
     }
@@ -130,7 +167,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                 }
 
                 case Constaces.MSG_ENCODE_PWD_DONW: {
-                    doAfterPreLogin();
+                    doAfterPreLogin(mDoor);
                     break;
                 }
                 case Constaces.MSG_AFTER_LOGIN_DONE: {
@@ -167,7 +204,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        LogTool.D("sendWeibo   onFailure" + new String(responseBody));
+                        LogTool.D("sendWeibo   onFailure" + error.getLocalizedMessage());
                     }
                 });
     }
@@ -246,8 +283,8 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         this.mLoginHandler = rhi;
     }
 
-    private void doAfterPreLogin() {
-        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, null, mPreLoginResult);
+    private void doAfterPreLogin(String door) {
+        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, door, mPreLoginResult);
         getAsyncHttpClient().post(getApplicationContext(), Constaces.LOGIN_FIRST_URL, mSinaPreLogin.afterPreLoginHeaders(),
                 httpEntity, "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
 
@@ -265,17 +302,61 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                             LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Success");
                             mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
                         } else {
+                        	if (mRequestResultParser.getErrorReason().contains("验证码")) {
+                        		hideDialogForWeiBo();
+                        		showDoorDialog();
+							}
                         	Toast.makeText(getApplicationContext(), mRequestResultParser.getErrorReason(), Toast.LENGTH_LONG).show();
-                            LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Failed : " + mRequestResultParser.getErrorReason());
+                            LogTool.D("doAfterPrelogin onSuccess" + " AfterLogin Failed : " + response);
                         }
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                        LogTool.D("doAfterPrelogin onFailure" + statusCode + new String(responseBody));
+                        LogTool.D("doAfterPrelogin onFailure  statusCode:" + statusCode + "  reason:"+ error.getLocalizedMessage());
                     }
                 });
     };
+    
+    
+    private void hideDoorDialog(){
+    	mDoorAlertDialog.hide();
+    }
+	private void showDoorDialog() {
+
+		mDoorAlertDialog.show();
+		mDoorAlertDialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE  | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+		mDoorAlertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		
+		mDoorAlertDialog.getWindow().setContentView(R.layout.door_img_dialog_layout);
+		
+		executeDoor((ImageView)mDoorAlertDialog.findViewById(R.id.doorImageView));
+		final EditText doorEdittext = (EditText) mDoorAlertDialog.findViewById(R.id.doorEditText);
+		Button checkButton = (Button) mDoorAlertDialog.findViewById(R.id.doorCheckBtn);
+		checkButton.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				showDialogForWeiBo();
+				doAfterPreLogin(doorEdittext.getText().toString().trim());
+				hideDoorDialog();
+			}
+		});
+	}
+	
+	private void executeDoor(final ImageView iv) {
+		DoorImageAsyncTask doorImageAsyncTask = new DoorImageAsyncTask();
+		doorImageAsyncTask.setOnDoorOpenListener(new OnDoorOpenListener() {
+			
+			@Override
+			public void onDoorOpen(android.graphics.Bitmap result) {
+				// TODO Auto-generated method stub
+				iv.setImageBitmap(result);
+			}
+		});
+		doorImageAsyncTask.execute(mPreLoginResult.getPcid());
+	}
 
     private String encodeAccount(String account) {
         String encodedString;
@@ -352,8 +433,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
 
-                        LogTool.D("LoginBeebo " + "onFailure " + statusCode + new String(responseBody)
-                                + error.getLocalizedMessage());
+                        LogTool.D("LoginBeebo " + "onFailure " + statusCode + error.getLocalizedMessage());
                     }
                 });
     }

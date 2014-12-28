@@ -45,8 +45,11 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
@@ -68,10 +71,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -124,7 +129,6 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 	ArrayList<ImageView> mSelectImageViews = new ArrayList<ImageView>();
 
 	ArrayList<ImageView> mEmotionArrayList = new ArrayList<ImageView>();
-	ProgressDialog mDialog;
 
 	Toast mEmptyToast;
 	private ImageLoader mImageLoader = ImageLoader.getInstance();
@@ -160,9 +164,6 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 		atContent = getIntent().getStringExtra("content");
 
 		mEmptyToast = Toast.makeText(getApplicationContext(), R.string.text_is_empty, Toast.LENGTH_SHORT);
-		mDialog = new ProgressDialog(this);
-		mDialog.setMessage(getString(R.string.send_wei_ing));
-		mDialog.setCancelable(false);
 
 		mEditPicScrollView = (ScrollView) findViewById(R.id.scrollView1);
 		editTextLayout = (RelativeLayout) findViewById(R.id.editTextLayout);
@@ -257,7 +258,8 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
                 RequestResultBean sendResultBean = getRequestResultParser().parse(responseBody, RequestResultBean.class);
                 LogTool.D(TAG + "onSuccess " + sendResultBean.getMsg());
                 if (sendResultBean.getMsg().equals("未登录") ) {
-                    doPreLogin(mAccountBean.getUname(), mAccountBean.getPwd());
+                   doPreLogin(mAccountBean.getUname(), mAccountBean.getPwd());
+                	hideDialogForWeiBo();
                 }
                 if (sendResultBean.getCode().equals("100000")) {
                     onSendFinished(true);
@@ -664,18 +666,6 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 
 	}
 
-	private void showDialogForWeiBo() {
-		if (!mDialog.isShowing()) {
-			mDialog.show();
-		}
-
-	}
-
-	private void hideDialogForWeiBo() {
-		mDialog.cancel();
-		mDialog.hide();
-	}
-
 	class WeiBaCacheFile implements FilenameFilter {
 
 		@Override
@@ -725,24 +715,4 @@ public class WeiboMainActivity extends BaseLoginActivity implements LoginCallBac
 //		menu.toggle();
 		mDrawerLayout.closeDrawer(findViewById(R.id.drawerLeft));
 	}
-	Handler mHandler = new Handler(){
-
-		@Override
-		public void handleMessage(Message msg) {
-			// TODO Auto-generated method stub
-			super.handleMessage(msg);
-			if (msg.what == 1002) {
-				DoorImageAsyncTask doorImageAsyncTask = new DoorImageAsyncTask();
-				doorImageAsyncTask.setOnDoorOpenListener(new OnDoorOpenListener() {
-					
-					@Override
-					public void onDoorOpen(android.graphics.Bitmap result) {
-						// TODO Auto-generated method stub
-						//mDoorImg.setImageBitmap(result);
-					}
-				});
-				doorImageAsyncTask.execute("");
-			}
-		}
-	};
 }

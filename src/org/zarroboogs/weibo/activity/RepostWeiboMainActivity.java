@@ -103,8 +103,6 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
     ArrayList<ImageView> mSelectImageViews = new ArrayList<ImageView>();
 
     ArrayList<ImageView> mEmotionArrayList = new ArrayList<ImageView>();
-    ProgressDialog mDialog;
-
     Toast mEmptyToast;
     DisplayImageOptions options;
 
@@ -134,9 +132,6 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
         // mAccountBean = getAccount();
         Log.d("RpostWeiBo_activity", "AccountBean == null ? : " + (mAccountBean == null));
         mEmptyToast = Toast.makeText(getApplicationContext(), R.string.text_is_empty, Toast.LENGTH_SHORT);
-        mDialog = new ProgressDialog(this);
-        mDialog.setMessage(getString(R.string.send_wei_ing));
-        mDialog.setCancelable(false);
 
         mEditPicScrollView = (ScrollView) findViewById(R.id.scrollView1);
         editTextLayout = (RelativeLayout) findViewById(R.id.editTextLayout);
@@ -527,17 +522,6 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
 
     }
 
-    private void showDialogForWeiBo() {
-        if (!mDialog.isShowing()) {
-            mDialog.show();
-        }
-
-    }
-
-    private void hideDialogForWeiBo() {
-        mDialog.cancel();
-        mDialog.hide();
-    }
 
     class WeiBaCacheFile implements FilenameFilter {
 
