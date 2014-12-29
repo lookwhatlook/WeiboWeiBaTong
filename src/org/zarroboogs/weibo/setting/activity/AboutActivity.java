@@ -16,7 +16,7 @@ public class AboutActivity extends AbstractAppActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.setting_activity_layout);
+		setContentView(R.layout.about_activity_layout);
 //		getActionBar().setDisplayShowHomeEnabled(false);
 //		getActionBar().setDisplayShowTitleEnabled(true);
 //		getActionBar().setDisplayHomeAsUpEnabled(true);

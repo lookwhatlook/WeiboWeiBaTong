@@ -12,7 +12,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:title="@string/app_name" >
+        app:title="@string/pref_about_title" >
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
