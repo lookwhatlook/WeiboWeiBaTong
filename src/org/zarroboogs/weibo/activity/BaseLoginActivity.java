@@ -454,6 +454,8 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                         }
                         mRequestResultParser = new RequestResultParser(response);
                         
+                        LogTool.D(TAG + " 网络正常返回，ReplaceLocation：  " + mRequestResultParser.getLocationReplace());
+                        
                         if (mRequestResultParser.isLogin()) {
                             LogTool.D(TAG + " 网络正常返回，并成功登陆");
                             mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
