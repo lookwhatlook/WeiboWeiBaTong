@@ -260,6 +260,7 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         headerList.toArray(repostHeaders);
 
         List<NameValuePair> nvs = new ArrayList<NameValuePair>();
+        LogTool.D("RepostWeiboMainActivity : repost-content: " + content);
         nvs.add(new BasicNameValuePair("content", content));
         nvs.add(new BasicNameValuePair("visible", "0"));
         nvs.add(new BasicNameValuePair("refer", ""));

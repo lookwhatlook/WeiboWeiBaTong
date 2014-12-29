@@ -8,7 +8,6 @@ import java.util.List;
 
 import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask;
 import lib.org.zarroboogs.weibo.login.javabean.RequestResultBean;
-import lib.org.zarroboogs.weibo.login.javabean.SendResultBean;
 import lib.org.zarroboogs.weibo.login.javabean.DoorImageAsyncTask.OnDoorOpenListener;
 import lib.org.zarroboogs.weibo.login.utils.LogTool;
 
@@ -37,10 +36,10 @@ import com.google.gson.Gson;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.umeng.analytics.MobclickAgent;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,7 +65,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -86,7 +84,7 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
     RelativeLayout mEmotionRelativeLayout;
 
     InputMethodManager imm = null;
-    EditText mEditText;
+    MaterialEditText mEditText;
     RelativeLayout mRootView;
 
     RelativeLayout editTextLayout;
@@ -143,7 +141,7 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
 
         mSelectPhoto = (ImageButton) findViewById(R.id.imageButton1);
         mRootView = (RelativeLayout) findViewById(R.id.container);
-        mEditText = (EditText) findViewById(R.id.weiboContentET);
+        mEditText = (MaterialEditText) findViewById(R.id.weiboContentET);
         mEmotionRelativeLayout = (RelativeLayout) findViewById(R.id.smileLayout_ref);
         smileButton = (ImageButton) findViewById(R.id.smileImgButton);
         mSendBtn = (ImageButton) findViewById(R.id.sendWeiBoBtn);
@@ -198,11 +196,13 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
                 LogTool.D(TAG + "onSuccess " + sendResultBean.getMsg());
                 if (sendResultBean.getMsg().equals("未登录") ) {
                     doPreLogin(mAccountBean.getUname(), mAccountBean.getPwd());
+                    hideDialogForWeiBo();
                 }
                 
                 if (sendResultBean.getCode().equals("100000")) {
                     hideDialogForWeiBo();
                     mEditText.setText("");
+                    Toast.makeText(getApplicationContext(), "转发成功", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -441,12 +441,6 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
         appSrcBtn.setText(getWeiba().getText());
     }
 
-    private boolean checkDataEmpty() {
-        if (TextUtils.isEmpty(mEditText.getText().toString()) && SendImgData.getInstance().getSendImgs().size() < 1) {
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public void onClick(View v) {
@@ -550,8 +544,7 @@ public class RepostWeiboMainActivity extends BaseLoginActivity implements LoginC
     private void repostWeibo() {
         String text = mEditText.getText().toString();
         if (TextUtils.isEmpty(text)) {
-            mEmptyToast.show();
-            return;
+            text = "转发微博";
         }
 
         repostWeibo(getWeiba().getCode(), text, "", msg.getId());
