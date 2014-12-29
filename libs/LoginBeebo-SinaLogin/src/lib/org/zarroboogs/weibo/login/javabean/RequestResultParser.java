@@ -18,8 +18,19 @@ public class RequestResultParser {
 	private boolean mIsLogin = false;
 	private String mErrorReason = "";
 	private String mResponseString;
-	private String mUserPageUrl;
-	private Gson mGson;
+	private String mLocationReplace;
+	
+	
+	
+	public String getLocationReplace() {
+        return mLocationReplace;
+    }
+
+    public void setLocationReplace(String mLocationReplace) {
+        this.mLocationReplace = mLocationReplace;
+    }
+
+    private Gson mGson;
 
 	public RequestResultParser() {
         mGson = new Gson();
@@ -55,6 +66,8 @@ public class RequestResultParser {
 	                // 为了您的帐号安全，请输入验证码
 	                mIsLogin = false;
 	                mErrorReason = "为了您的帐号安全，请输入验证码";
+	                //location.replace("http://widget.weibo.com/public/aj_login.php?framelogin=1&callback=parent.sinaSSOController.feedBackUrlCallBack&sudaref=widget.weibo.com&retcode=4049&reason=%CE%AA%C1%CB%C4%FA%B5%C4%D5%CA%BA%C5%B0%B2%C8%AB%A3%AC%C7%EB%CA%E4%C8%EB%D1%E9%D6%A4%C2%EB");
+//	                </script>
 	            } else if (result.contains("登录名或密码错误")) {
 	                // 用户名或密码错误
 	                mIsLogin = false;
@@ -66,6 +79,11 @@ public class RequestResultParser {
 	                mIsLogin = false;
 	                mErrorReason = "请输入正确的密码";
 	            }
+                String tmp = result.split("location.replace\\(")[1];
+                String tmp2 = tmp.split("\\);")[0];
+                
+                mLocationReplace = tmp2.replace("\"", "");
+                
 	            this.mResponseString = result;
 	        } catch (ParseException e) {
 	            // TODO Auto-generated catch block
