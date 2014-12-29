@@ -5,7 +5,9 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,11 +31,23 @@ public class DoorImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 	@Override
 	protected Bitmap doInBackground(String... params) {
 		// params[0]  picd
-		String r = SystemClock.uptimeMillis() + "";
+	    
+//		String r = SystemClock.uptimeMillis() + "";
+	    String r = random123(8);
 		Log.d("DoorImageAsyncTask ", "" + r);
 		String url = "http://login.sina.com.cn/cgi/pin.php?r=" + r + "&s=0&p=" + params[0];
 		return returnBitMap(url);
 	}
+	
+    public String random123(int length) {// 随机数字
+        Random random = new Random();
+        String val = "";
+        for (int i = 0; i < length; i++) {
+
+            val += random.nextInt(10) + "";
+        }
+        return val;
+    }
 	
 	@Override
 	protected void onPostExecute(Bitmap result) {
