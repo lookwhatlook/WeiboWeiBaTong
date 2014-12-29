@@ -78,7 +78,10 @@ public class RequestResultParser {
 	            } else if (result.contains("请输入正确的密码")) {
 	                mIsLogin = false;
 	                mErrorReason = "请输入正确的密码";
-	            }
+	            } else if (result.contains("抱歉！登录失败，请稍候再试")) {
+	                mIsLogin = false;
+                    mErrorReason = "抱歉！登录失败，请稍候再试";
+                }
                 String tmp = result.split("location.replace\\(")[1];
                 String tmp2 = tmp.split("\\);")[0];
                 

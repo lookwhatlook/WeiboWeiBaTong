@@ -301,61 +301,6 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         this.mLoginHandler = rhi;
     }
     
-
-    private void doAfterPreLogin(PreLoginResult preLoginResult, String door) {
-        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, door, preLoginResult);
-        getAsyncHttpClient().post(getApplicationContext(), Constaces.LOGIN_FIRST_URL, mSinaPreLogin.afterPreLoginHeaders(),
-                httpEntity, "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
-
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
-						String response = null;
-						String result = null;
-						try {
-							response = new String(responseBody, "GBK");
-							result = URLDecoder.decode(response, "GBK");
-				            result = URLDecoder.decode(response, "GBK");
-				            
-//							response = new String(response.getBytes("ISO-8859-1"), "UTF-8"); 
-							
-				            result.replaceAll("[\\t\\n\\r]", "");
-				            
-				            String[] s = result.split("\n\t\t");
-				            LogTool.D(TAG + " AfterPreLogin:  [ response length: ]: " + s.length );
-				            for (String string : s) {
-				            	LogTool.D(TAG + " AfterPreLogin:  [ response : ]: " + string );
-							}
-		                            
-						} catch (UnsupportedEncodingException e) {
-							e.printStackTrace();
-						}
-                        mRequestResultParser = new RequestResultParser(response);
-                        
-                        LogTool.D(TAG + " AfterPreLogin:  [onSuccess-Response]: " + mRequestResultParser.getResponseString() );
-                        
-                        if (mRequestResultParser.isLogin()) {
-                        	LogTool.D(TAG + " AfterPreLogin:  [onSuccess] " + response);
-                            mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
-                        } else {
-                        	if (mRequestResultParser.getErrorReason().contains("验证码")) {
-                        		hideDialogForWeiBo();
-                        		showDoorDialog();
-							}else {
-								hideDialogForWeiBo();
-								LogTool.D(TAG + " AfterPreLogin:  [onSuccess] No Door" );
-							}
-                        	Toast.makeText(getApplicationContext(), mRequestResultParser.getErrorReason(), Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                    	LogTool.D(TAG + " AfterPreLogin:  [onFailure] " + error.getLocalizedMessage());
-                    	
-                    }
-                });
-    };
     
     
     private void hideDoorDialog(){
@@ -452,6 +397,13 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
         }
     }
 
+    /**
+     * 登陆的第一步，主要获取PreLoginResult中的一些参数
+     * 下一步是根据参数获取加密之后的密码
+     * 之后是afterPrelogin
+     * @param uname
+     * @param upwd
+     */
     public void doPreLogin(String uname, String upwd) {
         this.mUserName = uname;
         this.mPassword = upwd;
@@ -475,4 +427,54 @@ public class BaseLoginActivity extends SharedPreferenceActivity {
                     }
                 });
     }
+    
+
+    private void doAfterPreLogin(PreLoginResult preLoginResult, String door) {
+        HttpEntity httpEntity = mSinaPreLogin.afterPreLoginEntity(encodeAccount(mUserName), rsaPwd, door, preLoginResult);
+        getAsyncHttpClient().post(getApplicationContext(), Constaces.LOGIN_FIRST_URL, mSinaPreLogin.afterPreLoginHeaders(),
+                httpEntity, "application/x-www-form-urlencoded", new AsyncHttpResponseHandler() {
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                        String response = null;
+                        String result = null;
+                        try {
+                            response = new String(responseBody, "GBK");
+                            result = URLDecoder.decode(response, "GBK");
+                            result = URLDecoder.decode(response, "GBK");
+                            
+                            String[] s = result.split("\n\t\t");
+                            for (String string : s) {
+                                LogTool.D(TAG + " 网络正常返回，结果是: " + string );
+                            }
+                                    
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
+                        mRequestResultParser = new RequestResultParser(response);
+                        
+                        if (mRequestResultParser.isLogin()) {
+                            LogTool.D(TAG + " 网络正常返回，并成功登陆");
+                            mHandler.sendEmptyMessage(Constaces.MSG_AFTER_LOGIN_DONE);
+                        } else {
+                            if (mRequestResultParser.getErrorReason().contains("验证码")) {
+                                LogTool.D(TAG + " 网络正常返回，登陆失败，需要验证码！");
+                                hideDialogForWeiBo();
+                                showDoorDialog();
+                            }else {
+                                hideDialogForWeiBo();
+                                LogTool.D(TAG + " 网络正常返回，登陆失败，原因是：" + mRequestResultParser.getErrorReason());
+                            }
+                            Toast.makeText(getApplicationContext(), mRequestResultParser.getErrorReason(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                        LogTool.D(TAG + " AfterPreLogin:  [onFailure] " + error.getLocalizedMessage());
+                        
+                    }
+                });
+    };
 }
